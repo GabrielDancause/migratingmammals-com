@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trip Expense Splitter | Migrating Mammals</title>
+  <meta name="description" content="Free tool to split group expenses fairly. Calculate minimum transactions and handle multi-currency trips easily.">
+  <meta property="og:title" content="Trip Expense Splitter">
+  <meta property="og:description" content="Split group expenses, calculate minimum transactions, and handle multi-currency trips all in your browser.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Trip Expense Splitter",
+    "url": "https://migratingmammals.com/expense-splitter.html",
+    "description": "Split group expenses fairly with minimum transactions and multi-currency support.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .card-header {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    input[type="text"], input[type="number"], select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="number"] {
+      font-family: var(--font-mono);
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    button.danger {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+
+    button.danger:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    button.small-btn {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      width: auto;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .row-auto {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .input-with-symbol {
+      position: relative;
+    }
+
+    .input-with-symbol .symbol {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      pointer-events: none;
+    }
+
+    .input-with-symbol input {
+      padding-left: 36px;
+    }
+
+    /* Lists */
+    .item-list {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .item-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .item-list li .name {
+      font-weight: 500;
+    }
+
+    .item-list li .details {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-family: var(--font-mono);
+    }
+
+    .remove-btn {
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      padding: 4px 8px;
+      font-size: 1.2rem;
+      width: auto;
+      line-height: 1;
+    }
+
+    .remove-btn:hover {
+      color: var(--danger);
+      background: transparent;
+    }
+
+    /* Checkbox list */
+    .checkbox-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.2s;
+    }
+
+    .checkbox-item:hover {
+      border-color: var(--text-secondary);
+    }
+
+    .checkbox-item input {
+      width: auto;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    /* Results Section */
+    .stat-box {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .settlement-list {
+      list-style: none;
+    }
+
+    .settlement-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .settlement-item:last-child {
+      border-bottom: none;
+    }
+
+    .settlement-text {
+      font-weight: 500;
+    }
+
+    .settlement-text .person {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .settlement-text .owes {
+      color: var(--text-secondary);
+      margin: 0 8px;
+    }
+
+    .settlement-amount {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .copy-btn {
+      width: auto;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      margin-top: 24px;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-secondary);
+      padding: 32px 0;
+      font-style: italic;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .main-grid {
+        display: block;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Trip Expense Splitter</h1>
+      <p class="subtitle">Fairly split group expenses, minimize transactions, and seamlessly handle multiple currencies in one place.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="main-grid">
+      <!-- Left Column: Inputs -->
+      <div>
+        <!-- Participants -->
+        <div class="card">
+          <div class="card-header">People</div>
+          <div class="row-auto">
+            <div class="form-group" style="margin-bottom: 0;">
+              <input type="text" id="new-person" placeholder="Name (e.g. Alice)">
+            </div>
+            <button id="add-person-btn" class="small-btn">Add</button>
+          </div>
+          <ul class="item-list" id="people-list">
+            <!-- People rendered here -->
+          </ul>
+        </div>
+
+        <!-- Currencies -->
+        <div class="card">
+          <div class="card-header">Currencies</div>
+          <div class="form-group">
+            <label for="base-currency">Base Currency</label>
+            <input type="text" id="base-currency" value="USD" placeholder="e.g. USD">
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">Add foreign currencies and their exchange rate to your base currency.</p>
+          <div class="row" style="gap: 12px; margin-bottom: 12px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <input type="text" id="new-currency-code" placeholder="Code (e.g. EUR)">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <input type="number" id="new-currency-rate" placeholder="Rate (e.g. 0.92)" step="0.0001">
+            </div>
+          </div>
+          <button id="add-currency-btn" class="secondary small-btn" style="width: 100%;">Add Currency</button>
+
+          <ul class="item-list" id="currencies-list">
+            <!-- Currencies rendered here -->
+          </ul>
+        </div>
+
+        <!-- Add Expense -->
+        <div class="card">
+          <div class="card-header">Add Expense</div>
+          <div class="form-group">
+            <label for="exp-desc">Description</label>
+            <input type="text" id="exp-desc" placeholder="e.g. Dinner at Luigi's">
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="exp-payer">Who Paid?</label>
+              <select id="exp-payer">
+                <!-- Options populated via JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exp-currency">Currency</label>
+              <select id="exp-currency">
+                <!-- Options populated via JS -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exp-amount">Amount</label>
+            <input type="number" id="exp-amount" min="0" step="0.01" placeholder="0.00">
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <label style="margin-bottom: 0;">Split Among</label>
+              <button id="select-all-btn" class="secondary" style="padding: 2px 8px; font-size: 0.8rem; width: auto; border: none;">Select All</button>
+            </div>
+            <div class="checkbox-list" id="exp-split-list">
+              <!-- Checkboxes populated via JS -->
+            </div>
+          </div>
+
+          <button id="add-expense-btn" style="margin-top: 12px;">Add Expense</button>
+        </div>
+      </div>
+
+      <!-- Right Column: Results -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            Expenses
+            <span id="expense-count" style="font-size: 0.9rem; color: var(--text-secondary); font-weight: 500;">0 items</span>
+          </div>
+          <div id="expenses-list-container">
+            <!-- Expenses list rendered here -->
+          </div>
+        </div>
+
+        <div class="card" style="position: sticky; top: 20px;">
+          <div class="card-header">Settlements</div>
+
+          <div class="stat-box">
+            <div class="stat-label">Total Spent</div>
+            <div class="stat-value" id="total-spent-val">0.00</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;" id="total-spent-currency">in USD</div>
+          </div>
+
+          <div style="margin-top: 24px; margin-bottom: 16px; font-weight: 600; color: var(--text-primary); border-bottom: 1px solid var(--border); padding-bottom: 8px;">Who owes whom?</div>
+
+          <div id="settlements-container">
+            <!-- Settlements rendered here -->
+          </div>
+
+          <button id="copy-btn" class="secondary copy-btn" style="width: 100%; display: none;">Copy Settlements</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO Content -->
+    <div class="seo-content">
+      <h2>How the Trip Expense Splitter Works</h2>
+      <p>Managing finances during a group trip can quickly become complicated, especially when multiple people are paying for different things. Our Trip Expense Splitter simplifies this process by keeping a running tally of who paid for what and automatically calculating the most efficient way to settle debts at the end of the trip.</p>
+
+      <h2>Minimum Transaction Algorithm</h2>
+      <p>Nobody wants to make five different bank transfers to settle their trip debts. This tool uses a "minimum transaction" algorithm that reduces the total number of payments needed. Instead of paying back every individual person you owe, the algorithm calculates everyone's net balance and matches those who owe money directly with those who are owed money, ensuring the minimum possible number of transfers.</p>
+
+      <h2>Handling Multiple Currencies</h2>
+      <p>When traveling internationally, you might pay for flights in your home currency, hotels in another, and daily expenses in local cash. This tool allows you to set a base currency and add custom exchange rates for any other currencies you use. All expenses are automatically converted back to your base currency for the final settlement calculation, meaning you never have to do manual conversions again.</p>
+
+      <ul>
+        <li><strong>Privacy First:</strong> All calculations are done entirely in your browser. No financial data or names are sent to our servers.</li>
+        <li><strong>Works Offline:</strong> Once the page is loaded, you can continue to add expenses and calculate settlements even if you lose your internet connection.</li>
+        <li><strong>Easy Sharing:</strong> Use the copy button to quickly share the final settlement list with your travel group via WhatsApp, iMessage, or email.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // State
+    let state = {
+      people: [],
+      baseCurrency: 'USD',
+      currencies: [], // { code: 'EUR', rate: 0.92 } -> 1 Base = 0.92 EUR
+      expenses: []    // { id, desc, payer, amount, currency, involved: [] }
+    };
+
+    // DOM Elements
+    const els = {
+      newPerson: document.getElementById('new-person'),
+      addPersonBtn: document.getElementById('add-person-btn'),
+      peopleList: document.getElementById('people-list'),
+
+      baseCurrency: document.getElementById('base-currency'),
+      newCurrencyCode: document.getElementById('new-currency-code'),
+      newCurrencyRate: document.getElementById('new-currency-rate'),
+      addCurrencyBtn: document.getElementById('add-currency-btn'),
+      currenciesList: document.getElementById('currencies-list'),
+
+      expDesc: document.getElementById('exp-desc'),
+      expPayer: document.getElementById('exp-payer'),
+      expCurrency: document.getElementById('exp-currency'),
+      expAmount: document.getElementById('exp-amount'),
+      expSplitList: document.getElementById('exp-split-list'),
+      selectAllBtn: document.getElementById('select-all-btn'),
+      addExpenseBtn: document.getElementById('add-expense-btn'),
+
+      expensesListContainer: document.getElementById('expenses-list-container'),
+      expenseCount: document.getElementById('expense-count'),
+
+      totalSpentVal: document.getElementById('total-spent-val'),
+      totalSpentCurrency: document.getElementById('total-spent-currency'),
+      settlementsContainer: document.getElementById('settlements-container'),
+      copyBtn: document.getElementById('copy-btn')
+    };
+
+    // Initialization
+    function init() {
+      // Add default people to show functionality
+      addPerson('Alice');
+      addPerson('Bob');
+
+      // Event Listeners
+      els.addPersonBtn.addEventListener('click', () => {
+        const name = els.newPerson.value.trim();
+        if (name) {
+          addPerson(name);
+          els.newPerson.value = '';
+        }
+      });
+      els.newPerson.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') els.addPersonBtn.click();
+      });
+
+      els.baseCurrency.addEventListener('change', (e) => {
+        state.baseCurrency = e.target.value.trim().toUpperCase() || 'USD';
+        render();
+      });
+
+      els.addCurrencyBtn.addEventListener('click', () => {
+        const code = els.newCurrencyCode.value.trim().toUpperCase();
+        const rate = parseFloat(els.newCurrencyRate.value);
+        if (code && rate && rate > 0) {
+          addCurrency(code, rate);
+          els.newCurrencyCode.value = '';
+          els.newCurrencyRate.value = '';
+        }
+      });
+
+      els.selectAllBtn.addEventListener('click', () => {
+        const checkboxes = els.expSplitList.querySelectorAll('input[type="checkbox"]');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+        checkboxes.forEach(cb => cb.checked = !allChecked);
+      });
+
+      els.addExpenseBtn.addEventListener('click', addExpense);
+
+      els.copyBtn.addEventListener('click', copySettlements);
+
+      // Setup default empty state rendering correctly
+      els.expensesListContainer.innerHTML = '<div class="empty-state">No expenses added yet.</div>';
+      els.settlementsContainer.innerHTML = '<div class="empty-state">Everyone is settled up!</div>';
+
+      render();
+    }
+
+    // Actions
+    function addPerson(name) {
+      if (!state.people.includes(name)) {
+        state.people.push(name);
+        render();
+      }
+    }
+
+    function removePerson(name) {
+      state.people = state.people.filter(p => p !== name);
+      // Remove from expenses if involved
+      state.expenses.forEach(exp => {
+        exp.involved = exp.involved.filter(p => p !== name);
+        if (exp.payer === name) exp.payer = state.people[0] || '';
+      });
+      render();
+    }
+
+    function addCurrency(code, rate) {
+      const existing = state.currencies.find(c => c.code === code);
+      if (existing) {
+        existing.rate = rate;
+      } else {
+        state.currencies.push({ code, rate });
+      }
+      render();
+    }
+
+    function removeCurrency(code) {
+      state.currencies = state.currencies.filter(c => c.code !== code);
+      // Fallback expenses using this currency to base currency
+      state.expenses.forEach(exp => {
+        if (exp.currency === code) exp.currency = state.baseCurrency;
+      });
+      render();
+    }
+
+    function addExpense() {
+      const desc = els.expDesc.value.trim() || 'Untitled Expense';
+      const payer = els.expPayer.value;
+      const amount = parseFloat(els.expAmount.value);
+      const currency = els.expCurrency.value;
+
+      const checkboxes = els.expSplitList.querySelectorAll('input[type="checkbox"]:checked');
+      const involved = Array.from(checkboxes).map(cb => cb.value);
+
+      if (!payer || isNaN(amount) || amount <= 0 || involved.length === 0) {
+        alert("Please ensure payer, valid amount, and at least one involved person are selected.");
+        return;
+      }
+
+      state.expenses.push({
+        id: Date.now().toString(),
+        desc,
+        payer,
+        amount,
+        currency,
+        involved
+      });
+
+      els.expDesc.value = '';
+      els.expAmount.value = '';
+
+      render();
+    }
+
+    // Make removeExpense accessible to the global scope since it's called from inline onclick handlers
+    window.removeExpense = function(id) {
+      state.expenses = state.expenses.filter(e => e.id !== id);
+      render();
+    }
+
+    window.removePerson = removePerson;
+    window.removeCurrency = removeCurrency;
+
+    // Calculations
+    function calculateSettlements() {
+      let balances = {};
+      state.people.forEach(p => balances[p] = 0);
+
+      let totalSpent = 0;
+
+      state.expenses.forEach(exp => {
+        // Find exchange rate (1 Base = X Currency). So Base = Amount / Rate
+        let rate = 1;
+        if (exp.currency !== state.baseCurrency) {
+          const c = state.currencies.find(c => c.code === exp.currency);
+          if (c) rate = c.rate;
+        }
+
+        let amountInBase = exp.amount / rate;
+        totalSpent += amountInBase;
+
+        // Payer's balance goes UP
+        if (balances[exp.payer] !== undefined) {
+          balances[exp.payer] += amountInBase;
+        }
+
+        // Involved balances go DOWN
+        let splitAmount = amountInBase / exp.involved.length;
+        exp.involved.forEach(p => {
+          if (balances[p] !== undefined) {
+            balances[p] -= splitAmount;
+          }
+        });
+      });
+
+      let debtors = [];
+      let creditors = [];
+
+      for (let p in balances) {
+        // Fix floating point issues
+        let bal = Math.round(balances[p] * 100) / 100;
+        if (bal < -0.01) debtors.push({ name: p, amount: -bal });
+        if (bal > 0.01) creditors.push({ name: p, amount: bal });
+      }
+
+      // Sort descending
+      debtors.sort((a, b) => b.amount - a.amount);
+      creditors.sort((a, b) => b.amount - a.amount);
+
+      let settlements = [];
+      let i = 0, j = 0;
+
+      while (i < debtors.length && j < creditors.length) {
+        let debtor = debtors[i];
+        let creditor = creditors[j];
+
+        let amount = Math.min(debtor.amount, creditor.amount);
+        amount = Math.round(amount * 100) / 100;
+
+        if (amount > 0) {
+          settlements.push({
+            from: debtor.name,
+            to: creditor.name,
+            amount: amount
+          });
+        }
+
+        debtor.amount -= amount;
+        creditor.amount -= amount;
+
+        if (debtor.amount < 0.01) i++;
+        if (creditor.amount < 0.01) j++;
+      }
+
+      return { settlements, totalSpent };
+    }
+
+    // Rendering
+    function render() {
+      // 1. Render People
+      els.peopleList.innerHTML = state.people.length === 0 ? '<li class="empty-state" style="border:none; padding:8px 0;">No people added</li>' : '';
+      state.people.forEach(p => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="name">${p}</span>
+          <button class="remove-btn" onclick="removePerson('${p}')">×</button>
+        `;
+        els.peopleList.appendChild(li);
+      });
+
+      // 2. Render Currencies
+      els.currenciesList.innerHTML = state.currencies.length === 0 ? '<li class="empty-state" style="border:none; padding:8px 0;">No extra currencies</li>' : '';
+      state.currencies.forEach(c => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="name">${c.code}</span>
+          <span class="details">1 ${state.baseCurrency} = ${c.rate} ${c.code}</span>
+          <button class="remove-btn" onclick="removeCurrency('${c.code}')">×</button>
+        `;
+        els.currenciesList.appendChild(li);
+      });
+
+      // 3. Update Expense Dropdowns & Checkboxes
+      const prevPayer = els.expPayer.value;
+      els.expPayer.innerHTML = state.people.map(p => `<option value="${p}">${p}</option>`).join('');
+      if (state.people.includes(prevPayer)) els.expPayer.value = prevPayer;
+
+      const prevCurrency = els.expCurrency.value;
+      let currencyOptions = `<option value="${state.baseCurrency}">${state.baseCurrency}</option>`;
+      currencyOptions += state.currencies.map(c => `<option value="${c.code}">${c.code}</option>`).join('');
+      els.expCurrency.innerHTML = currencyOptions;
+      if (prevCurrency === state.baseCurrency || state.currencies.some(c => c.code === prevCurrency)) {
+        els.expCurrency.value = prevCurrency;
+      }
+
+      // Maintain checked state if possible
+      const prevChecked = Array.from(els.expSplitList.querySelectorAll('input:checked')).map(cb => cb.value);
+      els.expSplitList.innerHTML = state.people.map(p => `
+        <label class="checkbox-item">
+          <input type="checkbox" value="${p}" ${prevChecked.includes(p) || prevChecked.length === 0 ? 'checked' : ''}>
+          ${p}
+        </label>
+      `).join('');
+
+      // 4. Render Expenses List
+      els.expenseCount.textContent = `${state.expenses.length} item${state.expenses.length === 1 ? '' : 's'}`;
+
+      if (state.expenses.length === 0) {
+        els.expensesListContainer.innerHTML = '<div class="empty-state">No expenses added yet.</div>';
+      } else {
+        els.expensesListContainer.innerHTML = '<ul class="item-list" style="margin-top:0;"></ul>';
+        const expUl = els.expensesListContainer.querySelector('ul');
+
+        // Reverse array to show newest first
+        [...state.expenses].reverse().forEach(exp => {
+          const li = document.createElement('li');
+          li.style.flexDirection = 'column';
+          li.style.alignItems = 'flex-start';
+          li.style.gap = '8px';
+
+          li.innerHTML = `
+            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+              <span class="name">${exp.desc}</span>
+              <span class="details" style="color: var(--accent); font-weight: 600; font-size: 1rem;">${exp.amount.toFixed(2)} ${exp.currency}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; font-size: 0.85rem; color: var(--text-secondary);">
+              <span>${exp.payer} paid for ${exp.involved.length} ${exp.involved.length === 1 ? 'person' : 'people'}</span>
+              <button class="remove-btn" onclick="removeExpense('${exp.id}')">Delete</button>
+            </div>
+          `;
+          expUl.appendChild(li);
+        });
+      }
+
+      // 5. Render Settlements
+      const { settlements, totalSpent } = calculateSettlements();
+
+      els.totalSpentVal.textContent = totalSpent.toFixed(2);
+      els.totalSpentCurrency.textContent = `in ${state.baseCurrency}`;
+
+      if (settlements.length === 0) {
+        els.settlementsContainer.innerHTML = '<div class="empty-state">Everyone is settled up!</div>';
+        els.copyBtn.style.display = 'none';
+      } else {
+        let html = '<ul class="settlement-list">';
+        settlements.forEach(s => {
+          html += `
+            <li class="settlement-item">
+              <span class="settlement-text">
+                <span class="person">${s.from}</span>
+                <span class="owes">owes</span>
+                <span class="person">${s.to}</span>
+              </span>
+              <span class="settlement-amount">${s.amount.toFixed(2)} ${state.baseCurrency}</span>
+            </li>
+          `;
+        });
+        html += '</ul>';
+        els.settlementsContainer.innerHTML = html;
+        els.copyBtn.style.display = 'block';
+      }
+    }
+
+    function copySettlements() {
+      const { settlements, totalSpent } = calculateSettlements();
+
+      let text = `Trip Settlements\nTotal Spent: ${totalSpent.toFixed(2)} ${state.baseCurrency}\n\n`;
+
+      if (settlements.length === 0) {
+        text += "Everyone is settled up!";
+      } else {
+        settlements.forEach(s => {
+          text += `${s.from} owes ${s.to} ${s.amount.toFixed(2)} ${state.baseCurrency}\n`;
+        });
+      }
+
+      text += `\nCalculated with migratingmammals.com`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = els.copyBtn.innerText;
+        els.copyBtn.innerText = 'Copied!';
+        setTimeout(() => {
+          els.copyBtn.innerText = originalText;
+        }, 2000);
+      });
+    }
+
+    // Start
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
