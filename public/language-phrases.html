@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline Travel Phrases Cheat Sheet | Migrating Mammals</title>
+  <meta name="description" content="Essential travel phrases in 20+ languages. Greetings, directions, food, and emergencies. Works fully offline in your browser.">
+  <meta property="og:title" content="Offline Travel Phrases Cheat Sheet">
+  <meta property="og:description" content="Translate essential travel phrases instantly in 20+ languages. Works completely offline.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Offline Travel Phrases Cheat Sheet",
+    "url": "https://migratingmammals.com/language-phrases.html",
+    "description": "Essential travel phrases in 20+ languages categorized by greetings, directions, food, and emergencies. Works offline.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      font-size: 1rem;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    /* Categories and Phrases */
+    .category {
+      margin-bottom: 32px;
+    }
+
+    .category:last-child {
+      margin-bottom: 0;
+    }
+
+    .category h3 {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .phrase-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .phrase-item:hover {
+      border-color: var(--accent);
+    }
+
+    .phrase-text {
+      flex-grow: 1;
+      padding-right: 16px;
+    }
+
+    .phrase-english {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .phrase-translation {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .phrase-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .copy-btn {
+        margin-top: 16px;
+        width: 100%;
+      }
+      .phrase-text {
+        padding-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Travel Phrases</h1>
+      <p class="subtitle">Essential travel phrases in 20+ languages. Fully offline capable, runs directly in your browser.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="form-group">
+        <label for="language-select">Select Language</label>
+        <select id="language-select"></select>
+      </div>
+
+      <div id="phrases-container">
+        <!-- Categories and phrases will be dynamically rendered here -->
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Offline Language Cheat Sheet</h2>
+      <p>Our travel phrases cheat sheet operates completely offline after the initial page load. All content and translation rendering runs client-side directly within your browser. This makes it the perfect tool to bookmark and use while exploring areas with spotty cell reception, deep underground in transit systems, or while trying to save on international roaming data.</p>
+
+      <h2>Essential Travel Categories</h2>
+      <p>We've focused on the most critical phrases you need when navigating a foreign country, categorized for quick access:</p>
+      <ul>
+        <li><strong>Greetings:</strong> Basic politeness goes a long way. Includes hello, goodbye, please, thank you, and yes/no.</li>
+        <li><strong>Directions:</strong> Helping you get un-lost. Includes asking for the bathroom, checking prices, and basic directional terms.</li>
+        <li><strong>Food:</strong> The essentials for dining out, including asking for water and the bill.</li>
+        <li><strong>Emergencies:</strong> Crucial phrases for when things go wrong, like calling for help, needing a doctor, or finding an English speaker.</li>
+      </ul>
+
+      <h2>20+ Languages Supported</h2>
+      <p>Our database includes carefully curated phrases for over 20 of the most widely spoken and traveled-to languages globally. From Spanish, French, and Japanese to Swahili, Tagalog, and Arabic, we have the basics covered for your next adventure.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Phrase Data generated dynamically
+    const phrasesData = {
+      "Spanish": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Hola" },
+          { "english": "Goodbye", "translation": "Adiós" },
+          { "english": "Please", "translation": "Por favor" },
+          { "english": "Thank you", "translation": "Gracias" },
+          { "english": "Yes / No", "translation": "Sí / No" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "¿Dónde está el baño?" },
+          { "english": "How much is this?", "translation": "¿Cuánto cuesta esto?" },
+          { "english": "Left / Right", "translation": "Izquierda / Derecha" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Agua, por favor" },
+          { "english": "The bill, please", "translation": "La cuenta, por favor" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "¡Ayuda!" },
+          { "english": "I need a doctor", "translation": "Necesito un médico" },
+          { "english": "Do you speak English?", "translation": "¿Hablas inglés?" }
+        ]
+      },
+      "French": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Bonjour" },
+          { "english": "Goodbye", "translation": "Au revoir" },
+          { "english": "Please", "translation": "S'il vous plaît" },
+          { "english": "Thank you", "translation": "Merci" },
+          { "english": "Yes / No", "translation": "Oui / Non" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Où sont les toilettes ?" },
+          { "english": "How much is this?", "translation": "C'est combien ?" },
+          { "english": "Left / Right", "translation": "Gauche / Droite" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "De l'eau, s'il vous plaît" },
+          { "english": "The bill, please", "translation": "L'addition, s'il vous plaît" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "À l'aide !" },
+          { "english": "I need a doctor", "translation": "J'ai besoin d'un médecin" },
+          { "english": "Do you speak English?", "translation": "Parlez-vous anglais ?" }
+        ]
+      },
+      "German": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Hallo" },
+          { "english": "Goodbye", "translation": "Auf Wiedersehen" },
+          { "english": "Please", "translation": "Bitte" },
+          { "english": "Thank you", "translation": "Danke" },
+          { "english": "Yes / No", "translation": "Ja / Nein" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Wo ist die Toilette?" },
+          { "english": "How much is this?", "translation": "Wie viel kostet das?" },
+          { "english": "Left / Right", "translation": "Links / Rechts" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Wasser, bitte" },
+          { "english": "The bill, please", "translation": "Die Rechnung, bitte" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Hilfe!" },
+          { "english": "I need a doctor", "translation": "Ich brauche einen Arzt" },
+          { "english": "Do you speak English?", "translation": "Sprechen Sie Englisch?" }
+        ]
+      },
+      "Italian": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Ciao" },
+          { "english": "Goodbye", "translation": "Arrivederci" },
+          { "english": "Please", "translation": "Per favore" },
+          { "english": "Thank you", "translation": "Grazie" },
+          { "english": "Yes / No", "translation": "Sì / No" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Dov'è il bagno?" },
+          { "english": "How much is this?", "translation": "Quanto costa?" },
+          { "english": "Left / Right", "translation": "Sinistra / Destra" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Acqua, per favore" },
+          { "english": "The bill, please", "translation": "Il conto, per favore" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Aiuto!" },
+          { "english": "I need a doctor", "translation": "Ho bisogno di un medico" },
+          { "english": "Do you speak English?", "translation": "Parla inglese?" }
+        ]
+      },
+      "Portuguese": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Olá" },
+          { "english": "Goodbye", "translation": "Adeus" },
+          { "english": "Please", "translation": "Por favor" },
+          { "english": "Thank you", "translation": "Obrigado/a" },
+          { "english": "Yes / No", "translation": "Sim / Não" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Onde é o banheiro?" },
+          { "english": "How much is this?", "translation": "Quanto custa isso?" },
+          { "english": "Left / Right", "translation": "Esquerda / Direita" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Água, por favor" },
+          { "english": "The bill, please", "translation": "A conta, por favor" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Socorro!" },
+          { "english": "I need a doctor", "translation": "Preciso de um médico" },
+          { "english": "Do you speak English?", "translation": "Você fala inglês?" }
+        ]
+      },
+      "Chinese (Mandarin)": {
+        "Greetings": [
+          { "english": "Hello", "translation": "你好 (Nǐ hǎo)" },
+          { "english": "Goodbye", "translation": "再见 (Zàijiàn)" },
+          { "english": "Please", "translation": "请 (Qǐng)" },
+          { "english": "Thank you", "translation": "谢谢 (Xièxiè)" },
+          { "english": "Yes / No", "translation": "是 / 不是 (Shì / Bù shì)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "洗手间在哪里？ (Xǐshǒujiān zài nǎlǐ?)" },
+          { "english": "How much is this?", "translation": "这个多少钱？ (Zhège duōshǎo qián?)" },
+          { "english": "Left / Right", "translation": "左 / 右 (Zuǒ / Yòu)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "请给我水 (Qǐng gěi wǒ shuǐ)" },
+          { "english": "The bill, please", "translation": "买单 (Mǎidān)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "救命！ (Jiùmìng!)" },
+          { "english": "I need a doctor", "translation": "我需要医生 (Wǒ xūyào yīshēng)" },
+          { "english": "Do you speak English?", "translation": "你会说英语吗？ (Nǐ huì shuō yīngyǔ ma?)" }
+        ]
+      },
+      "Japanese": {
+        "Greetings": [
+          { "english": "Hello", "translation": "こんにちは (Konnichiwa)" },
+          { "english": "Goodbye", "translation": "さようなら (Sayōnara)" },
+          { "english": "Please", "translation": "お願いします (Onegaishimasu)" },
+          { "english": "Thank you", "translation": "ありがとうございます (Arigatō gozaimasu)" },
+          { "english": "Yes / No", "translation": "はい / いいえ (Hai / Iie)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "トイレはどこですか？ (Toire wa doko desu ka?)" },
+          { "english": "How much is this?", "translation": "これはいくらですか？ (Kore wa ikura desu ka?)" },
+          { "english": "Left / Right", "translation": "左 / 右 (Hidari / Migi)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "お水をお願いします (Omizu o onegaishimasu)" },
+          { "english": "The bill, please", "translation": "お会計をお願いします (Okaikei o onegaishimasu)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "助けて！ (Tasukete!)" },
+          { "english": "I need a doctor", "translation": "医者が必要です (Isha ga hitsuyō desu)" },
+          { "english": "Do you speak English?", "translation": "英語を話せますか？ (Eigo o hanasemasu ka?)" }
+        ]
+      },
+      "Korean": {
+        "Greetings": [
+          { "english": "Hello", "translation": "안녕하세요 (Annyeonghaseyo)" },
+          { "english": "Goodbye", "translation": "안녕히 가세요 (Annyeonghi gaseyo)" },
+          { "english": "Please", "translation": "부탁합니다 (Butakhamnida)" },
+          { "english": "Thank you", "translation": "감사합니다 (Gamsahamnida)" },
+          { "english": "Yes / No", "translation": "네 / 아니요 (Ne / Aniyo)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "화장실이 어디예요? (Hwajangsiri eodiyeyo?)" },
+          { "english": "How much is this?", "translation": "이거 얼마예요? (Igeo eolmayeyo?)" },
+          { "english": "Left / Right", "translation": "왼쪽 / 오른쪽 (Oenjjok / Oreunjjok)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "물 좀 주세요 (Mul jom juseyo)" },
+          { "english": "The bill, please", "translation": "계산해 주세요 (Gyesanhae juseyo)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "도와주세요! (Dowajuseyo!)" },
+          { "english": "I need a doctor", "translation": "의사가 필요해요 (Uisaga piryohaeyo)" },
+          { "english": "Do you speak English?", "translation": "영어 할 줄 아세요? (Yeongeo hal jul aseyo?)" }
+        ]
+      },
+      "Arabic": {
+        "Greetings": [
+          { "english": "Hello", "translation": "مرحبا (Marhaban)" },
+          { "english": "Goodbye", "translation": "مع السلامة (Ma'a as-salamah)" },
+          { "english": "Please", "translation": "من فضلك (Min fadlik)" },
+          { "english": "Thank you", "translation": "شكرا (Shukran)" },
+          { "english": "Yes / No", "translation": "نعم / لا (Na'am / La)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "أين الحمام؟ (Ayna al-hammam?)" },
+          { "english": "How much is this?", "translation": "بكم هذا؟ (Bikam hadha?)" },
+          { "english": "Left / Right", "translation": "يسار / يمين (Yasar / Yamin)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "ماء من فضلك (Ma' min fadlik)" },
+          { "english": "The bill, please", "translation": "الفاتورة من فضلك (Al-faturah min fadlik)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "النجدة! (An-najdah!)" },
+          { "english": "I need a doctor", "translation": "أحتاج إلى طبيب (Ahtaj ila tabib)" },
+          { "english": "Do you speak English?", "translation": "هل تتحدث الإنجليزية؟ (Hal tatahaddath al-ingliziyyah?)" }
+        ]
+      },
+      "Russian": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Здравствуйте (Zdravstvuyte)" },
+          { "english": "Goodbye", "translation": "До свидания (Do svidaniya)" },
+          { "english": "Please", "translation": "Пожалуйста (Pozhaluysta)" },
+          { "english": "Thank you", "translation": "Спасибо (Spasibo)" },
+          { "english": "Yes / No", "translation": "Да / Нет (Da / Net)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Где туалет? (Gde tualet?)" },
+          { "english": "How much is this?", "translation": "Сколько это стоит? (Skol'ko eto stoit?)" },
+          { "english": "Left / Right", "translation": "Налево / Направо (Nalevo / Napravo)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Воды, пожалуйста (Vody, pozhaluysta)" },
+          { "english": "The bill, please", "translation": "Счет, пожалуйста (Schet, pozhaluysta)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Помогите! (Pomogite!)" },
+          { "english": "I need a doctor", "translation": "Мне нужен врач (Mne nuzhen vrach)" },
+          { "english": "Do you speak English?", "translation": "Вы говорите по-английски? (Vy govorite po-angliyski?)" }
+        ]
+      },
+      "Hindi": {
+        "Greetings": [
+          { "english": "Hello", "translation": "नमस्ते (Namaste)" },
+          { "english": "Goodbye", "translation": "अलविदा (Alvida)" },
+          { "english": "Please", "translation": "कृपया (Kripya)" },
+          { "english": "Thank you", "translation": "धन्यवाद (Dhanyavad)" },
+          { "english": "Yes / No", "translation": "हाँ / नहीं (Haan / Nahin)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "बाथरूम कहाँ है? (Bathroom kahan hai?)" },
+          { "english": "How much is this?", "translation": "यह कितने का है? (Yeh kitne ka hai?)" },
+          { "english": "Left / Right", "translation": "बाएं / दाएं (Baayen / Daayen)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "पानी दीजिए (Paani dijiye)" },
+          { "english": "The bill, please", "translation": "बिल दीजिए (Bill dijiye)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "मदद करो! (Madad karo!)" },
+          { "english": "I need a doctor", "translation": "मुझे डॉक्टर की जरूरत है (Mujhe doctor ki zaroorat hai)" },
+          { "english": "Do you speak English?", "translation": "क्या आप अंग्रेजी बोलते हैं? (Kya aap angrezi bolte hain?)" }
+        ]
+      },
+      "Turkish": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Merhaba" },
+          { "english": "Goodbye", "translation": "Hoşça kal" },
+          { "english": "Please", "translation": "Lütfen" },
+          { "english": "Thank you", "translation": "Teşekkür ederim" },
+          { "english": "Yes / No", "translation": "Evet / Hayır" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Tuvalet nerede?" },
+          { "english": "How much is this?", "translation": "Bu ne kadar?" },
+          { "english": "Left / Right", "translation": "Sol / Sağ" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Su, lütfen" },
+          { "english": "The bill, please", "translation": "Hesap, lütfen" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "İmdat!" },
+          { "english": "I need a doctor", "translation": "Doktora ihtiyacım var" },
+          { "english": "Do you speak English?", "translation": "İngilizce biliyor musunuz?" }
+        ]
+      },
+      "Vietnamese": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Xin chào" },
+          { "english": "Goodbye", "translation": "Tạm biệt" },
+          { "english": "Please", "translation": "Làm ơn" },
+          { "english": "Thank you", "translation": "Cảm ơn" },
+          { "english": "Yes / No", "translation": "Có / Không" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Nhà vệ sinh ở đâu?" },
+          { "english": "How much is this?", "translation": "Cái này bao nhiêu tiền?" },
+          { "english": "Left / Right", "translation": "Trái / Phải" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Cho tôi nước" },
+          { "english": "The bill, please", "translation": "Tính tiền" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Cứu với!" },
+          { "english": "I need a doctor", "translation": "Tôi cần bác sĩ" },
+          { "english": "Do you speak English?", "translation": "Bạn có nói tiếng Anh không?" }
+        ]
+      },
+      "Thai": {
+        "Greetings": [
+          { "english": "Hello", "translation": "สวัสดี (Sawasdee)" },
+          { "english": "Goodbye", "translation": "ลาก่อน (La gon)" },
+          { "english": "Please", "translation": "กรุณา (Karuna)" },
+          { "english": "Thank you", "translation": "ขอบคุณ (Khob khun)" },
+          { "english": "Yes / No", "translation": "ใช่ / ไม่ใช่ (Chai / Mai chai)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "ห้องน้ำอยู่ที่ไหน? (Hong nam yoo tee nai?)" },
+          { "english": "How much is this?", "translation": "นี่ราคาเท่าไหร่? (Nee ra-ka tao-rai?)" },
+          { "english": "Left / Right", "translation": "ซ้าย / ขวา (Sai / Kwa)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "ขอน้ำหน่อย (Khor nam noi)" },
+          { "english": "The bill, please", "translation": "เก็บเงินด้วย (Gep ngern duay)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "ช่วยด้วย! (Chuay duay!)" },
+          { "english": "I need a doctor", "translation": "ฉันต้องการหมอ (Chan tong-karn mor)" },
+          { "english": "Do you speak English?", "translation": "คุณพูดภาษาอังกฤษได้ไหม? (Khun pood pa-sa ang-krit dai mai?)" }
+        ]
+      },
+      "Indonesian": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Halo" },
+          { "english": "Goodbye", "translation": "Selamat tinggal" },
+          { "english": "Please", "translation": "Tolong" },
+          { "english": "Thank you", "translation": "Terima kasih" },
+          { "english": "Yes / No", "translation": "Ya / Tidak" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Di mana kamar mandi?" },
+          { "english": "How much is this?", "translation": "Berapa harganya?" },
+          { "english": "Left / Right", "translation": "Kiri / Kanan" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Air, tolong" },
+          { "english": "The bill, please", "translation": "Minta bonnya" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Tolong!" },
+          { "english": "I need a doctor", "translation": "Saya butuh dokter" },
+          { "english": "Do you speak English?", "translation": "Apakah Anda bisa berbahasa Inggris?" }
+        ]
+      },
+      "Greek": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Γειά σας (Yia sas)" },
+          { "english": "Goodbye", "translation": "Αντίο (Adio)" },
+          { "english": "Please", "translation": "Παρακαλώ (Parakalo)" },
+          { "english": "Thank you", "translation": "Ευχαριστώ (Efcharisto)" },
+          { "english": "Yes / No", "translation": "Ναι / Όχι (Ne / Ochi)" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Πού είναι η τουαλέτα; (Pou ine i toualeta?)" },
+          { "english": "How much is this?", "translation": "Πόσο κάνει αυτό; (Poso kani afto?)" },
+          { "english": "Left / Right", "translation": "Αριστερά / Δεξιά (Aristera / Dexia)" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Νερό, παρακαλώ (Nero, parakalo)" },
+          { "english": "The bill, please", "translation": "Το λογαριασμό, παρακαλώ (To logariasmo, parakalo)" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Βοήθεια! (Voithia!)" },
+          { "english": "I need a doctor", "translation": "Χρειάζομαι γιατρό (Chriazome yiatro)" },
+          { "english": "Do you speak English?", "translation": "Μιλάτε αγγλικά; (Milate agglika?)" }
+        ]
+      },
+      "Dutch": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Hallo" },
+          { "english": "Goodbye", "translation": "Tot ziens" },
+          { "english": "Please", "translation": "Alstublieft" },
+          { "english": "Thank you", "translation": "Dank u" },
+          { "english": "Yes / No", "translation": "Ja / Nee" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Waar is het toilet?" },
+          { "english": "How much is this?", "translation": "Hoeveel kost dit?" },
+          { "english": "Left / Right", "translation": "Links / Rechts" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Water, alstublieft" },
+          { "english": "The bill, please", "translation": "De rekening, alstublieft" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Help!" },
+          { "english": "I need a doctor", "translation": "Ik heb een dokter nodig" },
+          { "english": "Do you speak English?", "translation": "Spreekt u Engels?" }
+        ]
+      },
+      "Polish": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Cześć" },
+          { "english": "Goodbye", "translation": "Do widzenia" },
+          { "english": "Please", "translation": "Proszę" },
+          { "english": "Thank you", "translation": "Dziękuję" },
+          { "english": "Yes / No", "translation": "Tak / Nie" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Gdzie jest toaleta?" },
+          { "english": "How much is this?", "translation": "Ile to kosztuje?" },
+          { "english": "Left / Right", "translation": "Lewo / Prawo" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Poproszę wodę" },
+          { "english": "The bill, please", "translation": "Poproszę rachunek" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Pomocy!" },
+          { "english": "I need a doctor", "translation": "Potrzebuję lekarza" },
+          { "english": "Do you speak English?", "translation": "Czy mówisz po angielsku?" }
+        ]
+      },
+      "Swedish": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Hej" },
+          { "english": "Goodbye", "translation": "Hejdå" },
+          { "english": "Please", "translation": "Snälla" },
+          { "english": "Thank you", "translation": "Tack" },
+          { "english": "Yes / No", "translation": "Ja / Nej" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Var är toaletten?" },
+          { "english": "How much is this?", "translation": "Hur mycket kostar den här?" },
+          { "english": "Left / Right", "translation": "Vänster / Höger" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Vatten, tack" },
+          { "english": "The bill, please", "translation": "Notan, tack" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Hjälp!" },
+          { "english": "I need a doctor", "translation": "Jag behöver en läkare" },
+          { "english": "Do you speak English?", "translation": "Pratar du engelska?" }
+        ]
+      },
+      "Swahili": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Jambo" },
+          { "english": "Goodbye", "translation": "Kwa heri" },
+          { "english": "Please", "translation": "Tafadhali" },
+          { "english": "Thank you", "translation": "Asante" },
+          { "english": "Yes / No", "translation": "Ndiyo / Hapana" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Choo kiko wapi?" },
+          { "english": "How much is this?", "translation": "Hii ni bei gani?" },
+          { "english": "Left / Right", "translation": "Kushoto / Kulia" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Maji, tafadhali" },
+          { "english": "The bill, please", "translation": "Bili, tafadhali" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Msaada!" },
+          { "english": "I need a doctor", "translation": "Nahitaji daktari" },
+          { "english": "Do you speak English?", "translation": "Unazungumza Kiingereza?" }
+        ]
+      },
+      "Tagalog": {
+        "Greetings": [
+          { "english": "Hello", "translation": "Kamusta" },
+          { "english": "Goodbye", "translation": "Paalam" },
+          { "english": "Please", "translation": "Pakiusap" },
+          { "english": "Thank you", "translation": "Salamat" },
+          { "english": "Yes / No", "translation": "Oo / Hindi" }
+        ],
+        "Directions": [
+          { "english": "Where is the bathroom?", "translation": "Nasaan ang banyo?" },
+          { "english": "How much is this?", "translation": "Magkano ito?" },
+          { "english": "Left / Right", "translation": "Kaliwa / Kanan" }
+        ],
+        "Food": [
+          { "english": "Water, please", "translation": "Tubig nga po" },
+          { "english": "The bill, please", "translation": "Ang bill nga po" }
+        ],
+        "Emergencies": [
+          { "english": "Help!", "translation": "Tulong!" },
+          { "english": "I need a doctor", "translation": "Kailangan ko ng doktor" },
+          { "english": "Do you speak English?", "translation": "Nagsasalita ka ba ng Ingles?" }
+        ]
+      }
+    };
+
+    const languageSelect = document.getElementById('language-select');
+    const phrasesContainer = document.getElementById('phrases-container');
+
+    // Populate Language Select
+    function populateLanguages() {
+      const languages = Object.keys(phrasesData).sort();
+      languages.forEach(lang => {
+        const option = document.createElement('option');
+        option.value = lang;
+        option.textContent = lang;
+        languageSelect.appendChild(option);
+      });
+
+      // Default selection
+      if (languages.includes('Spanish')) {
+        languageSelect.value = 'Spanish';
+      }
+    }
+
+    // Render phrases for selected language
+    function renderPhrases() {
+      const selectedLang = languageSelect.value;
+      const data = phrasesData[selectedLang];
+
+      phrasesContainer.innerHTML = '';
+
+      for (const [category, phrases] of Object.entries(data)) {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'category';
+
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.textContent = category;
+        categoryDiv.appendChild(categoryTitle);
+
+        phrases.forEach(phrase => {
+          const phraseItem = document.createElement('div');
+          phraseItem.className = 'phrase-item';
+
+          const phraseTextDiv = document.createElement('div');
+          phraseTextDiv.className = 'phrase-text';
+
+          const phraseEnglish = document.createElement('div');
+          phraseEnglish.className = 'phrase-english';
+          phraseEnglish.textContent = phrase.english;
+
+          const phraseTranslation = document.createElement('div');
+          phraseTranslation.className = 'phrase-translation';
+          phraseTranslation.textContent = phrase.translation;
+
+          phraseTextDiv.appendChild(phraseEnglish);
+          phraseTextDiv.appendChild(phraseTranslation);
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-btn';
+          copyBtn.textContent = 'Copy';
+          copyBtn.onclick = () => {
+            navigator.clipboard.writeText(phrase.translation).then(() => {
+              const originalText = copyBtn.textContent;
+              copyBtn.textContent = 'Copied!';
+              setTimeout(() => {
+                copyBtn.textContent = originalText;
+              }, 2000);
+            }).catch(err => {
+              console.error('Failed to copy: ', err);
+            });
+          };
+
+          phraseItem.appendChild(phraseTextDiv);
+          phraseItem.appendChild(copyBtn);
+
+          categoryDiv.appendChild(phraseItem);
+        });
+
+        phrasesContainer.appendChild(categoryDiv);
+      }
+    }
+
+    // Event Listener
+    languageSelect.addEventListener('change', renderPhrases);
+
+    // Initialize
+    populateLanguages();
+    renderPhrases();
+  </script>
+</body>
+</html>
