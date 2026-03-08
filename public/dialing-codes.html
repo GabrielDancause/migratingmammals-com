@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Dialing Codes | Migrating Mammals</title>
+  <meta name="description" content="Search and copy international country dialing codes. Includes emergency numbers and mobile prefix guides.">
+  <meta property="og:title" content="International Dialing Codes">
+  <meta property="og:description" content="Easily lookup and copy international country calling codes with this fast offline tool.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "International Dialing Codes Lookup",
+    "url": "https://migratingmammals.com/dialing-codes.html",
+    "description": "Interactive search tool to lookup and copy international country calling codes.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    input[type="text"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      font-size: 1rem;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.copy-btn {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      font-size: 0.85rem;
+    }
+
+    button.copy-btn:hover {
+      background: rgba(196, 149, 106, 0.1);
+    }
+
+    button.copy-btn.copied {
+      background: var(--success);
+      color: var(--bg);
+      border-color: var(--success);
+    }
+
+    /* List Layout */
+    .results-count {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      text-align: right;
+    }
+
+    .country-list {
+      list-style: none;
+      max-height: 500px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+    }
+
+    /* Custom Scrollbar for list */
+    .country-list::-webkit-scrollbar {
+      width: 8px;
+    }
+    .country-list::-webkit-scrollbar-track {
+      background: var(--bg);
+      border-radius: 8px;
+    }
+    .country-list::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 8px;
+    }
+    .country-list::-webkit-scrollbar-thumb:hover {
+      background: #443c2c;
+    }
+
+    .country-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .country-item:last-child {
+      border-bottom: none;
+    }
+
+    .country-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .country-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .country-code-iso {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    .country-dial-code {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-right: 16px;
+    }
+
+    .country-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .country-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .country-actions {
+        margin-top: 12px;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>International Dialing Codes</h1>
+      <p class="subtitle">Quickly find and copy country calling codes for international numbers. Fast, offline-first tool.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="form-group">
+        <label for="search-input">Search Country or Code</label>
+        <input type="text" id="search-input" placeholder="e.g. 'Japan', 'US', '+81'">
+      </div>
+
+      <div class="results-count" id="results-count">Loading...</div>
+
+      <ul class="country-list" id="country-list">
+        <!-- JS populated -->
+      </ul>
+    </div>
+
+    <div class="seo-content">
+      <h2>How to Make an International Call</h2>
+      <p>Making an international call requires a specific sequence of numbers to route your call correctly across global networks:</p>
+      <ul>
+        <li><strong>International Exit Code:</strong> First, dial your country's exit code (often <code>00</code> in Europe/Asia or <code>011</code> in North America). If you are dialing from a mobile phone, you can usually just type a <code>+</code> symbol instead of the exit code.</li>
+        <li><strong>Country Calling Code:</strong> Next, dial the destination country's dialing code (which you can find using our tool above).</li>
+        <li><strong>Area/Mobile Code & Phone Number:</strong> Finally, dial the local phone number. Note: You often need to drop the leading <code>0</code> from the local area code when dialing internationally.</li>
+      </ul>
+
+      <h2>Mobile Prefixes vs Landlines</h2>
+      <p>In many countries, mobile phone numbers use specific prefixes that distinguish them from geographic landlines. For example, in the UK, mobile numbers typically start with <code>07</code>, while in Australia they start with <code>04</code>. Always remember to drop the leading zero if you are dialing from abroad. So an Australian mobile number <code>0412 345 678</code> becomes <code>+61 412 345 678</code>.</p>
+
+      <h2>Global Emergency Numbers</h2>
+      <p>If you are traveling, it is critical to know local emergency numbers. While dialing codes are for international routing, emergency numbers are local.</p>
+      <ul>
+        <li><strong>Europe (EU):</strong> <code>112</code> works universally across all EU member states.</li>
+        <li><strong>North America (US/Canada):</strong> <code>911</code> is the standard emergency contact.</li>
+        <li><strong>United Kingdom:</strong> <code>999</code> or <code>112</code>.</li>
+        <li><strong>Australia:</strong> <code>000</code>.</li>
+      </ul>
+      <p>Modern mobile phones are often hardcoded to recognize <code>112</code> and <code>911</code> worldwide and will attempt to route the call to the local equivalent emergency service dispatcher automatically, even without a SIM card inserted.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const countries = [
+      {"name": "Afghanistan", "code": "AF", "dial_code": "+93"},
+      {"name": "Albania", "code": "AL", "dial_code": "+355"},
+      {"name": "Algeria", "code": "DZ", "dial_code": "+213"},
+      {"name": "Andorra", "code": "AD", "dial_code": "+376"},
+      {"name": "Angola", "code": "AO", "dial_code": "+244"},
+      {"name": "Argentina", "code": "AR", "dial_code": "+54"},
+      {"name": "Australia", "code": "AU", "dial_code": "+61"},
+      {"name": "Austria", "code": "AT", "dial_code": "+43"},
+      {"name": "Bahamas", "code": "BS", "dial_code": "+1-242"},
+      {"name": "Bahrain", "code": "BH", "dial_code": "+973"},
+      {"name": "Bangladesh", "code": "BD", "dial_code": "+880"},
+      {"name": "Barbados", "code": "BB", "dial_code": "+1-246"},
+      {"name": "Belarus", "code": "BY", "dial_code": "+375"},
+      {"name": "Belgium", "code": "BE", "dial_code": "+32"},
+      {"name": "Belize", "code": "BZ", "dial_code": "+501"},
+      {"name": "Benin", "code": "BJ", "dial_code": "+229"},
+      {"name": "Bhutan", "code": "BT", "dial_code": "+975"},
+      {"name": "Bolivia", "code": "BO", "dial_code": "+591"},
+      {"name": "Bosnia and Herzegovina", "code": "BA", "dial_code": "+387"},
+      {"name": "Botswana", "code": "BW", "dial_code": "+267"},
+      {"name": "Brazil", "code": "BR", "dial_code": "+55"},
+      {"name": "Brunei", "code": "BN", "dial_code": "+673"},
+      {"name": "Bulgaria", "code": "BG", "dial_code": "+359"},
+      {"name": "Burkina Faso", "code": "BF", "dial_code": "+226"},
+      {"name": "Burundi", "code": "BI", "dial_code": "+257"},
+      {"name": "Cabo Verde", "code": "CV", "dial_code": "+238"},
+      {"name": "Cambodia", "code": "KH", "dial_code": "+855"},
+      {"name": "Cameroon", "code": "CM", "dial_code": "+237"},
+      {"name": "Canada", "code": "CA", "dial_code": "+1"},
+      {"name": "Central African Republic", "code": "CF", "dial_code": "+236"},
+      {"name": "Chad", "code": "TD", "dial_code": "+235"},
+      {"name": "Chile", "code": "CL", "dial_code": "+56"},
+      {"name": "China", "code": "CN", "dial_code": "+86"},
+      {"name": "Colombia", "code": "CO", "dial_code": "+57"},
+      {"name": "Comoros", "code": "KM", "dial_code": "+269"},
+      {"name": "Congo", "code": "CG", "dial_code": "+242"},
+      {"name": "Costa Rica", "code": "CR", "dial_code": "+506"},
+      {"name": "Croatia", "code": "HR", "dial_code": "+385"},
+      {"name": "Cuba", "code": "CU", "dial_code": "+53"},
+      {"name": "Cyprus", "code": "CY", "dial_code": "+357"},
+      {"name": "Czechia", "code": "CZ", "dial_code": "+420"},
+      {"name": "Denmark", "code": "DK", "dial_code": "+45"},
+      {"name": "Djibouti", "code": "DJ", "dial_code": "+253"},
+      {"name": "Dominica", "code": "DM", "dial_code": "+1-767"},
+      {"name": "Dominican Republic", "code": "DO", "dial_code": "+1-809, +1-829, +1-849"},
+      {"name": "Ecuador", "code": "EC", "dial_code": "+593"},
+      {"name": "Egypt", "code": "EG", "dial_code": "+20"},
+      {"name": "El Salvador", "code": "SV", "dial_code": "+503"},
+      {"name": "Equatorial Guinea", "code": "GQ", "dial_code": "+240"},
+      {"name": "Eritrea", "code": "ER", "dial_code": "+291"},
+      {"name": "Estonia", "code": "EE", "dial_code": "+372"},
+      {"name": "Eswatini", "code": "SZ", "dial_code": "+268"},
+      {"name": "Ethiopia", "code": "ET", "dial_code": "+251"},
+      {"name": "Fiji", "code": "FJ", "dial_code": "+679"},
+      {"name": "Finland", "code": "FI", "dial_code": "+358"},
+      {"name": "France", "code": "FR", "dial_code": "+33"},
+      {"name": "Gabon", "code": "GA", "dial_code": "+241"},
+      {"name": "Gambia", "code": "GM", "dial_code": "+220"},
+      {"name": "Georgia", "code": "GE", "dial_code": "+995"},
+      {"name": "Germany", "code": "DE", "dial_code": "+49"},
+      {"name": "Ghana", "code": "GH", "dial_code": "+233"},
+      {"name": "Greece", "code": "GR", "dial_code": "+30"},
+      {"name": "Grenada", "code": "GD", "dial_code": "+1-473"},
+      {"name": "Guatemala", "code": "GT", "dial_code": "+502"},
+      {"name": "Guinea", "code": "GN", "dial_code": "+224"},
+      {"name": "Guinea-Bissau", "code": "GW", "dial_code": "+245"},
+      {"name": "Guyana", "code": "GY", "dial_code": "+592"},
+      {"name": "Haiti", "code": "HT", "dial_code": "+509"},
+      {"name": "Honduras", "code": "HN", "dial_code": "+504"},
+      {"name": "Hungary", "code": "HU", "dial_code": "+36"},
+      {"name": "Iceland", "code": "IS", "dial_code": "+354"},
+      {"name": "India", "code": "IN", "dial_code": "+91"},
+      {"name": "Indonesia", "code": "ID", "dial_code": "+62"},
+      {"name": "Iran", "code": "IR", "dial_code": "+98"},
+      {"name": "Iraq", "code": "IQ", "dial_code": "+964"},
+      {"name": "Ireland", "code": "IE", "dial_code": "+353"},
+      {"name": "Israel", "code": "IL", "dial_code": "+972"},
+      {"name": "Italy", "code": "IT", "dial_code": "+39"},
+      {"name": "Jamaica", "code": "JM", "dial_code": "+1-876"},
+      {"name": "Japan", "code": "JP", "dial_code": "+81"},
+      {"name": "Jordan", "code": "JO", "dial_code": "+962"},
+      {"name": "Kazakhstan", "code": "KZ", "dial_code": "+7"},
+      {"name": "Kenya", "code": "KE", "dial_code": "+254"},
+      {"name": "Kiribati", "code": "KI", "dial_code": "+686"},
+      {"name": "Kuwait", "code": "KW", "dial_code": "+965"},
+      {"name": "Kyrgyzstan", "code": "KG", "dial_code": "+996"},
+      {"name": "Laos", "code": "LA", "dial_code": "+856"},
+      {"name": "Latvia", "code": "LV", "dial_code": "+371"},
+      {"name": "Lebanon", "code": "LB", "dial_code": "+961"},
+      {"name": "Lesotho", "code": "LS", "dial_code": "+266"},
+      {"name": "Liberia", "code": "LR", "dial_code": "+231"},
+      {"name": "Libya", "code": "LY", "dial_code": "+218"},
+      {"name": "Liechtenstein", "code": "LI", "dial_code": "+423"},
+      {"name": "Lithuania", "code": "LT", "dial_code": "+370"},
+      {"name": "Luxembourg", "code": "LU", "dial_code": "+352"},
+      {"name": "Madagascar", "code": "MG", "dial_code": "+261"},
+      {"name": "Malawi", "code": "MW", "dial_code": "+265"},
+      {"name": "Malaysia", "code": "MY", "dial_code": "+60"},
+      {"name": "Maldives", "code": "MV", "dial_code": "+960"},
+      {"name": "Mali", "code": "ML", "dial_code": "+223"},
+      {"name": "Malta", "code": "MT", "dial_code": "+356"},
+      {"name": "Marshall Islands", "code": "MH", "dial_code": "+692"},
+      {"name": "Mauritania", "code": "MR", "dial_code": "+222"},
+      {"name": "Mauritius", "code": "MU", "dial_code": "+230"},
+      {"name": "Mexico", "code": "MX", "dial_code": "+52"},
+      {"name": "Micronesia", "code": "FM", "dial_code": "+691"},
+      {"name": "Moldova", "code": "MD", "dial_code": "+373"},
+      {"name": "Monaco", "code": "MC", "dial_code": "+377"},
+      {"name": "Mongolia", "code": "MN", "dial_code": "+976"},
+      {"name": "Montenegro", "code": "ME", "dial_code": "+382"},
+      {"name": "Morocco", "code": "MA", "dial_code": "+212"},
+      {"name": "Mozambique", "code": "MZ", "dial_code": "+258"},
+      {"name": "Myanmar", "code": "MM", "dial_code": "+95"},
+      {"name": "Namibia", "code": "NA", "dial_code": "+264"},
+      {"name": "Nauru", "code": "NR", "dial_code": "+674"},
+      {"name": "Nepal", "code": "NP", "dial_code": "+977"},
+      {"name": "Netherlands", "code": "NL", "dial_code": "+31"},
+      {"name": "New Zealand", "code": "NZ", "dial_code": "+64"},
+      {"name": "Nicaragua", "code": "NI", "dial_code": "+505"},
+      {"name": "Niger", "code": "NE", "dial_code": "+227"},
+      {"name": "Nigeria", "code": "NG", "dial_code": "+234"},
+      {"name": "North Korea", "code": "KP", "dial_code": "+850"},
+      {"name": "North Macedonia", "code": "MK", "dial_code": "+389"},
+      {"name": "Norway", "code": "NO", "dial_code": "+47"},
+      {"name": "Oman", "code": "OM", "dial_code": "+968"},
+      {"name": "Pakistan", "code": "PK", "dial_code": "+92"},
+      {"name": "Palau", "code": "PW", "dial_code": "+680"},
+      {"name": "Palestine State", "code": "PS", "dial_code": "+970"},
+      {"name": "Panama", "code": "PA", "dial_code": "+507"},
+      {"name": "Papua New Guinea", "code": "PG", "dial_code": "+675"},
+      {"name": "Paraguay", "code": "PY", "dial_code": "+595"},
+      {"name": "Peru", "code": "PE", "dial_code": "+51"},
+      {"name": "Philippines", "code": "PH", "dial_code": "+63"},
+      {"name": "Poland", "code": "PL", "dial_code": "+48"},
+      {"name": "Portugal", "code": "PT", "dial_code": "+351"},
+      {"name": "Qatar", "code": "QA", "dial_code": "+974"},
+      {"name": "Romania", "code": "RO", "dial_code": "+40"},
+      {"name": "Russia", "code": "RU", "dial_code": "+7"},
+      {"name": "Rwanda", "code": "RW", "dial_code": "+250"},
+      {"name": "Saint Kitts and Nevis", "code": "KN", "dial_code": "+1-869"},
+      {"name": "Saint Lucia", "code": "LC", "dial_code": "+1-758"},
+      {"name": "Saint Vincent and the Grenadines", "code": "VC", "dial_code": "+1-784"},
+      {"name": "Samoa", "code": "WS", "dial_code": "+685"},
+      {"name": "San Marino", "code": "SM", "dial_code": "+378"},
+      {"name": "Sao Tome and Principe", "code": "ST", "dial_code": "+239"},
+      {"name": "Saudi Arabia", "code": "SA", "dial_code": "+966"},
+      {"name": "Senegal", "code": "SN", "dial_code": "+221"},
+      {"name": "Serbia", "code": "RS", "dial_code": "+381"},
+      {"name": "Seychelles", "code": "SC", "dial_code": "+248"},
+      {"name": "Sierra Leone", "code": "SL", "dial_code": "+232"},
+      {"name": "Singapore", "code": "SG", "dial_code": "+65"},
+      {"name": "Slovakia", "code": "SK", "dial_code": "+421"},
+      {"name": "Slovenia", "code": "SI", "dial_code": "+386"},
+      {"name": "Solomon Islands", "code": "SB", "dial_code": "+677"},
+      {"name": "Somalia", "code": "SO", "dial_code": "+252"},
+      {"name": "South Africa", "code": "ZA", "dial_code": "+27"},
+      {"name": "South Korea", "code": "KR", "dial_code": "+82"},
+      {"name": "South Sudan", "code": "SS", "dial_code": "+211"},
+      {"name": "Spain", "code": "ES", "dial_code": "+34"},
+      {"name": "Sri Lanka", "code": "LK", "dial_code": "+94"},
+      {"name": "Sudan", "code": "SD", "dial_code": "+249"},
+      {"name": "Suriname", "code": "SR", "dial_code": "+597"},
+      {"name": "Sweden", "code": "SE", "dial_code": "+46"},
+      {"name": "Switzerland", "code": "CH", "dial_code": "+41"},
+      {"name": "Syria", "code": "SY", "dial_code": "+963"},
+      {"name": "Tajikistan", "code": "TJ", "dial_code": "+992"},
+      {"name": "Tanzania", "code": "TZ", "dial_code": "+255"},
+      {"name": "Thailand", "code": "TH", "dial_code": "+66"},
+      {"name": "Timor-Leste", "code": "TL", "dial_code": "+670"},
+      {"name": "Togo", "code": "TG", "dial_code": "+228"},
+      {"name": "Tonga", "code": "TO", "dial_code": "+676"},
+      {"name": "Trinidad and Tobago", "code": "TT", "dial_code": "+1-868"},
+      {"name": "Tunisia", "code": "TN", "dial_code": "+216"},
+      {"name": "Turkey", "code": "TR", "dial_code": "+90"},
+      {"name": "Turkmenistan", "code": "TM", "dial_code": "+993"},
+      {"name": "Tuvalu", "code": "TV", "dial_code": "+688"},
+      {"name": "Uganda", "code": "UG", "dial_code": "+256"},
+      {"name": "Ukraine", "code": "UA", "dial_code": "+380"},
+      {"name": "United Arab Emirates", "code": "AE", "dial_code": "+971"},
+      {"name": "United Kingdom", "code": "GB", "dial_code": "+44"},
+      {"name": "United States", "code": "US", "dial_code": "+1"},
+      {"name": "Uruguay", "code": "UY", "dial_code": "+598"},
+      {"name": "Uzbekistan", "code": "UZ", "dial_code": "+998"},
+      {"name": "Vanuatu", "code": "VU", "dial_code": "+678"},
+      {"name": "Vatican City", "code": "VA", "dial_code": "+379"},
+      {"name": "Venezuela", "code": "VE", "dial_code": "+58"},
+      {"name": "Vietnam", "code": "VN", "dial_code": "+84"},
+      {"name": "Yemen", "code": "YE", "dial_code": "+967"},
+      {"name": "Zambia", "code": "ZM", "dial_code": "+260"},
+      {"name": "Zimbabwe", "code": "ZW", "dial_code": "+263"}
+    ];
+
+    const searchInput = document.getElementById('search-input');
+    const countryList = document.getElementById('country-list');
+    const resultsCount = document.getElementById('results-count');
+
+    function renderList(list) {
+      countryList.innerHTML = '';
+      resultsCount.textContent = `${list.length} countries found`;
+
+      list.forEach(country => {
+        const li = document.createElement('li');
+        li.className = 'country-item';
+
+        li.innerHTML = `
+          <div class="country-info">
+            <span class="country-name">${country.name}</span>
+            <span class="country-code-iso">ISO: ${country.code}</span>
+          </div>
+          <div class="country-actions">
+            <span class="country-dial-code">${country.dial_code}</span>
+            <button class="copy-btn" onclick="copyCode(this, '${country.dial_code}')">Copy</button>
+          </div>
+        `;
+
+        countryList.appendChild(li);
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = countries.filter(c =>
+        c.name.toLowerCase().includes(q) ||
+        c.code.toLowerCase().includes(q) ||
+        c.dial_code.includes(q)
+      );
+      renderList(filtered);
+    });
+
+    function copyCode(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+
+    // Initial render
+    renderList(countries);
+  </script>
+</body>
+</html>
