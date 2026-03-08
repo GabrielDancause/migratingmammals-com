@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Budget Planner | Migrating Mammals</title>
+  <meta name="description" content="Free tool to plan your travel budget by destination. Estimate daily and total costs for accommodation, food, flights, and more.">
+  <meta property="og:title" content="Travel Budget Planner">
+  <meta property="og:description" content="Calculate your total trip cost and average daily budget with this interactive tool.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Travel Budget Planner",
+    "url": "https://migratingmammals.com/travel-budget.html",
+    "description": "Plan your travel budgets by destination. Calculate daily and total estimates for accommodation, food, flights, and activities.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .card-header {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    input[type="text"], input[type="number"], select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="number"] {
+      font-family: var(--font-mono);
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-with-symbol {
+      position: relative;
+    }
+
+    .input-with-symbol .symbol {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      pointer-events: none;
+    }
+
+    .input-with-symbol input {
+      padding-left: 36px;
+    }
+
+    /* Results Section */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .stat-box {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .breakdown-list {
+      list-style: none;
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breakdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .breakdown-label {
+      font-weight: 500;
+    }
+
+    .breakdown-value {
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+    }
+
+    .copy-btn {
+      width: auto;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      margin-top: 24px;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .row, .row-3, .results-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Travel Budget Planner</h1>
+      <p class="subtitle">Plan your travel budgets by destination. Estimate daily expenses and fixed costs to calculate your total trip budget.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="row">
+      <!-- Input Column -->
+      <div>
+        <div class="card">
+          <div class="card-header">Trip Details</div>
+          <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" placeholder="e.g. Kyoto, Japan">
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="duration">Duration (Days)</label>
+              <input type="number" id="duration" min="1" value="7">
+            </div>
+            <div class="form-group">
+              <label for="currency">Currency Symbol</label>
+              <input type="text" id="currency" value="$" maxlength="5">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Daily Costs</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">Estimated average cost per day.</p>
+
+          <div class="form-group">
+            <label for="daily-accommodation">Accommodation</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="daily-accommodation" class="cost-input" min="0" value="80">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="daily-food">Food & Drinks</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="daily-food" class="cost-input" min="0" value="40">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="daily-transport">Local Transportation</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="daily-transport" class="cost-input" min="0" value="15">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="daily-activities">Activities & Tours</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="daily-activities" class="cost-input" min="0" value="25">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="daily-misc">Miscellaneous</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="daily-misc" class="cost-input" min="0" value="10">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Fixed Costs</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">One-time costs for the entire trip.</p>
+
+          <div class="form-group">
+            <label for="fixed-flights">Flights / Travel</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="fixed-flights" class="cost-input" min="0" value="500">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fixed-insurance">Travel Insurance</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="fixed-insurance" class="cost-input" min="0" value="40">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fixed-visa">Visa Fees</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="fixed-visa" class="cost-input" min="0" value="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fixed-other">Other Pre-trip Costs</label>
+            <div class="input-with-symbol">
+              <span class="symbol currency-symbol">$</span>
+              <input type="number" id="fixed-other" class="cost-input" min="0" value="0">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Column -->
+      <div>
+        <div class="card" style="position: sticky; top: 20px;">
+          <div class="card-header">Budget Summary</div>
+
+          <div class="results-grid">
+            <div class="stat-box">
+              <div class="stat-label">Total Cost</div>
+              <div class="stat-value" id="total-cost">$0</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Entire Trip</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Average Daily</div>
+              <div class="stat-value" id="avg-daily">$0</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Including Fixed</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 32px; margin-bottom: 16px; font-weight: 600; color: var(--text-primary); border-bottom: 1px solid var(--border); padding-bottom: 8px;">Breakdown</div>
+
+          <ul class="breakdown-list">
+            <li class="breakdown-item">
+              <span class="breakdown-label">Total Daily Expenses</span>
+              <span class="breakdown-value" id="breakdown-daily-total">$0</span>
+            </li>
+            <li class="breakdown-item">
+              <span class="breakdown-label">Total Fixed Costs</span>
+              <span class="breakdown-value" id="breakdown-fixed-total">$0</span>
+            </li>
+            <li class="breakdown-item" style="margin-top: 16px; font-weight: 700; color: var(--accent);">
+              <span class="breakdown-label">Grand Total</span>
+              <span class="breakdown-value" id="breakdown-grand-total">$0</span>
+            </li>
+          </ul>
+
+          <button id="copy-btn" class="secondary copy-btn" style="width: 100%;">Copy Budget Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>How to Plan a Travel Budget</h2>
+      <p>Planning a travel budget doesn't have to be stressful. By breaking your expenses down into manageable categories—daily costs and fixed costs—you can get a realistic estimate of how much your trip will cost. This Travel Budget Planner helps you visualize exactly where your money is going.</p>
+
+      <h2>Tips for Accurate Budgeting</h2>
+      <ul>
+        <li><strong>Research Daily Costs:</strong> Accommodation and food prices vary wildly between countries. Look up average hotel prices and restaurant menus in your destination to get a realistic daily figure.</li>
+        <li><strong>Don't Forget Miscellaneous:</strong> Always include a buffer for unexpected expenses, souvenirs, or small daily purchases like coffee or bottled water.</li>
+        <li><strong>Factor in Transportation:</strong> While major flights are fixed costs, remember to budget for local transportation like trains, buses, or rideshares, which can add up over a week.</li>
+      </ul>
+
+      <h2>Why Calculate Average Daily Cost?</h2>
+      <p>The "Average Daily Cost" in this tool includes both your daily expenses and a prorated portion of your fixed costs (like flights). This gives you a true picture of how much each day of your vacation actually costs, helping you compare the value of different destinations or trip durations.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // DOM Elements
+    const durationInput = document.getElementById('duration');
+    const currencyInput = document.getElementById('currency');
+    const destinationInput = document.getElementById('destination');
+    const currencySymbols = document.querySelectorAll('.currency-symbol');
+
+    const costInputs = document.querySelectorAll('.cost-input');
+
+    // Output Elements
+    const totalCostEl = document.getElementById('total-cost');
+    const avgDailyEl = document.getElementById('avg-daily');
+    const breakdownDailyTotalEl = document.getElementById('breakdown-daily-total');
+    const breakdownFixedTotalEl = document.getElementById('breakdown-fixed-total');
+    const breakdownGrandTotalEl = document.getElementById('breakdown-grand-total');
+    const copyBtn = document.getElementById('copy-btn');
+
+    // Values
+    let currency = '$';
+    let duration = 7;
+
+    function updateCurrencySymbols() {
+      currency = currencyInput.value || '$';
+      currencySymbols.forEach(el => {
+        el.textContent = currency;
+      });
+      calculateBudget();
+    }
+
+    function formatMoney(amount) {
+      return `${currency}${amount.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+    }
+
+    function calculateBudget() {
+      duration = parseInt(durationInput.value, 10) || 1;
+      if (duration < 1) {
+        duration = 1;
+        durationInput.value = 1;
+      }
+
+      // Daily Costs
+      const acc = parseFloat(document.getElementById('daily-accommodation').value) || 0;
+      const food = parseFloat(document.getElementById('daily-food').value) || 0;
+      const transport = parseFloat(document.getElementById('daily-transport').value) || 0;
+      const activities = parseFloat(document.getElementById('daily-activities').value) || 0;
+      const misc = parseFloat(document.getElementById('daily-misc').value) || 0;
+
+      const dailyTotal = acc + food + transport + activities + misc;
+      const totalDailyExpenses = dailyTotal * duration;
+
+      // Fixed Costs
+      const flights = parseFloat(document.getElementById('fixed-flights').value) || 0;
+      const insurance = parseFloat(document.getElementById('fixed-insurance').value) || 0;
+      const visa = parseFloat(document.getElementById('fixed-visa').value) || 0;
+      const other = parseFloat(document.getElementById('fixed-other').value) || 0;
+
+      const fixedTotal = flights + insurance + visa + other;
+
+      // Grand Total
+      const grandTotal = totalDailyExpenses + fixedTotal;
+      const avgDaily = grandTotal / duration;
+
+      // Update UI
+      totalCostEl.textContent = formatMoney(grandTotal);
+      avgDailyEl.textContent = formatMoney(avgDaily);
+
+      breakdownDailyTotalEl.textContent = formatMoney(totalDailyExpenses);
+      breakdownFixedTotalEl.textContent = formatMoney(fixedTotal);
+      breakdownGrandTotalEl.textContent = formatMoney(grandTotal);
+    }
+
+    // Event Listeners
+    durationInput.addEventListener('input', calculateBudget);
+    currencyInput.addEventListener('input', updateCurrencySymbols);
+    costInputs.forEach(input => {
+      input.addEventListener('input', calculateBudget);
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const dest = destinationInput.value ? ` to ${destinationInput.value}` : '';
+      const text = `Travel Budget Estimate${dest}
+Duration: ${duration} days
+
+Total Cost: ${totalCostEl.textContent}
+Average Daily Cost: ${avgDailyEl.textContent}
+
+Breakdown:
+- Total Daily Expenses: ${breakdownDailyTotalEl.textContent}
+- Total Fixed Costs: ${breakdownFixedTotalEl.textContent}
+
+Created with migratingmammals.com`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = copyBtn.innerText;
+        copyBtn.innerText = 'Copied!';
+        setTimeout(() => {
+          copyBtn.innerText = originalText;
+        }, 2000);
+      });
+    });
+
+    // Initial calculation
+    updateCurrencySymbols();
+  </script>
+</body>
+</html>
