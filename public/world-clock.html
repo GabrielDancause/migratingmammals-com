@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Clock Dashboard | Migrating Mammals</title>
+  <meta name="description" content="View the current time in multiple cities. Instantly identify business hour overlaps and day/night cycles across timezones.">
+  <meta property="og:title" content="World Clock Dashboard">
+  <meta property="og:description" content="Manage global teams easily. See time, business hours, and daylight status across multiple cities.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "World Clock Dashboard",
+    "url": "https://migratingmammals.com/world-clock.html",
+    "description": "View current time in multiple cities, track day/night cycles, and find business hours overlap.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    .row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    .row > button {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .clock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .clock-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .clock-card.business-hours {
+      border-color: rgba(196, 149, 106, 0.4);
+      background: linear-gradient(180deg, rgba(196, 149, 106, 0.05) 0%, var(--bg) 100%);
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      width: auto;
+      padding: 4px;
+    }
+
+    .remove-btn:hover {
+      color: var(--danger);
+      background: transparent;
+    }
+
+    .city-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      padding-right: 24px; /* Space for remove button */
+    }
+
+    .time-display {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 16px 0 8px;
+      letter-spacing: -1px;
+    }
+
+    .date-display {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .status-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .badge.day {
+      border-color: rgba(234, 179, 8, 0.3);
+      color: #eab308;
+    }
+
+    .badge.night {
+      border-color: rgba(59, 130, 246, 0.3);
+      color: #3b82f6;
+    }
+
+    .badge.business {
+      border-color: rgba(34, 197, 94, 0.3);
+      color: var(--success);
+    }
+
+    .badge.after-hours {
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>World Clock Dashboard</h1>
+      <p class="subtitle">Keep track of multiple timezones, visualize day/night cycles, and spot overlapping business hours instantly.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="row">
+        <div>
+          <select id="city-select">
+            <option value="">Select a timezone...</option>
+            <option value="America/Los_Angeles">San Francisco / Los Angeles (PT)</option>
+            <option value="America/Denver">Denver (MT)</option>
+            <option value="America/Chicago">Chicago (CT)</option>
+            <option value="America/New_York">New York (ET)</option>
+            <option value="America/Toronto">Toronto (ET)</option>
+            <option value="America/Sao_Paulo">São Paulo (BRT)</option>
+            <option value="Europe/London">London (GMT/BST)</option>
+            <option value="Europe/Paris">Paris / Berlin (CET/CEST)</option>
+            <option value="Africa/Johannesburg">Johannesburg (SAST)</option>
+            <option value="Asia/Dubai">Dubai (GST)</option>
+            <option value="Asia/Kolkata">Mumbai / New Delhi (IST)</option>
+            <option value="Asia/Singapore">Singapore (SGT)</option>
+            <option value="Asia/Tokyo">Tokyo (JST)</option>
+            <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+            <option value="Pacific/Auckland">Auckland (NZST/NZDT)</option>
+          </select>
+        </div>
+        <button id="add-city-btn">Add City</button>
+      </div>
+
+      <div style="height: 1px; background: var(--border); margin: 32px 0;"></div>
+
+      <div class="clock-grid" id="clock-grid">
+        <!-- Clocks will be generated here -->
+      </div>
+
+      <div style="margin-top: 32px; text-align: right;">
+          <button id="copy-btn" class="secondary" style="width: auto;">Copy Current Times</button>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Why Use a World Clock Dashboard?</h2>
+      <p>Managing remote teams, scheduling international client calls, or simply keeping in touch with friends and family abroad requires a clear understanding of time across the globe. A standard clock only gives you one piece of the puzzle. This World Clock Dashboard goes further by providing immediate context: is it currently business hours there? Is it middle of the night?</p>
+
+      <h2>Understanding Business Hour Overlaps</h2>
+      <p>The biggest challenge in global collaboration is finding a time when everyone is reasonably awake and working. This tool automatically calculates if the current time falls within standard business hours (typically 9 AM to 5 PM local time) for each selected city. This makes "right now" scheduling decisions effortless.</p>
+
+      <h2>Features of this Interactive Tool</h2>
+      <ul>
+        <li><strong>Real-time Updates:</strong> All clocks are synchronized and update every second without requiring a page refresh or internet connection after the initial load.</li>
+        <li><strong>Day/Night Indicators:</strong> Visual cues help you instantly recognize if it's daytime or nighttime in your target destination, preventing accidental 3 AM phone calls.</li>
+        <li><strong>Copy Functionality:</strong> Need to share the current time in various cities? The built-in copy button formats the data perfectly for Slack, Teams, or email.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const citySelect = document.getElementById('city-select');
+    const addCityBtn = document.getElementById('add-city-btn');
+    const clockGrid = document.getElementById('clock-grid');
+    const copyBtn = document.getElementById('copy-btn');
+
+    let selectedCities = [];
+    const MAX_CITIES = 8;
+    const BUSINESS_START = 9; // 9 AM
+    const BUSINESS_END = 17;  // 5 PM
+    const DAY_START = 6;      // 6 AM
+    const DAY_END = 18;       // 6 PM
+
+    // Load from local storage
+    try {
+      const saved = localStorage.getItem('world-clock-cities');
+      if (saved) {
+        selectedCities = JSON.parse(saved);
+      } else {
+        selectedCities = [
+          { id: 'America/New_York', name: 'New York (ET)' },
+          { id: 'Europe/London', name: 'London (GMT/BST)' },
+          { id: 'Asia/Tokyo', name: 'Tokyo (JST)' }
+        ];
+      }
+    } catch (e) {
+      console.error("Could not load saved cities");
+    }
+
+    function saveState() {
+      localStorage.setItem('world-clock-cities', JSON.stringify(selectedCities));
+    }
+
+    // Time calculations
+    function getCityTimeData(tz) {
+      const now = new Date();
+
+      const timeFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+
+      const dateFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      });
+
+      const hourFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        hour: 'numeric',
+        hour12: false
+      });
+
+      const timeStr = timeFormatter.format(now);
+      const dateStr = dateFormatter.format(now);
+
+      const parts = hourFormatter.formatToParts(now);
+      const hourPart = parts.find(p => p.type === 'hour').value;
+      const hour24 = parseInt(hourPart, 10) % 24;
+
+      return {
+        timeStr,
+        dateStr,
+        hour24
+      };
+    }
+
+    function renderClocks() {
+      if (selectedCities.length === 0) {
+        clockGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-secondary);">Add a city to see its current time.</div>';
+        return;
+      }
+
+      clockGrid.innerHTML = '';
+
+      selectedCities.forEach(city => {
+        const data = getCityTimeData(city.id);
+
+        const isBusiness = data.hour24 >= BUSINESS_START && data.hour24 < BUSINESS_END;
+        const isDay = data.hour24 >= DAY_START && data.hour24 < DAY_END;
+
+        const card = document.createElement('div');
+        card.className = `clock-card ${isBusiness ? 'business-hours' : ''}`;
+
+        card.innerHTML = `
+          <button class="remove-btn" onclick="removeCity('${city.id}')" title="Remove city">✕</button>
+          <div class="city-name">${city.name.split(' (')[0]}</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary);">${city.name.includes('(') ? '(' + city.name.split('(')[1] : ''}</div>
+
+          <div class="time-display">${data.timeStr}</div>
+          <div class="date-display">${data.dateStr}</div>
+
+          <div class="status-badges">
+            <span class="badge ${isDay ? 'day' : 'night'}">${isDay ? '☀️ Day' : '🌙 Night'}</span>
+            <span class="badge ${isBusiness ? 'business' : 'after-hours'}">${isBusiness ? '💼 Business Hours' : '🛋️ After Hours'}</span>
+          </div>
+        `;
+
+        clockGrid.appendChild(card);
+      });
+    }
+
+    function removeCity(id) {
+      selectedCities = selectedCities.filter(c => c.id !== id);
+      saveState();
+      renderClocks();
+    }
+
+    addCityBtn.addEventListener('click', () => {
+      const option = citySelect.options[citySelect.selectedIndex];
+      const cityId = option.value;
+      const cityName = option.text;
+
+      if (!cityId) return;
+
+      if (selectedCities.length >= MAX_CITIES) {
+        alert(`Maximum ${MAX_CITIES} cities allowed.`);
+        return;
+      }
+
+      if (selectedCities.some(c => c.id === cityId)) {
+        alert("City already added.");
+        return;
+      }
+
+      selectedCities.push({ id: cityId, name: cityName });
+      citySelect.selectedIndex = 0;
+      saveState();
+      renderClocks();
+    });
+
+    copyBtn.addEventListener('click', () => {
+      if (selectedCities.length === 0) return;
+
+      let text = "Current Times:\n\n";
+      selectedCities.forEach(city => {
+        const data = getCityTimeData(city.id);
+        text += `${city.name.split(' (')[0]}: ${data.timeStr} (${data.dateStr})\n`;
+      });
+
+      text += "\nCreated with migratingmammals.com";
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = copyBtn.innerText;
+        copyBtn.innerText = 'Copied!';
+        setTimeout(() => {
+          copyBtn.innerText = originalText;
+        }, 2000);
+      });
+    });
+
+    // Initialize
+    renderClocks();
+
+    // Update every second
+    setInterval(renderClocks, 1000);
+
+  </script>
+</body>
+</html>
