@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best eSIM Providers for Travel | Migrating Mammals</title>
+  <meta name="description" content="A curated comparison of the best eSIM providers for international travel. Compare Airalo, Holafly, Nomad, and Ubigi based on coverage, data plans, and price.">
+  <meta property="og:title" content="Best eSIM Providers for Travel">
+  <meta property="og:description" content="Compare the top travel eSIM providers including Airalo, Holafly, Nomad, and Ubigi to find the best data plans for your next trip.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "eSIM Provider Comparison",
+        "url": "https://migratingmammals.com/list-esim.html",
+        "description": "Interactive comparison tool for the best travel eSIM providers.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "Article",
+        "headline": "Best eSIM Providers for Travel",
+        "description": "A curated comparison of the best eSIM providers for international travel. Compare Airalo, Holafly, Nomad, and Ubigi based on coverage, data plans, and price.",
+        "author": {
+          "@type": "Organization",
+          "name": "Migrating Mammals"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Migrating Mammals",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://migratingmammals.com/favicon.ico"
+          }
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Controls */
+    .controls-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .controls-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .search-container {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px 12px 40px;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      width: 18px;
+      height: 18px;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn, .sort-select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    .sort-select {
+      appearance: none;
+      padding-right: 32px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    .filter-btn:hover, .sort-select:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Cards Layout */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .esim-item {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .esim-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .card-header {
+      padding: 24px 24px 16px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .card-name {
+      font-size: 1.4rem;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .score-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .card-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      background: var(--bg);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .card-body {
+      padding: 20px 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .pros li::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+
+    .cons li::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    }
+
+    .card-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+
+    .tag.highlight {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--card-bg);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    /* SEO Section */
+    .seo-content {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      margin: 32px 0 16px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .seo-content h2:first-child {
+      margin-top: 0;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    .seo-content ul {
+      margin: 0 0 16px 24px;
+      color: var(--text-secondary);
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 64px;
+      padding: 32px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover {
+      color: var(--text-primary);
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Best eSIM Providers for Travel</h1>
+      <p class="subtitle">Compare top eSIM options including <strong>Airalo, Holafly, Nomad, and Ubigi</strong>. Find the best data plans, coverage, and prices for your next trip.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="controls-container">
+      <div class="search-container">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="search-input" class="search-input" placeholder="Search providers or features...">
+      </div>
+
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All Providers</button>
+        <button class="filter-btn" data-filter="unlimited">Unlimited Data</button>
+        <button class="filter-btn" data-filter="regional">Regional/Global Plans</button>
+      </div>
+
+      <select id="sort-select" class="sort-select">
+        <option value="score-desc">Sort by Score (High to Low)</option>
+        <option value="name-asc">Sort by Name (A to Z)</option>
+      </select>
+    </div>
+
+    <div class="cards-grid" id="cards-grid">
+
+      <!-- Card 1: Airalo -->
+      <div class="esim-item" data-unlimited="false" data-regional="true" data-score="9.0" data-name="Airalo">
+        <div class="card-header">
+          <div class="card-name">Airalo</div>
+          <div class="score-badge">9.0</div>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-label">Coverage</span>
+              <span class="metric-value">200+ Countries</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Data Plans</span>
+              <span class="metric-value">Fixed GB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <span class="metric-label">Pros</span>
+            <ul class="feature-list pros">
+              <li>Largest selection of local, regional, and global plans</li>
+              <li>Very easy-to-use app interface</li>
+              <li>Affordable pricing for short trips</li>
+              <li>Loyalty program (Airmoney)</li>
+            </ul>
+          </div>
+          <div>
+            <span class="metric-label">Cons</span>
+            <ul class="feature-list cons">
+              <li>No truly unlimited data options</li>
+              <li>Can be pricey for heavy data users on long trips</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="tag highlight">Best Overall</span>
+          <span class="tag">Fixed Data</span>
+          <span class="tag">Global Coverage</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Holafly -->
+      <div class="esim-item" data-unlimited="true" data-regional="true" data-score="8.5" data-name="Holafly">
+        <div class="card-header">
+          <div class="card-name">Holafly</div>
+          <div class="score-badge">8.5</div>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-label">Coverage</span>
+              <span class="metric-value">160+ Countries</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Data Plans</span>
+              <span class="metric-value">Unlimited</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <span class="metric-label">Pros</span>
+            <ul class="feature-list pros">
+              <li>Offers unlimited data in most popular destinations</li>
+              <li>Excellent customer support (24/7)</li>
+              <li>Easy installation via QR code</li>
+            </ul>
+          </div>
+          <div>
+            <span class="metric-label">Cons</span>
+            <ul class="feature-list cons">
+              <li>Hotspot/tethering is often restricted or disabled</li>
+              <li>Higher upfront cost than fixed-data competitors</li>
+              <li>Unlimited data may be throttled after heavy daily use</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="tag highlight">Best for Unlimited</span>
+          <span class="tag">Unlimited Data</span>
+          <span class="tag">No Hotspot</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Nomad -->
+      <div class="esim-item" data-unlimited="false" data-regional="true" data-score="8.2" data-name="Nomad">
+        <div class="card-header">
+          <div class="card-name">Nomad</div>
+          <div class="score-badge">8.2</div>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-label">Coverage</span>
+              <span class="metric-value">110+ Countries</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Data Plans</span>
+              <span class="metric-value">Fixed GB</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <span class="metric-label">Pros</span>
+            <ul class="feature-list pros">
+              <li>Frequent promotions and discount codes available</li>
+              <li>Solid app experience and management</li>
+              <li>Competitive pricing in specific regions (e.g., USA, Asia)</li>
+            </ul>
+          </div>
+          <div>
+            <span class="metric-label">Cons</span>
+            <ul class="feature-list cons">
+              <li>Smaller overall coverage list compared to Airalo</li>
+              <li>Fewer regional bundle options</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="tag">Good Value</span>
+          <span class="tag">Fixed Data</span>
+          <span class="tag">App-focused</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Ubigi -->
+      <div class="esim-item" data-unlimited="false" data-regional="true" data-score="8.8" data-name="Ubigi">
+        <div class="card-header">
+          <div class="card-name">Ubigi</div>
+          <div class="score-badge">8.8</div>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-label">Coverage</span>
+              <span class="metric-value">190+ Destinations</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Data Plans</span>
+              <span class="metric-value">Fixed GB / Annual</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <span class="metric-label">Pros</span>
+            <ul class="feature-list pros">
+              <li>Excellent for Japan and Europe</li>
+              <li>Offers recurring monthly and annual plans</li>
+              <li>High-quality connectivity (often partners with top-tier networks)</li>
+              <li>Reusable eSIM profile (no need to reinstall for new trips)</li>
+            </ul>
+          </div>
+          <div>
+            <span class="metric-label">Cons</span>
+            <ul class="feature-list cons">
+              <li>Slightly more confusing initial setup process</li>
+              <li>App interface is less modern than competitors</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="tag highlight">Best for Frequent Travelers</span>
+          <span class="tag">Reusable Profile</span>
+          <span class="tag">Strong in Europe/Japan</span>
+        </div>
+      </div>
+
+      <div class="no-results" id="no-results">
+        <p>No eSIM providers match your search criteria.</p>
+      </div>
+
+    </div>
+
+    <div class="seo-content">
+      <h2>Why Use an eSIM for International Travel?</h2>
+      <p>Gone are the days of hunting down a local kiosk at the airport, fumbling with tiny physical SIM cards, and accidentally losing your home number. An eSIM (embedded SIM) allows you to download a digital data plan directly to your compatible smartphone before you even board your flight.</p>
+      <ul>
+        <li><strong>Instant Connectivity:</strong> Connect to local networks the moment you land.</li>
+        <li><strong>Keep Your Home Number:</strong> Run dual SIMs to keep your primary number active for SMS (like banking 2FA) while using the eSIM for cheap data.</li>
+        <li><strong>Cost-Effective:</strong> Avoid exorbitant roaming charges from your home carrier (which can often be $10+ per day).</li>
+      </ul>
+
+      <h2>Choosing the Right Provider: Fixed vs. Unlimited Data</h2>
+      <p>When selecting between providers like <strong>Airalo</strong> and <strong>Holafly</strong>, the biggest decision is whether you need fixed data or unlimited data.</p>
+      <p>If you rely on Wi-Fi at your accommodation or coworking space and only need data for maps, messaging, and light browsing, a fixed-data plan (e.g., 3GB or 5GB from Airalo) is usually the most cost-effective option. However, if you plan on streaming, heavily using social media, or navigating constantly without Wi-Fi, an unlimited plan (like Holafly) provides peace of mind, though you should verify their hotspot policies if you plan to tether to your laptop.</p>
+
+      <h2>Regional vs. Local Plans</h2>
+      <p>If your trip involves crossing multiple borders (like a Eurotrip or a tour of Southeast Asia), buying a <strong>Regional eSIM</strong> is highly recommended. Providers like <strong>Ubigi</strong> and <strong>Airalo</strong> offer excellent regional packages (e.g., "Eurolink" or "Asialink") that automatically switch to the best local networks as you cross borders, saving you the hassle of buying a new eSIM for every country.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('search-input');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const sortSelect = document.getElementById('sort-select');
+      const grid = document.getElementById('cards-grid');
+      const cards = Array.from(grid.querySelectorAll('.esim-item'));
+      const noResults = document.getElementById('no-results');
+
+      let currentFilter = 'all';
+
+      // Filtering Logic
+      function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const textContent = card.innerText.toLowerCase();
+          const isUnlimited = card.getAttribute('data-unlimited') === 'true';
+          const isRegional = card.getAttribute('data-regional') === 'true';
+
+          let matchesSearch = textContent.includes(query);
+          let matchesFilter = true;
+
+          if (currentFilter === 'unlimited') {
+            matchesFilter = isUnlimited;
+          } else if (currentFilter === 'regional') {
+            matchesFilter = isRegional;
+          }
+
+          if (matchesSearch && matchesFilter) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResults.style.display = 'block';
+        } else {
+          noResults.style.display = 'none';
+        }
+      }
+
+      // Sorting Logic
+      function applySort() {
+        const sortValue = sortSelect.value;
+
+        cards.sort((a, b) => {
+          const scoreA = parseFloat(a.getAttribute('data-score'));
+          const scoreB = parseFloat(b.getAttribute('data-score'));
+          const nameA = a.getAttribute('data-name');
+          const nameB = b.getAttribute('data-name');
+
+          if (sortValue === 'score-desc') return scoreB - scoreA;
+          if (sortValue === 'name-asc') return nameA.localeCompare(nameB);
+          return 0;
+        });
+
+        // Append in new order
+        cards.forEach(card => grid.insertBefore(card, noResults));
+      }
+
+      // Event Listeners
+      searchInput.addEventListener('input', applyFilters);
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          currentFilter = e.target.getAttribute('data-filter');
+          applyFilters();
+        });
+      });
+
+      sortSelect.addEventListener('change', applySort);
+
+      // Initial Sort
+      applySort();
+    });
+  </script>
+</body>
+</html>
