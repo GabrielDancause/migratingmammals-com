@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best VPNs for Travel | Migrating Mammals</title>
+  <meta name="description" content="Compare the best VPNs for travelers: NordVPN, ExpressVPN, Surfshark, and Mullvad. Analyze speed, privacy, streaming, and pricing offline.">
+  <meta property="og:title" content="Best VPNs for Travel">
+  <meta property="og:description" content="Curated comparison of top travel VPNs including NordVPN, ExpressVPN, Surfshark, and Mullvad.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Travel VPN Comparator",
+        "url": "https://migratingmammals.com/list-vpn.html",
+        "description": "Compare top VPNs for travel offline.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "Article",
+        "headline": "Best VPNs for Travel",
+        "description": "Compare the best VPNs for travelers: NordVPN, ExpressVPN, Surfshark, and Mullvad. Analyze speed, privacy, streaming, and pricing.",
+        "author": {
+          "@type": "Organization",
+          "name": "Migrating Mammals",
+          "url": "https://migratingmammals.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "GAB Ventures",
+          "url": "https://gab.ae"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Search/Filter Bar */
+    .search-container {
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 16px 20px 16px 48px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Card Layout */
+    .vpn-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .vpn-card h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .score-badge {
+      background: rgba(196, 149, 106, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(196, 149, 106, 0.3);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .metric-item {
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Pros / Cons */
+    .pros-cons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .list-group h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .list-group.pros h3 { color: var(--success); }
+    .list-group.cons h3 { color: var(--warning); }
+
+    .list-group ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .list-group li {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .list-group li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    .list-group.pros li::before { color: var(--success); }
+    .list-group.cons li::before { color: var(--warning); }
+
+    /* Actions */
+    .card-actions {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hide class for search */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .card-body {
+        grid-template-columns: 1fr;
+      }
+      .vpn-card {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Best VPNs for Travel</h1>
+      <p class="subtitle">A curated comparison of the top VPNs for digital nomads and frequent travelers. Evaluated on speed, privacy, streaming access, and price.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="search-container">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="search-input" class="search-input" placeholder="Search VPNs, features, or keywords...">
+    </div>
+
+    <div id="vpn-list">
+
+      <!-- NordVPN -->
+      <div class="vpn-card" data-keywords="nordvpn fast streaming netflix double vpn panama reliable">
+        <div class="card-header">
+          <h2>NordVPN</h2>
+          <div class="score-badge">9.5/10</div>
+        </div>
+        <div class="card-body">
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="metric-label">Speed</div>
+              <div class="metric-value">Excellent (NordLynx)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Privacy / HQ</div>
+              <div class="metric-value">Panama (No Logs)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Streaming</div>
+              <div class="metric-value">Outstanding</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Price (Monthly avg)</div>
+              <div class="metric-value">~$3.39 - $4.99</div>
+            </div>
+          </div>
+          <div class="pros-cons">
+            <div class="list-group pros">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Pros</h3>
+              <ul>
+                <li>Consistently the fastest speeds globally</li>
+                <li>Reliably unblocks most streaming services (Netflix, Hulu, etc.)</li>
+                <li>Strong privacy features (Double VPN, Onion Over VPN)</li>
+                <li>Strict, independently audited no-logs policy</li>
+              </ul>
+            </div>
+            <div class="list-group cons">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Cons</h3>
+              <ul>
+                <li>Map-based interface can be clunky on smaller mobile screens</li>
+                <li>Renewal prices can be higher than initial sign-up deals</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="copy-btn" onclick="copyVpnDetails('NordVPN', '9.5', 'Excellent', 'Panama', 'Outstanding', '~$3.39', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Details
+          </button>
+        </div>
+      </div>
+
+      <!-- ExpressVPN -->
+      <div class="vpn-card" data-keywords="expressvpn simple bvi lightway router fast expensive">
+        <div class="card-header">
+          <h2>ExpressVPN</h2>
+          <div class="score-badge">9.0/10</div>
+        </div>
+        <div class="card-body">
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="metric-label">Speed</div>
+              <div class="metric-value">Great (Lightway)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Privacy / HQ</div>
+              <div class="metric-value">BVI (No Logs)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Streaming</div>
+              <div class="metric-value">Very Good</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Price (Monthly avg)</div>
+              <div class="metric-value">~$6.67 - $8.32</div>
+            </div>
+          </div>
+          <div class="pros-cons">
+            <div class="list-group pros">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Pros</h3>
+              <ul>
+                <li>Extremely simple, intuitive app design across all platforms</li>
+                <li>Excellent server spread across 105 countries</li>
+                <li>Custom router app is the best in the industry</li>
+                <li>Trusted, verified no-logs policy (British Virgin Islands HQ)</li>
+              </ul>
+            </div>
+            <div class="list-group cons">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Cons</h3>
+              <ul>
+                <li>Noticeably more expensive than competitors</li>
+                <li>Fewer simultaneous connections (8) compared to some rivals</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="copy-btn" onclick="copyVpnDetails('ExpressVPN', '9.0', 'Great', 'BVI', 'Very Good', '~$6.67', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Surfshark -->
+      <div class="vpn-card" data-keywords="surfshark cheap unlimited devices value netherlands wireguard">
+        <div class="card-header">
+          <h2>Surfshark</h2>
+          <div class="score-badge">8.8/10</div>
+        </div>
+        <div class="card-body">
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="metric-label">Speed</div>
+              <div class="metric-value">Good (WireGuard)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Privacy / HQ</div>
+              <div class="metric-value">Netherlands (No Logs)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Streaming</div>
+              <div class="metric-value">Good</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Price (Monthly avg)</div>
+              <div class="metric-value">~$2.19 - $2.49</div>
+            </div>
+          </div>
+          <div class="pros-cons">
+            <div class="list-group pros">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Pros</h3>
+              <ul>
+                <li>Unlimited simultaneous device connections</li>
+                <li>Incredible value on long-term plans</li>
+                <li>Features CleanWeb (ad/tracker blocker) built-in</li>
+                <li>Solid speeds and capable streaming unblocking</li>
+              </ul>
+            </div>
+            <div class="list-group cons">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Cons</h3>
+              <ul>
+                <li>Headquarters is in the Netherlands (Nine Eyes intelligence alliance)</li>
+                <li>Customer support can sometimes be slow to resolve complex issues</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="copy-btn" onclick="copyVpnDetails('Surfshark', '8.8', 'Good', 'Netherlands', 'Good', '~$2.19', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Mullvad -->
+      <div class="vpn-card" data-keywords="mullvad privacy anonymous port forwarding sweden transparent wireguard">
+        <div class="card-header">
+          <h2>Mullvad</h2>
+          <div class="score-badge">8.5/10</div>
+        </div>
+        <div class="card-body">
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="metric-label">Speed</div>
+              <div class="metric-value">Great (WireGuard)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Privacy / HQ</div>
+              <div class="metric-value">Sweden (Extreme Privacy)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Streaming</div>
+              <div class="metric-value">Poor</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Price (Monthly avg)</div>
+              <div class="metric-value">€5.00 (Flat Rate)</div>
+            </div>
+          </div>
+          <div class="pros-cons">
+            <div class="list-group pros">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Pros</h3>
+              <ul>
+                <li>The gold standard for anonymity (no email or password required)</li>
+                <li>Can pay in cash or crypto for total privacy</li>
+                <li>Transparent flat-rate pricing (€5/month since 2009)</li>
+                <li>Excellent WireGuard implementation and speeds</li>
+              </ul>
+            </div>
+            <div class="list-group cons">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Cons</h3>
+              <ul>
+                <li>Not designed for unblocking streaming services (Netflix, etc.)</li>
+                <li>Smaller server network compared to the big players</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="copy-btn" onclick="copyVpnDetails('Mullvad', '8.5', 'Great', 'Sweden', 'Poor', '€5.00', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Details
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="seo-content">
+      <h2>Why You Need a VPN While Traveling</h2>
+      <p>As a digital nomad or frequent traveler, your data is constantly exposed. You connect to unfamiliar airport Wi-Fi, sketchy cafe networks, and hotel routers that may be compromised. A Virtual Private Network (VPN) encrypts your internet traffic, creating a secure tunnel between your device and the internet. This prevents bad actors, local ISPs, and even network administrators from seeing your passwords, browsing history, or intercepting sensitive work documents.</p>
+
+      <p>Beyond security, a VPN is essential for maintaining access to the tools and entertainment you rely on. Many banking apps, government portals, and corporate intranets will lock you out if they detect a login from an unusual foreign IP address. A VPN allows you to route your connection through your home country, bypassing these geographical security blocks.</p>
+
+      <h2>How to Choose the Right VPN</h2>
+      <p>Not all VPNs are created equal. When evaluating a VPN for travel, consider your primary use case. If you need to access geo-blocked streaming services like Netflix or BBC iPlayer, providers like NordVPN or ExpressVPN are your best bet due to their massive server networks and ability to evade VPN blockers.</p>
+
+      <p>If your primary concern is absolute privacy and anonymity—perhaps you are traveling to a region with heavy internet censorship—Mullvad is unmatched in its commitment to not collecting any user data whatsoever. Finally, if you travel with a large family or carry multiple devices (laptop, phone, tablet, e-reader), Surfshark's unlimited simultaneous connections offer the best value.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Search/Filter Logic
+    const searchInput = document.getElementById('search-input');
+    const vpnCards = document.querySelectorAll('.vpn-card');
+
+    searchInput.addEventListener('input', function() {
+      const query = this.value.toLowerCase().trim();
+
+      vpnCards.forEach(card => {
+        if (!query) {
+          card.classList.remove('hidden');
+          return;
+        }
+
+        const textContent = card.innerText.toLowerCase();
+        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+
+        if (textContent.includes(query) || keywords.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+
+    // Copy Details Functionality
+    function copyVpnDetails(name, score, speed, privacy, streaming, price, btnElement) {
+      const summary = `${name} VPN Summary
+------------------
+Score: ${score}/10
+Speed: ${speed}
+Privacy/HQ: ${privacy}
+Streaming: ${streaming}
+Price: ${price}/mo
+
+Compare more at migratingmammals.com/list-vpn.html`;
+
+      navigator.clipboard.writeText(summary).then(() => {
+        const originalText = btnElement.innerHTML;
+        btnElement.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+        btnElement.style.color = 'var(--success)';
+        btnElement.style.borderColor = 'var(--success)';
+
+        setTimeout(() => {
+          btnElement.innerHTML = originalText;
+          btnElement.style.color = '';
+          btnElement.style.borderColor = '';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
