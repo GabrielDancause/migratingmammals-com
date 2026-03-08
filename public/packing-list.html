@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Packing List Generator | Migrating Mammals</title>
+  <meta name="description" content="Generate a customized packing list based on your trip's climate, duration, and planned activities. Works offline.">
+  <meta property="og:title" content="Smart Packing List Generator">
+  <meta property="og:description" content="Never forget an essential again. Get a customized packing list for your next trip.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Smart Packing List Generator",
+    "url": "https://migratingmammals.com/packing-list.html",
+    "description": "Generate a customized packing list based on your trip's climate, duration, and planned activities.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select, input[type="number"], input[type="text"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="number"]:focus, input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    button.outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    button.outline:hover {
+      background: rgba(196, 149, 106, 0.1);
+    }
+
+    .row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    .row > button {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: normal;
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .checkbox-label input[type="checkbox"]:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .checkbox-label input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      color: var(--bg);
+      font-size: 14px;
+      font-weight: bold;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* List Display Section */
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .list-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .list-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .list-actions button {
+      width: auto;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+
+    .category-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .category-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .category-progress {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: normal;
+    }
+
+    .item-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .item-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .item-row.packed .item-name {
+      text-decoration: line-through;
+      color: var(--text-secondary);
+    }
+
+    .item-name {
+      flex: 1;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .item-qty {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Custom Item Input */
+    .custom-item-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .custom-item-row input {
+      padding: 8px 12px;
+    }
+
+    .custom-item-row button {
+      width: auto;
+      padding: 8px 16px;
+    }
+
+    /* Overall Progress */
+    .overall-progress-container {
+      margin-bottom: 32px;
+    }
+
+    .progress-bar-bg {
+      height: 12px;
+      background: var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--success);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .list-actions {
+        width: 100%;
+      }
+      .list-actions button {
+        flex: 1;
+      }
+      .item-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Smart Packing List Generator</h1>
+      <p class="subtitle">Customize your packing list by climate, trip length, and activities. Check off items as you pack, with progress saved automatically.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card" id="generator-form">
+      <h2>Trip Details</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">Tell us about your trip to generate a customized list.</p>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="trip-days">Trip Duration (Days)</label>
+          <input type="number" id="trip-days" min="1" max="365" value="7">
+        </div>
+        <div class="form-group">
+          <label for="trip-climate">Climate</label>
+          <select id="trip-climate">
+            <option value="moderate">Moderate / Mild</option>
+            <option value="hot">Hot / Tropical</option>
+            <option value="cold">Cold / Winter</option>
+            <option value="variable">Variable / Mixed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Activities & Needs</label>
+        <div class="checkbox-grid" id="activities-grid">
+          <label class="checkbox-label"><input type="checkbox" value="swimming"> Swimming</label>
+          <label class="checkbox-label"><input type="checkbox" value="hiking"> Hiking/Outdoors</label>
+          <label class="checkbox-label"><input type="checkbox" value="formal"> Formal Event</label>
+          <label class="checkbox-label"><input type="checkbox" value="gym"> Gym/Workout</label>
+          <label class="checkbox-label"><input type="checkbox" value="work"> Working Remotely</label>
+          <label class="checkbox-label"><input type="checkbox" value="photography"> Photography</label>
+          <label class="checkbox-label"><input type="checkbox" value="international"> International</label>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <button id="generate-btn">Generate Packing List</button>
+      </div>
+    </div>
+
+    <div class="card" id="list-container" style="display: none;">
+      <div class="list-header">
+        <h2>Your Packing List</h2>
+        <div class="list-actions">
+          <button class="outline" id="copy-btn">Copy List</button>
+          <button class="secondary" id="reset-btn">Start Over</button>
+        </div>
+      </div>
+
+      <div class="overall-progress-container">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-labels">
+          <span id="progress-text">0 / 0 items packed</span>
+          <span id="progress-percent">0%</span>
+        </div>
+      </div>
+
+      <div id="categories-container">
+        <!-- Categories and items will be generated here -->
+      </div>
+
+      <div class="category-card" style="margin-top: 32px;">
+        <div class="category-title">Add Custom Item</div>
+        <div class="custom-item-row">
+          <input type="text" id="custom-item-name" placeholder="E.g., Special medication">
+          <input type="number" id="custom-item-qty" min="1" value="1" style="width: 80px; flex: none;">
+          <button id="add-custom-btn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>How to Pack Efficiently</h2>
+      <p>Packing for a trip doesn't have to be stressful. By using a customized packing list based on your specific destination's climate and your planned activities, you can avoid both overpacking and forgetting essential items. The Smart Packing List Generator calculates realistic quantities for clothing based on your trip length, helping you travel lighter.</p>
+
+      <h2>The Art of Layering</h2>
+      <ul>
+        <li><strong>Base Layers:</strong> Essential for both hot and cold climates. In hot weather, moisture-wicking materials keep you cool. In cold weather, thermal base layers trap body heat.</li>
+        <li><strong>Mid Layers:</strong> Think fleece jackets, sweaters, or light down jackets. These provide insulation and can be added or removed easily.</li>
+        <li><strong>Outer Layers:</strong> Your protection against wind and rain. A lightweight, packable rain jacket is a must-have for almost any destination.</li>
+      </ul>
+
+      <h2>Tips for Minimizing Luggage</h2>
+      <p>If you aim to travel carry-on only, versatility is key. Choose clothing items in a cohesive color palette that can be easily mixed and matched. Wear your bulkiest items (like heavy boots or a thick jacket) on the plane rather than packing them. Finally, remember that unless you are traveling to a very remote location, you can almost always buy forgotten toiletries or basic items at your destination.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // State
+    let currentList = [];
+    let isListGenerated = false;
+
+    // DOM Elements
+    const generatorForm = document.getElementById('generator-form');
+    const listContainer = document.getElementById('list-container');
+    const generateBtn = document.getElementById('generate-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const categoriesContainer = document.getElementById('categories-container');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const progressPercent = document.getElementById('progress-percent');
+
+    const tripDaysInput = document.getElementById('trip-days');
+    const tripClimateInput = document.getElementById('trip-climate');
+    const activitiesGrid = document.getElementById('activities-grid');
+
+    const customItemName = document.getElementById('custom-item-name');
+    const customItemQty = document.getElementById('custom-item-qty');
+    const addCustomBtn = document.getElementById('add-custom-btn');
+
+    // Item Database Logic
+    function getItemsForTrip(days, climate, activities) {
+      let items = [];
+      const add = (category, name, qty = 1, fixed = false) => {
+        // If not fixed, calculate max quantity
+        const finalQty = fixed ? qty : Math.min(qty, Math.ceil(days * 1.5));
+        items.push({ id: Date.now().toString() + Math.random().toString(36).substr(2, 5), category, name, qty: finalQty, packed: false });
+      };
+
+      // --- Essentials ---
+      add('Essentials', 'Wallet / Cash / Cards', 1, true);
+      add('Essentials', 'Keys', 1, true);
+      add('Essentials', 'Phone', 1, true);
+      add('Essentials', 'Water Bottle', 1, true);
+
+      if (activities.includes('international')) {
+        add('Essentials', 'Passport', 1, true);
+        add('Essentials', 'Travel Insurance Info', 1, true);
+        add('Essentials', 'Visas / Documents', 1, true);
+        add('Essentials', 'Universal Travel Adapter', 1, true);
+      } else {
+        add('Essentials', 'ID / Driver\'s License', 1, true);
+      }
+
+      // --- Clothing (Base) ---
+      // Underwear/Socks: 1 per day + 1 extra, cap at 14 (assume laundry)
+      let baseQty = Math.min(days + 1, 14);
+      add('Clothing', 'Underwear', baseQty, true);
+      add('Clothing', 'Socks', baseQty, true);
+
+      // Tops: roughly 1 per 1.5 days
+      let topsQty = Math.max(2, Math.min(Math.ceil(days / 1.5), 10));
+      add('Clothing', 'T-Shirts / Casual Tops', topsQty, true);
+
+      // Bottoms: roughly 1 per 3 days
+      let bottomsQty = Math.max(1, Math.min(Math.ceil(days / 3), 4));
+
+      // Sleepwear
+      add('Clothing', 'Sleepwear', Math.max(1, Math.min(Math.ceil(days / 4), 3)), true);
+
+      // --- Climate Specific Clothing ---
+      if (climate === 'hot') {
+        add('Clothing', 'Shorts / Skirts', bottomsQty, true);
+        add('Clothing', 'Lightweight Pants', 1, true);
+        add('Clothing', 'Sun Hat', 1, true);
+        add('Clothing', 'Light Sweater / Layer (for AC)', 1, true);
+        add('Footwear', 'Sandals / Flip Flops', 1, true);
+      } else if (climate === 'cold') {
+        add('Clothing', 'Pants / Jeans', bottomsQty, true);
+        add('Clothing', 'Sweaters / Fleece', Math.max(1, Math.min(Math.ceil(days / 3), 4)), true);
+        add('Clothing', 'Warm Coat / Jacket', 1, true);
+        add('Clothing', 'Thermal Base Layers', Math.max(1, Math.min(Math.ceil(days / 3), 3)), true);
+        add('Clothing', 'Beanie / Gloves / Scarf', 1, true);
+        add('Footwear', 'Warm Boots', 1, true);
+      } else if (climate === 'variable') {
+        add('Clothing', 'Pants / Jeans', Math.ceil(bottomsQty / 2), true);
+        add('Clothing', 'Shorts / Skirts', Math.ceil(bottomsQty / 2), true);
+        add('Clothing', 'Sweaters / Layers', 2, true);
+        add('Clothing', 'Light Jacket / Windbreaker', 1, true);
+      } else { // Moderate
+        add('Clothing', 'Pants / Jeans', bottomsQty, true);
+        add('Clothing', 'Light Jacket', 1, true);
+        add('Clothing', 'Sweater / Cardigan', 1, true);
+      }
+
+      // --- Footwear Base ---
+      add('Footwear', 'Comfortable Walking Shoes', 1, true);
+
+      // --- Toiletries ---
+      add('Toiletries', 'Toothbrush & Toothpaste', 1, true);
+      add('Toiletries', 'Deodorant', 1, true);
+      add('Toiletries', 'Shampoo & Conditioner', 1, true);
+      add('Toiletries', 'Body Wash / Soap', 1, true);
+      add('Toiletries', 'Skincare / Moisturizer', 1, true);
+      add('Toiletries', 'Sunscreen', 1, true);
+      add('Toiletries', 'First Aid / Medications', 1, true);
+      add('Toiletries', 'Hairbrush / Comb', 1, true);
+      add('Toiletries', 'Lip Balm', 1, true);
+
+      // --- Electronics ---
+      add('Electronics', 'Phone Charger', 1, true);
+      add('Electronics', 'Headphones / Earbuds', 1, true);
+      add('Electronics', 'Power Bank', 1, true);
+
+      // --- Activity Specific ---
+      if (activities.includes('swimming')) {
+        add('Activities', 'Swimsuit', climate === 'hot' ? 2 : 1, true);
+        add('Activities', 'Beach Towel / Quick-dry Towel', 1, true);
+        add('Activities', 'Dry Bag', 1, true);
+      }
+
+      if (activities.includes('hiking')) {
+        add('Activities', 'Hiking Boots / Trail Shoes', 1, true);
+        add('Activities', 'Moisture-wicking Socks', Math.max(1, Math.ceil(days / 3)), true);
+        add('Activities', 'Activewear Tops / Bottoms', Math.max(1, Math.ceil(days / 2)), true);
+        add('Activities', 'Daypack', 1, true);
+      }
+
+      if (activities.includes('formal')) {
+        add('Activities', 'Formal Outfit (Suit/Dress)', 1, true);
+        add('Activities', 'Dress Shoes', 1, true);
+        add('Activities', 'Formal Accessories', 1, true);
+      }
+
+      if (activities.includes('gym')) {
+        add('Activities', 'Workout Clothes', Math.max(1, Math.ceil(days / 3)), true);
+        add('Activities', 'Gym Shoes', 1, true);
+      }
+
+      if (activities.includes('work')) {
+        add('Electronics', 'Laptop & Charger', 1, true);
+        add('Electronics', 'Mouse', 1, true);
+        add('Essentials', 'Notebook & Pen', 1, true);
+      }
+
+      if (activities.includes('photography')) {
+        add('Electronics', 'Camera & Lenses', 1, true);
+        add('Electronics', 'Spare Batteries & SD Cards', 1, true);
+        add('Electronics', 'Camera Charger', 1, true);
+      }
+
+      return items;
+    }
+
+    // Load from localStorage
+    try {
+      const savedList = localStorage.getItem('packing-list-items');
+      const savedState = localStorage.getItem('packing-list-state');
+
+      if (savedList && savedState === 'generated') {
+        currentList = JSON.parse(savedList);
+        isListGenerated = true;
+        showList();
+        renderList();
+      }
+    } catch (e) {
+      console.error("Could not load saved list");
+    }
+
+    function saveState() {
+      localStorage.setItem('packing-list-items', JSON.stringify(currentList));
+      localStorage.setItem('packing-list-state', isListGenerated ? 'generated' : 'form');
+    }
+
+    // Event Listeners
+    generateBtn.addEventListener('click', () => {
+      const days = parseInt(tripDaysInput.value, 10);
+      const climate = tripClimateInput.value;
+
+      const checkboxes = activitiesGrid.querySelectorAll('input[type="checkbox"]:checked');
+      const activities = Array.from(checkboxes).map(cb => cb.value);
+
+      if (isNaN(days) || days < 1) {
+        alert("Please enter a valid number of days.");
+        return;
+      }
+
+      currentList = getItemsForTrip(days, climate, activities);
+      isListGenerated = true;
+      saveState();
+
+      showList();
+      renderList();
+
+      // Smooth scroll to list
+      listContainer.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if(confirm("Are you sure you want to start over? This will clear your current packing list.")) {
+        isListGenerated = false;
+        currentList = [];
+        saveState();
+        hideList();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+
+    copyBtn.addEventListener('click', () => {
+      let text = "My Packing List\n\n";
+
+      const categories = [...new Set(currentList.map(i => i.category))];
+      categories.forEach(cat => {
+        text += `== ${cat} ==\n`;
+        const items = currentList.filter(i => i.category === cat);
+        items.forEach(i => {
+          const check = i.packed ? "[x]" : "[ ]";
+          text += `${check} ${i.name} (x${i.qty})\n`;
+        });
+        text += `\n`;
+      });
+
+      navigator.clipboard.writeText(text).then(() => {
+        if (copyBtn.innerText !== 'Copied!') {
+          const originalText = copyBtn.innerText;
+          copyBtn.innerText = 'Copied!';
+          setTimeout(() => {
+            copyBtn.innerText = originalText;
+          }, 2000);
+        }
+      });
+    });
+
+    // Helper to prevent XSS
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g,
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+
+    addCustomBtn.addEventListener('click', () => {
+        const name = customItemName.value.trim();
+        const qty = parseInt(customItemQty.value, 10);
+
+        if (!name) return;
+
+        currentList.push({
+            id: 'custom-' + Date.now(),
+            category: 'Custom Items',
+            name: name,
+            qty: isNaN(qty) || qty < 1 ? 1 : qty,
+            packed: false
+        });
+
+        customItemName.value = '';
+        customItemQty.value = '1';
+
+        saveState();
+        renderList();
+    });
+
+    // We expose toggleItem to global scope for inline onclick handler
+    window.toggleItem = function(id) {
+      const item = currentList.find(i => i.id === id);
+      if (item) {
+        item.packed = !item.packed;
+        saveState();
+        renderList(); // Re-render to update progress and styling
+      }
+    }
+
+    function showList() {
+      generatorForm.style.display = 'none';
+      listContainer.style.display = 'block';
+    }
+
+    function hideList() {
+      generatorForm.style.display = 'block';
+      listContainer.style.display = 'none';
+    }
+
+    function renderList() {
+      categoriesContainer.innerHTML = '';
+
+      const categories = [...new Set(currentList.map(i => i.category))];
+      let totalItems = currentList.length;
+      let packedItems = currentList.filter(i => i.packed).length;
+
+      categories.forEach(cat => {
+        const items = currentList.filter(i => i.category === cat);
+        const catPacked = items.filter(i => i.packed).length;
+
+        const card = document.createElement('div');
+        card.className = 'category-card';
+
+        card.innerHTML = `
+          <div class="category-title">
+            <span>${cat}</span>
+            <span class="category-progress">${catPacked} / ${items.length}</span>
+          </div>
+          <ul class="item-list">
+            ${items.map(item => `
+              <li class="item-row ${item.packed ? 'packed' : ''}">
+                <label class="checkbox-label" style="flex: 1;">
+                  <input type="checkbox" onchange="window.toggleItem('${escapeHTML(item.id)}')" ${item.packed ? 'checked' : ''}>
+                  <span class="item-name">${escapeHTML(item.name)}</span>
+                </label>
+                <span class="item-qty">x${item.qty}</span>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+
+        categoriesContainer.appendChild(card);
+      });
+
+      // Update overall progress
+      const percent = totalItems === 0 ? 0 : Math.round((packedItems / totalItems) * 100);
+      progressFill.style.width = `${percent}%`;
+      progressText.textContent = `${packedItems} / ${totalItems} items packed`;
+      progressPercent.textContent = `${percent}%`;
+
+      if (percent === 100 && totalItems > 0) {
+        progressFill.style.backgroundColor = 'var(--success)';
+      } else {
+        progressFill.style.backgroundColor = 'var(--accent)';
+      }
+    }
+  </script>
+</body>
+</html>
