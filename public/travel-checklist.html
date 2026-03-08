@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Travel Checklist | Migrating Mammals</title>
+  <meta name="description" content="A comprehensive pre-departure checklist for international travel. Ensure you have your documents, health items, electronics, and home prepped before you fly.">
+  <meta property="og:title" content="International Travel Checklist">
+  <meta property="og:description" content="Never forget a crucial step before international travel. Use our customizable, saveable checklist.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "International Travel Checklist",
+    "url": "https://migratingmammals.com/travel-checklist.html",
+    "description": "Pre-departure checklist for international travel including documents, health, electronics, money, and home prep.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select, input[type="text"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    button.outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    button.outline:hover {
+      background: rgba(196, 149, 106, 0.1);
+    }
+
+    .row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    .row > button {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    /* List Display Section */
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .list-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .list-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .list-actions button {
+      width: auto;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+
+    .category-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .category-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .category-progress {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: normal;
+    }
+
+    .item-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+
+    .item-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-weight: normal;
+      cursor: pointer;
+      margin-bottom: 0;
+      width: 100%;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checkbox-label input[type="checkbox"]:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .checkbox-label input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      color: var(--bg);
+      font-size: 14px;
+      font-weight: bold;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .item-row.packed .item-name {
+      text-decoration: line-through;
+      color: var(--text-secondary);
+    }
+
+    .item-name {
+      flex: 1;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      line-height: 1.4;
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 4px;
+      width: auto;
+      font-size: 1rem;
+    }
+
+    .delete-btn:hover {
+      color: var(--danger);
+      background: transparent;
+    }
+
+    /* Custom Item Input */
+    .custom-item-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .custom-item-row input {
+      padding: 8px 12px;
+    }
+
+    .custom-item-row button {
+      width: auto;
+      padding: 8px 16px;
+    }
+
+    /* Overall Progress */
+    .overall-progress-container {
+      margin-bottom: 32px;
+    }
+
+    .progress-bar-bg {
+      height: 12px;
+      background: var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--success);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .list-actions {
+        width: 100%;
+      }
+      .list-actions button {
+        flex: 1;
+      }
+      .item-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Pre-Departure Travel Checklist</h1>
+      <p class="subtitle">Ensure you have everything ready before your international trip. Check off items to save your progress locally in your browser.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card" id="list-container">
+      <div class="list-header">
+        <h2>Your Checklist</h2>
+        <div class="list-actions">
+          <button class="outline" id="copy-btn">Copy List</button>
+          <button class="secondary" id="reset-btn">Reset</button>
+        </div>
+      </div>
+
+      <div class="overall-progress-container">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-labels">
+          <span id="progress-text">0 / 0 items done</span>
+          <span id="progress-percent">0%</span>
+        </div>
+      </div>
+
+      <div id="categories-container">
+        <!-- Categories and items will be generated here -->
+      </div>
+
+      <div class="category-card" style="margin-top: 32px;">
+        <div class="category-title">Add Custom Item</div>
+        <div class="row">
+          <div style="flex: 1;">
+            <select id="custom-item-category">
+              <option value="Documents">Documents</option>
+              <option value="Health">Health</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Money">Money</option>
+              <option value="Home Prep">Home Prep</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="custom-item-row" style="flex: 2;">
+            <input type="text" id="custom-item-name" placeholder="E.g., Renew passport" style="flex: 1;">
+            <button id="add-custom-btn">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Essential Pre-Travel Preparation</h2>
+      <p>Preparing for an international trip goes far beyond simply packing your bags. A robust pre-departure checklist helps ensure your home is secure, your finances are accessible abroad, and you have all necessary documentation. By tackling these tasks systematically, you can start your vacation relaxed and stress-free.</p>
+
+      <h2>Important Document Management</h2>
+      <ul>
+        <li><strong>Passport Validity:</strong> Most countries require your passport to be valid for at least six months beyond your planned return date. Check your expiration date well in advance.</li>
+        <li><strong>Digital and Physical Copies:</strong> Always keep a physical photocopy of your passport in a separate bag from the original. It's also wise to store secure digital copies of your passport, visas, and insurance documents in cloud storage or email them to yourself.</li>
+        <li><strong>Travel Insurance:</strong> Don't leave home without it. Ensure you understand what is covered (medical, trip cancellation, baggage loss) and have the emergency contact numbers saved.</li>
+      </ul>
+
+      <h2>Financial and Home Prep Tips</h2>
+      <p>Before leaving, remember to notify your bank and credit card companies of your travel dates and destinations to prevent them from flagging your international transactions as fraudulent. Opt for travel credit cards that waive foreign transaction fees. At home, unplugging unnecessary appliances not only saves electricity but reduces the risk of fire. Setting up a hold on your mail prevents your mailbox from overflowing, which is a clear sign to burglars that a house is empty.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const defaultItems = [
+      { category: 'Documents', name: 'Passport (valid for 6+ months)' },
+      { category: 'Documents', name: 'Visas / Entry Documents' },
+      { category: 'Documents', name: 'Travel Insurance Information' },
+      { category: 'Documents', name: 'Flight Tickets / Boarding Passes' },
+      { category: 'Documents', name: 'Hotel / Accommodation Reservations' },
+      { category: 'Documents', name: 'Copies of Important Documents' },
+      { category: 'Health', name: 'Prescription Medications' },
+      { category: 'Health', name: 'Basic First Aid Kit' },
+      { category: 'Health', name: 'Hand Sanitizer & Wipes' },
+      { category: 'Health', name: 'Vaccination Certificates' },
+      { category: 'Health', name: 'Pain Relievers / Motion Sickness Pills' },
+      { category: 'Electronics', name: 'Universal Travel Adapter' },
+      { category: 'Electronics', name: 'Phone Charger & Cables' },
+      { category: 'Electronics', name: 'Power Bank' },
+      { category: 'Electronics', name: 'Headphones / Earbuds' },
+      { category: 'Electronics', name: 'Downloaded Maps & Entertainment' },
+      { category: 'Money', name: 'Cash (Local & Emergency)' },
+      { category: 'Money', name: 'Travel Credit Cards (No FX Fees)' },
+      { category: 'Money', name: 'Debit Card for ATMs' },
+      { category: 'Money', name: 'Notify Bank of Travel Plans' },
+      { category: 'Home Prep', name: 'Empty Trash & Clean Fridge' },
+      { category: 'Home Prep', name: 'Hold Mail / Arrange Pickup' },
+      { category: 'Home Prep', name: 'Unplug Unnecessary Appliances' },
+      { category: 'Home Prep', name: 'Adjust Thermostat' },
+      { category: 'Home Prep', name: 'Lock All Doors & Windows' }
+    ];
+
+    let currentList = [];
+
+    const categoriesContainer = document.getElementById('categories-container');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const progressPercent = document.getElementById('progress-percent');
+    const resetBtn = document.getElementById('reset-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const customItemCategory = document.getElementById('custom-item-category');
+    const customItemName = document.getElementById('custom-item-name');
+    const addCustomBtn = document.getElementById('add-custom-btn');
+
+    function init() {
+      try {
+        const savedList = localStorage.getItem('travel-checklist-items');
+        if (savedList) {
+          currentList = JSON.parse(savedList);
+        } else {
+          loadDefaultList();
+        }
+      } catch (e) {
+        console.error("Could not load saved list", e);
+        loadDefaultList();
+      }
+      renderList();
+    }
+
+    function loadDefaultList() {
+      currentList = defaultItems.map(item => ({
+        id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
+        category: item.category,
+        name: item.name,
+        packed: false,
+        isCustom: false
+      }));
+    }
+
+    function saveState() {
+      localStorage.setItem('travel-checklist-items', JSON.stringify(currentList));
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g,
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+
+    window.toggleItem = function(id) {
+      const item = currentList.find(i => i.id === id);
+      if (item) {
+        item.packed = !item.packed;
+        saveState();
+        renderList();
+      }
+    }
+
+    window.deleteItem = function(id) {
+      if (confirm('Remove this item?')) {
+        currentList = currentList.filter(i => i.id !== id);
+        saveState();
+        renderList();
+      }
+    }
+
+    addCustomBtn.addEventListener('click', () => {
+      const name = customItemName.value.trim();
+      const category = customItemCategory.value;
+
+      if (!name) return;
+
+      currentList.push({
+        id: 'custom-' + Date.now(),
+        category: category,
+        name: name,
+        packed: false,
+        isCustom: true
+      });
+
+      customItemName.value = '';
+      saveState();
+      renderList();
+    });
+
+    // Support enter key for adding custom item
+    customItemName.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        addCustomBtn.click();
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if(confirm("Are you sure you want to reset your checklist? This will uncheck all items and remove any custom items you've added.")) {
+        loadDefaultList();
+        saveState();
+        renderList();
+      }
+    });
+
+    copyBtn.addEventListener('click', () => {
+      let text = "My Pre-Departure Checklist\n\n";
+
+      // Group by categories preserving the order of standard categories first
+      const predefinedCats = ['Documents', 'Health', 'Electronics', 'Money', 'Home Prep'];
+      const allCats = [...new Set(currentList.map(i => i.category))];
+
+      const orderedCats = [
+        ...predefinedCats.filter(c => allCats.includes(c)),
+        ...allCats.filter(c => !predefinedCats.includes(c))
+      ];
+
+      orderedCats.forEach(cat => {
+        text += `== ${cat} ==\n`;
+        const items = currentList.filter(i => i.category === cat);
+        items.forEach(i => {
+          const check = i.packed ? "[x]" : "[ ]";
+          text += `${check} ${i.name}\n`;
+        });
+        text += `\n`;
+      });
+
+      navigator.clipboard.writeText(text).then(() => {
+        if (copyBtn.innerText !== 'Copied!') {
+          const originalText = copyBtn.innerText;
+          copyBtn.innerText = 'Copied!';
+          setTimeout(() => {
+            copyBtn.innerText = originalText;
+          }, 2000);
+        }
+      });
+    });
+
+    function renderList() {
+      categoriesContainer.innerHTML = '';
+
+      const predefinedCats = ['Documents', 'Health', 'Electronics', 'Money', 'Home Prep'];
+      const allCats = [...new Set(currentList.map(i => i.category))];
+
+      // Order categories: predefined first, then any custom ones
+      const orderedCats = [
+        ...predefinedCats.filter(c => allCats.includes(c)),
+        ...allCats.filter(c => !predefinedCats.includes(c))
+      ];
+
+      let totalItems = currentList.length;
+      let packedItems = currentList.filter(i => i.packed).length;
+
+      orderedCats.forEach(cat => {
+        const items = currentList.filter(i => i.category === cat);
+        const catPacked = items.filter(i => i.packed).length;
+
+        const card = document.createElement('div');
+        card.className = 'category-card';
+
+        card.innerHTML = `
+          <div class="category-title">
+            <span>${escapeHTML(cat)}</span>
+            <span class="category-progress">${catPacked} / ${items.length}</span>
+          </div>
+          <ul class="item-list">
+            ${items.map(item => `
+              <li class="item-row ${item.packed ? 'packed' : ''}">
+                <label class="checkbox-label">
+                  <input type="checkbox" onchange="window.toggleItem('${escapeHTML(item.id)}')" ${item.packed ? 'checked' : ''}>
+                  <span class="item-name">${escapeHTML(item.name)}</span>
+                </label>
+                ${item.isCustom ? `<button class="delete-btn" onclick="window.deleteItem('${escapeHTML(item.id)}')">&times;</button>` : ''}
+              </li>
+            `).join('')}
+          </ul>
+        `;
+
+        categoriesContainer.appendChild(card);
+      });
+
+      // Update overall progress
+      const percent = totalItems === 0 ? 0 : Math.round((packedItems / totalItems) * 100);
+      progressFill.style.width = `${percent}%`;
+      progressText.textContent = `${packedItems} / ${totalItems} items done`;
+      progressPercent.textContent = `${percent}%`;
+
+      if (percent === 100 && totalItems > 0) {
+        progressFill.style.backgroundColor = 'var(--success)';
+      } else {
+        progressFill.style.backgroundColor = 'var(--accent)';
+      }
+    }
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>
