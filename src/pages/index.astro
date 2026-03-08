@@ -2,7 +2,7 @@
 import BaseHead from '../layouts/BaseHead.astro';
 
 const tools = [
-  { emoji: "🛂", name: "Schengen 90/180 Calculator", desc: "Track your days in the Schengen zone. Never overstay again — visual timeline of your 90/180-day allowance.", soon: true },
+  { emoji: "🛂", name: "Schengen 90/180 Calculator", desc: "Track your days in the Schengen zone. Never overstay again — visual timeline of your 90/180-day allowance.", slug: "/schengen-calculator" },
   { emoji: "🌐", name: "Timezone Overlap Finder", desc: "Working across time zones? Find the best meeting hours between any two cities instantly.", soon: true },
   { emoji: "💱", name: "Currency Arbitrage Tracker", desc: "Spot favorable exchange rates. Compare ATM, Wise, and credit card rates for your destination.", soon: true },
   { emoji: "🏨", name: "RevPAR Calculator", desc: "Revenue per available room — the metric that matters. Benchmark your boutique property against the market.", soon: true },
@@ -33,6 +33,10 @@ const tools = [
     .card h2 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
     .card p { font-size: 0.85rem; color: #888; line-height: 1.6; }
     .badge { position: absolute; top: 14px; right: 14px; background: #2a2418; color: #C4956A; font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .live-badge { background: #C4956A; color: #0c0a00; font-weight: 800; }
+    a.card.live { text-decoration: none; color: inherit; cursor: pointer; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+    a.card.live:hover { border-color: #C4956A; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(196,149,106,0.1); }
+    .arrow { color: #C4956A; font-size: 0.85rem; margin-top: 14px; display: inline-block; font-weight: 600; }
     .footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #1a1510; }
     .footer a { color: #C4956A; text-decoration: none; }
     @media (max-width: 600px) { .hero h1 { font-size: 2.2rem; } .hero { padding: 70px 20px 50px; } .grid { grid-template-columns: 1fr; } }
@@ -46,7 +50,15 @@ const tools = [
   </div>
 </div>
 <div class="grid">
-  {tools.map(t => (
+  {tools.map(t => t.slug ? (
+    <a class="card live" href={t.slug}>
+      <span class="badge live-badge">LIVE</span>
+      <span class="emoji">{t.emoji}</span>
+      <h2>{t.name}</h2>
+      <p>{t.desc}</p>
+      <span class="arrow">Try it →</span>
+    </a>
+  ) : (
     <div class="card">
       {t.soon && <span class="badge">COMING SOON</span>}
       <span class="emoji">{t.emoji}</span>
