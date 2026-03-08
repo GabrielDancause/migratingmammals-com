@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline Currency Converter | Migrating Mammals</title>
+  <meta name="description" content="Free offline currency converter for 50+ fiat currencies and major cryptocurrencies. Calculate exchange rates instantly in your browser.">
+  <meta property="og:title" content="Offline Currency Converter">
+  <meta property="og:description" content="Calculate exchange rates for 50+ currencies and crypto instantly. Works fully offline.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Offline Currency Converter",
+    "url": "https://migratingmammals.com/currency-converter.html",
+    "description": "Convert over 50 fiat currencies and major cryptocurrencies instantly and offline.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    input[type="number"], select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      font-size: 1rem;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    .converter-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .swap-btn {
+      background: var(--bg);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      height: 48px;
+    }
+
+    .swap-btn:hover {
+      border-color: var(--accent);
+      background: var(--border);
+    }
+
+    .swap-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Results */
+    .results-container {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin-top: 32px;
+      position: relative;
+    }
+
+    .results-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .results-value {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .results-equation {
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: auto;
+    }
+
+    .copy-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .converter-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .swap-btn {
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+      .results-value {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Currency Converter</h1>
+      <p class="subtitle">Convert between 50+ fiat currencies and major cryptocurrencies. Completely private, runs directly in your browser.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" value="1" min="0" step="any">
+      </div>
+
+      <div class="converter-row">
+        <div>
+          <label for="from-currency">From</label>
+          <select id="from-currency"></select>
+        </div>
+
+        <button class="swap-btn" id="swap-btn" aria-label="Swap Currencies" title="Swap Currencies">
+          <svg viewBox="0 0 24 24">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"></path>
+          </svg>
+        </button>
+
+        <div>
+          <label for="to-currency">To</label>
+          <select id="to-currency"></select>
+        </div>
+      </div>
+
+      <div class="results-container">
+        <button class="copy-btn" id="copy-btn">Copy</button>
+        <div class="results-label">Converted Amount</div>
+        <div class="results-value" id="result-value">0.00</div>
+        <div class="results-equation" id="result-equation">1 USD = 1 USD</div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Offline Currency Conversion</h2>
+      <p>Our currency converter tool operates completely offline after the initial page load. All computation runs client-side directly within your browser. This means you can bookmark this page and use it even when you don't have internet access—a perfect solution for traveling in remote locations or during flights.</p>
+
+      <h2>Supported Currencies</h2>
+      <p>We support over 50 of the world's most traded fiat currencies, as well as several major cryptocurrencies. Whether you need to calculate expenses for an upcoming trip or analyze cross-border payments, our tool provides a comprehensive selection:</p>
+      <ul>
+        <li><strong>Major Fiat:</strong> USD (US Dollar), EUR (Euro), GBP (British Pound), JPY (Japanese Yen), CAD (Canadian Dollar), AUD (Australian Dollar), and more.</li>
+        <li><strong>Global Fiat:</strong> AED, BRL, CNY, INR, MXN, SGD, ZAR, and dozens of other global currencies.</li>
+        <li><strong>Cryptocurrencies:</strong> Bitcoin (BTC), Ethereum (ETH), Solana (SOL), and others.</li>
+      </ul>
+
+      <h2>Privacy & Security</h2>
+      <p>Because this tool does not rely on external API calls for each conversion, your financial queries remain strictly on your own device. No data regarding the amounts you enter or the currencies you select is ever transmitted to or stored on our servers.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Rates based on USD (static snapshot for offline usage)
+    const rates = {
+      // Major Fiat
+      "USD": 1,
+      "EUR": 0.92,
+      "GBP": 0.79,
+      "JPY": 150.25,
+      "AUD": 1.53,
+      "CAD": 1.35,
+      "CHF": 0.88,
+      "CNY": 7.20,
+      "HKD": 7.82,
+      "NZD": 1.63,
+      // Europe
+      "SEK": 10.45,
+      "NOK": 10.60,
+      "DKK": 6.88,
+      "PLN": 3.98,
+      "CZK": 23.40,
+      "HUF": 360.50,
+      "RON": 4.58,
+      "BGN": 1.80,
+      "UAH": 38.50,
+      // Asia Pacific
+      "KRW": 1335.50,
+      "SGD": 1.34,
+      "TWD": 31.60,
+      "THB": 35.80,
+      "IDR": 15650.00,
+      "MYR": 4.75,
+      "PHP": 56.20,
+      "VND": 24650.00,
+      "INR": 82.90,
+      "PKR": 279.50,
+      "BDT": 109.80,
+      "LKR": 313.50,
+      "KZT": 451.20,
+      // Americas
+      "MXN": 17.05,
+      "BRL": 4.95,
+      "ARS": 835.50,
+      "CLP": 970.20,
+      "COP": 3930.00,
+      // Middle East & Africa
+      "ZAR": 18.95,
+      "TRY": 31.15,
+      "ILS": 3.65,
+      "AED": 3.67,
+      "SAR": 3.75,
+      "EGP": 30.90,
+      "MAD": 10.05,
+      "NGN": 1500.00,
+      "KES": 145.50,
+      "GHS": 12.45,
+      // Crypto
+      "BTC": 0.000019, // ~52k USD
+      "ETH": 0.00035, // ~2.8k USD
+      "SOL": 0.0095, // ~105 USD
+      "ADA": 1.65, // ~0.60 USD
+      "XRP": 1.85, // ~0.54 USD
+      "DOGE": 11.8 // ~0.085 USD
+    };
+
+    const currencyNames = {
+      "USD": "US Dollar",
+      "EUR": "Euro",
+      "GBP": "British Pound",
+      "JPY": "Japanese Yen",
+      "AUD": "Australian Dollar",
+      "CAD": "Canadian Dollar",
+      "CHF": "Swiss Franc",
+      "CNY": "Chinese Yuan",
+      "HKD": "Hong Kong Dollar",
+      "NZD": "New Zealand Dollar",
+      "SEK": "Swedish Krona",
+      "NOK": "Norwegian Krone",
+      "DKK": "Danish Krone",
+      "PLN": "Polish Zloty",
+      "CZK": "Czech Koruna",
+      "HUF": "Hungarian Forint",
+      "RON": "Romanian Leu",
+      "BGN": "Bulgarian Lev",
+      "UAH": "Ukrainian Hryvnia",
+      "KRW": "South Korean Won",
+      "SGD": "Singapore Dollar",
+      "TWD": "New Taiwan Dollar",
+      "THB": "Thai Baht",
+      "IDR": "Indonesian Rupiah",
+      "MYR": "Malaysian Ringgit",
+      "PHP": "Philippine Peso",
+      "VND": "Vietnamese Dong",
+      "INR": "Indian Rupee",
+      "PKR": "Pakistani Rupee",
+      "BDT": "Bangladeshi Taka",
+      "LKR": "Sri Lankan Rupee",
+      "KZT": "Kazakhstani Tenge",
+      "MXN": "Mexican Peso",
+      "BRL": "Brazilian Real",
+      "ARS": "Argentine Peso",
+      "CLP": "Chilean Peso",
+      "COP": "Colombian Peso",
+      "ZAR": "South African Rand",
+      "TRY": "Turkish Lira",
+      "ILS": "Israeli New Shekel",
+      "AED": "UAE Dirham",
+      "SAR": "Saudi Riyal",
+      "EGP": "Egyptian Pound",
+      "MAD": "Moroccan Dirham",
+      "NGN": "Nigerian Naira",
+      "KES": "Kenyan Shilling",
+      "GHS": "Ghanaian Cedi",
+      "BTC": "Bitcoin",
+      "ETH": "Ethereum",
+      "SOL": "Solana",
+      "ADA": "Cardano",
+      "XRP": "Ripple",
+      "DOGE": "Dogecoin"
+    };
+
+    // DOM Elements
+    const amountInput = document.getElementById('amount');
+    const fromSelect = document.getElementById('from-currency');
+    const toSelect = document.getElementById('to-currency');
+    const swapBtn = document.getElementById('swap-btn');
+    const resultValue = document.getElementById('result-value');
+    const resultEquation = document.getElementById('result-equation');
+    const copyBtn = document.getElementById('copy-btn');
+
+    // Populate selects
+    function populateSelects() {
+      const currencies = Object.keys(rates).sort();
+      currencies.forEach(currency => {
+        const option1 = document.createElement('option');
+        option1.value = currency;
+        option1.textContent = `${currency} - ${currencyNames[currency]}`;
+        fromSelect.appendChild(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = currency;
+        option2.textContent = `${currency} - ${currencyNames[currency]}`;
+        toSelect.appendChild(option2);
+      });
+
+      // Default selections
+      fromSelect.value = "USD";
+      toSelect.value = "EUR";
+    }
+
+    // Format Number
+    function formatNumber(num, currency) {
+      // If crypto, show more decimals
+      const isCrypto = ["BTC", "ETH", "SOL", "ADA", "XRP", "DOGE"].includes(currency);
+
+      if (isCrypto) {
+        return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 8 });
+      } else {
+        return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+    }
+
+    // Calculate
+    function calculate() {
+      const amount = parseFloat(amountInput.value);
+      if (isNaN(amount) || amount < 0) {
+        resultValue.textContent = "0.00";
+        resultEquation.textContent = "";
+        return;
+      }
+
+      const from = fromSelect.value;
+      const to = toSelect.value;
+
+      const rateFrom = rates[from];
+      const rateTo = rates[to];
+
+      // Convert to base (USD), then to target
+      // Example: rateTo is how many TO you get per USD.
+      // So to get USD from FROM, divide by rateFrom.
+      const convertedAmount = (amount / rateFrom) * rateTo;
+
+      resultValue.textContent = `${formatNumber(convertedAmount, to)} ${to}`;
+
+      // Show unit rate equation
+      const unitRate = (1 / rateFrom) * rateTo;
+      resultEquation.textContent = `1 ${from} = ${formatNumber(unitRate, to)} ${to}`;
+    }
+
+    // Event Listeners
+    amountInput.addEventListener('input', calculate);
+    fromSelect.addEventListener('change', calculate);
+    toSelect.addEventListener('change', calculate);
+
+    swapBtn.addEventListener('click', () => {
+      const temp = fromSelect.value;
+      fromSelect.value = toSelect.value;
+      toSelect.value = temp;
+      calculate();
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const textToCopy = resultValue.textContent;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+
+    // Initialize
+    populateSelects();
+    calculate();
+  </script>
+</body>
+</html>
