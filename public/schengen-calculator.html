@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schengen 90/180 Day Calculator | Migrating Mammals</title>
+  <meta name="description" content="Free tool to track your days in the Schengen zone. Add trip dates, see remaining days, and get warnings before you overstay the 90/180-day rule.">
+  <meta property="og:title" content="Schengen 90/180 Day Calculator">
+  <meta property="og:description" content="Visual timeline of your 90/180-day allowance. Never overstay again.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Schengen 90/180 Day Calculator",
+    "url": "https://migratingmammals.com/schengen-calculator.html",
+    "description": "Calculate your allowed stay in the Schengen Area based on the 90/180-day rule.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    input[type="date"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="date"]:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    /* Trip Input Grid */
+    .trip-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    /* Trip List */
+    .trip-list {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .trip-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .trip-dates {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+    }
+
+    .trip-duration {
+      color: var(--accent);
+      font-weight: 600;
+      margin-left: 12px;
+      font-family: var(--font-mono);
+    }
+
+    .remove-btn {
+      background: transparent;
+      color: var(--danger);
+      width: auto;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+
+    .remove-btn:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Results Section */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .stat-box {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-value.warning { color: var(--danger); }
+    .stat-value.safe { color: var(--success); }
+
+    /* Progress Bar */
+    .progress-container {
+      margin-top: 32px;
+    }
+
+    .progress-bar-bg {
+      height: 12px;
+      background: var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Notice/Alert */
+    .alert {
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 24px;
+      font-size: 0.95rem;
+      display: none;
+    }
+    .alert.danger {
+      display: block;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .trip-input-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .trip-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .remove-btn {
+        margin-top: 12px;
+        width: 100%;
+        text-align: center;
+      }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Schengen 90/180 Calculator</h1>
+      <p class="subtitle">Track your days in the Schengen zone. Add trip dates and get warnings before you overstay the 90/180-day rule.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="form-group">
+        <label for="assessment-date">Assessment Date (Target Date)</label>
+        <input type="date" id="assessment-date">
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">We calculate the 180-day window looking backwards from this date.</p>
+      </div>
+
+      <div style="height: 1px; background: var(--border); margin: 32px 0;"></div>
+
+      <label>Add a Trip</label>
+      <div class="trip-input-row">
+        <div>
+          <label for="entry-date" style="font-size: 0.85rem; color: var(--text-secondary);">Entry Date</label>
+          <input type="date" id="entry-date">
+        </div>
+        <div>
+          <label for="exit-date" style="font-size: 0.85rem; color: var(--text-secondary);">Exit Date</label>
+          <input type="date" id="exit-date">
+        </div>
+        <button id="add-trip-btn">Add Trip</button>
+      </div>
+
+      <ul class="trip-list" id="trip-list">
+        <!-- Trips will be added here -->
+      </ul>
+
+      <div class="results-grid">
+        <div class="stat-box">
+          <div class="stat-label">Days Used</div>
+          <div class="stat-value" id="days-used">0</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">in 180-day window</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Days Remaining</div>
+          <div class="stat-value safe" id="days-remaining">90</div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">allowance</div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-labels">
+          <span>0 days</span>
+          <span>90 days max</span>
+        </div>
+      </div>
+
+      <div id="overstay-alert" class="alert">
+        <strong>Overstay Warning!</strong> You have exceeded the 90-day limit within the 180-day period.
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>How the Schengen 90/180 Rule Works</h2>
+      <p>The Schengen Area enforces a strict short-stay rule for non-EU visitors: you are permitted to stay a maximum of <strong>90 days within any 180-day period</strong>. This is a rolling window, meaning that for any given day you are in the Schengen zone, you must look back 180 days to ensure your total days spent do not exceed 90.</p>
+
+      <h2>Important Tips for Calculating</h2>
+      <ul>
+        <li><strong>Entry and Exit Days Count:</strong> The day you arrive and the day you leave both count as full days towards your 90-day limit, regardless of the time of your flight.</li>
+        <li><strong>It's a Rolling Window:</strong> The 180-day period is not fixed to a calendar year. It constantly moves forward with you.</li>
+        <li><strong>Applies to the Whole Zone:</strong> Moving from France to Germany doesn't reset the clock. The rule applies collectively to all countries within the Schengen Area.</li>
+      </ul>
+
+      <h2>Example Scenario</h2>
+      <p>If you enter Spain on January 1st and stay for 30 days, then leave for the UK, you have used 30 days. If you return to Italy on April 1st, the system looks back 180 days from April 1st. Your 30 days in January still count towards your 90-day limit until they start "falling out" of the 180-day window.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // State
+    let trips = [];
+
+    // DOM Elements
+    const entryInput = document.getElementById('entry-date');
+    const exitInput = document.getElementById('exit-date');
+    const addTripBtn = document.getElementById('add-trip-btn');
+    const tripList = document.getElementById('trip-list');
+    const assessmentInput = document.getElementById('assessment-date');
+    const daysUsedEl = document.getElementById('days-used');
+    const daysRemainingEl = document.getElementById('days-remaining');
+    const progressFill = document.getElementById('progress-fill');
+    const overstayAlert = document.getElementById('overstay-alert');
+
+    // Initialize assessment date to today
+    const today = new Date();
+    assessmentInput.valueAsDate = today;
+
+    // Load from localStorage if available
+    try {
+      const saved = localStorage.getItem('schengen-trips');
+      if (saved) {
+        trips = JSON.parse(saved);
+        renderTrips();
+        calculateDays();
+      }
+    } catch (e) {
+      console.error("Could not load saved trips");
+    }
+
+    function saveTrips() {
+      localStorage.setItem('schengen-trips', JSON.stringify(trips));
+    }
+
+    // Event Listeners
+    addTripBtn.addEventListener('click', () => {
+      const entryStr = entryInput.value;
+      const exitStr = exitInput.value;
+
+      if (!entryStr || !exitStr) {
+        alert("Please select both entry and exit dates.");
+        return;
+      }
+
+      const entryDate = new Date(entryStr);
+      const exitDate = new Date(exitStr);
+
+      if (exitDate < entryDate) {
+        alert("Exit date cannot be before entry date.");
+        return;
+      }
+
+      trips.push({
+        id: Date.now().toString(),
+        entry: entryStr,
+        exit: exitStr
+      });
+
+      // Clear inputs
+      entryInput.value = '';
+      exitInput.value = '';
+
+      saveTrips();
+      renderTrips();
+      calculateDays();
+    });
+
+    assessmentInput.addEventListener('change', calculateDays);
+
+    function removeTrip(id) {
+      trips = trips.filter(t => t.id !== id);
+      saveTrips();
+      renderTrips();
+      calculateDays();
+    }
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      // Adding UTC offset logic to prevent off-by-one errors from local timezones on simple dates
+      const d = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function renderTrips() {
+      tripList.innerHTML = '';
+
+      // Sort trips by entry date
+      const sortedTrips = [...trips].sort((a, b) => new Date(a.entry) - new Date(b.entry));
+
+      sortedTrips.forEach(trip => {
+        const entryDate = new Date(trip.entry);
+        const exitDate = new Date(trip.exit);
+        const duration = Math.round((exitDate - entryDate) / (1000 * 60 * 60 * 24)) + 1;
+
+        const li = document.createElement('li');
+        li.className = 'trip-item';
+        li.innerHTML = `
+          <div>
+            <span class="trip-dates">${formatDate(trip.entry)} &rarr; ${formatDate(trip.exit)}</span>
+            <span class="trip-duration">${duration} days</span>
+          </div>
+          <button class="remove-btn" onclick="removeTrip('${trip.id}')">Remove</button>
+        `;
+        tripList.appendChild(li);
+      });
+    }
+
+    function calculateDays() {
+      const assessmentStr = assessmentInput.value;
+      if (!assessmentStr) return;
+
+      const assessmentDate = new Date(assessmentStr);
+      // Strip time
+      assessmentDate.setHours(0, 0, 0, 0);
+
+      // 180 day window starts 179 days before the assessment date (making it an inclusive 180 day period)
+      const windowStart = new Date(assessmentDate);
+      windowStart.setDate(assessmentDate.getDate() - 179);
+
+      let totalDaysUsed = 0;
+
+      trips.forEach(trip => {
+        const entryDate = new Date(trip.entry);
+        entryDate.setHours(0,0,0,0);
+        const exitDate = new Date(trip.exit);
+        exitDate.setHours(0,0,0,0);
+
+        // Find intersection of trip and 180-day window
+        const overlapStart = new Date(Math.max(entryDate.getTime(), windowStart.getTime()));
+        const overlapEnd = new Date(Math.min(exitDate.getTime(), assessmentDate.getTime()));
+
+        if (overlapStart <= overlapEnd) {
+          const days = Math.round((overlapEnd - overlapStart) / (1000 * 60 * 60 * 24)) + 1;
+          totalDaysUsed += days;
+        }
+      });
+
+      updateUI(totalDaysUsed);
+    }
+
+    function updateUI(daysUsed) {
+      const maxDays = 90;
+      const remaining = Math.max(0, maxDays - daysUsed);
+
+      // Update text
+      daysUsedEl.textContent = daysUsed;
+      daysRemainingEl.textContent = remaining;
+
+      // Update colors
+      if (daysUsed >= 90) {
+        daysUsedEl.className = 'stat-value warning';
+        daysRemainingEl.className = 'stat-value warning';
+        overstayAlert.className = 'alert danger';
+        progressFill.style.backgroundColor = 'var(--danger)';
+      } else if (daysUsed >= 75) {
+        daysUsedEl.className = 'stat-value';
+        daysRemainingEl.className = 'stat-value';
+        overstayAlert.className = 'alert';
+        progressFill.style.backgroundColor = '#f59e0b'; // amber
+      } else {
+        daysUsedEl.className = 'stat-value';
+        daysRemainingEl.className = 'stat-value safe';
+        overstayAlert.className = 'alert';
+        progressFill.style.backgroundColor = 'var(--accent)';
+      }
+
+      // Update progress bar
+      const percentage = Math.min(100, (daysUsed / maxDays) * 100);
+      progressFill.style.width = `${percentage}%`;
+    }
+
+    // Initial calculation on load
+    calculateDays();
+  </script>
+</body>
+</html>
