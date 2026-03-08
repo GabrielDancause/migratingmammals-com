@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Nomad Travel Insurance Guide | Migrating Mammals</title>
+  <meta name="description" content="A comprehensive reference guide comparing travel insurance options for digital nomads: SafetyWing, World Nomads, and Genki.">
+  <meta property="og:title" content="Digital Nomad Travel Insurance Guide">
+  <meta property="og:description" content="A developer's go-to reference page comparing SafetyWing, World Nomads, and Genki travel insurance for digital nomads.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Digital Nomad Travel Insurance Guide",
+    "description": "Compare travel insurance for nomads: SafetyWing, World Nomads, Genki. Coverage, claims, costs.",
+    "author": {
+      "@type": "Organization",
+      "name": "Migrating Mammals",
+      "url": "https://migratingmammals.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Migrating Mammals",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://migratingmammals.com/favicon.ico"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://migratingmammals.com/guide-travel-insurance.html"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Search/Filter Bar */
+    .search-bar-container {
+      margin-bottom: 32px;
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-secondary);
+      color: var(--text-primary);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Content Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(196, 149, 106, 0.3);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-budget { background: rgba(34, 197, 94, 0.1); color: var(--success); }
+    .tag-premium { background: rgba(196, 149, 106, 0.1); color: var(--accent); }
+    .tag-health { background: rgba(59, 130, 246, 0.1); color: var(--info); }
+
+    .price-display {
+      text-align: right;
+    }
+
+    .price-amount {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .price-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Data Tables */
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .data-section {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .data-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
+    }
+
+    .data-row:last-child {
+      border-bottom: none;
+    }
+
+    .data-label {
+      color: var(--text-secondary);
+    }
+
+    .data-value {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      text-align: right;
+      max-width: 60%;
+    }
+
+    .data-value.good { color: var(--success); }
+    .data-value.bad { color: var(--danger); }
+    .data-value.warn { color: var(--warning); }
+
+    /* Expandable Sections */
+    .expandable {
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .expandable-header {
+      background: var(--bg);
+      padding: 12px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .expandable-header:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .expandable-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .expandable.open .expandable-icon {
+      transform: rotate(180deg);
+    }
+
+    .expandable-content {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: var(--bg);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .expandable.open .expandable-content {
+      padding: 20px;
+      max-height: 1000px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Copy Buttons */
+    .copy-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-top: 4px;
+      display: inline-flex;
+    }
+
+    .copy-block code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Comparison Table (Desktop) */
+    .comparison-wrapper {
+      overflow-x: auto;
+      margin-bottom: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      background: var(--card-bg);
+    }
+
+    .comparison-table th, .comparison-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    .comparison-table th:last-child, .comparison-table td:last-child {
+      border-right: none;
+    }
+
+    .comparison-table th {
+      background: var(--bg);
+      font-weight: 700;
+      color: var(--text-primary);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table tbody tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .td-value {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content h2:first-child {
+      margin-top: 0;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Empty State */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .price-display {
+        text-align: left;
+      }
+      .seo-content {
+        padding: 24px;
+      }
+      .comparison-wrapper {
+        display: none; /* Hide complex table on mobile, rely on cards */
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-only {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Nomad Insurance Guide</h1>
+      <p class="subtitle">A technical cheat sheet comparing the top travel and health insurance providers for digital nomads and remote workers.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="search-bar-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search coverage, limits, or providers (e.g., 'scooter', 'laptop', 'deductible')...">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All Providers</button>
+        <button class="filter-btn" data-filter="budget">Budget-Friendly</button>
+        <button class="filter-btn" data-filter="premium">Comprehensive</button>
+        <button class="filter-btn" data-filter="health">Health-Focused</button>
+      </div>
+    </div>
+
+    <!-- Quick Comparison Table (Desktop Only) -->
+    <div class="comparison-wrapper" id="comparisonTable">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>SafetyWing (Nomad)</th>
+            <th>World Nomads (Explorer)</th>
+            <th>Genki (Explorer)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Type</strong></td>
+            <td>Travel Medical</td>
+            <td>Comprehensive Travel</td>
+            <td>Health Insurance</td>
+          </tr>
+          <tr>
+            <td><strong>Base Price / 4 wks</strong></td>
+            <td class="td-value">$56.28</td>
+            <td class="td-value">~$120.00</td>
+            <td class="td-value">€39.30</td>
+          </tr>
+          <tr>
+            <td><strong>Max Medical</strong></td>
+            <td class="td-value">$250,000</td>
+            <td class="td-value">Unlimited</td>
+            <td class="td-value">Unlimited</td>
+          </tr>
+          <tr>
+            <td><strong>Deductible</strong></td>
+            <td class="td-value">$250</td>
+            <td class="td-value">$0 - $100</td>
+            <td class="td-value">€50</td>
+          </tr>
+          <tr>
+            <td><strong>Electronics</strong></td>
+            <td class="td-value bad">No</td>
+            <td class="td-value good">Yes ($3k+)</td>
+            <td class="td-value bad">No</td>
+          </tr>
+          <tr>
+            <td><strong>Home Country Cov.</strong></td>
+            <td class="td-value">30 days / 90</td>
+            <td class="td-value bad">No</td>
+            <td class="td-value">42 days / 180</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="noResults" class="no-results">
+      No matching insurance data found. Try a different search term.
+    </div>
+
+    <div class="provider-cards" id="providerCards">
+      <!-- SafetyWing Card -->
+      <div class="card provider-card" data-tags="all budget">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              SafetyWing <span class="card-tag tag-budget">Budget</span>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">Nomad Insurance</p>
+          </div>
+          <div class="price-display">
+            <div class="price-amount">$56.28</div>
+            <div class="price-label">per 4 weeks (age 10-39)</div>
+          </div>
+        </div>
+
+        <div class="data-grid">
+          <div class="data-section searchable">
+            <h3>Medical Coverage</h3>
+            <div class="data-row">
+              <span class="data-label">Max Limit</span>
+              <span class="data-value">$250,000</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Deductible</span>
+              <span class="data-value warn">$250</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Dental (Emergency)</span>
+              <span class="data-value">$1,000 max</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Physiotherapy</span>
+              <span class="data-value">$50/day</span>
+            </div>
+          </div>
+
+          <div class="data-section searchable">
+            <h3>Travel Coverage</h3>
+            <div class="data-row">
+              <span class="data-label">Trip Interruption</span>
+              <span class="data-value">$5,000</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lost Checked Luggage</span>
+              <span class="data-value">$3,000 max</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Electronics/Tech</span>
+              <span class="data-value bad">Excluded</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Scooter/Moped</span>
+              <span class="data-value warn">Yes (if licensed)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="expandable">
+          <div class="expandable-header">
+            <span>Key Policies & Gotchas</span>
+            <svg class="expandable-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="expandable-content searchable">
+            <ul style="margin-left: 20px; margin-bottom: 16px;">
+              <li><strong>Home Country:</strong> Covered for 30 days per 90 days (15 days for US residents).</li>
+              <li><strong>US Coverage:</strong> Costs significantly more (+$48/4wks).</li>
+              <li><strong>Subscription Model:</strong> Auto-renews every 28 days until cancelled.</li>
+              <li><strong>Pre-existing Conditions:</strong> Not covered.</li>
+            </ul>
+            <p><strong>Filing a claim:</strong> Handled through Tokio Marine HCC. You must pay upfront and submit receipts unless it's a major hospitalization where they can arrange direct billing.</p>
+
+            <div class="copy-block">
+              <code>claims@hccmis.com</code>
+              <button class="copy-btn" onclick="copyToClipboard('claims@hccmis.com', this)" aria-label="Copy email">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- World Nomads Card -->
+      <div class="card provider-card" data-tags="all premium">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              World Nomads <span class="card-tag tag-premium">Comprehensive</span>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">Explorer Plan</p>
+          </div>
+          <div class="price-display">
+            <div class="price-amount">~$120.00</div>
+            <div class="price-label">per 4 weeks (varies by residence)</div>
+          </div>
+        </div>
+
+        <div class="data-grid">
+          <div class="data-section searchable">
+            <h3>Medical Coverage</h3>
+            <div class="data-row">
+              <span class="data-label">Max Limit</span>
+              <span class="data-value good">Unlimited</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Deductible</span>
+              <span class="data-value good">$0 - $100</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Dental (Emergency)</span>
+              <span class="data-value">$750 max</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Evacuation</span>
+              <span class="data-value">$500,000</span>
+            </div>
+          </div>
+
+          <div class="data-section searchable">
+            <h3>Travel Coverage</h3>
+            <div class="data-row">
+              <span class="data-label">Trip Cancellation</span>
+              <span class="data-value">$10,000</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Baggage/Tech</span>
+              <span class="data-value good">$3,000 max</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Adventure Sports</span>
+              <span class="data-value good">200+ Covered</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Rental Car Excess</span>
+              <span class="data-value">Optional Add-on</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="expandable">
+          <div class="expandable-header">
+            <span>Key Policies & Gotchas</span>
+            <svg class="expandable-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="expandable-content searchable">
+            <ul style="margin-left: 20px; margin-bottom: 16px;">
+              <li><strong>Pricing:</strong> Highly variable based on your country of residence and destination.</li>
+              <li><strong>Tech Coverage:</strong> High limits for laptops/cameras, but requires receipts and police reports for theft. Depreciation is applied.</li>
+              <li><strong>Home Country:</strong> Generally NO coverage in your country of permanent residence.</li>
+              <li><strong>Purchase Timing:</strong> Can be bought while already traveling (waiting periods may apply).</li>
+            </ul>
+            <p><strong>Filing a claim:</strong> Done via their online portal. They are known for strict documentation requirements, so keep all receipts, medical reports, and police reports.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Genki Card -->
+      <div class="card provider-card" data-tags="all health">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              Genki <span class="card-tag tag-health">Health-Focused</span>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">Explorer Plan</p>
+          </div>
+          <div class="price-display">
+            <div class="price-amount">€39.30</div>
+            <div class="price-label">per month (age up to 29)</div>
+          </div>
+        </div>
+
+        <div class="data-grid">
+          <div class="data-section searchable">
+            <h3>Medical Coverage</h3>
+            <div class="data-row">
+              <span class="data-label">Max Limit</span>
+              <span class="data-value good">Unlimited</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Deductible</span>
+              <span class="data-value">€50 per case</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Outpatient</span>
+              <span class="data-value good">100% covered</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Sports/Activities</span>
+              <span class="data-value good">Most Covered</span>
+            </div>
+          </div>
+
+          <div class="data-section searchable">
+            <h3>Travel Coverage</h3>
+            <div class="data-row">
+              <span class="data-label">Trip Cancellation</span>
+              <span class="data-value bad">No</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lost Luggage</span>
+              <span class="data-value bad">No</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Electronics</span>
+              <span class="data-value bad">No</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Repatriation</span>
+              <span class="data-value">Covered</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="expandable">
+          <div class="expandable-header">
+            <span>Key Policies & Gotchas</span>
+            <svg class="expandable-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="expandable-content searchable">
+            <ul style="margin-left: 20px; margin-bottom: 16px;">
+              <li><strong>Type:</strong> This is purely health/medical insurance, NOT travel insurance. It covers zero travel delays, lost bags, or stolen laptops.</li>
+              <li><strong>Home Country:</strong> Covered for up to 42 days per 180 days.</li>
+              <li><strong>Flexibility:</strong> Monthly subscription, cancel anytime. Max duration is 2 years.</li>
+              <li><strong>Age Tiers:</strong> Price jumps significantly at age 30 (to €54/mo) and age 40 (to €69/mo).</li>
+            </ul>
+            <p><strong>Filing a claim:</strong> Handled through Allianz Partners. Use the Air Doctor app to find doctors and arrange direct billing for outpatient visits, avoiding out-of-pocket costs.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="seo-content">
+      <h2>Travel Insurance vs. International Health Insurance</h2>
+      <p>When selecting coverage as a digital nomad, it is crucial to understand the distinction between <strong>travel insurance</strong> and <strong>international health insurance</strong>. </p>
+      <p>Travel insurance (like World Nomads or SafetyWing's base plan) is designed for temporary trips. It covers emergency medical situations, but also includes travel-related mishaps like lost luggage, flight cancellations, and stolen electronics. It is not designed for routine checkups or long-term care.</p>
+      <p>International Health Insurance (like Genki Native or SafetyWing Nomad Health) functions more like the health insurance you have in your home country, but globally. It covers routine doctor visits, preventative care, and ongoing treatments, but typically offers zero coverage for travel logistics like lost bags or canceled flights.</p>
+
+      <h2>How to Choose the Right Nomad Insurance</h2>
+      <ul>
+        <li><strong>Assess Your Gear:</strong> If you travel with expensive laptops and cameras, a comprehensive plan that covers tech (like World Nomads) might be worth the premium. Alternatively, buy cheap medical-only insurance and insure your gear separately.</li>
+        <li><strong>Consider Your Activities:</strong> Standard policies often exclude "extreme" sports. If you plan to ride a scooter in Southeast Asia, surf, or scuba dive, read the policy wording carefully. You usually need a specific license for scooters, and certain depth limits apply for diving.</li>
+        <li><strong>Check Home Country Rules:</strong> Most nomads visit home occasionally. Check how many days of incidental home country coverage the policy provides, and whether coverage in the USA is included (it usually costs extra).</li>
+      </ul>
+
+      <h2>The Claim Process Reality</h2>
+      <p>Regardless of the provider, travel insurance claims require meticulous documentation. If an item is stolen, you <em>must</em> get a police report within 24 hours. If you visit a doctor, you must keep all receipts, medical reports, and proof of payment. For major hospitalizations, always call the emergency assistance number on your policy <em>before</em> receiving treatment whenever possible, so they can arrange direct billing and avoid you having to front thousands of dollars.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Expandable sections logic
+    document.querySelectorAll('.expandable-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const parent = header.parentElement;
+        parent.classList.toggle('open');
+      });
+    });
+
+    // Copy to clipboard helper
+    window.copyToClipboard = function(text, btnElement) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalHTML = btnElement.innerHTML;
+        btnElement.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        setTimeout(() => {
+          btnElement.innerHTML = originalHTML;
+        }, 2000);
+      });
+    };
+
+    // Search and Filter Logic
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.provider-card');
+    const noResults = document.getElementById('noResults');
+    const comparisonTable = document.getElementById('comparisonTable');
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function applyFilters() {
+      let visibleCount = 0;
+      const searchTerms = currentSearch.toLowerCase().split(' ').filter(t => t.length > 0);
+
+      cards.forEach(card => {
+        // Tag filter
+        const tags = card.getAttribute('data-tags').split(' ');
+        const matchesFilter = currentFilter === 'all' || tags.includes(currentFilter);
+
+        // Text search
+        let matchesSearch = true;
+        if (searchTerms.length > 0) {
+          // Gather all searchable text in this card
+          const searchableElements = card.querySelectorAll('.card-title, .searchable');
+          let cardText = '';
+          searchableElements.forEach(el => cardText += el.textContent + ' ');
+          cardText = cardText.toLowerCase();
+
+          matchesSearch = searchTerms.every(term => cardText.includes(term));
+        }
+
+        if (matchesFilter && matchesSearch) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show/hide empty state
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+      // Hide comparison table if searching/filtering (since it doesn't filter rows easily)
+      if (comparisonTable) {
+        if (currentFilter !== 'all' || currentSearch.length > 0) {
+          comparisonTable.style.display = 'none';
+        } else {
+          comparisonTable.style.display = 'block';
+        }
+      }
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      applyFilters();
+    });
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active class
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Apply filter
+        currentFilter = btn.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+  </script>
+</body>
+</html>
