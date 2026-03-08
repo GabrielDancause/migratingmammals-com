@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Time Calculator | Migrating Mammals</title>
+  <meta name="description" content="Calculate flight time between airports including Great Circle Distance, wind pattern adjustments, and layovers. Works offline.">
+  <meta property="og:title" content="Flight Time Calculator">
+  <meta property="og:description" content="Calculate real-world flight times between global airports. Accounts for distance, wind, and layovers.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Flight Time Calculator",
+    "url": "https://migratingmammals.com/flight-time.html",
+    "description": "Calculate flight times between airports including Great Circle distance, wind patterns, and layovers.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    input[type="number"], select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        width: auto;
+        accent-color: var(--accent);
+    }
+
+    .checkbox-group label {
+        margin-bottom: 0;
+        font-weight: normal;
+    }
+
+    /* Input Grid */
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .layover-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+        align-items: end;
+    }
+
+    /* Results Section */
+    .results-container {
+        display: none;
+        margin-top: 32px;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stat-box {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-subtext {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 4px;
+    }
+
+    .route-summary {
+        background: var(--bg);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+    }
+
+    .route-point {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .route-code {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--accent);
+    }
+
+    .route-name {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        font-family: var(--font-ui);
+        max-width: 100px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .route-line {
+        flex: 1;
+        height: 2px;
+        background: var(--border);
+        margin: 0 16px;
+        position: relative;
+    }
+
+    .route-line::after {
+        content: '✈';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--text-secondary);
+        background: var(--bg);
+        padding: 0 8px;
+        font-size: 1.2rem;
+    }
+
+    .layover-point {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 0.8rem;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        color: var(--text-secondary);
+    }
+
+    .copy-btn {
+        width: auto;
+        padding: 8px 16px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .input-row, .layover-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .route-summary {
+          flex-direction: column;
+          gap: 16px;
+      }
+      .route-line {
+          width: 2px;
+          height: 40px;
+          margin: 8px 0;
+      }
+      .route-line::after {
+          transform: translate(-50%, -50%) rotate(90deg);
+      }
+      .layover-point {
+          top: 50%;
+          left: 20px;
+          transform: translateY(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Flight Time Calculator</h1>
+      <p class="subtitle">Calculate accurate flight durations using Great Circle Distance, wind patterns, and layovers.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="input-row">
+        <div>
+          <label for="origin">Origin Airport</label>
+          <select id="origin">
+              <option value="">Select origin...</option>
+              <!-- Populated by JS -->
+          </select>
+        </div>
+        <div>
+          <label for="destination">Destination Airport</label>
+          <select id="destination">
+              <option value="">Select destination...</option>
+              <!-- Populated by JS -->
+          </select>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+          <input type="checkbox" id="add-layover">
+          <label for="add-layover">Add a layover</label>
+      </div>
+
+      <div class="layover-row" id="layover-container" style="display: none;">
+        <div>
+          <label for="layover">Layover Airport</label>
+          <select id="layover">
+              <option value="">Select layover...</option>
+              <!-- Populated by JS -->
+          </select>
+        </div>
+        <div>
+          <label for="layover-duration">Duration (hours)</label>
+          <input type="number" id="layover-duration" min="0" step="0.5" value="2">
+        </div>
+      </div>
+
+      <div style="height: 1px; background: var(--border); margin: 32px 0;"></div>
+
+      <div class="input-row">
+          <div>
+              <label for="speed">Cruising Speed (km/h)</label>
+              <input type="number" id="speed" value="900">
+              <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Commercial jets typical: 850-920 km/h</p>
+          </div>
+          <div>
+              <div class="checkbox-group" style="margin-top: 32px;">
+                  <input type="checkbox" id="apply-wind" checked>
+                  <label for="apply-wind">Adjust for prevailing winds (Jet Stream)</label>
+              </div>
+          </div>
+      </div>
+
+      <button id="calculate-btn">Calculate Flight Time</button>
+
+      <div class="results-container" id="results">
+        <div class="route-summary" id="route-display">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="results-grid">
+          <div class="stat-box">
+            <div class="stat-label">Total Flight Time</div>
+            <div class="stat-value" id="flight-time">0h 0m</div>
+            <div class="stat-subtext">Includes 30m buffer per flight</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Total Distance</div>
+            <div class="stat-value" id="flight-distance">0 km</div>
+            <div class="stat-subtext">Great Circle Distance</div>
+          </div>
+        </div>
+
+        <div class="stat-box" id="total-trip-box" style="display: none; margin-bottom: 24px; padding: 16px;">
+            <div class="stat-label">Total Trip Time (w/ Layover)</div>
+            <div class="stat-value" id="total-trip-time" style="font-size: 2rem; color: var(--accent);">0h 0m</div>
+        </div>
+
+        <button class="secondary copy-btn" id="copy-btn">Copy Results</button>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>How is Flight Time Calculated?</h2>
+      <p>This calculator estimates flight durations by determining the <strong>Great Circle Distance</strong> between two airports and dividing it by an average commercial jet cruising speed. We add a standard 30-minute buffer to each leg of the journey to account for taxiing, takeoff, and landing procedures.</p>
+
+      <h2>What is Great Circle Distance?</h2>
+      <p>Because the Earth is a sphere, the shortest distance between two points is not a straight line on a flat map, but an arc along the surface known as a Great Circle. This is why flight paths on maps often look curved, especially on long-haul transoceanic flights. We use the <strong>Haversine formula</strong> to calculate this spherical distance accurately.</p>
+
+      <h2>The Impact of Wind Patterns</h2>
+      <p>Flight times are rarely symmetric. Prevailing high-altitude winds, known as <strong>Jet Streams</strong>, blow predominantly from West to East. Therefore, flying Eastward (e.g., New York to London) usually benefits from a tailwind, making the flight faster. Conversely, flying Westward (e.g., London to New York) involves battling a headwind, increasing the flight time. When enabled, this tool applies a basic heuristic to adjust flight speeds based on the calculated bearing between the airports.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Airport Database (Sample of major global hubs)
+    const airports = {
+        "ATL": { name: "Atlanta", lat: 33.6407, lon: -84.4277 },
+        "PEK": { name: "Beijing Capital", lat: 40.0799, lon: 116.6031 },
+        "DXB": { name: "Dubai", lat: 25.2532, lon: 55.3657 },
+        "LAX": { name: "Los Angeles", lat: 33.9416, lon: -118.4085 },
+        "HND": { name: "Tokyo Haneda", lat: 35.5494, lon: 139.7798 },
+        "ORD": { name: "Chicago O'Hare", lat: 41.9742, lon: -87.9073 },
+        "LHR": { name: "London Heathrow", lat: 51.4700, lon: -0.4543 },
+        "PVG": { name: "Shanghai Pudong", lat: 31.1433, lon: 121.8052 },
+        "CDG": { name: "Paris Charles de Gaulle", lat: 49.0097, lon: 2.5479 },
+        "DFW": { name: "Dallas/Fort Worth", lat: 32.8998, lon: -97.0403 },
+        "AMS": { name: "Amsterdam Schiphol", lat: 52.3105, lon: 4.7683 },
+        "FRA": { name: "Frankfurt", lat: 50.0333, lon: 8.5705 },
+        "IST": { name: "Istanbul", lat: 41.2753, lon: 28.7519 },
+        "CAN": { name: "Guangzhou Baiyun", lat: 28.3966, lon: 113.2988 },
+        "JFK": { name: "New York JFK", lat: 40.6413, lon: -73.7781 },
+        "SIN": { name: "Singapore Changi", lat: 1.3644, lon: 103.9915 },
+        "DEN": { name: "Denver", lat: 39.8584, lon: -104.6670 },
+        "ICN": { name: "Seoul Incheon", lat: 37.4602, lon: 126.4407 },
+        "BKK": { name: "Bangkok Suvarnabhumi", lat: 13.6900, lon: 100.7501 },
+        "SFO": { name: "San Francisco", lat: 37.6213, lon: -122.3790 },
+        "GRU": { name: "São Paulo Guarulhos", lat: -23.4356, lon: -46.4731 },
+        "SYD": { name: "Sydney", lat: -33.9399, lon: 151.1753 },
+        "JNB": { name: "Johannesburg O.R. Tambo", lat: -26.1392, lon: 28.2460 },
+        "EZE": { name: "Buenos Aires Ezeiza", lat: -34.8222, lon: -58.5358 },
+        "YYZ": { name: "Toronto Pearson", lat: 43.6777, lon: -79.6248 }
+    };
+
+    // DOM Elements
+    const originSelect = document.getElementById('origin');
+    const destSelect = document.getElementById('destination');
+    const layoverSelect = document.getElementById('layover');
+    const addLayoverCheck = document.getElementById('add-layover');
+    const layoverContainer = document.getElementById('layover-container');
+    const layoverDuration = document.getElementById('layover-duration');
+    const speedInput = document.getElementById('speed');
+    const applyWindCheck = document.getElementById('apply-wind');
+    const calculateBtn = document.getElementById('calculate-btn');
+    const resultsContainer = document.getElementById('results');
+    const flightTimeEl = document.getElementById('flight-time');
+    const distanceEl = document.getElementById('flight-distance');
+    const totalTripBox = document.getElementById('total-trip-box');
+    const totalTripTimeEl = document.getElementById('total-trip-time');
+    const routeDisplay = document.getElementById('route-display');
+    const copyBtn = document.getElementById('copy-btn');
+
+    // Populate Selects
+    const sortedAirports = Object.keys(airports).sort((a, b) => airports[a].name.localeCompare(airports[b].name));
+
+    function populateSelect(selectEl) {
+        sortedAirports.forEach(code => {
+            const option = document.createElement('option');
+            option.value = code;
+            option.textContent = `${airports[code].name} (${code})`;
+            selectEl.appendChild(option);
+        });
+    }
+
+    populateSelect(originSelect);
+    populateSelect(destSelect);
+    populateSelect(layoverSelect);
+
+    // Event Listeners
+    addLayoverCheck.addEventListener('change', (e) => {
+        layoverContainer.style.display = e.target.checked ? 'grid' : 'none';
+    });
+
+    calculateBtn.addEventListener('click', calculateFlight);
+
+    copyBtn.addEventListener('click', () => {
+        const textToCopy = `Flight: ${originSelect.value} to ${destSelect.value}\n` +
+            `Total Flight Time: ${flightTimeEl.textContent}\n` +
+            `Distance: ${distanceEl.textContent}\n` +
+            (addLayoverCheck.checked ? `Total Trip Time (w/ layover): ${totalTripTimeEl.textContent}\n` : '');
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = 'Copied!';
+            setTimeout(() => { copyBtn.innerText = originalText; }, 2000);
+        });
+    });
+
+    // Math Utility Functions
+    const toRad = (value) => value * Math.PI / 180;
+    const toDeg = (value) => value * 180 / Math.PI;
+
+    // Haversine Formula for Distance
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // km
+        const dLat = toRad(lat2 - lat1);
+        const dLon = toRad(lon2 - lon1);
+        const l1 = toRad(lat1);
+        const l2 = toRad(lat2);
+
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(l1) * Math.cos(l2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+
+    // Calculate Bearing to determine general direction (East vs West)
+    function calculateBearing(lat1, lon1, lat2, lon2) {
+        const l1 = toRad(lat1);
+        const l2 = toRad(lat2);
+        const dLon = toRad(lon2 - lon1);
+
+        const y = Math.sin(dLon) * Math.cos(l2);
+        const x = Math.cos(l1) * Math.sin(l2) - Math.sin(l1) * Math.cos(l2) * Math.cos(dLon);
+        const brng = Math.atan2(y, x);
+
+        return (toDeg(brng) + 360) % 360;
+    }
+
+    function formatTime(hoursFloat) {
+        const h = Math.floor(hoursFloat);
+        const m = Math.round((hoursFloat - h) * 60);
+        return `${h}h ${m}m`;
+    }
+
+    // Main Calculation Logic
+    function calculateFlight() {
+        const origCode = originSelect.value;
+        const destCode = destSelect.value;
+        const hasLayover = addLayoverCheck.checked;
+        const layCode = layoverSelect.value;
+
+        if (!origCode || !destCode) {
+            alert("Please select both origin and destination airports.");
+            return;
+        }
+        if (hasLayover && !layCode) {
+            alert("Please select a layover airport.");
+            return;
+        }
+        if (origCode === destCode || (hasLayover && (origCode === layCode || destCode === layCode))) {
+            alert("Airports must be distinct.");
+            return;
+        }
+
+        const baseSpeed = parseFloat(speedInput.value) || 900;
+        const useWind = applyWindCheck.checked;
+        const takeoffLandingBuffer = 0.5; // 30 mins per leg
+
+        let totalDist = 0;
+        let totalFlightTime = 0;
+        let legs = [];
+
+        if (hasLayover) {
+            legs.push({ start: airports[origCode], end: airports[layCode] });
+            legs.push({ start: airports[layCode], end: airports[destCode] });
+        } else {
+            legs.push({ start: airports[origCode], end: airports[destCode] });
+        }
+
+        legs.forEach(leg => {
+            const dist = calculateDistance(leg.start.lat, leg.start.lon, leg.end.lat, leg.end.lon);
+            totalDist += dist;
+
+            let legSpeed = baseSpeed;
+            if (useWind) {
+                const bearing = calculateBearing(leg.start.lat, leg.start.lon, leg.end.lat, leg.end.lon);
+                // Simple heuristic: Eastbound (0-180) gets tailwind, Westbound (180-360) gets headwind
+                // Max effect around 90 (East) and 270 (West)
+                const windFactor = Math.sin(toRad(bearing));
+                const windSpeedEstimate = 50; // km/h
+                legSpeed += (windFactor * windSpeedEstimate);
+            }
+
+            const timeForLeg = (dist / legSpeed) + takeoffLandingBuffer;
+            totalFlightTime += timeForLeg;
+        });
+
+        // Update UI
+        distanceEl.textContent = `${Math.round(totalDist).toLocaleString()} km`;
+        flightTimeEl.textContent = formatTime(totalFlightTime);
+
+        // Update Route Display
+        if (hasLayover) {
+            routeDisplay.innerHTML = `
+                <div class="route-point">
+                    <span class="route-code">${origCode}</span>
+                    <span class="route-name">${airports[origCode].name}</span>
+                </div>
+                <div class="route-line">
+                    <div class="layover-point">${layoverDuration.value}h Layover at ${layCode}</div>
+                </div>
+                <div class="route-point">
+                    <span class="route-code">${destCode}</span>
+                    <span class="route-name">${airports[destCode].name}</span>
+                </div>
+            `;
+            const layDurationFloat = parseFloat(layoverDuration.value) || 0;
+            totalTripBox.style.display = 'block';
+            totalTripTimeEl.textContent = formatTime(totalFlightTime + layDurationFloat);
+        } else {
+            routeDisplay.innerHTML = `
+                <div class="route-point">
+                    <span class="route-code">${origCode}</span>
+                    <span class="route-name">${airports[origCode].name}</span>
+                </div>
+                <div class="route-line"></div>
+                <div class="route-point">
+                    <span class="route-code">${destCode}</span>
+                    <span class="route-name">${airports[destCode].name}</span>
+                </div>
+            `;
+            totalTripBox.style.display = 'none';
+        }
+
+        // Show results
+        resultsContainer.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
