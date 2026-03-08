@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visa Requirement Checker | Migrating Mammals</title>
+  <meta name="description" content="Check visa requirements, visa-free days, and e-visa options based on your passport and destination.">
+  <meta property="og:title" content="Visa Requirement Checker">
+  <meta property="og:description" content="Instantly check if you need a visa for your next trip, how long you can stay, and e-visa options.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Visa Requirement Checker",
+    "url": "https://migratingmammals.com/visa-checker.html",
+    "description": "Check visa requirements by passport and destination.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      width: auto;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    /* Input Grid */
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* Results Section */
+    .result-box {
+      display: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .result-box.active {
+      display: block;
+    }
+
+    .result-status {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .result-status.visa-free { color: var(--success); }
+    .result-status.evisa { color: #3b82f6; } /* blue */
+    .result-status.visa-required { color: var(--danger); }
+
+    .result-duration {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .result-notes {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .copy-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .input-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Visa Requirement Checker</h1>
+      <p class="subtitle">Instantly check visa requirements, allowed stay duration, and e-visa options based on your passport and destination.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="input-row">
+        <div>
+          <label for="passport">Your Passport</label>
+          <select id="passport">
+            <option value="" disabled selected>Select Passport...</option>
+            <option value="US">United States</option>
+            <option value="UK">United Kingdom</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="NZ">New Zealand</option>
+            <option value="EU">European Union (Schengen)</option>
+            <option value="IN">India</option>
+            <option value="CN">China</option>
+          </select>
+        </div>
+        <div>
+          <label for="destination">Destination</label>
+          <select id="destination">
+            <option value="" disabled selected>Select Destination...</option>
+            <option value="US">United States</option>
+            <option value="UK">United Kingdom</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="NZ">New Zealand</option>
+            <option value="EU">Schengen Area</option>
+            <option value="JP">Japan</option>
+            <option value="MX">Mexico</option>
+            <option value="TH">Thailand</option>
+            <option value="VN">Vietnam</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="check-btn">Check Visa Requirements</button>
+
+      <div id="result-box" class="result-box">
+        <div id="result-status" class="result-status"></div>
+        <div id="result-duration" class="result-duration"></div>
+        <div id="result-notes" class="result-notes"></div>
+        <div class="copy-container">
+          <button id="copy-btn" class="secondary">Copy Result</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Understanding Visa Requirements</h2>
+      <p>Visa requirements determine whether you need pre-approval to enter a foreign country, how long you can stay, and what activities you are permitted to do while there. It is crucial to verify your visa status before booking any travel, as boarding may be denied if you don't hold the correct entry authorization.</p>
+
+      <h2>Types of Entry Authorizations</h2>
+      <ul>
+        <li><strong>Visa-Free:</strong> You can travel to the destination with just your valid passport. Upon arrival, an immigration officer will grant you entry for a specified number of days (e.g., 30, 90, or 180 days).</li>
+        <li><strong>Electronic Travel Authorization (eTA / ESTA / ETIAS):</strong> A pre-screening system for visa-exempt travelers. It is generally quick to obtain online but is mandatory before boarding your flight.</li>
+        <li><strong>e-Visa:</strong> An electronic visa applied for and issued online prior to travel. You'll typically receive a document to print and present at the border.</li>
+        <li><strong>Visa Required (Sticker/Consular Visa):</strong> A traditional visa applied for at an embassy or consulate, which is affixed to a page in your passport.</li>
+      </ul>
+
+      <h2>Important Considerations for Digital Nomads</h2>
+      <p>Standard tourist visas and visa-free entries generally do not permit local employment. If you intend to work for local companies, you will need a work visa. Digital nomads working remotely for foreign clients or employers should check if their destination offers a specific Digital Nomad Visa (DNV) to ensure full legal compliance, particularly for longer stays.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Simplified, hardcoded mock database for offline functionality
+    const visaRules = {
+      // US Passport
+      "US-US": { status: "Home", duration: "Unlimited", type: "visa-free", notes: "Right of abode." },
+      "US-UK": { status: "Visa-Free", duration: "Up to 6 months", type: "visa-free", notes: "eTA required starting late 2024/2025." },
+      "US-CA": { status: "Visa-Free", duration: "Up to 6 months", type: "visa-free", notes: "No eTA required if entering by land/sea, required if flying." },
+      "US-AU": { status: "ETA Required", duration: "Up to 90 days", type: "evisa", notes: "Subclass 601 ETA required." },
+      "US-NZ": { status: "NZeTA Required", duration: "Up to 3 months", type: "evisa", notes: "NZeTA required before travel." },
+      "US-EU": { status: "Visa-Free", duration: "90 days within any 180-day period", type: "visa-free", notes: "ETIAS will be required starting mid-2025." },
+      "US-JP": { status: "Visa-Free", duration: "Up to 90 days", type: "visa-free", notes: "For tourism or business purposes." },
+      "US-MX": { status: "Visa-Free", duration: "Up to 180 days", type: "visa-free", notes: "Forma Migratoria Múltiple (FMM) may be required." },
+      "US-TH": { status: "Visa Exemption", duration: "Up to 30 days", type: "visa-free", notes: "Can be extended once for an additional 30 days." },
+      "US-VN": { status: "e-Visa", duration: "Up to 90 days", type: "evisa", notes: "Multiple entry e-visa available online." },
+
+      // UK Passport
+      "UK-UK": { status: "Home", duration: "Unlimited", type: "visa-free", notes: "Right of abode." },
+      "UK-US": { status: "ESTA Required", duration: "Up to 90 days", type: "evisa", notes: "Visa Waiver Program (VWP)." },
+      "UK-EU": { status: "Visa-Free", duration: "90 days within any 180-day period", type: "visa-free", notes: "Post-Brexit rules apply. ETIAS required mid-2025." },
+      "UK-AU": { status: "eVisitor Required", duration: "Up to 90 days", type: "evisa", notes: "Subclass 651 eVisitor required." },
+
+      // EU Passport (Schengen generally)
+      "EU-EU": { status: "Freedom of Movement", duration: "Unlimited", type: "visa-free", notes: "Right to live and work." },
+      "EU-US": { status: "ESTA Required", duration: "Up to 90 days", type: "evisa", notes: "Applies to most EU countries." },
+      "EU-UK": { status: "Visa-Free", duration: "Up to 6 months", type: "visa-free", notes: "eTA required starting mid-2025." },
+
+      // India Passport
+      "IN-US": { status: "Visa Required", duration: "Varies", type: "visa-required", notes: "B1/B2 visa required." },
+      "IN-UK": { status: "Visa Required", duration: "Varies", type: "visa-required", notes: "Standard Visitor Visa required." },
+      "IN-EU": { status: "Visa Required", duration: "Varies", type: "visa-required", notes: "Schengen Visa required." },
+      "IN-TH": { status: "Visa Exemption / VOA", duration: "Up to 30 days", type: "visa-free", notes: "Temporary visa exemption active." },
+
+      // Generic Default Fallbacks
+      "default-visa-required": { status: "Visa Required", duration: "Varies depending on embassy approval", type: "visa-required", notes: "Apply at the destination's embassy or consulate prior to travel." }
+    };
+
+    const passportSelect = document.getElementById('passport');
+    const destinationSelect = document.getElementById('destination');
+    const checkBtn = document.getElementById('check-btn');
+    const resultBox = document.getElementById('result-box');
+    const resultStatus = document.getElementById('result-status');
+    const resultDuration = document.getElementById('result-duration');
+    const resultNotes = document.getElementById('result-notes');
+    const copyBtn = document.getElementById('copy-btn');
+
+    checkBtn.addEventListener('click', () => {
+      const p = passportSelect.value;
+      const d = destinationSelect.value;
+
+      if (!p || !d) {
+        alert("Please select both your passport and destination.");
+        return;
+      }
+
+      if (p === d) {
+        displayResult({ status: "Home Country", duration: "Unlimited", type: "visa-free", notes: "You hold the passport of this country." });
+        return;
+      }
+
+      const key = `${p}-${d}`;
+      const rule = visaRules[key] || visaRules["default-visa-required"];
+
+      displayResult(rule);
+    });
+
+    function displayResult(rule) {
+      resultStatus.textContent = rule.status;
+      resultStatus.className = `result-status ${rule.type}`;
+
+      resultDuration.textContent = rule.duration;
+      resultNotes.textContent = rule.notes;
+
+      resultBox.classList.add('active');
+    }
+
+    copyBtn.addEventListener('click', () => {
+      const pText = passportSelect.options[passportSelect.selectedIndex].text;
+      const dText = destinationSelect.options[destinationSelect.selectedIndex].text;
+
+      const textToCopy = `Visa Requirements: ${pText} Passport to ${dText}\n` +
+                         `Status: ${resultStatus.textContent}\n` +
+                         `Duration: ${resultDuration.textContent}\n` +
+                         `Notes: ${resultNotes.textContent}`;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+</body>
+</html>
