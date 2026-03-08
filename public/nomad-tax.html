@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Nomad Tax Estimator | Migrating Mammals</title>
+  <meta name="description" content="Free offline digital nomad tax estimator. Calculate your potential tax obligations based on residency, income sources, and countries visited.">
+  <meta property="og:title" content="Digital Nomad Tax Estimator">
+  <meta property="og:description" content="Estimate tax obligations for digital nomads based on residency, income, and travel history. Works fully offline.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Digital Nomad Tax Estimator",
+    "url": "https://migratingmammals.com/nomad-tax.html",
+    "description": "Estimate your potential tax obligations as a digital nomad based on residency, income, and travel.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .help-text {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      margin-top: -4px;
+    }
+
+    input[type="number"], input[type="text"], select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      font-size: 1rem;
+    }
+
+    input[type="number"]:focus, input[type="text"]:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    .input-with-symbol {
+      position: relative;
+    }
+
+    .input-with-symbol .symbol {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    .input-with-symbol input {
+      padding-left: 32px;
+    }
+
+    /* Dynamic Countries List */
+    .country-list {
+      margin-bottom: 24px;
+    }
+
+    .country-item {
+      display: grid;
+      grid-template-columns: 2fr 1fr auto;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .btn-remove {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      width: auto;
+      padding: 8px 12px;
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-remove:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .btn-add {
+      background: var(--bg);
+      color: var(--text-primary);
+      border: 1px dashed var(--border);
+      width: 100%;
+      margin-top: 8px;
+      margin-bottom: 24px;
+    }
+
+    .btn-add:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Results */
+    .results-container {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-top: 32px;
+      position: relative;
+      display: none;
+    }
+
+    .results-container.active {
+      display: block;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .results-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .result-group {
+      margin-bottom: 20px;
+    }
+
+    .result-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .result-value {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .result-value.danger { color: var(--danger); }
+    .result-value.warning { color: var(--warning); }
+    .result-value.success { color: var(--success); }
+
+    .result-detail {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .warning-box {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--warning);
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .warning-box strong {
+      color: var(--warning);
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: auto;
+    }
+
+    .copy-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .country-item {
+        grid-template-columns: 1fr 1fr;
+      }
+      .country-item .btn-remove {
+        grid-column: span 2;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Digital Nomad Tax Estimator</h1>
+      <p class="subtitle">Estimate your tax residency status and potential obligations based on your income and travel history. 100% private, works offline.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="income">Annual Income (USD)</label>
+          <div class="input-with-symbol">
+            <span class="symbol">$</span>
+            <input type="number" id="income" value="50000" min="0" step="1000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="home-country">Primary Tax Residency (Home Country)</label>
+          <select id="home-country">
+            <option value="US">United States (Taxes worldwide income)</option>
+            <option value="UK">United Kingdom</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="EU">European Union (General)</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Countries Visited This Year</label>
+        <span class="help-text">Enter the countries you've visited and the number of days spent in each. (Spending 183+ days usually triggers tax residency).</span>
+
+        <div id="countries-list" class="country-list">
+          <!-- Dynamically populated -->
+        </div>
+
+        <button type="button" class="btn-add" id="add-country-btn">+ Add Another Country</button>
+      </div>
+
+      <button id="calculate-btn">Calculate Estimates</button>
+
+      <div class="results-container" id="results-container">
+        <div class="results-header">
+          <div class="results-title">Tax Status Estimate</div>
+          <button class="copy-btn" id="copy-btn">Copy Summary</button>
+        </div>
+
+        <div class="result-group">
+          <div class="result-label">Home Country Tax Obligation</div>
+          <div class="result-value" id="res-home-status">Likely Resident</div>
+          <div class="result-detail" id="res-home-detail">Based on your selection, you are likely required to file taxes here.</div>
+        </div>
+
+        <div class="result-group">
+          <div class="result-label">New Tax Residencies Triggered (183+ Days)</div>
+          <div class="result-value" id="res-triggered-count">0</div>
+          <div class="result-detail" id="res-triggered-detail">Countries where you've spent 183 days or more.</div>
+        </div>
+
+        <div class="result-group">
+          <div class="result-label">Estimated Effective Tax Rate (Simplified)</div>
+          <div class="result-value" id="res-tax-rate">0%</div>
+          <div class="result-detail" id="res-tax-amount">Estimated liability: $0</div>
+        </div>
+
+        <div class="warning-box" id="warning-box">
+          <strong>Disclaimer:</strong> This is a highly simplified estimation tool for informational purposes only. International tax law is complex, and rules vary wildly by jurisdiction, visa type, and double taxation treaties. Always consult a qualified tax professional regarding your specific situation.
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Understanding Digital Nomad Taxes</h2>
+      <p>One of the biggest misconceptions among digital nomads is that living out of a suitcase means you don't owe taxes anywhere. Unfortunately, this is rarely true. Most countries determine tax residency based on physical presence, commonly using the <strong>183-day rule</strong>. If you spend 183 days or more in a single country during a 12-month period, you are typically considered a tax resident of that country and may be liable to pay taxes on your local or worldwide income.</p>
+
+      <p>Furthermore, if you are a citizen of the United States or Eritrea, your home country taxes you based on citizenship, not residency. This means you must file taxes no matter where you live in the world, though programs like the Foreign Earned Income Exclusion (FEIE) can help mitigate double taxation.</p>
+
+      <h2>Tax Residency vs. Tourist Visas</h2>
+      <p>Working remotely while on a tourist visa sits in a legal gray area in many countries. While immigration laws (tourist visas) and tax laws are often handled by different government departments, working locally—even for a foreign employer—can technically violate the terms of a standard tourist visa. Many countries are now introducing specific Digital Nomad Visas to bridge this gap, offering clear legal status and often defining specific tax obligations or exemptions for remote workers.</p>
+
+      <h2>Why Use This Tool?</h2>
+      <p>Our Digital Nomad Tax Estimator is designed to help you visualize your potential tax liabilities based on your travel schedule. By tracking how many days you spend in various countries, you can quickly see if you are approaching the threshold that might trigger tax residency. Because this tool runs completely offline in your browser, your income and travel data remain strictly private and are never sent to a server.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Simplified base tax rates for estimation
+    const baseRates = {
+      "US": 0.22,
+      "UK": 0.20,
+      "CA": 0.25,
+      "AU": 0.30,
+      "EU": 0.25,
+      "OTHER": 0.20
+    };
+
+    const countriesList = document.getElementById('countries-list');
+    const addCountryBtn = document.getElementById('add-country-btn');
+    const calculateBtn = document.getElementById('calculate-btn');
+    const resultsContainer = document.getElementById('results-container');
+    const copyBtn = document.getElementById('copy-btn');
+
+    let countryCount = 0;
+
+    function addCountryRow(name = '', days = 0) {
+      countryCount++;
+      const id = countryCount;
+
+      const div = document.createElement('div');
+      div.className = 'country-item';
+      div.id = `country-row-${id}`;
+
+      div.innerHTML = `
+        <input type="text" placeholder="Country Name" class="country-name" value="${name}">
+        <div class="input-with-symbol">
+          <input type="number" placeholder="Days" class="country-days" value="${days}" min="0" max="365">
+        </div>
+        <button type="button" class="btn-remove" onclick="removeCountryRow(${id})">Remove</button>
+      `;
+
+      countriesList.appendChild(div);
+    }
+
+    window.removeCountryRow = function(id) {
+      const row = document.getElementById(`country-row-${id}`);
+      if (row) {
+        row.remove();
+      }
+    };
+
+    // Initialize with one empty row
+    addCountryRow('Thailand', 30);
+    addCountryRow('Spain', 100);
+
+    addCountryBtn.addEventListener('click', () => {
+      addCountryRow();
+    });
+
+    function calculateTaxes() {
+      const income = parseFloat(document.getElementById('income').value) || 0;
+      const homeCountry = document.getElementById('home-country').value;
+
+      const rows = document.querySelectorAll('.country-item');
+      let totalDays = 0;
+      let triggeredCountries = [];
+
+      rows.forEach(row => {
+        const name = row.querySelector('.country-name').value.trim();
+        const days = parseInt(row.querySelector('.country-days').value) || 0;
+
+        if (name && days > 0) {
+          totalDays += days;
+          if (days >= 183) {
+            triggeredCountries.push(name);
+          }
+        }
+      });
+
+      // Update Results UI
+      const resHomeStatus = document.getElementById('res-home-status');
+      const resHomeDetail = document.getElementById('res-home-detail');
+      const resTriggeredCount = document.getElementById('res-triggered-count');
+      const resTriggeredDetail = document.getElementById('res-triggered-detail');
+      const resTaxRate = document.getElementById('res-tax-rate');
+      const resTaxAmount = document.getElementById('res-tax-amount');
+
+      // Home Country Logic
+      if (homeCountry === 'US') {
+        resHomeStatus.textContent = 'Yes (Worldwide Income)';
+        resHomeStatus.className = 'result-value warning';
+        resHomeDetail.textContent = 'The US taxes based on citizenship. You must file regardless of where you live, though exclusions (FEIE) may apply.';
+      } else {
+        if (totalDays > 330) {
+          resHomeStatus.textContent = 'Possibly Non-Resident';
+          resHomeStatus.className = 'result-value success';
+          resHomeDetail.textContent = 'You spent most of the year abroad. You may qualify as a non-tax resident in your home country (check local ties rules).';
+        } else {
+          resHomeStatus.textContent = 'Likely Resident';
+          resHomeStatus.className = 'result-value warning';
+          resHomeDetail.textContent = 'You spent significant time in your home country or haven\'t broken ties. You likely owe tax there.';
+        }
+      }
+
+      // Triggered Residencies
+      if (triggeredCountries.length > 0) {
+        resTriggeredCount.textContent = triggeredCountries.length;
+        resTriggeredCount.className = 'result-value danger';
+        resTriggeredDetail.textContent = `You spent 183+ days in: ${triggeredCountries.join(', ')}. You are likely a tax resident there.`;
+      } else {
+        resTriggeredCount.textContent = 'None';
+        resTriggeredCount.className = 'result-value success';
+        resTriggeredDetail.textContent = 'You did not spend 183+ days in any single foreign country.';
+      }
+
+      // Simplified Tax Math
+      let effectiveRate = baseRates[homeCountry] || 0.20;
+      // If triggered a foreign residency, assume higher rate or double taxation risk
+      if (triggeredCountries.length > 0 && homeCountry === 'US') {
+        effectiveRate = Math.max(effectiveRate, 0.25);
+      } else if (triggeredCountries.length > 0) {
+        effectiveRate = 0.25; // Assume foreign rate
+      } else if (homeCountry !== 'US' && totalDays > 330) {
+        effectiveRate = 0; // Digital nomad with no tax residency
+      }
+
+      const estimatedTax = income * effectiveRate;
+
+      resTaxRate.textContent = `${(effectiveRate * 100).toFixed(1)}%`;
+      if (effectiveRate === 0) resTaxRate.className = 'result-value success';
+      else resTaxRate.className = 'result-value';
+
+      resTaxAmount.textContent = `Estimated liability: $${estimatedTax.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+
+      resultsContainer.classList.add('active');
+    }
+
+    calculateBtn.addEventListener('click', calculateTaxes);
+
+    copyBtn.addEventListener('click', () => {
+      const income = document.getElementById('income').value;
+      const homeCountry = document.getElementById('home-country').options[document.getElementById('home-country').selectedIndex].text;
+
+      const status = document.getElementById('res-home-status').textContent;
+      const triggered = document.getElementById('res-triggered-count').textContent;
+      const detail = document.getElementById('res-triggered-detail').textContent;
+      const rate = document.getElementById('res-tax-rate').textContent;
+      const amount = document.getElementById('res-tax-amount').textContent;
+
+      const summary = `Digital Nomad Tax Estimate
+--------------------------
+Income: $${income}
+Home Country: ${homeCountry}
+Home Tax Status: ${status}
+New Residencies Triggered: ${triggered} (${detail})
+Estimated Effective Rate: ${rate}
+${amount}
+
+*Disclaimer: Simplified estimation only. Consult a tax professional.*`;
+
+      navigator.clipboard.writeText(summary).then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
