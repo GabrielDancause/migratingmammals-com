@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distance Calculator | Migrating Mammals</title>
+  <meta name="description" content="Calculate the distance between two locations in kilometers and miles. Get driving time estimates. Works offline.">
+  <meta property="og:title" content="Distance Calculator | Migrating Mammals">
+  <meta property="og:description" content="Calculate the distance between two locations in kilometers and miles. Get driving time estimates.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Distance Calculator",
+    "url": "https://migratingmammals.com/distance-calculator.html",
+    "description": "Calculate the distance between two locations in kilometers and miles. Get driving time estimates.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select, input[type="text"], input[type="number"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus, input[type="number"]:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    .row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    .row > button {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    /* Input mode switcher */
+    .input-mode-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .mode-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      width: auto;
+      transition: all 0.2s;
+    }
+    .mode-tab.active {
+      background: rgba(196, 149, 106, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .input-section {
+      display: none;
+    }
+    .input-section.active {
+      display: block;
+    }
+
+    .coord-inputs {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Swap button */
+    .swap-container {
+      display: flex;
+      justify-content: center;
+      margin: 16px 0;
+    }
+    .swap-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+    .swap-btn:hover {
+      background: var(--border);
+      color: var(--text-primary);
+    }
+
+    /* Results */
+    .results-container {
+      margin-top: 32px;
+      padding: 24px;
+      background: rgba(196, 149, 106, 0.05);
+      border: 1px solid rgba(196, 149, 106, 0.2);
+      border-radius: 8px;
+      display: none;
+    }
+    .results-container.active {
+      display: block;
+    }
+
+    .result-title {
+      color: var(--accent);
+      font-weight: bold;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .copy-btn {
+      width: auto;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .drive-time {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .drive-time-icon {
+      font-size: 1.5rem;
+    }
+    .drive-time-details {
+      flex: 1;
+    }
+    .drive-time-value {
+      font-family: var(--font-mono);
+      font-weight: bold;
+      color: var(--text-primary);
+    }
+    .drive-time-note {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    .speed-control {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .speed-control input {
+      width: 80px;
+      padding: 6px 10px;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .result-stats {
+        grid-template-columns: 1fr;
+      }
+      .coord-inputs {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Distance Calculator</h1>
+      <p class="subtitle">Quickly calculate the distance and estimated driving time between two locations or coordinate points. 100% offline.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="input-mode-tabs">
+        <button class="mode-tab active" data-mode="cities">Major Cities</button>
+        <button class="mode-tab" data-mode="coords">Coordinates (Lat/Lng)</button>
+      </div>
+
+      <!-- Cities Mode -->
+      <div id="section-cities" class="input-section active">
+        <div class="form-group">
+          <label for="city-from">Origin</label>
+          <select id="city-from">
+            <option value="">Select a city...</option>
+          </select>
+        </div>
+
+        <div class="swap-container">
+          <button class="swap-btn" id="swap-cities" title="Swap locations">↕</button>
+        </div>
+
+        <div class="form-group">
+          <label for="city-to">Destination</label>
+          <select id="city-to">
+            <option value="">Select a city...</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Coordinates Mode -->
+      <div id="section-coords" class="input-section">
+        <div class="form-group">
+          <label>Origin</label>
+          <div class="coord-inputs">
+            <input type="number" id="lat-from" placeholder="Latitude (e.g., 40.7128)" step="any">
+            <input type="number" id="lng-from" placeholder="Longitude (e.g., -74.0060)" step="any">
+          </div>
+        </div>
+
+        <div class="swap-container">
+          <button class="swap-btn" id="swap-coords" title="Swap coordinates">↕</button>
+        </div>
+
+        <div class="form-group">
+          <label>Destination</label>
+          <div class="coord-inputs">
+            <input type="number" id="lat-to" placeholder="Latitude (e.g., 51.5074)" step="any">
+            <input type="number" id="lng-to" placeholder="Longitude (e.g., -0.1278)" step="any">
+          </div>
+        </div>
+      </div>
+
+      <button id="calculate-btn">Calculate Distance</button>
+
+      <div class="results-container" id="results">
+        <div class="result-title">
+          <span>Distance Results</span>
+          <button class="copy-btn" id="copy-btn">Copy Details</button>
+        </div>
+
+        <div class="result-stats">
+          <div class="stat-box">
+            <div class="stat-value" id="dist-km">--</div>
+            <div class="stat-label">Kilometers (km)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="dist-mi">--</div>
+            <div class="stat-label">Miles (mi)</div>
+          </div>
+        </div>
+
+        <div class="drive-time">
+          <div class="drive-time-icon">🚗</div>
+          <div class="drive-time-details">
+            <div class="drive-time-value" id="time-estimate">--</div>
+            <div class="drive-time-note">Estimated non-stop driving time (great-circle route)</div>
+          </div>
+        </div>
+
+        <div class="speed-control">
+          <label for="avg-speed">Avg. Speed:</label>
+          <input type="number" id="avg-speed" value="80" min="1" max="300">
+          <span id="speed-unit">km/h</span>
+        </div>
+      </div>
+
+      <div id="error-msg" style="display: none; padding: 16px; border-radius: 8px; margin-top: 24px; font-size: 0.95rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5;">
+        Please enter valid locations or coordinates to calculate distance.
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>How Distance is Calculated</h2>
+      <p>This tool uses the <strong>Haversine formula</strong> to calculate the great-circle distance between two points on the Earth's surface. This is the shortest distance over the earth's surface, giving an "as the crow flies" measurement.</p>
+      <p>Because the Earth is a sphere (or closely approximated as one), calculating the straight-line distance requires spherical trigonometry. The Haversine formula accounts for the curvature of the Earth, providing an accurate measure of distance between any two global coordinates.</p>
+
+      <h2>Driving Time Estimates</h2>
+      <p>The estimated driving time provided is based on the straight-line (great-circle) distance and a default average speed (which you can adjust). Please keep the following in mind:</p>
+      <ul>
+        <li><strong>Straight-Line vs. Road Distance:</strong> Roads rarely go in a perfectly straight line. Actual driving distances are typically 15% to 30% longer than the straight-line distance, depending on geography and road infrastructure.</li>
+        <li><strong>Speed Variability:</strong> The default speed assumes highway driving. Your actual average speed will be lower due to traffic, rest stops, city driving, and speed limits.</li>
+        <li><strong>No Routing Data:</strong> Since this tool works entirely offline and client-side, it does not use routing APIs (like Google Maps) to determine actual roads, ferries, or natural obstacles like oceans and mountains.</li>
+      </ul>
+
+      <h2>Why Use an Offline Distance Calculator?</h2>
+      <p>Whether you're planning a trip while on a flight with no Wi-Fi, plotting coordinates in a remote location, or simply need a fast, privacy-respecting tool that doesn't send your data to third-party servers, an offline calculator is invaluable. By processing all calculations directly in your browser using JavaScript, your location data never leaves your device.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // Database of major cities with coordinates
+    const cities = [
+      { name: "Amsterdam, Netherlands", lat: 52.3676, lng: 4.9041 },
+      { name: "Athens, Greece", lat: 37.9838, lng: 23.7275 },
+      { name: "Auckland, New Zealand", lat: -36.8485, lng: 174.7633 },
+      { name: "Bangkok, Thailand", lat: 13.7563, lng: 100.5018 },
+      { name: "Barcelona, Spain", lat: 41.3851, lng: 2.1734 },
+      { name: "Beijing, China", lat: 39.9042, lng: 116.4074 },
+      { name: "Berlin, Germany", lat: 52.5200, lng: 13.4050 },
+      { name: "Buenos Aires, Argentina", lat: -34.6037, lng: -58.3816 },
+      { name: "Cairo, Egypt", lat: 30.0444, lng: 31.2357 },
+      { name: "Cape Town, South Africa", lat: -33.9249, lng: 18.4241 },
+      { name: "Chicago, USA", lat: 41.8781, lng: -87.6298 },
+      { name: "Denver, USA", lat: 39.7392, lng: -104.9903 },
+      { name: "Dubai, UAE", lat: 25.2048, lng: 55.2708 },
+      { name: "Hong Kong", lat: 22.3193, lng: 114.1694 },
+      { name: "Istanbul, Turkey", lat: 41.0082, lng: 28.9784 },
+      { name: "Jakarta, Indonesia", lat: -6.2088, lng: 106.8456 },
+      { name: "Johannesburg, South Africa", lat: -26.2041, lng: 28.0473 },
+      { name: "Lisbon, Portugal", lat: 38.7223, lng: -9.1393 },
+      { name: "London, UK", lat: 51.5074, lng: -0.1278 },
+      { name: "Los Angeles, USA", lat: 34.0522, lng: -118.2437 },
+      { name: "Madrid, Spain", lat: 40.4168, lng: -3.7038 },
+      { name: "Melbourne, Australia", lat: -37.8136, lng: 144.9631 },
+      { name: "Mexico City, Mexico", lat: 19.4326, lng: -99.1332 },
+      { name: "Miami, USA", lat: 25.7617, lng: -80.1918 },
+      { name: "Mumbai, India", lat: 19.0760, lng: 72.8777 },
+      { name: "New York City, USA", lat: 40.7128, lng: -74.0060 },
+      { name: "Paris, France", lat: 48.8566, lng: 2.3522 },
+      { name: "Rio de Janeiro, Brazil", lat: -22.9068, lng: -43.1729 },
+      { name: "Rome, Italy", lat: 41.9028, lng: 12.4964 },
+      { name: "San Francisco, USA", lat: 37.7749, lng: -122.4194 },
+      { name: "São Paulo, Brazil", lat: -23.5505, lng: -46.6333 },
+      { name: "Seoul, South Korea", lat: 37.5665, lng: 126.9780 },
+      { name: "Shanghai, China", lat: 31.2304, lng: 121.4737 },
+      { name: "Singapore", lat: 1.3521, lng: 103.8198 },
+      { name: "Sydney, Australia", lat: -33.8688, lng: 151.2093 },
+      { name: "Tokyo, Japan", lat: 35.6762, lng: 139.6503 },
+      { name: "Toronto, Canada", lat: 43.6510, lng: -79.3470 },
+      { name: "Vancouver, Canada", lat: 49.2827, lng: -123.1207 },
+      { name: "Vienna, Austria", lat: 48.2082, lng: 16.3738 }
+    ];
+
+    // DOM Elements
+    const modeTabs = document.querySelectorAll('.mode-tab');
+    const inputSections = document.querySelectorAll('.input-section');
+    const cityFromSelect = document.getElementById('city-from');
+    const cityToSelect = document.getElementById('city-to');
+
+    const latFromInput = document.getElementById('lat-from');
+    const lngFromInput = document.getElementById('lng-from');
+    const latToInput = document.getElementById('lat-to');
+    const lngToInput = document.getElementById('lng-to');
+
+    const swapCitiesBtn = document.getElementById('swap-cities');
+    const swapCoordsBtn = document.getElementById('swap-coords');
+
+    const calcBtn = document.getElementById('calculate-btn');
+    const resultsContainer = document.getElementById('results');
+    const errorMsg = document.getElementById('error-msg');
+
+    const distKmEl = document.getElementById('dist-km');
+    const distMiEl = document.getElementById('dist-mi');
+    const timeEstimateEl = document.getElementById('time-estimate');
+    const avgSpeedInput = document.getElementById('avg-speed');
+    const speedUnitEl = document.getElementById('speed-unit');
+    const copyBtn = document.getElementById('copy-btn');
+
+    // State
+    let currentMode = 'cities'; // 'cities' or 'coords'
+    let lastDistanceKm = 0;
+
+    // Init
+    function init() {
+      // Populate city dropdowns
+      cities.sort((a, b) => a.name.localeCompare(b.name)).forEach((city, index) => {
+        const option1 = new Option(city.name, index);
+        const option2 = new Option(city.name, index);
+        cityFromSelect.add(option1);
+        cityToSelect.add(option2);
+      });
+
+      // Load saved state
+      try {
+        const savedMode = localStorage.getItem('dist-calc-mode');
+        if (savedMode) switchMode(savedMode);
+      } catch (e) {}
+    }
+
+    // Mode Switching
+    modeTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        switchMode(tab.dataset.mode);
+      });
+    });
+
+    function switchMode(mode) {
+      currentMode = mode;
+
+      modeTabs.forEach(t => t.classList.remove('active'));
+      document.querySelector(`.mode-tab[data-mode="${mode}"]`).classList.add('active');
+
+      inputSections.forEach(s => s.classList.remove('active'));
+      document.getElementById(`section-${mode}`).classList.add('active');
+
+      try { localStorage.setItem('dist-calc-mode', mode); } catch (e) {}
+    }
+
+    // Swaps
+    swapCitiesBtn.addEventListener('click', () => {
+      const temp = cityFromSelect.value;
+      cityFromSelect.value = cityToSelect.value;
+      cityToSelect.value = temp;
+      if (resultsContainer.classList.contains('active')) calculate();
+    });
+
+    swapCoordsBtn.addEventListener('click', () => {
+      const tempLat = latFromInput.value;
+      const tempLng = lngFromInput.value;
+
+      latFromInput.value = latToInput.value;
+      lngFromInput.value = lngToInput.value;
+
+      latToInput.value = tempLat;
+      lngToInput.value = tempLng;
+
+      if (resultsContainer.classList.contains('active')) calculate();
+    });
+
+    // Haversine formula
+    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radius of the earth in km
+      const dLat = deg2rad(lat2 - lat1);
+      const dLon = deg2rad(lon2 - lon1);
+      const a =
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      const d = R * c; // Distance in km
+      return d;
+    }
+
+    function deg2rad(deg) {
+      return deg * (Math.PI/180);
+    }
+
+    // Formatting
+    function formatNumber(num) {
+      return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(num);
+    }
+
+    function updateTimeEstimate() {
+      if (!lastDistanceKm) return;
+
+      const speedKmh = parseFloat(avgSpeedInput.value);
+      if (isNaN(speedKmh) || speedKmh <= 0) return;
+
+      const hours = lastDistanceKm / speedKmh;
+
+      const h = Math.floor(hours);
+      const m = Math.round((hours - h) * 60);
+
+      let timeStr = "";
+      if (h > 0) timeStr += `${h} hr `;
+      if (m > 0 || h === 0) timeStr += `${m} min`;
+
+      timeEstimateEl.textContent = timeStr;
+    }
+
+    // Calculate action
+    function calculate() {
+      let lat1, lng1, lat2, lng2;
+      let name1 = "Origin", name2 = "Destination";
+
+      errorMsg.style.display = 'none';
+
+      if (currentMode === 'cities') {
+        const idx1 = cityFromSelect.value;
+        const idx2 = cityToSelect.value;
+
+        if (idx1 === "" || idx2 === "") {
+          errorMsg.style.display = 'block';
+          resultsContainer.classList.remove('active');
+          return;
+        }
+
+        lat1 = cities[idx1].lat;
+        lng1 = cities[idx1].lng;
+        name1 = cities[idx1].name;
+
+        lat2 = cities[idx2].lat;
+        lng2 = cities[idx2].lng;
+        name2 = cities[idx2].name;
+
+      } else {
+        lat1 = parseFloat(latFromInput.value);
+        lng1 = parseFloat(lngFromInput.value);
+        lat2 = parseFloat(latToInput.value);
+        lng2 = parseFloat(lngToInput.value);
+
+        if (isNaN(lat1) || isNaN(lng1) || isNaN(lat2) || isNaN(lng2)) {
+          errorMsg.style.display = 'block';
+          resultsContainer.classList.remove('active');
+          return;
+        }
+        name1 = `${lat1}, ${lng1}`;
+        name2 = `${lat2}, ${lng2}`;
+      }
+
+      const distKm = getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2);
+      const distMi = distKm * 0.621371;
+
+      lastDistanceKm = distKm;
+
+      window.currentOriginName = name1;
+      window.currentDestinationName = name2;
+
+      distKmEl.textContent = formatNumber(distKm);
+      distMiEl.textContent = formatNumber(distMi);
+
+      updateTimeEstimate();
+
+      resultsContainer.classList.add('active');
+    }
+
+    calcBtn.addEventListener('click', calculate);
+    avgSpeedInput.addEventListener('input', updateTimeEstimate);
+
+    // Enter key submits
+    [latFromInput, lngFromInput, latToInput, lngToInput].forEach(el => {
+      el.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') calculate();
+      });
+    });
+
+    copyBtn.addEventListener('click', () => {
+      if (resultsContainer.classList.contains('active')) {
+        const resultText = `Distance from ${window.currentOriginName} to ${window.currentDestinationName}:\n` +
+          `• ${distKmEl.textContent} km\n` +
+          `• ${distMiEl.textContent} miles\n` +
+          `• Est. Drive Time: ${timeEstimateEl.textContent} (at ${avgSpeedInput.value} km/h)`;
+
+        navigator.clipboard.writeText(resultText).then(() => {
+          const originalText = copyBtn.innerText;
+          copyBtn.innerText = 'Copied!';
+          setTimeout(() => { copyBtn.innerText = originalText; }, 2000);
+        });
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>
