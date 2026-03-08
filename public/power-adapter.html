@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Power Adapter Guide & Calculator | Migrating Mammals</title>
+  <meta name="description" content="Check plug types, voltage, and frequency by country. Instantly know if you need a travel power adapter or voltage converter for your next trip.">
+  <meta property="og:title" content="Travel Power Adapter Guide & Calculator">
+  <meta property="og:description" content="Find the right plug adapter and voltage for any country. Works offline.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Travel Power Adapter Guide & Calculator",
+    "url": "https://migratingmammals.com/power-adapter.html",
+    "description": "Determine the necessary power adapters, plug types, and voltage converters for international travel.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      font-size: 1rem;
+      appearance: none;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    .converter-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .swap-btn {
+      background: var(--bg);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      height: 48px;
+    }
+
+    .swap-btn:hover {
+      border-color: var(--accent);
+      background: var(--border);
+    }
+
+    .swap-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    button.copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
+    button.copy-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* Results */
+    .results-container {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-top: 32px;
+      position: relative;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-sub {
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .alert {
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 16px;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    .alert-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert.danger {
+      background: rgba(239, 68, 68, 0.05);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .alert.danger .alert-title { color: var(--danger); }
+
+    .alert.warning {
+      background: rgba(245, 158, 11, 0.05);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    .alert.warning .alert-title { color: var(--warning); }
+
+    .alert.success {
+      background: rgba(34, 197, 94, 0.05);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+    .alert.success .alert-title { color: var(--success); }
+
+    .plugs-display {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .plug-badge {
+      background: var(--border);
+      color: var(--text-primary);
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .converter-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .swap-btn {
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Power Adapter Guide</h1>
+      <p class="subtitle">Select your home country and destination to see if you need a plug adapter or voltage converter. Works completely offline.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="converter-row">
+        <div>
+          <label for="from-country">Your Devices Are From</label>
+          <select id="from-country"></select>
+        </div>
+
+        <button class="swap-btn" id="swap-btn" aria-label="Swap Countries" title="Swap Countries">
+          <svg viewBox="0 0 24 24">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"></path>
+          </svg>
+        </button>
+
+        <div>
+          <label for="to-country">Traveling To</label>
+          <select id="to-country"></select>
+        </div>
+      </div>
+
+      <div class="results-container" id="results-container">
+        <button class="copy-btn" id="copy-btn">Copy Info</button>
+
+        <div class="results-grid">
+          <div class="stat-box">
+            <div class="stat-label">Destination Plugs</div>
+            <div class="plugs-display" id="dest-plugs"></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Voltage & Frequency</div>
+            <div class="stat-value" id="dest-voltage">230V</div>
+            <div class="stat-sub" id="dest-frequency">50Hz</div>
+          </div>
+        </div>
+
+        <div id="adapter-alert" class="alert">
+          <div class="alert-title" id="adapter-title">Checking adapters...</div>
+          <div id="adapter-desc"></div>
+        </div>
+
+        <div id="voltage-alert" class="alert">
+          <div class="alert-title" id="voltage-title">Checking voltage...</div>
+          <div id="voltage-desc"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Do I Need a Travel Adapter?</h2>
+      <p>A <strong>travel plug adapter</strong> is a simple device that changes the shape of your plug to fit into an outlet in another country. It does not change the electrical voltage. The world uses over 15 different types of electrical outlets, designated by letters A through O.</p>
+      <p>Our tool compares the plug types common in your home country with those used at your destination to determine if your devices will physically plug into the wall.</p>
+
+      <h2>Adapters vs. Voltage Converters</h2>
+      <p>It's crucial to understand the difference between an adapter and a voltage converter:</p>
+      <ul>
+        <li><strong>Adapters:</strong> Only change the pin configuration so your plug fits the wall socket.</li>
+        <li><strong>Voltage Converters:</strong> Change the electrical voltage (e.g., stepping down 220V to 110V) to prevent devices from frying.</li>
+      </ul>
+
+      <h2>Check Your Devices for "Dual Voltage"</h2>
+      <p>Before buying a heavy and expensive voltage converter, check the label on your electronics. Most modern travel gadgets (laptops, phone chargers, camera batteries) are <strong>dual voltage</strong>. Look for fine print on the power brick that says something like: <code>INPUT: 100-240V, 50/60Hz</code>.</p>
+      <p>If your device says 100-240V, you <strong>do not</strong> need a voltage converter—only a simple plug adapter. However, appliances that generate heat or use motors (hair dryers, curling irons, blenders) are rarely dual voltage and often require a step-down transformer if traveling between 110V and 220V regions.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const countries = [
+      { name: "Argentina", plugs: ["C", "I"], voltage: 220, frequency: "50Hz" },
+      { name: "Australia", plugs: ["I"], voltage: 230, frequency: "50Hz" },
+      { name: "Austria", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Belgium", plugs: ["C", "E"], voltage: 230, frequency: "50Hz" },
+      { name: "Brazil", plugs: ["C", "N"], voltage: 127, frequency: "60Hz", voltageStr: "127V / 220V" },
+      { name: "Canada", plugs: ["A", "B"], voltage: 120, frequency: "60Hz" },
+      { name: "Chile", plugs: ["C", "L"], voltage: 220, frequency: "50Hz" },
+      { name: "China", plugs: ["A", "C", "I"], voltage: 220, frequency: "50Hz" },
+      { name: "Colombia", plugs: ["A", "B"], voltage: 110, frequency: "60Hz" },
+      { name: "Costa Rica", plugs: ["A", "B"], voltage: 120, frequency: "60Hz" },
+      { name: "Croatia", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Czech Republic", plugs: ["C", "E"], voltage: 230, frequency: "50Hz" },
+      { name: "Denmark", plugs: ["C", "E", "F", "K"], voltage: 230, frequency: "50Hz" },
+      { name: "Egypt", plugs: ["C", "F"], voltage: 220, frequency: "50Hz" },
+      { name: "Fiji", plugs: ["I"], voltage: 240, frequency: "50Hz" },
+      { name: "France", plugs: ["C", "E"], voltage: 230, frequency: "50Hz" },
+      { name: "Germany", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Greece", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Hong Kong", plugs: ["G"], voltage: 220, frequency: "50Hz" },
+      { name: "Hungary", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Iceland", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "India", plugs: ["C", "D", "M"], voltage: 230, frequency: "50Hz" },
+      { name: "Indonesia", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Ireland", plugs: ["G"], voltage: 230, frequency: "50Hz" },
+      { name: "Israel", plugs: ["C", "H", "M"], voltage: 230, frequency: "50Hz" },
+      { name: "Italy", plugs: ["C", "F", "L"], voltage: 230, frequency: "50Hz" },
+      { name: "Japan", plugs: ["A", "B"], voltage: 100, frequency: "50Hz / 60Hz" },
+      { name: "Kenya", plugs: ["G"], voltage: 240, frequency: "50Hz" },
+      { name: "Malaysia", plugs: ["G"], voltage: 240, frequency: "50Hz" },
+      { name: "Mexico", plugs: ["A", "B"], voltage: 127, frequency: "60Hz" },
+      { name: "Morocco", plugs: ["C", "E"], voltage: 220, frequency: "50Hz" },
+      { name: "Netherlands", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "New Zealand", plugs: ["I"], voltage: 230, frequency: "50Hz" },
+      { name: "Norway", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Peru", plugs: ["A", "B", "C"], voltage: 220, frequency: "60Hz" },
+      { name: "Philippines", plugs: ["A", "B", "C"], voltage: 220, frequency: "60Hz" },
+      { name: "Poland", plugs: ["C", "E"], voltage: 230, frequency: "50Hz" },
+      { name: "Portugal", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Saudi Arabia", plugs: ["G"], voltage: 230, frequency: "60Hz" },
+      { name: "Singapore", plugs: ["G"], voltage: 230, frequency: "50Hz" },
+      { name: "South Africa", plugs: ["C", "M", "N"], voltage: 230, frequency: "50Hz" },
+      { name: "South Korea", plugs: ["C", "F"], voltage: 220, frequency: "60Hz" },
+      { name: "Spain", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Sweden", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "Switzerland", plugs: ["C", "J"], voltage: 230, frequency: "50Hz" },
+      { name: "Taiwan", plugs: ["A", "B"], voltage: 110, frequency: "60Hz" },
+      { name: "Thailand", plugs: ["A", "B", "C", "O"], voltage: 220, frequency: "50Hz" },
+      { name: "Turkey", plugs: ["C", "F"], voltage: 230, frequency: "50Hz" },
+      { name: "United Arab Emirates", plugs: ["C", "D", "G"], voltage: 230, frequency: "50Hz" },
+      { name: "United Kingdom", plugs: ["G"], voltage: 230, frequency: "50Hz" },
+      { name: "United States", plugs: ["A", "B"], voltage: 120, frequency: "60Hz" },
+      { name: "Vietnam", plugs: ["A", "C", "F"], voltage: 220, frequency: "50Hz" }
+    ];
+
+    const fromSelect = document.getElementById('from-country');
+    const toSelect = document.getElementById('to-country');
+    const swapBtn = document.getElementById('swap-btn');
+    const copyBtn = document.getElementById('copy-btn');
+
+    const destPlugsEl = document.getElementById('dest-plugs');
+    const destVoltageEl = document.getElementById('dest-voltage');
+    const destFreqEl = document.getElementById('dest-frequency');
+
+    const adapterAlert = document.getElementById('adapter-alert');
+    const adapterTitle = document.getElementById('adapter-title');
+    const adapterDesc = document.getElementById('adapter-desc');
+
+    const voltageAlert = document.getElementById('voltage-alert');
+    const voltageTitle = document.getElementById('voltage-title');
+    const voltageDesc = document.getElementById('voltage-desc');
+
+    function init() {
+      // Sort alphabetically
+      countries.sort((a, b) => a.name.localeCompare(b.name));
+
+      countries.forEach((country, index) => {
+        const option1 = new Option(country.name, index);
+        const option2 = new Option(country.name, index);
+        fromSelect.add(option1);
+        toSelect.add(option2);
+      });
+
+      // Default selections (US to UK)
+      const usIndex = countries.findIndex(c => c.name === "United States");
+      const ukIndex = countries.findIndex(c => c.name === "United Kingdom");
+
+      if(usIndex > -1) fromSelect.selectedIndex = usIndex;
+      if(ukIndex > -1) toSelect.selectedIndex = ukIndex;
+
+      calculate();
+    }
+
+    function calculate() {
+      if (fromSelect.selectedIndex === -1 || toSelect.selectedIndex === -1) return;
+
+      const from = countries[fromSelect.value];
+      const to = countries[toSelect.value];
+
+      // Update Destination Stats
+      destPlugsEl.innerHTML = '';
+      to.plugs.forEach(p => {
+        const span = document.createElement('span');
+        span.className = 'plug-badge';
+        span.textContent = `Type ${p}`;
+        destPlugsEl.appendChild(span);
+      });
+
+      destVoltageEl.textContent = to.voltageStr || `${to.voltage}V`;
+      destFreqEl.textContent = to.frequency;
+
+      // Adapter Logic
+      const commonPlugs = from.plugs.filter(p => to.plugs.includes(p));
+      if (commonPlugs.length > 0) {
+        if (commonPlugs.length === from.plugs.length) {
+          adapterAlert.className = 'alert success';
+          adapterTitle.innerHTML = '✅ No adapter needed';
+          adapterDesc.textContent = `Your native plugs (${from.plugs.join(', ')}) will fit directly into ${to.name}'s outlets.`;
+        } else {
+          adapterAlert.className = 'alert warning';
+          adapterTitle.innerHTML = '⚠️ Adapter might be needed';
+          adapterDesc.textContent = `Some of your plugs (${from.plugs.join(', ')}) might not fit all outlets in ${to.name} (Types ${to.plugs.join(', ')}). A universal adapter is recommended.`;
+        }
+      } else {
+        adapterAlert.className = 'alert danger';
+        adapterTitle.innerHTML = '❌ Plug adapter REQUIRED';
+        adapterDesc.textContent = `None of your native plugs (${from.plugs.join(', ')}) will fit in ${to.name} (Types ${to.plugs.join(', ')}). You must bring a travel adapter.`;
+      }
+
+      // Voltage Logic
+      const vFrom = from.voltage;
+      const vTo = to.voltage;
+
+      // Categorize voltages (100-127V vs 220-240V)
+      const isLowFrom = vFrom <= 130;
+      const isHighFrom = vFrom >= 220;
+      const isLowTo = vTo <= 130;
+      const isHighTo = vTo >= 220;
+
+      if ((isLowFrom && isLowTo) || (isHighFrom && isHighTo)) {
+        voltageAlert.className = 'alert success';
+        voltageTitle.innerHTML = '⚡ Voltage is compatible';
+        voltageDesc.textContent = `The voltage in ${to.name} (${to.voltageStr || to.voltage + 'V'}) is similar to your home country. Your devices will work normally.`;
+      } else {
+        voltageAlert.className = 'alert warning';
+        voltageTitle.innerHTML = '⚠️ Voltage difference detected';
+
+        let desc = `You are traveling from a ${from.voltage}V country to a ${to.voltageStr || to.voltage + 'V'} country. `;
+        desc += `Most modern electronics (laptops, phones) are dual-voltage and will work fine. However, single-voltage appliances (like hair dryers or shavers) will need a voltage converter. Check your device labels for "100-240V".`;
+
+        voltageDesc.textContent = desc;
+      }
+    }
+
+    // Event Listeners
+    fromSelect.addEventListener('change', calculate);
+    toSelect.addEventListener('change', calculate);
+
+    swapBtn.addEventListener('click', () => {
+      const temp = fromSelect.value;
+      fromSelect.value = toSelect.value;
+      toSelect.value = temp;
+      calculate();
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const from = countries[fromSelect.value];
+      const to = countries[toSelect.value];
+
+      const textToCopy = `Power Specs for ${to.name}:\n` +
+        `- Plugs: Type ${to.plugs.join(', ')}\n` +
+        `- Voltage: ${to.voltageStr || to.voltage + 'V'}\n` +
+        `- Frequency: ${to.frequency}\n\n` +
+        `Compared to ${from.name}:\n` +
+        `- Adapter Needed: ${from.plugs.some(p => to.plugs.includes(p)) ? (from.plugs.every(p => to.plugs.includes(p)) ? 'No' : 'Maybe') : 'Yes'}\n` +
+        `- Voltage Check: ${Math.abs(from.voltage - to.voltage) > 50 ? 'Different (Check if devices are 100-240V dual-voltage)' : 'Similar'}`;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      });
+    });
+
+    // Run
+    init();
+  </script>
+</body>
+</html>
