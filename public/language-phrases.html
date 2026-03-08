@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Phrases Cheat Sheet | Migrating Mammals</title>
+  <meta name="description" content="Essential travel phrases in 20+ languages. Quick translations for greetings, directions, food, emergencies, and shopping. Print for offline use.">
+  <meta property="og:title" content="Travel Phrases Cheat Sheet">
+  <meta property="og:description" content="Essential travel phrases in 20+ languages. Categories: greetings, directions, food, emergencies, shopping. Printable cards for offline use.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Travel Phrases Cheat Sheet",
+    "url": "https://migratingmammals.com/language-phrases.html",
+    "description": "Essential travel phrases in 20+ languages for greetings, directions, food, emergencies, and shopping.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .language-selector {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Cards */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .category-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .phrase-list {
+      list-style: none;
+    }
+
+    .phrase-item {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(42, 36, 24, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .phrase-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .phrase-en {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .phrase-tr {
+      font-size: 1.1rem;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+      background: var(--border);
+      color: var(--text-primary);
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 80px 0;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      header { padding: 20px 0; border-bottom: 2px solid #ccc; }
+      h1 { background: none; -webkit-text-fill-color: black; color: black; font-size: 2rem; }
+      .subtitle { color: #333; }
+      .controls, .copy-btn, .seo-content, .footer { display: none !important; }
+      .container { max-width: 100%; padding: 0; }
+      .categories-grid { display: block; }
+      .category-card {
+        background: white;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+        padding: 16px;
+      }
+      .category-title { color: black; border-bottom: 1px solid #ccc; }
+      .phrase-tr { color: black; }
+      .phrase-en { color: #555; }
+      .phrase-item { border-bottom: 1px solid #eee; }
+    }
+
+    @media (max-width: 768px) {
+      .categories-grid { grid-template-columns: 1fr; }
+      .controls { flex-direction: column; align-items: stretch; }
+      .actions { flex-direction: column; }
+      .actions button { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Travel Phrases Cheat Sheet</h1>
+      <p class="subtitle">Essential travel phrases across 20+ languages. Perfect for quick reference on the go, or print it out to keep in your pocket offline.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="controls">
+      <div class="language-selector">
+        <label for="lang-select">Select Language</label>
+        <select id="lang-select">
+          <!-- Options injected via JS -->
+        </select>
+      </div>
+      <div class="actions">
+        <button class="secondary" id="print-btn" onclick="window.print()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print Cards
+        </button>
+      </div>
+    </div>
+
+    <div id="phrases-container" class="categories-grid">
+      <!-- Cards injected via JS -->
+    </div>
+
+    <div class="seo-content">
+      <h2>Why Carry a Phrase Cheat Sheet?</h2>
+      <p>Even with modern translation apps, carrying a simple cheat sheet of essential phrases can drastically improve your travel experience. Relying completely on your phone requires battery power, internet access, and taking out an expensive device in public. A quick printed card or an offline cached webpage provides instant reference to the most critical words you'll need.</p>
+
+      <h2>Core Categories for Nomads</h2>
+      <p>When settling into a new city, there are a few situations where local language skills are indispensable:</p>
+      <ul>
+        <li><strong>Greetings:</strong> The baseline of politeness. Knowing how to say hello, please, and thank you goes a long way in establishing goodwill with locals.</li>
+        <li><strong>Directions:</strong> Whether your GPS fails or you need to navigate a train station, basic directional vocabulary is critical for avoiding getting lost.</li>
+        <li><strong>Food & Shopping:</strong> From grabbing water at a convenience store to ordering from a local menu or haggling in a market.</li>
+        <li><strong>Emergencies:</strong> In a worst-case scenario, knowing how to ask for a doctor, the police, or the nearest hospital is vital.</li>
+      </ul>
+
+      <h2>How to Use This Tool</h2>
+      <p>Simply select your destination's language from the dropdown menu to instantly generate a categorized list of essential phrases. Use the copy button next to any phrase to quickly grab it for a message or note. Better yet, hit the "Print Cards" button before your flight to generate a clean, pocket-sized cheat sheet that works without Wi-Fi.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const translations = {"Spanish": {"Greetings": {"Hello": "Hola", "Goodbye": "Adi\u00f3s", "Please": "Por favor", "Thank you": "Gracias", "Yes / No": "S\u00ed / No"}, "Directions": {"Where is the bathroom?": "\u00bfD\u00f3nde est\u00e1 el ba\u00f1o?", "Left / Right": "Izquierda / Derecha", "Straight ahead": "Todo recto", "Train station": "Estaci\u00f3n de tren", "Airport": "Aeropuerto"}, "Food": {"Water, please": "Agua, por favor", "The bill, please": "La cuenta, por favor", "I am vegetarian": "Soy vegetariano/a", "Menu, please": "El men\u00fa, por favor", "Delicious": "Delicioso"}, "Emergencies": {"Help!": "\u00a1Ayuda!", "I need a doctor": "Necesito un m\u00e9dico", "Call the police": "Llame a la polic\u00eda", "Pharmacy": "Farmacia", "Hospital": "Hospital"}, "Shopping": {"How much is this?": "\u00bfCu\u00e1nto cuesta esto?", "Do you take cards?": "\u00bfAceptan tarjetas?", "Too expensive": "Demasiado caro", "I'll take it": "Me lo llevo", "Just looking": "Solo estoy mirando"}}, "French": {"Greetings": {"Hello": "Bonjour", "Goodbye": "Au revoir", "Please": "S'il vous pla\u00eet", "Thank you": "Merci", "Yes / No": "Oui / Non"}, "Directions": {"Where is the bathroom?": "O\u00f9 sont les toilettes?", "Left / Right": "Gauche / Droite", "Straight ahead": "Tout droit", "Train station": "Gare", "Airport": "A\u00e9roport"}, "Food": {"Water, please": "De l'eau, s'il vous pla\u00eet", "The bill, please": "L'addition, s'il vous pla\u00eet", "I am vegetarian": "Je suis v\u00e9g\u00e9tarien(ne)", "Menu, please": "Le menu, s'il vous pla\u00eet", "Delicious": "D\u00e9licieux"}, "Emergencies": {"Help!": "Au secours!", "I need a doctor": "J'ai besoin d'un m\u00e9decin", "Call the police": "Appelez la police", "Pharmacy": "Pharmacie", "Hospital": "H\u00f4pital"}, "Shopping": {"How much is this?": "C'est combien?", "Do you take cards?": "Prenez-vous la carte?", "Too expensive": "Trop cher", "I'll take it": "Je le prends", "Just looking": "Je regarde juste"}}, "German": {"Greetings": {"Hello": "Hallo", "Goodbye": "Auf Wiedersehen", "Please": "Bitte", "Thank you": "Danke", "Yes / No": "Ja / Nein"}, "Directions": {"Where is the bathroom?": "Wo ist die Toilette?", "Left / Right": "Links / Rechts", "Straight ahead": "Geradeaus", "Train station": "Bahnhof", "Airport": "Flughafen"}, "Food": {"Water, please": "Wasser, bitte", "The bill, please": "Die Rechnung, bitte", "I am vegetarian": "Ich bin Vegetarier(in)", "Menu, please": "Die Speisekarte, bitte", "Delicious": "Lecker"}, "Emergencies": {"Help!": "Hilfe!", "I need a doctor": "Ich brauche einen Arzt", "Call the police": "Rufen Sie die Polizei", "Pharmacy": "Apotheke", "Hospital": "Krankenhaus"}, "Shopping": {"How much is this?": "Wie viel kostet das?", "Do you take cards?": "Nehmen Sie Karten?", "Too expensive": "Zu teuer", "I'll take it": "Ich nehme es", "Just looking": "Ich schaue nur"}}, "Italian": {"Greetings": {"Hello": "Ciao", "Goodbye": "Arrivederci", "Please": "Per favore", "Thank you": "Grazie", "Yes / No": "S\u00ec / No"}, "Directions": {"Where is the bathroom?": "Dov'\u00e8 il bagno?", "Left / Right": "Sinistra / Destra", "Straight ahead": "Dritto", "Train station": "Stazione ferroviaria", "Airport": "Aeroporto"}, "Food": {"Water, please": "Acqua, per favore", "The bill, please": "Il conto, per favore", "I am vegetarian": "Sono vegetariano/a", "Menu, please": "Il menu, per favore", "Delicious": "Delizioso"}, "Emergencies": {"Help!": "Aiuto!", "I need a doctor": "Ho bisogno di un medico", "Call the police": "Chiami la polizia", "Pharmacy": "Farmacia", "Hospital": "Ospedale"}, "Shopping": {"How much is this?": "Quanto costa questo?", "Do you take cards?": "Accettate carte?", "Too expensive": "Troppo costoso", "I'll take it": "Lo prendo", "Just looking": "Sto solo guardando"}}, "Portuguese": {"Greetings": {"Hello": "Ol\u00e1", "Goodbye": "Adeus", "Please": "Por favor", "Thank you": "Obrigado/a", "Yes / No": "Sim / N\u00e3o"}, "Directions": {"Where is the bathroom?": "Onde \u00e9 o banheiro?", "Left / Right": "Esquerda / Direita", "Straight ahead": "Em frente", "Train station": "Esta\u00e7\u00e3o de trem", "Airport": "Aeroporto"}, "Food": {"Water, please": "\u00c1gua, por favor", "The bill, please": "A conta, por favor", "I am vegetarian": "Sou vegetariano/a", "Menu, please": "O menu, por favor", "Delicious": "Delicioso"}, "Emergencies": {"Help!": "Socorro!", "I need a doctor": "Preciso de um m\u00e9dico", "Call the police": "Ligue para a pol\u00edcia", "Pharmacy": "Farm\u00e1cia", "Hospital": "Hospital"}, "Shopping": {"How much is this?": "Quanto custa isso?", "Do you take cards?": "Aceitam cart\u00e3o?", "Too expensive": "Muito caro", "I'll take it": "Vou levar", "Just looking": "S\u00f3 dando uma olhada"}}, "Japanese": {"Greetings": {"Hello": "\u3053\u3093\u306b\u3061\u306f (Konnichiwa)", "Goodbye": "\u3055\u3088\u3046\u306a\u3089 (Sayounara)", "Please": "\u304a\u9858\u3044\u3057\u307e\u3059 (Onegaishimasu)", "Thank you": "\u3042\u308a\u304c\u3068\u3046 (Arigatou)", "Yes / No": "\u306f\u3044 / \u3044\u3044\u3048 (Hai / Iie)"}, "Directions": {"Where is the bathroom?": "\u30c8\u30a4\u30ec\u306f\u3069\u3053\u3067\u3059\u304b\uff1f (Toire wa doko desu ka?)", "Left / Right": "\u5de6 / \u53f3 (Hidari / Migi)", "Straight ahead": "\u307e\u3063\u3059\u3050 (Massugu)", "Train station": "\u99c5 (Eki)", "Airport": "\u7a7a\u6e2f (K\u016bk\u014d)"}, "Food": {"Water, please": "\u304a\u6c34\u3092\u304a\u9858\u3044\u3057\u307e\u3059 (Omizu o onegaishimasu)", "The bill, please": "\u304a\u4f1a\u8a08\u3092\u304a\u9858\u3044\u3057\u307e\u3059 (Okaikei o onegaishimasu)", "I am vegetarian": "\u79c1\u306f\u30d9\u30b8\u30bf\u30ea\u30a2\u30f3\u3067\u3059 (Watashi wa bejitarian desu)", "Menu, please": "\u30e1\u30cb\u30e5\u30fc\u3092\u304a\u9858\u3044\u3057\u307e\u3059 (Meny\u016b o onegaishimasu)", "Delicious": "\u7f8e\u5473\u3057\u3044 (Oishii)"}, "Emergencies": {"Help!": "\u52a9\u3051\u3066\uff01 (Tasukete!)", "I need a doctor": "\u533b\u8005\u304c\u5fc5\u8981\u3067\u3059 (Isha ga hitsuy\u014d desu)", "Call the police": "\u8b66\u5bdf\u3092\u547c\u3093\u3067 (Keisatsu o yonde)", "Pharmacy": "\u85ac\u5c40 (Yakkyoku)", "Hospital": "\u75c5\u9662 (By\u014din)"}, "Shopping": {"How much is this?": "\u3053\u308c\u306f\u3044\u304f\u3089\u3067\u3059\u304b\uff1f (Kore wa ikura desu ka?)", "Do you take cards?": "\u30ab\u30fc\u30c9\u306f\u4f7f\u3048\u307e\u3059\u304b\uff1f (K\u0101do wa tsukaemasu ka?)", "Too expensive": "\u9ad8\u3059\u304e\u308b (Takasugiru)", "I'll take it": "\u3053\u308c\u3092\u8cb7\u3044\u307e\u3059 (Kore o kaimasu)", "Just looking": "\u898b\u3066\u3044\u308b\u3060\u3051\u3067\u3059 (Miteiru dake desu)"}}, "Mandarin": {"Greetings": {"Hello": "\u4f60\u597d (N\u01d0 h\u01ceo)", "Goodbye": "\u518d\u89c1 (Z\u00e0iji\u00e0n)", "Please": "\u8bf7 (Q\u01d0ng)", "Thank you": "\u8c22\u8c22 (Xi\u00e8xi\u00e8)", "Yes / No": "\u662f / \u4e0d\u662f (Sh\u00ec / B\u00fa sh\u00ec)"}, "Directions": {"Where is the bathroom?": "\u6d17\u624b\u95f4\u5728\u54ea\u91cc\uff1f (X\u01d0sh\u01d2uji\u0101n z\u00e0i n\u01cel\u01d0?)", "Left / Right": "\u5de6 / \u53f3 (Zu\u01d2 / Y\u00f2u)", "Straight ahead": "\u76f4\u8d70 (Zh\u00ed z\u01d2u)", "Train station": "\u706b\u8f66\u7ad9 (Hu\u01d2ch\u0113 zh\u00e0n)", "Airport": "\u673a\u573a (J\u012bch\u01ceng)"}, "Food": {"Water, please": "\u8bf7\u7ed9\u6211\u6c34 (Q\u01d0ng g\u011bi w\u01d2 shu\u01d0)", "The bill, please": "\u4e70\u5355 (M\u01ceid\u0101n)", "I am vegetarian": "\u6211\u5403\u7d20 (W\u01d2 ch\u012b s\u00f9)", "Menu, please": "\u8bf7\u7ed9\u6211\u83dc\u5355 (Q\u01d0ng g\u011bi w\u01d2 c\u00e0id\u0101n)", "Delicious": "\u597d\u5403 (H\u01ceoch\u012b)"}, "Emergencies": {"Help!": "\u6551\u547d\uff01 (Ji\u00f9m\u00ecng!)", "I need a doctor": "\u6211\u9700\u8981\u533b\u751f (W\u01d2 x\u016by\u00e0o y\u012bsh\u0113ng)", "Call the police": "\u53eb\u8b66\u5bdf (Ji\u00e0o j\u01d0ngch\u00e1)", "Pharmacy": "\u836f\u5e97 (Y\u00e0odi\u00e0n)", "Hospital": "\u533b\u9662 (Y\u012byu\u00e0n)"}, "Shopping": {"How much is this?": "\u8fd9\u4e2a\u591a\u5c11\u94b1\uff1f (Zh\u00e8ge du\u014dsh\u01ceo qi\u00e1n?)", "Do you take cards?": "\u53ef\u4ee5\u5237\u5361\u5417\uff1f (K\u011by\u01d0 shu\u0101k\u01ce ma?)", "Too expensive": "\u592a\u8d35\u4e86 (T\u00e0i gu\u00ec le)", "I'll take it": "\u6211\u8981\u8fd9\u4e2a (W\u01d2 y\u00e0o zh\u00e8ge)", "Just looking": "\u53ea\u662f\u770b\u770b (Zh\u01d0sh\u00ec k\u00e0nkan)"}}, "Korean": {"Greetings": {"Hello": "\uc548\ub155\ud558\uc138\uc694 (Annyeonghaseyo)", "Goodbye": "\uc548\ub155\ud788 \uac00\uc138\uc694 (Annyeonghi gaseyo)", "Please": "\ubd80\ud0c1\ud569\ub2c8\ub2e4 (Butakhamnida)", "Thank you": "\uac10\uc0ac\ud569\ub2c8\ub2e4 (Gamsahamnida)", "Yes / No": "\ub124 / \uc544\ub2c8\uc694 (Ne / Aniyo)"}, "Directions": {"Where is the bathroom?": "\ud654\uc7a5\uc2e4\uc774 \uc5b4\ub514\uc608\uc694? (Hwajangsiri eodiyeyo?)", "Left / Right": "\uc67c\ucabd / \uc624\ub978\ucabd (Oenjjok / Oreunjjok)", "Straight ahead": "\uc9c1\uc9c4 (Jikjin)", "Train station": "\uae30\ucc28\uc5ed (Gichayeok)", "Airport": "\uacf5\ud56d (Gonghang)"}, "Food": {"Water, please": "\ubb3c \uc880 \uc8fc\uc138\uc694 (Mul jom juseyo)", "The bill, please": "\uacc4\uc0b0\uc11c \uc8fc\uc138\uc694 (Gyesanseo juseyo)", "I am vegetarian": "\uc800\ub294 \ucc44\uc2dd\uc8fc\uc758\uc790\uc785\ub2c8\ub2e4 (Jeoneun chaesikjuuijaimnida)", "Menu, please": "\uba54\ub274\ud310 \uc8fc\uc138\uc694 (Menyupan juseyo)", "Delicious": "\ub9db\uc788\uc5b4\uc694 (Masisseoyo)"}, "Emergencies": {"Help!": "\ub3c4\uc640\uc8fc\uc138\uc694! (Dowajuseyo!)", "I need a doctor": "\uc758\uc0ac\uac00 \ud544\uc694\ud574\uc694 (Uisaga piryohaeyo)", "Call the police": "\uacbd\ucc30\uc744 \ubd88\ub7ec\uc8fc\uc138\uc694 (Gyeongchareul bulleojuseyo)", "Pharmacy": "\uc57d\uad6d (Yakguk)", "Hospital": "\ubcd1\uc6d0 (Byeongwon)"}, "Shopping": {"How much is this?": "\uc774\uac70 \uc5bc\ub9c8\uc608\uc694? (Igeo eolmayeyo?)", "Do you take cards?": "\uce74\ub4dc \ub418\ub098\uc694? (Kadeu doenayo?)", "Too expensive": "\ub108\ubb34 \ube44\uc2f8\uc694 (Neomu bissayo)", "I'll take it": "\uc774\uac78\ub85c \ud560\uac8c\uc694 (Igeollo halgeyo)", "Just looking": "\uadf8\ub0e5 \ubcf4\ub294 \uac70\uc608\uc694 (Geunyang boneun geoyeyo)"}}, "Arabic": {"Greetings": {"Hello": "\u0645\u0631\u062d\u0628\u0627 (Marhaban)", "Goodbye": "\u0645\u0639 \u0627\u0644\u0633\u0644\u0627\u0645\u0629 (Ma'a as-salamah)", "Please": "\u0645\u0646 \u0641\u0636\u0644\u0643 (Min fadlik)", "Thank you": "\u0634\u0643\u0631\u0627 (Shukran)", "Yes / No": "\u0646\u0639\u0645 / \u0644\u0627 (Na'am / La)"}, "Directions": {"Where is the bathroom?": "\u0623\u064a\u0646 \u0627\u0644\u062d\u0645\u0627\u0645\u061f (Ayna al-hammam?)", "Left / Right": "\u064a\u0633\u0627\u0631 / \u064a\u0645\u064a\u0646 (Yasar / Yamin)", "Straight ahead": "\u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u0645\u0628\u0627\u0634\u0631\u0629 (Ila al-amam mubasharatan)", "Train station": "\u0645\u062d\u0637\u0629 \u0627\u0644\u0642\u0637\u0627\u0631 (Mahattat al-qitar)", "Airport": "\u0645\u0637\u0627\u0631 (Matar)"}, "Food": {"Water, please": "\u0645\u0627\u0621 \u0645\u0646 \u0641\u0636\u0644\u0643 (Ma' min fadlik)", "The bill, please": "\u0627\u0644\u0641\u0627\u062a\u0648\u0631\u0629 \u0645\u0646 \u0641\u0636\u0644\u0643 (Al-faturah min fadlik)", "I am vegetarian": "\u0623\u0646\u0627 \u0646\u0628\u0627\u062a\u064a (Ana nabati)", "Menu, please": "\u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0645\u0646 \u0641\u0636\u0644\u0643 (Al-qa'imah min fadlik)", "Delicious": "\u0644\u0630\u064a\u0630 (Ladhidh)"}, "Emergencies": {"Help!": "\u0627\u0644\u0646\u062c\u062f\u0629! (An-najdah!)", "I need a doctor": "\u0623\u062d\u062a\u0627\u062c \u0625\u0644\u0649 \u0637\u0628\u064a\u0628 (Ahtaj ila tabib)", "Call the police": "\u0627\u062a\u0635\u0644 \u0628\u0627\u0644\u0634\u0631\u0637\u0629 (Ittasil bil-shurtah)", "Pharmacy": "\u0635\u064a\u062f\u0644\u064a\u0629 (Saydaliyah)", "Hospital": "\u0645\u0633\u062a\u0634\u0641\u0649 (Mustashfa)"}, "Shopping": {"How much is this?": "\u0628\u0643\u0645 \u0647\u0630\u0627\u061f (Bikam hadha?)", "Do you take cards?": "\u0647\u0644 \u062a\u0642\u0628\u0644\u0648\u0646 \u0627\u0644\u0628\u0637\u0627\u0642\u0627\u062a\u061f (Hal taqbalun al-bitaqat?)", "Too expensive": "\u063a\u0627\u0644 \u062c\u062f\u0627 (Ghali jiddan)", "I'll take it": "\u0633\u0622\u062e\u0630\u0647 (Sa'akhudhuh)", "Just looking": "\u0623\u062a\u0641\u0631\u062c \u0641\u0642\u0637 (Atafarraj faqat)"}}, "Hindi": {"Greetings": {"Hello": "\u0928\u092e\u0938\u094d\u0924\u0947 (Namaste)", "Goodbye": "\u0905\u0932\u0935\u093f\u0926\u093e (Alvida)", "Please": "\u0915\u0943\u092a\u092f\u093e (Kripaya)", "Thank you": "\u0927\u0928\u094d\u092f\u0935\u093e\u0926 (Dhanyavaad)", "Yes / No": "\u0939\u093e\u0901 / \u0928\u0939\u0940\u0902 (Haan / Nahin)"}, "Directions": {"Where is the bathroom?": "\u0936\u094c\u091a\u093e\u0932\u092f \u0915\u0939\u093e\u0901 \u0939\u0948? (Shauchalay kahan hai?)", "Left / Right": "\u092c\u093e\u090f\u0901 / \u0926\u093e\u090f\u0901 (Baayen / Daayen)", "Straight ahead": "\u0938\u0940\u0927\u0947 \u0906\u0917\u0947 (Seedhe aage)", "Train station": "\u0930\u0947\u0932\u0935\u0947 \u0938\u094d\u091f\u0947\u0936\u0928 (Railway station)", "Airport": "\u0939\u0935\u093e\u0908 \u0905\u0921\u094d\u0921\u093e (Havaee adda)"}, "Food": {"Water, please": "\u092a\u093e\u0928\u0940 \u0926\u0940\u091c\u093f\u090f (Paani dijiye)", "The bill, please": "\u092c\u093f\u0932 \u0926\u0940\u091c\u093f\u090f (Bill dijiye)", "I am vegetarian": "\u092e\u0948\u0902 \u0936\u093e\u0915\u093e\u0939\u093e\u0930\u0940 \u0939\u0942\u0901 (Main shakahari hoon)", "Menu, please": "\u092e\u0947\u0928\u094d\u092f\u0942 \u0926\u0940\u091c\u093f\u090f (Menu dijiye)", "Delicious": "\u0938\u094d\u0935\u093e\u0926\u093f\u0937\u094d\u091f (Swaadisht)"}, "Emergencies": {"Help!": "\u092e\u0926\u0926! (Madad!)", "I need a doctor": "\u092e\u0941\u091d\u0947 \u0921\u0949\u0915\u094d\u091f\u0930 \u091a\u093e\u0939\u093f\u090f (Mujhe doctor chahiye)", "Call the police": "\u092a\u0941\u0932\u093f\u0938 \u0915\u094b \u092c\u0941\u0932\u093e\u0913 (Police ko bulao)", "Pharmacy": "\u0926\u0935\u093e\u0916\u093e\u0928\u093e (Davakhana)", "Hospital": "\u0905\u0938\u094d\u092a\u0924\u093e\u0932 (Aspataal)"}, "Shopping": {"How much is this?": "\u092f\u0939 \u0915\u093f\u0924\u0928\u0947 \u0915\u093e \u0939\u0948? (Yeh kitne ka hai?)", "Do you take cards?": "\u0915\u094d\u092f\u093e \u0906\u092a \u0915\u093e\u0930\u094d\u0921 \u0932\u0947\u0924\u0947 \u0939\u0948\u0902? (Kya aap card lete hain?)", "Too expensive": "\u092c\u0939\u0941\u0924 \u092e\u0939\u0901\u0917\u093e \u0939\u0948 (Bahut mahanga hai)", "I'll take it": "\u092e\u0948\u0902 \u092f\u0939 \u0932\u0942\u0901\u0917\u093e (Main yeh loonga)", "Just looking": "\u092c\u0938 \u0926\u0947\u0916 \u0930\u0939\u093e \u0939\u0942\u0901 (Bas dekh raha hoon)"}}, "Russian": {"Greetings": {"Hello": "\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435 (Zdravstvuyte)", "Goodbye": "\u0414\u043e \u0441\u0432\u0438\u0434\u0430\u043d\u0438\u044f (Do svidaniya)", "Please": "\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430 (Pozhaluysta)", "Thank you": "\u0421\u043f\u0430\u0441\u0438\u0431\u043e (Spasibo)", "Yes / No": "\u0414\u0430 / \u041d\u0435\u0442 (Da / Net)"}, "Directions": {"Where is the bathroom?": "\u0413\u0434\u0435 \u0442\u0443\u0430\u043b\u0435\u0442? (Gde tualet?)", "Left / Right": "\u041d\u0430\u043b\u0435\u0432\u043e / \u041d\u0430\u043f\u0440\u0430\u0432\u043e (Nalevo / Napravo)", "Straight ahead": "\u041f\u0440\u044f\u043c\u043e (Pryamo)", "Train station": "\u0412\u043e\u043a\u0437\u0430\u043b (Vokzal)", "Airport": "\u0410\u044d\u0440\u043e\u043f\u043e\u0440\u0442 (Aeroport)"}, "Food": {"Water, please": "\u0412\u043e\u0434\u044b, \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430 (Vody, pozhaluysta)", "The bill, please": "\u0421\u0447\u0435\u0442, \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430 (Schet, pozhaluysta)", "I am vegetarian": "\u042f \u0432\u0435\u0433\u0435\u0442\u0430\u0440\u0438\u0430\u043d\u0435\u0446 (Ya vegetarianets)", "Menu, please": "\u041c\u0435\u043d\u044e, \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430 (Menyu, pozhaluysta)", "Delicious": "\u0412\u043a\u0443\u0441\u043d\u043e (Vkusno)"}, "Emergencies": {"Help!": "\u041f\u043e\u043c\u043e\u0433\u0438\u0442\u0435! (Pomogite!)", "I need a doctor": "\u041c\u043d\u0435 \u043d\u0443\u0436\u0435\u043d \u0432\u0440\u0430\u0447 (Mne nuzhen vrach)", "Call the police": "\u0412\u044b\u0437\u043e\u0432\u0438\u0442\u0435 \u043f\u043e\u043b\u0438\u0446\u0438\u044e (Vyzovite politsiyu)", "Pharmacy": "\u0410\u043f\u0442\u0435\u043a\u0430 (Apteka)", "Hospital": "\u0411\u043e\u043b\u044c\u043d\u0438\u0446\u0430 (Bol'nitsa)"}, "Shopping": {"How much is this?": "\u0421\u043a\u043e\u043b\u044c\u043a\u043e \u044d\u0442\u043e \u0441\u0442\u043e\u0438\u0442? (Skol'ko eto stoit?)", "Do you take cards?": "\u0412\u044b \u043f\u0440\u0438\u043d\u0438\u043c\u0430\u0435\u0442\u0435 \u043a\u0430\u0440\u0442\u044b? (Vy prinimaete karty?)", "Too expensive": "\u0421\u043b\u0438\u0448\u043a\u043e\u043c \u0434\u043e\u0440\u043e\u0433\u043e (Slishkom dorogo)", "I'll take it": "\u042f \u0431\u0435\u0440\u0443 \u044d\u0442\u043e (Ya beru eto)", "Just looking": "\u042f \u043f\u0440\u043e\u0441\u0442\u043e \u0441\u043c\u043e\u0442\u0440\u044e (Ya prosto smotryu)"}}, "Dutch": {"Greetings": {"Hello": "Hallo", "Goodbye": "Tot ziens", "Please": "Alstublieft", "Thank you": "Dank u", "Yes / No": "Ja / Nee"}, "Directions": {"Where is the bathroom?": "Waar is het toilet?", "Left / Right": "Links / Rechts", "Straight ahead": "Rechtdoor", "Train station": "Treinstation", "Airport": "Luchthaven"}, "Food": {"Water, please": "Water, alstublieft", "The bill, please": "De rekening, alstublieft", "I am vegetarian": "Ik ben vegetari\u00ebr", "Menu, please": "De menukaart, alstublieft", "Delicious": "Heerlijk"}, "Emergencies": {"Help!": "Help!", "I need a doctor": "Ik heb een dokter nodig", "Call the police": "Bel de politie", "Pharmacy": "Apotheek", "Hospital": "Ziekenhuis"}, "Shopping": {"How much is this?": "Hoeveel kost dit?", "Do you take cards?": "Accepteert u kaarten?", "Too expensive": "Te duur", "I'll take it": "Ik neem het", "Just looking": "Ik kijk alleen maar"}}, "Turkish": {"Greetings": {"Hello": "Merhaba", "Goodbye": "Ho\u015f\u00e7a kal", "Please": "L\u00fctfen", "Thank you": "Te\u015fekk\u00fcr ederim", "Yes / No": "Evet / Hay\u0131r"}, "Directions": {"Where is the bathroom?": "Tuvalet nerede?", "Left / Right": "Sol / Sa\u011f", "Straight ahead": "D\u00fcz ileri", "Train station": "Tren istasyonu", "Airport": "Havaliman\u0131"}, "Food": {"Water, please": "Su, l\u00fctfen", "The bill, please": "Hesap, l\u00fctfen", "I am vegetarian": "Vejetaryenim", "Menu, please": "Men\u00fc, l\u00fctfen", "Delicious": "Lezzetli"}, "Emergencies": {"Help!": "\u0130mdat!", "I need a doctor": "Doktora ihtiyac\u0131m var", "Call the police": "Polisi ara", "Pharmacy": "Eczane", "Hospital": "Hastane"}, "Shopping": {"How much is this?": "Bu ne kadar?", "Do you take cards?": "Kart kabul ediyor musunuz?", "Too expensive": "\u00c7ok pahal\u0131", "I'll take it": "Bunu al\u0131yorum", "Just looking": "Sadece bak\u0131yorum"}}, "Vietnamese": {"Greetings": {"Hello": "Xin ch\u00e0o", "Goodbye": "T\u1ea1m bi\u1ec7t", "Please": "L\u00e0m \u01a1n", "Thank you": "C\u1ea3m \u01a1n", "Yes / No": "C\u00f3 / Kh\u00f4ng"}, "Directions": {"Where is the bathroom?": "Nh\u00e0 v\u1ec7 sinh \u1edf \u0111\u00e2u?", "Left / Right": "Tr\u00e1i / Ph\u1ea3i", "Straight ahead": "\u0110i th\u1eb3ng", "Train station": "Ga xe l\u1eeda", "Airport": "S\u00e2n bay"}, "Food": {"Water, please": "Cho t\u00f4i n\u01b0\u1edbc", "The bill, please": "T\u00ednh ti\u1ec1n", "I am vegetarian": "T\u00f4i \u0103n chay", "Menu, please": "Cho xem th\u1ef1c \u0111\u01a1n", "Delicious": "Ngon"}, "Emergencies": {"Help!": "C\u1ee9u v\u1edbi!", "I need a doctor": "T\u00f4i c\u1ea7n b\u00e1c s\u0129", "Call the police": "G\u1ecdi c\u1ea3nh s\u00e1t", "Pharmacy": "Ti\u1ec7m thu\u1ed1c", "Hospital": "B\u1ec7nh vi\u1ec7n"}, "Shopping": {"How much is this?": "C\u00e1i n\u00e0y bao nhi\u00eau?", "Do you take cards?": "C\u00f3 nh\u1eadn th\u1ebb kh\u00f4ng?", "Too expensive": "M\u1eafc qu\u00e1", "I'll take it": "T\u00f4i l\u1ea5y c\u00e1i n\u00e0y", "Just looking": "Ch\u1ec9 xem th\u00f4i"}}, "Thai": {"Greetings": {"Hello": "\u0e2a\u0e27\u0e31\u0e2a\u0e14\u0e35 (Sawatdee)", "Goodbye": "\u0e25\u0e32\u0e01\u0e48\u0e2d\u0e19 (La gon)", "Please": "\u0e01\u0e23\u0e38\u0e13\u0e32 (Garuna)", "Thank you": "\u0e02\u0e2d\u0e1a\u0e04\u0e38\u0e13 (Khop khun)", "Yes / No": "\u0e43\u0e0a\u0e48 / \u0e44\u0e21\u0e48\u0e43\u0e0a\u0e48 (Chai / Mai chai)"}, "Directions": {"Where is the bathroom?": "\u0e2b\u0e49\u0e2d\u0e07\u0e19\u0e49\u0e33\u0e2d\u0e22\u0e39\u0e48\u0e44\u0e2b\u0e19 (Hong nam yoo nai?)", "Left / Right": "\u0e0b\u0e49\u0e32\u0e22 / \u0e02\u0e27\u0e32 (Sai / Kwa)", "Straight ahead": "\u0e15\u0e23\u0e07\u0e44\u0e1b (Trong pai)", "Train station": "\u0e2a\u0e16\u0e32\u0e19\u0e35\u0e23\u0e16\u0e44\u0e1f (Sathani rot fai)", "Airport": "\u0e2a\u0e19\u0e32\u0e21\u0e1a\u0e34\u0e19 (Sanam bin)"}, "Food": {"Water, please": "\u0e02\u0e2d\u0e19\u0e49\u0e33\u0e2b\u0e19\u0e48\u0e2d\u0e22 (Khor nam noi)", "The bill, please": "\u0e40\u0e01\u0e47\u0e1a\u0e40\u0e07\u0e34\u0e19\u0e14\u0e49\u0e27\u0e22 (Gep ngen duay)", "I am vegetarian": "\u0e09\u0e31\u0e19\u0e01\u0e34\u0e19\u0e21\u0e31\u0e07\u0e2a\u0e27\u0e34\u0e23\u0e31\u0e15\u0e34 (Chan gin mangsawirat)", "Menu, please": "\u0e02\u0e2d\u0e40\u0e21\u0e19\u0e39\u0e2b\u0e19\u0e48\u0e2d\u0e22 (Khor menu noi)", "Delicious": "\u0e2d\u0e23\u0e48\u0e2d\u0e22 (Aroi)"}, "Emergencies": {"Help!": "\u0e0a\u0e48\u0e27\u0e22\u0e14\u0e49\u0e27\u0e22! (Chuay duay!)", "I need a doctor": "\u0e09\u0e31\u0e19\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2b\u0e21\u0e2d (Chan tong gan mor)", "Call the police": "\u0e40\u0e23\u0e35\u0e22\u0e01\u0e15\u0e33\u0e23\u0e27\u0e08 (Riak tamruat)", "Pharmacy": "\u0e23\u0e49\u0e32\u0e19\u0e02\u0e32\u0e22\u0e22\u0e32 (Ran kai ya)", "Hospital": "\u0e42\u0e23\u0e07\u0e1e\u0e22\u0e32\u0e1a\u0e32\u0e25 (Rong phayaban)"}, "Shopping": {"How much is this?": "\u0e40\u0e17\u0e48\u0e32\u0e44\u0e2b\u0e23\u0e48 (Tao rai?)", "Do you take cards?": "\u0e23\u0e31\u0e1a\u0e1a\u0e31\u0e15\u0e23\u0e44\u0e2b\u0e21 (Rap bat mai?)", "Too expensive": "\u0e41\u0e1e\u0e07\u0e44\u0e1b (Paeng pai)", "I'll take it": "\u0e40\u0e2d\u0e32\u0e2d\u0e31\u0e19\u0e19\u0e35\u0e49 (Ao an nee)", "Just looking": "\u0e41\u0e04\u0e48\u0e14\u0e39\u0e40\u0e09\u0e22\u0e46 (Kae doo chey chey)"}}, "Greek": {"Greetings": {"Hello": "\u0393\u03b5\u03b9\u03ac \u03c3\u03bf\u03c5 (Yia sou)", "Goodbye": "\u0391\u03bd\u03c4\u03af\u03bf (Andio)", "Please": "\u03a0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb\u03ce (Parakalo)", "Thank you": "\u0395\u03c5\u03c7\u03b1\u03c1\u03b9\u03c3\u03c4\u03ce (Efcharisto)", "Yes / No": "\u039d\u03b1\u03b9 / \u038c\u03c7\u03b9 (Ne / Ochi)"}, "Directions": {"Where is the bathroom?": "\u03a0\u03bf\u03cd \u03b5\u03af\u03bd\u03b1\u03b9 \u03b7 \u03c4\u03bf\u03c5\u03b1\u03bb\u03ad\u03c4\u03b1; (Pou ine i toualeta?)", "Left / Right": "\u0391\u03c1\u03b9\u03c3\u03c4\u03b5\u03c1\u03ac / \u0394\u03b5\u03be\u03b9\u03ac (Aristera / Dexia)", "Straight ahead": "\u0395\u03c5\u03b8\u03b5\u03af\u03b1 (Efthia)", "Train station": "\u03a3\u03c4\u03b1\u03b8\u03bc\u03cc\u03c2 \u03c4\u03c1\u03ad\u03bd\u03c9\u03bd (Stathmos trenon)", "Airport": "\u0391\u03b5\u03c1\u03bf\u03b4\u03c1\u03cc\u03bc\u03b9\u03bf (Aerodromio)"}, "Food": {"Water, please": "\u039d\u03b5\u03c1\u03cc, \u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb\u03ce (Nero, parakalo)", "The bill, please": "\u03a4\u03bf \u03bb\u03bf\u03b3\u03b1\u03c1\u03b9\u03b1\u03c3\u03bc\u03cc, \u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb\u03ce (To logariasmo, parakalo)", "I am vegetarian": "\u0395\u03af\u03bc\u03b1\u03b9 \u03c7\u03bf\u03c1\u03c4\u03bf\u03c6\u03ac\u03b3\u03bf\u03c2 (Ime chortofagos)", "Menu, please": "\u03a4\u03bf\u03bd \u03ba\u03b1\u03c4\u03ac\u03bb\u03bf\u03b3\u03bf, \u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb\u03ce (Ton katalogo, parakalo)", "Delicious": "\u039d\u03cc\u03c3\u03c4\u03b9\u03bc\u03bf (Nostimo)"}, "Emergencies": {"Help!": "\u0392\u03bf\u03ae\u03b8\u03b5\u03b9\u03b1! (Voithia!)", "I need a doctor": "\u03a7\u03c1\u03b5\u03b9\u03ac\u03b6\u03bf\u03bc\u03b1\u03b9 \u03b3\u03b9\u03b1\u03c4\u03c1\u03cc (Chriazome yiatro)", "Call the police": "\u039a\u03b1\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03b1\u03c3\u03c4\u03c5\u03bd\u03bf\u03bc\u03af\u03b1 (Kaleste tin astinomia)", "Pharmacy": "\u03a6\u03b1\u03c1\u03bc\u03b1\u03ba\u03b5\u03af\u03bf (Farmakio)", "Hospital": "\u039d\u03bf\u03c3\u03bf\u03ba\u03bf\u03bc\u03b5\u03af\u03bf (Nosokomio)"}, "Shopping": {"How much is this?": "\u03a0\u03cc\u03c3\u03bf \u03ba\u03bf\u03c3\u03c4\u03af\u03b6\u03b5\u03b9 \u03b1\u03c5\u03c4\u03cc; (Poso kostizi afto?)", "Do you take cards?": "\u0394\u03ad\u03c7\u03b5\u03c3\u03c4\u03b5 \u03ba\u03ac\u03c1\u03c4\u03b5\u03c2; (Decheste kartes?)", "Too expensive": "\u03a0\u03bf\u03bb\u03cd \u03b1\u03ba\u03c1\u03b9\u03b2\u03cc (Poli akrivo)", "I'll take it": "\u0398\u03b1 \u03c4\u03bf \u03c0\u03ac\u03c1\u03c9 (Tha to paro)", "Just looking": "\u0391\u03c0\u03bb\u03ac \u03ba\u03bf\u03b9\u03c4\u03ac\u03b6\u03c9 (Apla kitazo)"}}, "Polish": {"Greetings": {"Hello": "Cze\u015b\u0107", "Goodbye": "Do widzenia", "Please": "Prosz\u0119", "Thank you": "Dzi\u0119kuj\u0119", "Yes / No": "Tak / Nie"}, "Directions": {"Where is the bathroom?": "Gdzie jest toaleta?", "Left / Right": "W lewo / W prawo", "Straight ahead": "Prosto", "Train station": "Stacja kolejowa", "Airport": "Lotnisko"}, "Food": {"Water, please": "Wod\u0119, prosz\u0119", "The bill, please": "Rachunek, prosz\u0119", "I am vegetarian": "Jestem wegetarianinem", "Menu, please": "Menu, prosz\u0119", "Delicious": "Pyszne"}, "Emergencies": {"Help!": "Pomocy!", "I need a doctor": "Potrzebuj\u0119 lekarza", "Call the police": "Zadzwo\u0144 po policj\u0119", "Pharmacy": "Apteka", "Hospital": "Szpital"}, "Shopping": {"How much is this?": "Ile to kosztuje?", "Do you take cards?": "Czy mo\u017cna p\u0142aci\u0107 kart\u0105?", "Too expensive": "Za drogie", "I'll take it": "Wezm\u0119 to", "Just looking": "Tylko ogl\u0105dam"}}, "Swedish": {"Greetings": {"Hello": "Hej", "Goodbye": "Hej d\u00e5", "Please": "Sn\u00e4lla", "Thank you": "Tack", "Yes / No": "Ja / Nej"}, "Directions": {"Where is the bathroom?": "Var \u00e4r toaletten?", "Left / Right": "V\u00e4nster / H\u00f6ger", "Straight ahead": "Rakt fram", "Train station": "T\u00e5gstation", "Airport": "Flygplats"}, "Food": {"Water, please": "Vatten, tack", "The bill, please": "Notan, tack", "I am vegetarian": "Jag \u00e4r vegetarian", "Menu, please": "Menyn, tack", "Delicious": "Mycket gott"}, "Emergencies": {"Help!": "Hj\u00e4lp!", "I need a doctor": "Jag beh\u00f6ver en l\u00e4kare", "Call the police": "Ring polisen", "Pharmacy": "Apotek", "Hospital": "Sjukhus"}, "Shopping": {"How much is this?": "Hur mycket kostar den h\u00e4r?", "Do you take cards?": "Tar ni kort?", "Too expensive": "F\u00f6r dyrt", "I'll take it": "Jag tar den", "Just looking": "Jag tittar bara"}}, "Indonesian": {"Greetings": {"Hello": "Halo", "Goodbye": "Selamat tinggal", "Please": "Tolong", "Thank you": "Terima kasih", "Yes / No": "Ya / Tidak"}, "Directions": {"Where is the bathroom?": "Di mana kamar mandi?", "Left / Right": "Kiri / Kanan", "Straight ahead": "Lurus terus", "Train station": "Stasiun kereta", "Airport": "Bandara"}, "Food": {"Water, please": "Minta air", "The bill, please": "Minta bon", "I am vegetarian": "Saya vegetarian", "Menu, please": "Minta menu", "Delicious": "Enak"}, "Emergencies": {"Help!": "Tolong!", "I need a doctor": "Saya butuh dokter", "Call the police": "Panggil polisi", "Pharmacy": "Apotek", "Hospital": "Rumah sakit"}, "Shopping": {"How much is this?": "Berapa harganya?", "Do you take cards?": "Terima kartu?", "Too expensive": "Terlalu mahal", "I'll take it": "Saya ambil ini", "Just looking": "Cuma lihat-lihat"}}, "Swahili": {"Greetings": {"Hello": "Jambo", "Goodbye": "Kwaheri", "Please": "Tafadhali", "Thank you": "Asante", "Yes / No": "Ndiyo / Hapana"}, "Directions": {"Where is the bathroom?": "Choo kiko wapi?", "Left / Right": "Kushoto / Kulia", "Straight ahead": "Moja kwa moja", "Train station": "Stesheni ya treni", "Airport": "Uwanja wa ndege"}, "Food": {"Water, please": "Maji, tafadhali", "The bill, please": "Bili, tafadhali", "I am vegetarian": "Mimi ni mla mboga", "Menu, please": "Menyu, tafadhali", "Delicious": "Tamu"}, "Emergencies": {"Help!": "Msaada!", "I need a doctor": "Nahitaji daktari", "Call the police": "Piga simu polisi", "Pharmacy": "Duka la dawa", "Hospital": "Hospitali"}, "Shopping": {"How much is this?": "Hii ni bei gani?", "Do you take cards?": "Mnapokea kadi?", "Too expensive": "Ghali sana", "I'll take it": "Nitaichukua", "Just looking": "Naangalia tu"}}, "Tagalog": {"Greetings": {"Hello": "Kamusta", "Goodbye": "Paalam", "Please": "Pakiusap", "Thank you": "Salamat", "Yes / No": "Oo / Hindi"}, "Directions": {"Where is the bathroom?": "Nasaan ang banyo?", "Left / Right": "Kaliwa / Kanan", "Straight ahead": "Diretso", "Train station": "Estasyon ng tren", "Airport": "Paliparan"}, "Food": {"Water, please": "Tubig nga po", "The bill, please": "Bill nga po", "I am vegetarian": "Vegetarian ako", "Menu, please": "Menu nga po", "Delicious": "Masarap"}, "Emergencies": {"Help!": "Tulong!", "I need a doctor": "Kailangan ko ng doktor", "Call the police": "Tumawag ng pulis", "Pharmacy": "Botika", "Hospital": "Ospital"}, "Shopping": {"How much is this?": "Magkano ito?", "Do you take cards?": "Tumatanggap ba kayo ng card?", "Too expensive": "Masyadong mahal", "I'll take it": "Bibilhin ko na", "Just looking": "Tumingin lang"}}};
+
+    const icons = {
+      "Greetings": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z"></path><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"></path></svg>`,
+      "Directions": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>`,
+      "Food": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 8-4-4-6 6"></path><path d="M14 12L4 22"></path><path d="m22 2-6 6"></path></svg>`,
+      "Emergencies": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`, // using standard icon as fallback, but changed to alert
+      "Shopping": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`
+    };
+
+    // Override emergency icon
+    icons["Emergencies"] = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+
+    const langSelect = document.getElementById('lang-select');
+    const container = document.getElementById('phrases-container');
+
+    // Populate dropdown
+    const languages = Object.keys(translations).sort();
+    languages.forEach(lang => {
+      const option = document.createElement('option');
+      option.value = lang;
+      option.textContent = lang;
+      langSelect.appendChild(option);
+    });
+
+    function renderCards(language) {
+      const data = translations[language];
+      container.innerHTML = '';
+
+      Object.keys(data).forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'category-card';
+
+        let html = `<div class="category-title">${icons[category] || ''} ${category}</div>`;
+        html += `<ul class="phrase-list">`;
+
+        Object.entries(data[category]).forEach(([en, tr]) => {
+          const safeTr = tr.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+          html += `
+            <li class="phrase-item">
+              <div>
+                <div class="phrase-en">${en}</div>
+                <div class="phrase-tr">${tr}</div>
+              </div>
+              <button class="copy-btn" onclick="copyText(this)" data-phrase="${safeTr}" aria-label="Copy phrase">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </li>
+          `;
+        });
+
+        html += `</ul>`;
+        card.innerHTML = html;
+        container.appendChild(card);
+      });
+    }
+
+    function copyText(btn) {
+      const text = btn.getAttribute('data-phrase');
+      navigator.clipboard.writeText(text).then(() => {
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy', err);
+      });
+    }
+
+    langSelect.addEventListener('change', (e) => {
+      renderCards(e.target.value);
+    });
+
+    // Initial render
+    if(languages.length > 0) {
+      renderCards(languages[0]);
+    }
+  </script>
+</body>
+</html>
