@@ -1,0 +1,60 @@
+---
+import BaseHead from '../layouts/BaseHead.astro';
+
+const tools = [
+  { emoji: "🛂", name: "Schengen 90/180 Calculator", desc: "Track your days in the Schengen zone. Never overstay again — visual timeline of your 90/180-day allowance.", soon: true },
+  { emoji: "🌐", name: "Timezone Overlap Finder", desc: "Working across time zones? Find the best meeting hours between any two cities instantly.", soon: true },
+  { emoji: "💱", name: "Currency Arbitrage Tracker", desc: "Spot favorable exchange rates. Compare ATM, Wise, and credit card rates for your destination.", soon: true },
+  { emoji: "🏨", name: "RevPAR Calculator", desc: "Revenue per available room — the metric that matters. Benchmark your boutique property against the market.", soon: true },
+  { emoji: "📋", name: "OTA Commission Comparison", desc: "Booking.com vs Airbnb vs direct — compare commission rates and net revenue per booking.", soon: true },
+  { emoji: "🧹", name: "Cleaning Fee Margin Tool", desc: "Are your cleaning fees covering costs? Calculate your true margin per turnover.", soon: true },
+];
+---
+<html lang="en">
+<head>
+  <BaseHead
+    title="Migrating Mammals — Digital Nomad Tools & Boutique Hospitality Calculators"
+    description="Free tools for digital nomads and boutique hospitality operators. Schengen day tracker, timezone overlap finder, RevPAR calculator, OTA commission comparison, and more."
+    ogTitle="Migrating Mammals — Tools for Nomads & Hosts"
+    ogDescription="Schengen tracker, timezone overlap finder, RevPAR calculator, and hospitality tools. Free, no signup."
+  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0a0806; color: #e0d5c8; }
+    .hero { text-align: center; padding: 100px 24px 80px; background: linear-gradient(180deg, #1a1008 0%, #0a0806 100%); position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(139,94,60,0.08) 0%, transparent 60%); }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h1 { font-size: 3rem; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; background: linear-gradient(135deg, #fff 0%, #C4956A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: #666; font-size: 1.05rem; max-width: 500px; margin: 0 auto; }
+    .grid { max-width: 900px; margin: 0 auto; padding: 0 24px 100px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: #12100c; border: 2px solid #2a2418; border-radius: 16px; padding: 28px 24px; position: relative; }
+    .card .emoji { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .card h2 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .card p { font-size: 0.85rem; color: #888; line-height: 1.6; }
+    .badge { position: absolute; top: 14px; right: 14px; background: #2a2418; color: #C4956A; font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #1a1510; }
+    .footer a { color: #C4956A; text-decoration: none; }
+    @media (max-width: 600px) { .hero h1 { font-size: 2.2rem; } .hero { padding: 70px 20px 50px; } .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-content">
+    <h1>Migrating Mammals 🌍</h1>
+    <p>Tools for people who move — and the places that host them.</p>
+  </div>
+</div>
+<div class="grid">
+  {tools.map(t => (
+    <div class="card">
+      {t.soon && <span class="badge">COMING SOON</span>}
+      <span class="emoji">{t.emoji}</span>
+      <h2>{t.name}</h2>
+      <p>{t.desc}</p>
+    </div>
+  ))}
+</div>
+<div class="footer">© 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property</div>
+</body>
+</html>
