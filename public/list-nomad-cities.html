@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Cities for Digital Nomads in 2025 | Migrating Mammals</title>
+  <meta name="description" content="Top digital nomad cities ranked by cost, internet, community, safety, and visa options. Compare Chiang Mai, Lisbon, Medellín, Bali, and more.">
+  <meta property="og:title" content="Best Cities for Digital Nomads in 2025">
+  <meta property="og:description" content="Top digital nomad cities ranked by cost, internet, community, safety, and visa options.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Best Cities for Digital Nomads in 2025",
+    "description": "Top digital nomad cities ranked by cost, internet, community, safety, and visa options.",
+    "author": {
+      "@type": "Organization",
+      "name": "Migrating Mammals",
+      "url": "https://migratingmammals.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "GAB Ventures",
+      "url": "https://gab.ae"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Controls: Search and Sort */
+    .controls-container {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .search-container {
+      flex-grow: 1;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 16px 20px 16px 48px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      width: 20px;
+      height: 20px;
+    }
+
+    .sort-select {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+      cursor: pointer;
+      height: 100%;
+      min-width: 180px;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+    }
+
+    .sort-select:focus {
+      border-color: var(--accent);
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(196, 149, 106, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0 0 4px 0;
+      line-height: 1.2;
+    }
+
+    .city-country {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .overall-score {
+      text-align: right;
+      background: rgba(196, 149, 106, 0.1);
+      border: 1px solid rgba(196, 149, 106, 0.3);
+      padding: 8px 16px;
+      border-radius: 12px;
+    }
+
+    .score-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin: 0 0 16px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    /* City Content Grid */
+    .city-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* Metrics & Data Rows */
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-row:last-child {
+      border-bottom: none;
+    }
+
+    .data-label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .data-value {
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .rating-list {
+      margin-top: 24px;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .metric-label {
+      width: 100px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .score-bar-bg {
+      flex-grow: 1;
+      height: 8px;
+      background: var(--bg);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    .metric-value {
+      width: 40px;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Pros & Cons */
+    .pros-cons {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .pros h3 { color: var(--success); }
+    .cons h3 { color: var(--danger); }
+
+    ul.feature-list {
+      list-style: none;
+      margin: 0;
+    }
+
+    ul.feature-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .pros ul.feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .cons ul.feature-list li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      color: var(--danger);
+      font-weight: bold;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Search highlight utility */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .city-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .controls-container {
+        flex-direction: column;
+      }
+      .card {
+        padding: 24px 16px;
+      }
+      .overall-score {
+        padding: 6px 12px;
+      }
+      .score-number {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Best Digital Nomad Cities</h1>
+      <p class="subtitle">Curated list of top cities worldwide for remote work, ranked by cost, internet speed, community, and quality of life.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="controls-container">
+      <div class="search-container">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" class="search-input" placeholder="Search cities, countries, or features (e.g. 'beach', 'Thailand')...">
+      </div>
+      <select id="sort-select" class="sort-select">
+        <option value="score-desc">Highest Rated</option>
+        <option value="cost-asc">Lowest Cost</option>
+        <option value="cost-desc">Highest Cost</option>
+        <option value="name-asc">Name (A-Z)</option>
+      </select>
+    </div>
+
+    <div id="cities-container">
+      <!-- Cards will be generated via JS for easier sorting/filtering offline -->
+    </div>
+
+    <div class="seo-content">
+      <h2>How We Rank Digital Nomad Cities</h2>
+      <p>Choosing the right base as a digital nomad involves balancing multiple factors. We evaluate cities based on <strong>cost of living</strong> (rent, food, and coworking spaces), <strong>internet reliability</strong>, the presence of a strong <strong>nomad community</strong>, overall <strong>safety</strong>, and the availability of viable <strong>visa options</strong>.</p>
+
+      <h2>The Importance of Visa Options in 2025</h2>
+      <p>With many countries launching dedicated Digital Nomad Visas (DNVs), long-term stays have become significantly easier to navigate legally. Cities in countries like Spain, Portugal, Thailand, and Colombia now offer clear pathways for remote workers to stay from 6 months up to several years without relying on standard tourist visas or "visa runs."</p>
+
+      <h2>Community vs. Cost</h2>
+      <p>While affordability is often a primary driver for new nomads, community infrastructure is equally critical. Cities like Chiang Mai and Bali might have slightly rising costs compared to lesser-known alternatives, but they offer unparalleled networking opportunities, frequent meetups, and infrastructure perfectly tailored for remote professionals.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const citiesData = [
+      {
+        name: "Chiang Mai",
+        country: "Thailand",
+        costNum: 1000,
+        costStr: "~$1,000/mo",
+        internet: "100+ Mbps",
+        visa: "DTV (up to 5 yrs)",
+        score: 4.8,
+        community: 5.0,
+        safety: 4.5,
+        pros: ["Incredibly affordable cost of living", "Massive and active nomad community", "World-class cafe and food culture"],
+        cons: ["Severe burning season (Feb-Apr)", "Can be very hot and humid"],
+        keywords: "asia cheap food mountains cafe dtv"
+      },
+      {
+        name: "Lisbon",
+        country: "Portugal",
+        costNum: 2500,
+        costStr: "~$2,500/mo",
+        internet: "200+ Mbps",
+        visa: "D8 Nomad Visa",
+        score: 4.7,
+        community: 5.0,
+        safety: 4.5,
+        pros: ["Excellent year-round weather", "Vibrant tech and startup scene", "Beautiful architecture and history"],
+        cons: ["Cost of living is rising rapidly", "Severe local housing crisis"],
+        keywords: "europe beach surf eu schengen expensive"
+      },
+      {
+        name: "Medellín",
+        country: "Colombia",
+        costNum: 1200,
+        costStr: "~$1,200/mo",
+        internet: "80+ Mbps",
+        visa: "Nomad Visa (up to 2 yrs)",
+        score: 4.4,
+        community: 4.5,
+        safety: 3.0,
+        pros: ["'Eternal Spring' perfect weather", "Very affordable lifestyle", "Lively culture and nightlife"],
+        cons: ["Safety requires constant vigilance", "Language barrier if you don't speak Spanish"],
+        keywords: "south america latam spanish mountains party"
+      },
+      {
+        name: "Bali (Canggu)",
+        country: "Indonesia",
+        costNum: 1500,
+        costStr: "~$1,500/mo",
+        internet: "50+ Mbps",
+        visa: "B211A / Remote Worker Visa",
+        score: 4.5,
+        community: 5.0,
+        safety: 4.0,
+        pros: ["Unbeatable beach and villa lifestyle", "Huge global community", "Incredible coworking spaces"],
+        cons: ["Traffic is terrible", "Suffering from over-tourism"],
+        keywords: "asia beach surf tropical island"
+      },
+      {
+        name: "Bangkok",
+        country: "Thailand",
+        costNum: 1400,
+        costStr: "~$1,400/mo",
+        internet: "200+ Mbps",
+        visa: "DTV (up to 5 yrs)",
+        score: 4.6,
+        community: 4.5,
+        safety: 4.0,
+        pros: ["Incredible food scene", "Excellent modern infrastructure", "Great base for regional travel"],
+        cons: ["Heavy traffic and pollution", "Can feel overwhelmingly massive"],
+        keywords: "asia city metropolis urban food dtv"
+      },
+      {
+        name: "Buenos Aires",
+        country: "Argentina",
+        costNum: 1000,
+        costStr: "~$1,000/mo",
+        internet: "100+ Mbps",
+        visa: "Nomad Visa (up to 1 yr)",
+        score: 4.3,
+        community: 4.0,
+        safety: 3.5,
+        pros: ["Amazing culture, food, and wine", "Very affordable (via exchange rates)", "Beautiful European-style architecture"],
+        cons: ["Economic and currency instability", "Geographically far from other global hubs"],
+        keywords: "south america latam spanish city wine"
+      },
+      {
+        name: "Tbilisi",
+        country: "Georgia",
+        costNum: 1300,
+        costStr: "~$1,300/mo",
+        internet: "50+ Mbps",
+        visa: "1-year Visa-Free",
+        score: 4.2,
+        community: 4.0,
+        safety: 4.5,
+        pros: ["Incredible 1-year visa-free policy", "Unique food and ancient wine culture", "Generally very safe"],
+        cons: ["Infrastructure outside center is lacking", "Winters can be harsh"],
+        keywords: "europe asia caucasus cheap safe wine"
+      },
+      {
+        name: "Da Nang",
+        country: "Vietnam",
+        costNum: 900,
+        costStr: "~$900/mo",
+        internet: "100+ Mbps",
+        visa: "E-visa (up to 90 days)",
+        score: 4.6,
+        community: 4.5,
+        safety: 4.5,
+        pros: ["Beautiful long beaches", "Extremely low cost of living", "Great food and cafe culture"],
+        cons: ["Limited long-term visa options", "Fewer direct international flights"],
+        keywords: "asia cheap beach safe food"
+      }
+    ];
+
+    const container = document.getElementById('cities-container');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+
+    function renderCities(cities) {
+      container.innerHTML = '';
+
+      if (cities.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color: var(--text-secondary); padding: 40px;">No cities found matching your criteria.</p>';
+        return;
+      }
+
+      cities.forEach(city => {
+        const communityPct = (city.community / 5) * 100;
+        const safetyPct = (city.safety / 5) * 100;
+
+        const prosHtml = city.pros.map(p => `<li>${p}</li>`).join('');
+        const consHtml = city.cons.map(c => `<li>${c}</li>`).join('');
+
+        const card = document.createElement('div');
+        card.className = 'card city-card';
+        card.innerHTML = `
+          <div class="card-header">
+            <div>
+              <h2>${city.name}</h2>
+              <span class="city-country">${city.country}</span>
+            </div>
+            <div class="overall-score">
+              <div class="score-number">${city.score.toFixed(1)}</div>
+              <div class="score-label">/ 5</div>
+            </div>
+          </div>
+
+          <div class="city-content">
+            <div class="city-metrics">
+              <h3>Key Metrics</h3>
+              <div class="data-row">
+                <span class="data-label">Cost of Living:</span>
+                <span class="data-value">${city.costStr}</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">Internet:</span>
+                <span class="data-value">${city.internet}</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">Visa:</span>
+                <span class="data-value">${city.visa}</span>
+              </div>
+
+              <div class="rating-list">
+                <h3>Ratings</h3>
+                <div class="metric">
+                  <span class="metric-label">Community</span>
+                  <div class="score-bar-bg"><div class="score-bar-fill" style="width: ${communityPct}%;"></div></div>
+                  <span class="metric-value">${city.community.toFixed(1)}</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-label">Safety</span>
+                  <div class="score-bar-bg"><div class="score-bar-fill" style="width: ${safetyPct}%;"></div></div>
+                  <span class="metric-value">${city.safety.toFixed(1)}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h3>Pros</h3>
+                <ul class="feature-list">
+                  ${prosHtml}
+                </ul>
+              </div>
+              <div class="cons">
+                <h3>Cons</h3>
+                <ul class="feature-list">
+                  ${consHtml}
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterAndSort() {
+      const query = searchInput.value.toLowerCase().trim();
+      const sortVal = sortSelect.value;
+
+      // Filter
+      let filtered = citiesData.filter(city => {
+        if (!query) return true;
+        const searchableText = `${city.name} ${city.country} ${city.pros.join(' ')} ${city.cons.join(' ')} ${city.keywords}`.toLowerCase();
+        return searchableText.includes(query);
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        if (sortVal === 'score-desc') return b.score - a.score;
+        if (sortVal === 'cost-asc') return a.costNum - b.costNum;
+        if (sortVal === 'cost-desc') return b.costNum - a.costNum;
+        if (sortVal === 'name-asc') return a.name.localeCompare(b.name);
+        return 0;
+      });
+
+      renderCities(filtered);
+    }
+
+    searchInput.addEventListener('input', filterAndSort);
+    sortSelect.addEventListener('change', filterAndSort);
+
+    // Initial render
+    filterAndSort();
+  </script>
+</body>
+</html>
