@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jet Lag Calculator & Recovery Plan | Migrating Mammals</title>
+  <meta name="description" content="Calculate your expected jet lag severity and generate a personalized schedule to adjust to your new timezone before you travel.">
+  <meta property="og:title" content="Jet Lag Calculator & Recovery Plan">
+  <meta property="og:description" content="Beat jet lag with a personalized timezone adjustment schedule.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Jet Lag Calculator",
+    "url": "https://migratingmammals.com/jet-lag.html",
+    "description": "Calculate jet lag severity and get a personalized adjustment schedule based on your origin and destination timezones.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select, input[type="time"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="time"] {
+        font-family: var(--font-mono);
+    }
+
+    select:focus, input[type="time"]:focus {
+      border-color: var(--accent);
+    }
+
+    .row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      margin-top: 0;
+    }
+
+    button.secondary:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+      background: transparent;
+    }
+
+    /* Results Section */
+    #results {
+      display: none;
+      margin-top: 32px;
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+    }
+
+    #results.active {
+      display: block;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .stat-box {
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-sub {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 4px;
+    }
+
+    .severity-mild { color: var(--success); }
+    .severity-moderate { color: var(--warning); }
+    .severity-severe { color: var(--danger); }
+
+    /* Schedule */
+    .schedule-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .schedule-header h3 {
+        font-size: 1.25rem;
+        color: var(--accent);
+    }
+
+    .schedule-list {
+      list-style: none;
+    }
+
+    .schedule-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .schedule-day {
+      font-weight: 600;
+    }
+
+    .schedule-times {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    .copy-btn {
+      width: auto;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      margin-top: 0;
+    }
+
+    .alert {
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 24px;
+      font-size: 0.95rem;
+      background: rgba(196, 149, 106, 0.1);
+      border: 1px solid rgba(196, 149, 106, 0.3);
+      color: var(--text-primary);
+      display: none;
+    }
+
+    .alert.active {
+        display: block;
+    }
+
+    /* SEO Content */
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .schedule-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .schedule-times {
+          text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Jet Lag Calculator</h1>
+      <p class="subtitle">Calculate your expected jet lag severity and generate a personalized schedule to adjust your body clock before you travel.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="row">
+        <div class="form-group">
+          <label for="origin-tz">Origin Timezone</label>
+          <select id="origin-tz">
+            <option value="America/Los_Angeles">San Francisco / Los Angeles (PT)</option>
+            <option value="America/Denver">Denver (MT)</option>
+            <option value="America/Chicago">Chicago (CT)</option>
+            <option value="America/New_York" selected>New York (ET)</option>
+            <option value="America/Toronto">Toronto (ET)</option>
+            <option value="America/Sao_Paulo">São Paulo (BRT)</option>
+            <option value="Europe/London">London (GMT/BST)</option>
+            <option value="Europe/Paris">Paris / Berlin (CET/CEST)</option>
+            <option value="Africa/Johannesburg">Johannesburg (SAST)</option>
+            <option value="Asia/Dubai">Dubai (GST)</option>
+            <option value="Asia/Kolkata">Mumbai / New Delhi (IST)</option>
+            <option value="Asia/Singapore">Singapore (SGT)</option>
+            <option value="Asia/Tokyo">Tokyo (JST)</option>
+            <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+            <option value="Pacific/Auckland">Auckland (NZST/NZDT)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dest-tz">Destination Timezone</label>
+          <select id="dest-tz">
+            <option value="America/Los_Angeles">San Francisco / Los Angeles (PT)</option>
+            <option value="America/Denver">Denver (MT)</option>
+            <option value="America/Chicago">Chicago (CT)</option>
+            <option value="America/New_York">New York (ET)</option>
+            <option value="America/Toronto">Toronto (ET)</option>
+            <option value="America/Sao_Paulo">São Paulo (BRT)</option>
+            <option value="Europe/London" selected>London (GMT/BST)</option>
+            <option value="Europe/Paris">Paris / Berlin (CET/CEST)</option>
+            <option value="Africa/Johannesburg">Johannesburg (SAST)</option>
+            <option value="Asia/Dubai">Dubai (GST)</option>
+            <option value="Asia/Kolkata">Mumbai / New Delhi (IST)</option>
+            <option value="Asia/Singapore">Singapore (SGT)</option>
+            <option value="Asia/Tokyo">Tokyo (JST)</option>
+            <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+            <option value="Pacific/Auckland">Auckland (NZST/NZDT)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="normal-bedtime">Normal Bedtime</label>
+          <input type="time" id="normal-bedtime" value="23:00">
+        </div>
+        <div class="form-group">
+          <label for="normal-wake">Normal Wake Time</label>
+          <input type="time" id="normal-wake" value="07:00">
+        </div>
+      </div>
+
+      <button id="calculate-btn">Calculate Jet Lag Plan</button>
+
+      <div id="no-jetlag-alert" class="alert">
+        <strong>No significant jet lag expected!</strong> The time difference is minimal. Have a great trip!
+      </div>
+
+      <div id="results">
+        <div class="results-grid">
+          <div class="stat-box">
+            <div class="stat-label">Time Difference</div>
+            <div class="stat-value" id="time-diff-val">0h</div>
+            <div class="stat-sub" id="direction-val">Direction</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Estimated Recovery</div>
+            <div class="stat-value" id="recovery-val">0</div>
+            <div class="stat-sub">days to fully adjust</div>
+          </div>
+        </div>
+
+        <div class="schedule-header">
+          <h3>Pre-Trip Adjustment Schedule</h3>
+          <button class="secondary copy-btn" id="copy-btn">Copy Plan</button>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
+          Shift your sleep schedule gradually over the 3 days before you depart to minimize jet lag upon arrival.
+        </p>
+
+        <ul class="schedule-list" id="schedule-list">
+          <!-- Schedule items populated by JS -->
+        </ul>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>Understanding Jet Lag: East vs. West</h2>
+      <p>Jet lag occurs when your body's internal clock (circadian rhythm) is out of sync with the time at your destination. The direction of travel significantly impacts how you experience jet lag.</p>
+      <ul>
+        <li><strong>Traveling East (Losing Time):</strong> Generally considered harder to adjust to. You are trying to advance your body clock, meaning you need to go to sleep earlier and wake up earlier than your body is used to. It typically takes about 1 day to recover for every hour of time zone change.</li>
+        <li><strong>Traveling West (Gaining Time):</strong> Usually easier for most people. You are delaying your body clock, meaning you stay up later and sleep in longer. Our natural circadian rhythm is slightly longer than 24 hours, making it easier to extend the day. It typically takes about 1 day to recover for every 1.5 hours of time zone change.</li>
+      </ul>
+
+      <h2>Tips for Minimizing Jet Lag</h2>
+      <p>While shifting your sleep schedule beforehand helps, you can also use these strategies during and after your flight:</p>
+      <ul>
+        <li><strong>Light Exposure:</strong> Light is the strongest cue for your circadian rhythm. If traveling East, get morning light and avoid evening light. If traveling West, seek evening light and avoid early morning light.</li>
+        <li><strong>Stay Hydrated:</strong> Airplane cabins are extremely dry. Dehydration exacerbates the physical symptoms of jet lag. Drink plenty of water and limit alcohol and caffeine on the flight.</li>
+        <li><strong>Adjust Immediately:</strong> As soon as you step on the plane, change your watch to the destination time and try to eat and sleep according to that schedule.</li>
+        <li><strong>Melatonin:</strong> A low dose of melatonin (0.5mg to 3mg) taken 30-60 minutes before your target bedtime at the destination can help signal to your body that it's time to sleep.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const originSelect = document.getElementById('origin-tz');
+    const destSelect = document.getElementById('dest-tz');
+    const bedtimeInput = document.getElementById('normal-bedtime');
+    const wakeInput = document.getElementById('normal-wake');
+    const calculateBtn = document.getElementById('calculate-btn');
+
+    const resultsSection = document.getElementById('results');
+    const noJetlagAlert = document.getElementById('no-jetlag-alert');
+    const timeDiffVal = document.getElementById('time-diff-val');
+    const directionVal = document.getElementById('direction-val');
+    const recoveryVal = document.getElementById('recovery-val');
+    const scheduleList = document.getElementById('schedule-list');
+    const copyBtn = document.getElementById('copy-btn');
+
+    // Helper: Get offset in hours between two timezones at current time
+    function getOffsetBetweenTimezones(originTz, destTz) {
+      const now = new Date();
+
+      // Get the UTC offset for both timezones at the current moment
+      // We parse the parts to construct dates in UTC to avoid local timezone interference
+      const getTzOffsetHours = (tz) => {
+          const parts = new Intl.DateTimeFormat('en-US', {
+              timeZone: tz,
+              year: 'numeric', month: 'numeric', day: 'numeric',
+              hour: 'numeric', minute: 'numeric', second: 'numeric',
+              hour12: false
+          }).formatToParts(now);
+
+          const getPart = (type) => parseInt(parts.find(p => p.type === type).value, 10);
+
+          // month is 0-indexed in Date constructor
+          const tzDate = new Date(Date.UTC(
+              getPart('year'), getPart('month') - 1, getPart('day'),
+              getPart('hour') === 24 ? 0 : getPart('hour'), getPart('minute'), getPart('second')
+          ));
+
+          return (tzDate - now) / (1000 * 60 * 60);
+      };
+
+      const originOffset = getTzOffsetHours(originTz);
+      const destOffset = getTzOffsetHours(destTz);
+
+      // Difference in hours (positive means destination is ahead / East)
+      return destOffset - originOffset;
+    }
+
+    // Format time string (HH:MM) to 12-hour AM/PM format
+    function formatTimeAMPM(timeStr) {
+        if (!timeStr) return '';
+        const [hourStr, minute] = timeStr.split(':');
+        let hour = parseInt(hourStr, 10);
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        hour = hour % 12;
+        hour = hour ? hour : 12; // 0 becomes 12
+        return \`\${hour}:\${minute} \${ampm}\`;
+    }
+
+    // Add minutes to a HH:MM time string
+    function addMinutesToTime(timeStr, minutesToAdd) {
+        const [h, m] = timeStr.split(':').map(Number);
+        let date = new Date(2000, 0, 1, h, m);
+        date.setMinutes(date.getMinutes() + minutesToAdd);
+
+        const newH = date.getHours().toString().padStart(2, '0');
+        const newM = date.getMinutes().toString().padStart(2, '0');
+        return \`\${newH}:\${newM}\`;
+    }
+
+    calculateBtn.addEventListener('click', () => {
+        const origin = originSelect.value;
+        const dest = destSelect.value;
+        const bedtime = bedtimeInput.value;
+        const wake = wakeInput.value;
+
+        if (!origin || !dest || !bedtime || !wake) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        const diffHoursRaw = getOffsetBetweenTimezones(origin, dest);
+
+        // Handle wrapping for extreme timezone differences (e.g. crossing international date line)
+        // Usually, the shortest path is the relevant one for jet lag
+        let diffHours = diffHoursRaw;
+
+        // For wrapping logic to work correctly, we should only wrap if the difference is very large.
+        // Wait, actually, timezone differences can be up to 14 hours.
+        // If it's a 14 hour difference (e.g., NY to Tokyo), going the other way is 10 hours.
+        // The body usually adjusts to the shorter path if the difference is more than 12 hours.
+        // Let's use the shorter path.
+        if (diffHours > 12) diffHours -= 24;
+        else if (diffHours < -12) diffHours += 24;
+
+        const absDiff = Math.abs(diffHours);
+
+        if (absDiff < 2) {
+            resultsSection.classList.remove('active');
+            noJetlagAlert.classList.add('active');
+            return;
+        }
+
+        noJetlagAlert.classList.remove('active');
+        resultsSection.classList.add('active');
+
+        const direction = diffHours > 0 ? 'East' : 'West';
+        const directionText = diffHours > 0 ? 'Ahead (Eastward)' : 'Behind (Westward)';
+
+        timeDiffVal.textContent = \`\${absDiff}h\`;
+        directionVal.textContent = directionText;
+
+        // Calculate recovery time
+        // East: 1 day per hour
+        // West: 1 day per 1.5 hours
+        let recoveryDays = 0;
+        if (direction === 'East') {
+            recoveryDays = Math.ceil(absDiff * 1);
+        } else {
+            recoveryDays = Math.ceil(absDiff / 1.5);
+        }
+
+        recoveryVal.textContent = recoveryDays;
+
+        // Color coding based on severity
+        recoveryVal.className = 'stat-value';
+        if (recoveryDays <= 3) recoveryVal.classList.add('severity-mild');
+        else if (recoveryDays <= 6) recoveryVal.classList.add('severity-moderate');
+        else recoveryVal.classList.add('severity-severe');
+
+        // Generate Schedule
+        // Max shift is usually 1 hour per day. We do a 3 day plan.
+        const maxShiftPerDay = 60; // minutes
+        let totalShiftNeeded = diffHours * 60;
+
+        // We cap the pre-trip shift at 3 hours total (1 hour per day for 3 days)
+        // because shifting more than that while still in origin timezone is very hard.
+        let shiftDirection = direction === 'East' ? -1 : 1; // East = sleep earlier (negative minutes)
+        let maxTotalShift = 3 * maxShiftPerDay;
+
+        let targetTotalShift = Math.min(Math.abs(totalShiftNeeded), maxTotalShift);
+        let shiftPerDay = Math.round(targetTotalShift / 3);
+
+        scheduleList.innerHTML = '';
+
+        for (let i = 3; i >= 1; i--) {
+            // Day 3 before is index 1 of shift, Day 1 before is index 3 of shift
+            const dayShiftMinutes = shiftDirection * shiftPerDay * (4 - i);
+
+            const adjBedtime = addMinutesToTime(bedtime, dayShiftMinutes);
+            const adjWake = addMinutesToTime(wake, dayShiftMinutes);
+
+            const li = document.createElement('li');
+            li.className = 'schedule-item';
+
+            let shiftDesc = "";
+            if (shiftDirection < 0) {
+                shiftDesc = \`<br><span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal;">(Shift \${Math.abs(dayShiftMinutes)}m earlier)</span>\`;
+            } else {
+                shiftDesc = \`<br><span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal;">(Shift \${Math.abs(dayShiftMinutes)}m later)</span>\`;
+            }
+
+            li.innerHTML = \`
+                <div class="schedule-day">
+                    Day \${4-i} <span style="font-weight:normal; color:var(--text-secondary);">(\${i} days before flight)</span>
+                    \${shiftDesc}
+                </div>
+                <div class="schedule-times">
+                    <div>Bedtime: <strong>\${formatTimeAMPM(adjBedtime)}</strong></div>
+                    <div>Wake up: <strong>\${formatTimeAMPM(adjWake)}</strong></div>
+                </div>
+            \`;
+            scheduleList.appendChild(li);
+        }
+
+        // Add actual travel day tip
+        const liFlight = document.createElement('li');
+        liFlight.className = 'schedule-item';
+        liFlight.style.backgroundColor = 'rgba(196, 149, 106, 0.05)';
+        liFlight.innerHTML = \`
+            <div class="schedule-day" style="color: var(--accent);">
+                Travel Day
+            </div>
+            <div class="schedule-times" style="text-align:left;">
+                <span style="font-size: 0.85rem;">Change watch to destination time. Attempt to sleep/eat on destination schedule.</span>
+            </div>
+        \`;
+        scheduleList.appendChild(liFlight);
+    });
+
+    copyBtn.addEventListener('click', () => {
+        let text = \`Jet Lag Adjustment Plan\\n\\n\`;
+        text += \`Origin: \${originSelect.options[originSelect.selectedIndex].text}\\n\`;
+        text += \`Destination: \${destSelect.options[destSelect.selectedIndex].text}\\n\`;
+        text += \`Time Difference: \${timeDiffVal.textContent} \${directionVal.textContent}\\n\`;
+        text += \`Estimated Recovery: \${recoveryVal.textContent} days\\n\\n\`;
+
+        text += \`Pre-Trip Schedule:\\n\`;
+        const items = scheduleList.querySelectorAll('li');
+        items.forEach((item, index) => {
+            if (index < 3) {
+                const dayText = item.querySelector('.schedule-day').innerText.replace(/\\n.*/, ''); // Get just "Day X (Y days before flight)"
+                const times = item.querySelectorAll('.schedule-times div');
+                text += \`- \${dayText}: \${times[0].innerText}, \${times[1].innerText}\\n\`;
+            } else {
+                text += \`- Travel Day: Change watch to destination time.\\n\`;
+            }
+        });
+
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = 'Copied!';
+            setTimeout(() => {
+                copyBtn.innerText = originalText;
+            }, 2000);
+        });
+    });
+
+  </script>
+</body>
+</html>
