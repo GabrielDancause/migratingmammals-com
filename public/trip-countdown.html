@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trip Countdown Timer | Migrating Mammals</title>
+  <meta name="description" content="Free tool to track countdowns for multiple upcoming trips. Shows remaining days, hours, and minutes for all your travel plans.">
+  <meta property="og:title" content="Trip Countdown Timer">
+  <meta property="og:description" content="Calculate remaining days, hours, and minutes until your next trip. Track multiple trips simultaneously.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Trip Countdown Timer",
+    "url": "https://migratingmammals.com/trip-countdown.html",
+    "description": "Track countdowns for multiple upcoming trips. Shows remaining days, hours, and minutes for your travel plans.",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0806;
+      --card-bg: #12100c;
+      --border: #2a2418;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .card-header {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"] {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Color scheme for datepicker icon */
+    ::-webkit-calendar-picker-indicator {
+      filter: invert(1) opacity(0.5);
+      cursor: pointer;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      font-family: var(--font-ui);
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(196, 149, 106, 0.1);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      width: auto;
+    }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Trip List */
+    .trip-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .trip-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .trip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .trip-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .trip-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .trip-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .trip-date {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .countdown-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 8px;
+    }
+
+    .countdown-value {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .trip-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* SEO Section */
+    .seo-content {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Overdue state */
+    .trip-item.overdue {
+      border-color: var(--accent);
+    }
+    .trip-item.overdue .countdown-value {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Trip Countdown Timer</h1>
+      <p class="subtitle">Track the days, hours, and minutes until your next adventure. Build excitement for multiple upcoming trips.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="card">
+      <div class="card-header">Add New Trip</div>
+      <form id="add-trip-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="trip-name">Destination / Trip Name</label>
+            <input type="text" id="trip-name" placeholder="e.g., Summer in Kyoto" required>
+          </div>
+          <div class="form-group">
+            <label for="trip-date">Date & Time</label>
+            <input type="datetime-local" id="trip-date" required>
+          </div>
+        </div>
+        <button type="submit" class="btn">Add to Countdown List</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Your Countdowns</div>
+      <div id="trip-list" class="trip-list">
+        <!-- Trips will be rendered here -->
+        <div class="empty-state">No trips added yet. Add your first destination above!</div>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>How to Use the Trip Countdown Timer</h2>
+      <p>Building excitement is half the fun of traveling! Our free trip countdown timer allows you to simultaneously track exactly how much time is left before you depart for multiple destinations. Simply enter your destination name and your departure date and time, and the tool will calculate the remaining days, hours, and minutes.</p>
+
+      <h2>Why Track Multiple Trips?</h2>
+      <ul>
+        <li><strong>Digital Nomads:</strong> If you're constantly on the move, it's easy to lose track of when your current visa expires or your next flight departs. Keeping a centralized list helps manage your itinerary.</li>
+        <li><strong>Frequent Travelers:</strong> Anticipating several upcoming vacations or business trips? Seeing the countdowns side-by-side helps you prioritize your packing and preparation.</li>
+        <li><strong>Sharing with Friends:</strong> Use the "Copy" feature to quickly share your exact countdown status with travel companions or family members on WhatsApp or social media.</li>
+      </ul>
+
+      <h2>Tips for Trip Preparation</h2>
+      <p>As the countdown gets closer to zero, don't forget the essentials! When you hit the 30-day mark, it's a good idea to confirm your accommodation and double-check visa requirements. At the 7-day mark, start organizing your packing list and notify your bank of your upcoming international travel to avoid blocked cards.</p>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    // State
+    let trips = [];
+    let timerInterval = null;
+
+    // DOM Elements
+    const addTripForm = document.getElementById('add-trip-form');
+    const tripNameInput = document.getElementById('trip-name');
+    const tripDateInput = document.getElementById('trip-date');
+    const tripListEl = document.getElementById('trip-list');
+
+    // Load from localStorage
+    try {
+      const saved = localStorage.getItem('trip-countdowns');
+      if (saved) {
+        trips = JSON.parse(saved);
+        // Sort trips by date (closest first)
+        sortTrips();
+      }
+    } catch (e) {
+      console.error("Could not load saved trips");
+    }
+
+    // Set minimum date to today for the datetime input
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    tripDateInput.min = now.toISOString().slice(0, 16);
+
+    function saveTrips() {
+      localStorage.setItem('trip-countdowns', JSON.stringify(trips));
+    }
+
+    function sortTrips() {
+      trips.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    function generateId() {
+      return Math.random().toString(36).substring(2, 9);
+    }
+
+    function calculateTimeLeft(targetDateStr) {
+      const targetDate = new Date(targetDateStr);
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference <= 0) {
+        return { total: 0, days: 0, hours: 0, minutes: 0, seconds: 0, isOverdue: true };
+      }
+
+      return {
+        total: difference,
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+        isOverdue: false
+      };
+    }
+
+    function formatDisplayDate(dateStr) {
+      const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return new Date(dateStr).toLocaleDateString(undefined, options);
+    }
+
+    function renderTrips() {
+      if (trips.length === 0) {
+        tripListEl.innerHTML = '<div class="empty-state">No trips added yet. Add your first destination above!</div>';
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        return;
+      }
+
+      tripListEl.innerHTML = '';
+
+      trips.forEach(trip => {
+        const timeLeft = calculateTimeLeft(trip.date);
+
+        const tripEl = document.createElement('div');
+        tripEl.className = `trip-item ${timeLeft.isOverdue ? 'overdue' : ''}`;
+        tripEl.id = `trip-${trip.id}`;
+
+        // Escape HTML to prevent XSS
+        const escapeHtml = (unsafe) => {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        };
+
+        const safeName = escapeHtml(trip.name);
+
+        tripEl.innerHTML = `
+          <div class="trip-header">
+            <div>
+              <div class="trip-name">${safeName}</div>
+              <div class="trip-date">${formatDisplayDate(trip.date)}</div>
+            </div>
+            <div class="trip-actions">
+              <button class="btn btn-secondary btn-sm copy-btn" data-id="${trip.id}">Copy</button>
+              <button class="btn btn-danger btn-sm remove-btn" data-id="${trip.id}">Remove</button>
+            </div>
+          </div>
+
+          ${timeLeft.isOverdue ?
+            `<div style="text-align:center; padding: 20px 0; color: var(--accent); font-weight: bold; font-size: 1.2rem;">
+              Trip time has arrived! ✈️
+            </div>` :
+            `<div class="countdown-grid">
+              <div class="countdown-box">
+                <div class="countdown-value days-val">${timeLeft.days}</div>
+                <div class="countdown-label">Days</div>
+              </div>
+              <div class="countdown-box">
+                <div class="countdown-value hours-val">${timeLeft.hours}</div>
+                <div class="countdown-label">Hours</div>
+              </div>
+              <div class="countdown-box">
+                <div class="countdown-value minutes-val">${timeLeft.minutes}</div>
+                <div class="countdown-label">Mins</div>
+              </div>
+              <div class="countdown-box">
+                <div class="countdown-value seconds-val">${timeLeft.seconds}</div>
+                <div class="countdown-label">Secs</div>
+              </div>
+            </div>`
+          }
+        `;
+
+        tripListEl.appendChild(tripEl);
+      });
+
+      // Attach event listeners to newly created buttons
+      document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => removeTrip(e.target.dataset.id));
+      });
+
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => copyTrip(e.target.dataset.id, e.target));
+      });
+
+      // Start timer if not running
+      if (!timerInterval) {
+        timerInterval = setInterval(updateAllCountdowns, 1000);
+      }
+    }
+
+    function updateAllCountdowns() {
+      let needsFullRender = false;
+
+      trips.forEach(trip => {
+        const timeLeft = calculateTimeLeft(trip.date);
+        const tripEl = document.getElementById(`trip-${trip.id}`);
+
+        if (!tripEl) return;
+
+        if (timeLeft.isOverdue && !tripEl.classList.contains('overdue')) {
+          // Transitioned to overdue state, need a full render to show the message
+          needsFullRender = true;
+          return;
+        }
+
+        if (!timeLeft.isOverdue) {
+          // Fast DOM update for values
+          const daysEl = tripEl.querySelector('.days-val');
+          const hoursEl = tripEl.querySelector('.hours-val');
+          const minsEl = tripEl.querySelector('.minutes-val');
+          const secsEl = tripEl.querySelector('.seconds-val');
+
+          if (daysEl && daysEl.textContent != timeLeft.days) daysEl.textContent = timeLeft.days;
+          if (hoursEl && hoursEl.textContent != timeLeft.hours) hoursEl.textContent = timeLeft.hours;
+          if (minsEl && minsEl.textContent != timeLeft.minutes) minsEl.textContent = timeLeft.minutes;
+          if (secsEl && secsEl.textContent != timeLeft.seconds) secsEl.textContent = timeLeft.seconds;
+        }
+      });
+
+      if (needsFullRender) {
+        renderTrips();
+      }
+    }
+
+    function addTrip(e) {
+      e.preventDefault();
+
+      const name = tripNameInput.value.trim();
+      const dateStr = tripDateInput.value;
+
+      if (!name || !dateStr) return;
+
+      const newTrip = {
+        id: generateId(),
+        name: name,
+        date: dateStr,
+        createdAt: new Date().toISOString()
+      };
+
+      trips.push(newTrip);
+      sortTrips();
+      saveTrips();
+      renderTrips();
+
+      // Reset form
+      tripNameInput.value = '';
+      tripDateInput.value = '';
+      tripNameInput.focus();
+    }
+
+    function removeTrip(id) {
+      trips = trips.filter(t => t.id !== id);
+      saveTrips();
+      renderTrips();
+    }
+
+    function copyTrip(id, btnEl) {
+      const trip = trips.find(t => t.id === id);
+      if (!trip) return;
+
+      const timeLeft = calculateTimeLeft(trip.date);
+      let text = '';
+
+      if (timeLeft.isOverdue) {
+        text = `My trip to ${trip.name} has arrived! ✈️\nTracked via migratingmammals.com`;
+      } else {
+        text = `Countdown to ${trip.name} ✈️\n${timeLeft.days} days, ${timeLeft.hours} hours, ${timeLeft.minutes} mins remaining!\nTracked via migratingmammals.com`;
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btnEl.innerText;
+        btnEl.innerText = 'Copied!';
+        setTimeout(() => {
+          btnEl.innerText = originalText;
+        }, 2000);
+      });
+    }
+
+    // Event Listeners
+    addTripForm.addEventListener('submit', addTrip);
+
+    // Initial render
+    renderTrips();
+  </script>
+</body>
+</html>
