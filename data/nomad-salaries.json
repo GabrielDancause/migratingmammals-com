@@ -1,0 +1,128 @@
+[
+  {
+    "role": "Data Engineer",
+    "category": "Data",
+    "medianSalaryUSD": 137500,
+    "p25": 121250,
+    "p75": 153750,
+    "remoteListings": 2,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Data Scientist",
+    "category": "Data",
+    "medianSalaryUSD": 125000,
+    "p25": 60000,
+    "p75": 185000,
+    "remoteListings": 9,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Product Designer",
+    "category": "Design",
+    "medianSalaryUSD": 100000,
+    "p25": 100000,
+    "p75": 100000,
+    "remoteListings": 2,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Frontend Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 145000,
+    "p25": 123750,
+    "p75": 162500,
+    "remoteListings": 3,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "DevOps Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 140000,
+    "p25": 140000,
+    "p75": 140000,
+    "remoteListings": 1,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Backend Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 125000,
+    "p25": 125000,
+    "p75": 125000,
+    "remoteListings": 1,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Full Stack Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 125000,
+    "p25": 102500,
+    "p75": 155000,
+    "remoteListings": 3,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Software Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 98750,
+    "p25": 79375,
+    "p75": 125000,
+    "remoteListings": 8,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Finance Manager",
+    "category": "Finance",
+    "medianSalaryUSD": 148282,
+    "p25": 135250,
+    "p75": 195050,
+    "remoteListings": 7,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "HR Manager",
+    "category": "HR & Ops",
+    "medianSalaryUSD": 110450,
+    "p25": 75225,
+    "p75": 145675,
+    "remoteListings": 2,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Marketing Manager",
+    "category": "Marketing",
+    "medianSalaryUSD": 127250,
+    "p25": 103375,
+    "p75": 157824,
+    "remoteListings": 8,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Product Manager",
+    "category": "Product",
+    "medianSalaryUSD": 95400,
+    "p25": 71450,
+    "p75": 119350,
+    "remoteListings": 2,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Sales Representative",
+    "category": "Sales",
+    "medianSalaryUSD": 141250,
+    "p25": 119775,
+    "p75": 184944,
+    "remoteListings": 8,
+    "typicalExperience": "Mid-Senior Level"
+  },
+  {
+    "role": "Customer Success Manager",
+    "category": "Support",
+    "medianSalaryUSD": 140000,
+    "p25": 90000,
+    "p75": 147463,
+    "remoteListings": 3,
+    "typicalExperience": "Mid-Senior Level"
+  }
+]
