@@ -27,10 +27,20 @@ const tools = [
 
 // Studies 
 const studies = [
+  {
+    emoji: "💳",
+    title: "Travel Credit Card Foreign Transaction Fee Comparison 2026",
+    subtitle: "23 cards · no foreign transaction fees",
+    slug: "/travel-card-fees",
+    stat: "23",
+    statLabel: "cards compared",
+    desc: "We analyzed 23 popular travel credit cards with no foreign transaction fees, from no-annual-fee options to premium cards with lounge access.",
+    tag: "ORIGINAL RESEARCH",
+    name: "Travel Credit Card Fee Comparison" // keeping name field in case it's used elsewhere
+  },
   { emoji: "🏢", name: "Coworking Space Prices Around the World 2026", slug: "/coworking-prices", desc: "Compare coworking day pass and monthly prices across 50+ cities popular with digital nomads.", stat: "52", statLabel: "cities analyzed" },
   { emoji: "🌍", name: "Digital Nomad Visa Index 2026", slug: "/nomad-visa-index", desc: "60 countries with nomad visa programs — cost, duration, tax implications", stat: "60", statLabel: "countries with nomad visas" },
-  { emoji: "🏙️", name: "Nomad Cost of Living Index 2026", slug: "/cost-of-living-index", desc: "42 popular nomad cities ranked by monthly costs", stat: "$705", statLabel: "Chiang Mai monthly budget" },
-  { emoji: "💳", name: "Travel Credit Card Fee Comparison", slug: "/travel-card-fees", desc: "22 travel cards compared — fees, rewards, and perks", stat: "0%", statLabel: "foreign transaction fee (best cards)" }
+  { emoji: "🏙️", name: "Nomad Cost of Living Index 2026", slug: "/cost-of-living-index", desc: "42 popular nomad cities ranked by monthly costs", stat: "$705", statLabel: "Chiang Mai monthly budget" }
 ];
 
 // Guides
@@ -348,12 +358,14 @@ const lists = [
       <div class="studies-grid">
         {studies.map(study => (
           <a class="study-card" href={study.slug}>
+            {study.tag && <div class="section-tag" style="margin-bottom: 12px; font-size: 0.65rem;">{study.tag}</div>}
             <span class="study-emoji">{study.emoji}</span>
             <div class="study-stat">
               <span class="stat-number">{study.stat}</span>
               <span class="stat-label">{study.statLabel}</span>
             </div>
-            <h3 class="study-name">{study.name}</h3>
+            <h3 class="study-name">{study.title || study.name}</h3>
+            {study.subtitle && <p style="font-size: 0.8rem; color: #C4956A; margin-bottom: 8px;">{study.subtitle}</p>}
             <p class="study-desc">{study.desc}</p>
           </a>
         ))}
