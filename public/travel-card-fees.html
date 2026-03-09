@@ -1,1018 +1,845 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G86C7NJG3F');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Credit Card Foreign Transaction Fee Comparison 2026 | migratingmammals.com</title>
-  <meta name="description" content="Compare foreign transaction fees, annual fees, and travel perks across 20+ major US credit cards. Find the best card for your 2026 travels.">
-  <link rel="canonical" href="https://migratingmammals.com/travel-card-fees">
+  <title>Travel Credit Card Foreign Transaction Fee Comparison 2026</title>
+  <meta name="description" content="Compare foreign transaction fees, annual fees, and travel perks across major US credit cards. Find the best travel card with no foreign transaction fee.">
+  <link rel="canonical" href="https://migratingmammals.com/travel-card-fees" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #0a0b10;
+      --bg: #0a0b10;
       --card-bg: #111318;
-      --border-color: #1e2030;
+      --border: #1e2030;
       --accent: #C4956A;
-      --text-primary: #e0e0e0;
-      --text-secondary: #a0a0a0;
-      --success: #4CAF50;
-      --warning: #FFC107;
+      --text-main: #e0d5c8;
+      --text-sec: #888888;
+      --success: #38a169;
+      --danger: #e53e3e;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background-color: var(--bg-color);
-      color: var(--text-primary);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text-main);
       line-height: 1.6;
     }
-    header, main, footer {
-      max-width: 1100px;
+
+    header {
+      padding: 60px 24px 40px;
+      text-align: center;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 2rem;
     }
-    h1, h2, h3 {
-      color: var(--accent);
-    }
+
     h1 {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      color: #fff;
     }
+
     .subtitle {
-        color: var(--text-secondary);
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
+      color: var(--text-sec);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
     }
-    .methodology {
-      background-color: var(--card-bg);
-      border-left: 4px solid var(--accent);
-      padding: 1.5rem;
-      margin-bottom: 3rem;
-      border-radius: 4px;
+
+    .accent { color: var(--accent); }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
     }
-    .methodology h2 {
-        margin-top: 0;
-        font-size: 1.5rem;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: transform 0.2s;
+
+    .controls {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
     }
-    .card:hover {
-      transform: translateY(-5px);
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+    }
+
+    .search-box input:focus {
+      outline: none;
       border-color: var(--accent);
     }
-    .card h3 {
-      margin-top: 0;
-      min-height: 3em;
+
+    .filters {
       display: flex;
-      align-items: center;
+      gap: 12px;
     }
-    .issuer {
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-secondary);
-        margin-bottom: 0.5rem;
-    }
-    .category-tag {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        background: var(--border-color);
-        margin-bottom: 1rem;
-    }
-    .fee-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .fee-box {
-        text-align: center;
-        flex: 1;
-    }
-    .fee-label {
-        display: block;
-        font-size: 0.7rem;
-        color: var(--text-secondary);
-        text-transform: uppercase;
-    }
-    .fee-value {
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-    .perks {
-        margin-top: 1rem;
-        flex-grow: 1;
-    }
-    .perk-item {
-        display: flex;
-        align-items: flex-start;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-    .perk-icon {
-        margin-right: 8px;
-        color: var(--success);
-    }
-    .no-perk {
-        color: var(--text-secondary);
-        text-decoration: line-through;
-    }
-    .rewards {
-        font-style: italic;
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        margin-top: 1rem;
-    }
-    .bonus {
-        margin-top: 1rem;
-        padding: 0.5rem;
-        background: rgba(196, 149, 106, 0.1);
-        border-radius: 4px;
-        font-size: 0.85rem;
-        color: var(--accent);
-    }
-    .faq {
-        margin-top: 4rem;
-    }
-    .faq-item {
-      margin-bottom: 2rem;
-    }
-    .faq-item h4 {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-    .faq-item p {
-      color: var(--text-secondary);
-    }
-    footer {
-      border-top: 1px solid var(--border-color);
-      margin-top: 4rem;
-      text-align: center;
-      color: var(--text-secondary);
+
+    select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
       font-size: 0.9rem;
+      cursor: pointer;
+      appearance: none;
     }
-    a {
+    select:focus { outline: none; border-color: var(--accent); }
+
+    .table-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-sec);
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    th:hover { color: var(--text-main); }
+
+    .sort-asc::after { content: ' ↑'; color: var(--accent); }
+    .sort-desc::after { content: ' ↓'; color: var(--accent); }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .card-name {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .card-issuer {
+      font-size: 0.8rem;
+      color: var(--text-sec);
+      background: rgba(255,255,255,0.05);
+      padding: 2px 8px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    .money-val {
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }
+
+    .fx-fee {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .fx-zero { background: rgba(56, 161, 105, 0.15); color: #68d391; }
+    .fx-high { background: rgba(229, 62, 62, 0.15); color: #fc8181; }
+
+    .bool-icon {
+      font-size: 1.2rem;
+    }
+    .bool-true { color: #68d391; }
+    .bool-false { color: #4a5568; }
+
+    .details-cell {
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      max-width: 250px;
+    }
+
+    .perk-tag {
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      background: rgba(196, 149, 106, 0.15);
+      color: var(--accent);
+      border-radius: 4px;
+      margin-right: 4px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    .faq-section h2 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .faq-q {
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .faq-a {
+      color: var(--text-sec);
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-sec);
+      font-size: 0.85rem;
+    }
+
+    .footer a {
       color: var(--accent);
       text-decoration: none;
     }
-    a:hover {
-      text-decoration: underline;
-    }
-    @media (max-width: 600px) {
-        header, main, footer {
-            padding: 1rem;
-        }
-        h1 {
-            font-size: 1.8rem;
-        }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .controls { flex-direction: column; align-items: stretch; }
+      .filters { flex-direction: column; }
+      .hide-mobile { display: none; }
+      th, td { padding: 12px; }
     }
   </style>
-  <script type="application/ld+json">
-    [
+</head>
+<body>
+
+  <header>
+    <h1>Travel Credit Card Foreign Transaction Fee Comparison <span class="accent">2026</span></h1>
+    <p class="subtitle">We compared 24 popular travel credit cards to find the best options with no foreign transaction fees, analyzing annual costs, rewards, and travel perks.</p>
+  </header>
+
+  <div class="container">
+    <div class="controls">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search by card name, issuer, or rewards...">
+      </div>
+      <div class="filters">
+        <select id="fee-filter">
+          <option value="all">All Annual Fees</option>
+          <option value="0">$0 Annual Fee</option>
+          <option value="1-99">$1 - $99</option>
+          <option value="100+">$100+</option>
+        </select>
+        <select id="fx-filter">
+          <option value="all">All FX Fees</option>
+          <option value="0">No FX Fee (0%)</option>
+        </select>
+        <select id="category-filter">
+          <option value="all">All Categories</option>
+          <option value="premium">Premium</option>
+          <option value="mid-tier">Mid-Tier</option>
+          <option value="no-annual-fee">No Annual Fee</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 12px; font-size: 0.9rem; color: var(--text-sec);">
+      Showing <span id="result-count" style="color: #fff; font-weight: 600;">0</span> cards
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th data-sort="cardName">Card & Issuer</th>
+            <th data-sort="annualFeeUSD">Annual Fee</th>
+            <th data-sort="foreignTxFeePct">FX Fee</th>
+            <th class="hide-mobile">Rewards & Bonus</th>
+            <th data-sort="loungeAccess">Perks</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Rows injected via JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="faq-section" style="margin-top: 40px; margin-bottom: 40px;">
+    <h2>Methodology</h2>
+    <p style="color: var(--text-sec); line-height: 1.6;">We analyzed 24 major U.S. travel credit cards to compare their foreign transaction fees, annual fees, and travel perks such as lounge access and travel insurance. Data was sourced from public issuer information and cross-referenced with top financial review sites like NerdWallet, Bankrate, The Points Guy, and CNBC. We categorized the cards into premium, mid-tier, and no-annual-fee segments to provide a comprehensive comparison for different types of travelers.</p>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Which credit cards have no foreign transaction fee?</div>
+      <div class="faq-a">Many travel credit cards offer no foreign transaction fees. Popular options include the Chase Sapphire Preferred, Capital One Venture X, Capital One Savor, and the Bank of America Travel Rewards card. Generally, cards branded for travel or premium rewards waive this fee.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is the Chase Sapphire worth the annual fee for travel?</div>
+      <div class="faq-a">Yes, for most frequent travelers. The Chase Sapphire Preferred has a $95 annual fee but offers 2x points on travel, primary rental car insurance, and valuable points that transfer to airlines and hotels. The Chase Sapphire Reserve ($550 fee) includes lounge access and a $300 travel credit, making it worthwhile for heavy travelers.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do Capital One cards charge foreign transaction fees?</div>
+      <div class="faq-a">No, none of Capital One's U.S.-issued credit cards charge a foreign transaction fee. This applies to all their cards, including the Quicksilver, Savor, and Venture lines, making them excellent choices for international travel.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is a foreign transaction fee?</div>
+      <div class="faq-a">A foreign transaction fee (or FX fee) is a surcharge added by your credit card issuer on purchases made outside your home country or in a foreign currency. It is typically around 3% of the transaction amount, which can add up quickly during a trip.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Which is the best credit card for international travel?</div>
+      <div class="faq-a">The "best" card depends on your travel style. The Capital One Venture X is highly rated for premium perks (lounge access) at a lower effective cost than competitors. The Chase Sapphire Preferred is the best mid-tier option, while the Wells Fargo Autograph is an excellent no-annual-fee choice.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 <a href="/">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+  </div>
+
+  <!-- JSON Data -->
+  <script id="card-data" type="application/json">
+[
   {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Travel Credit Card Foreign Transaction Fee Comparison 2026",
-    "url": "https://migratingmammals.com/travel-card-fees",
-    "description": "Comprehensive comparison of foreign transaction fees, annual fees, and travel perks across major US credit cards for 2026.",
-    "datePublished": "2026-01-01",
-    "author": {
-      "@type": "Organization",
-      "name": "migratingmammals.com"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "migratingmammals.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://migratingmammals.com/logo.png"
-      }
-    }
+    "cardName": "Chase Sapphire Preferred® Card",
+    "issuer": "Chase",
+    "annualFeeUSD": 95,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "2x on travel, 3x on dining",
+    "signupBonus": "Earn 60,000 bonus points after you spend $4,000 on purchases in the first 3 months",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "mid-tier"
   },
   {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Which credit cards have no foreign transaction fee?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Many travel-focused credit cards from issuers like Chase, Capital One, and American Express offer no foreign transaction fees. All Capital One and Discover cards have no foreign transaction fees, while other issuers typically reserve this perk for their mid-tier and premium travel cards."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is the Chase Sapphire worth the annual fee for travel?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "For frequent travelers, the Chase Sapphire Preferred ($95) or Reserve ($550) are often worth it due to their high rewards rates on travel, valuable point transfer partners, and comprehensive travel insurance. The Reserve also adds lounge access and a $300 annual travel credit."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do Capital One cards charge foreign transaction fees?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No, Capital One is one of the few major issuers that charges $0 in foreign transaction fees across its entire credit card lineup, including their no-annual-fee and secured cards."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is a foreign transaction fee?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A foreign transaction fee is a surcharge (typically 3%) that credit card issuers add to purchases made outside the United States or with a non-U.S. merchant. It covers the cost of processing the international transaction."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which is the best credit card for international travel?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The 'best' card depends on your spending, but top contenders for 2026 include the Chase Sapphire Preferred for its balance of fee and rewards, the Capital One Venture X for premium perks at a lower effective cost, and the Wells Fargo Autograph for no annual fee."
-        }
-      }
-    ]
+    "cardName": "Chase Sapphire Reserve®",
+    "issuer": "Chase",
+    "annualFeeUSD": 550,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "3x on travel and dining",
+    "signupBonus": "Earn 60,000 bonus points after you spend $4,000 on purchases in the first 3 months",
+    "loungeAccess": true,
+    "travelInsurance": true,
+    "category": "premium"
   },
   {
-    "@context": "https://schema.org",
-    "@type": "Table",
-    "name": "Credit Card Fee Comparison Table",
-    "about": "Comparison of annual fees and foreign transaction fees for popular travel credit cards."
+    "cardName": "Capital One Venture X Rewards Credit Card",
+    "issuer": "Capital One",
+    "annualFeeUSD": 395,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "2x miles on all purchases",
+    "signupBonus": "Earn 75,000 bonus miles when you spend $4,000 on purchases in the first 3 months",
+    "loungeAccess": true,
+    "travelInsurance": true,
+    "category": "premium"
+  },
+  {
+    "cardName": "Capital One Venture Rewards Credit Card",
+    "issuer": "Capital One",
+    "annualFeeUSD": 95,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "2x miles on all purchases",
+    "signupBonus": "Earn 75,000 bonus miles when you spend $4,000 on purchases in the first 3 months",
+    "loungeAccess": true,
+    "travelInsurance": true,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "Capital One VentureOne Rewards Credit Card",
+    "issuer": "Capital One",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "1.25x miles on all purchases",
+    "signupBonus": "Earn 20,000 bonus miles once you spend $500 on purchases within 3 months",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Capital One Savor Cash Rewards Credit Card",
+    "issuer": "Capital One",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "3% on dining, entertainment, groceries",
+    "signupBonus": "Earn a one-time $250 cash bonus once you spend $500 on purchases within 3 months",
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "The Platinum Card® from American Express",
+    "issuer": "American Express",
+    "annualFeeUSD": 695,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "5x on flights booked directly or with Amex Travel",
+    "signupBonus": "Earn 80,000 Membership Rewards® Points after you spend $8,000 on purchases on your new Card in your first 6 months",
+    "loungeAccess": true,
+    "travelInsurance": true,
+    "category": "premium"
+  },
+  {
+    "cardName": "American Express® Gold Card",
+    "issuer": "American Express",
+    "annualFeeUSD": 250,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "4x on dining and U.S. supermarkets",
+    "signupBonus": "Earn 60,000 Membership Rewards® points after you spend $6,000 on eligible purchases on your new Card in your first 6 months",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "Bank of America® Travel Rewards credit card",
+    "issuer": "Bank of America",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "1.5 points per $1 spent on all purchases",
+    "signupBonus": "25,000 online bonus points after you make at least $1,000 in purchases in the first 90 days of account opening",
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Bank of America® Premium Rewards® credit card",
+    "issuer": "Bank of America",
+    "annualFeeUSD": 95,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "2 points on travel and dining, 1.5 points on all other purchases",
+    "signupBonus": "Receive 60,000 online bonus points after you make at least $4,000 in purchases in the first 90 days",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "Wells Fargo Autograph℠ Card",
+    "issuer": "Wells Fargo",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "3x points on restaurants, travel, gas, transit, streaming, and phone plans",
+    "signupBonus": "Earn 20,000 bonus points when you spend $1,000 in purchases in the first 3 months",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Citi Premier® Card",
+    "issuer": "Citi",
+    "annualFeeUSD": 95,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "3x on restaurants, supermarkets, gas, air travel, and hotels",
+    "signupBonus": "Earn 60,000 bonus ThankYou® Points after you spend $4,000 in purchases within the first 3 months",
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "Citi Double Cash® Card",
+    "issuer": "Citi",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 3,
+    "rewardsRate": "2% cash back on all purchases (1% when you buy, 1% when you pay)",
+    "signupBonus": null,
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Discover it® Miles",
+    "issuer": "Discover",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "1.5x miles on all purchases",
+    "signupBonus": "Discover will automatically match all the Miles you've earned at the end of your first year",
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "U.S. Bank Altitude® Reserve Visa Infinite® Card",
+    "issuer": "U.S. Bank",
+    "annualFeeUSD": 400,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "3x points on travel and mobile wallet spending",
+    "signupBonus": "Earn 50,000 bonus points after spending $4,500 in the first 90 days",
+    "loungeAccess": true,
+    "travelInsurance": true,
+    "category": "premium"
+  },
+  {
+    "cardName": "U.S. Bank Altitude® Go Visa Signature® Card",
+    "issuer": "U.S. Bank",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "4x points on dining, takeout, and restaurant delivery",
+    "signupBonus": "Earn 20,000 bonus points when you spend $1,000 in eligible purchases within the first 90 days",
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Bilt World Elite Mastercard®",
+    "issuer": "Wells Fargo",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "1x on rent, 2x on travel, 3x on dining",
+    "signupBonus": null,
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Blue Cash Everyday® Card from American Express",
+    "issuer": "American Express",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 2.7,
+    "rewardsRate": "3% on U.S. supermarkets, gas, and online retail",
+    "signupBonus": "Earn a $200 statement credit after you spend $2,000 in purchases within the first 6 months",
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Capital One Quicksilver Cash Rewards Credit Card",
+    "issuer": "Capital One",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "1.5% cash back on all purchases",
+    "signupBonus": "Earn a one-time $200 cash bonus after you spend $500 on purchases within 3 months",
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
+  },
+  {
+    "cardName": "Delta SkyMiles® Gold American Express Card",
+    "issuer": "American Express",
+    "annualFeeUSD": 150,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "2x on Delta purchases, restaurants, and U.S. supermarkets",
+    "signupBonus": "Earn 40,000 Bonus Miles after you spend $2,000 in purchases on your new Card in your first 6 months",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "United℠ Explorer Card",
+    "issuer": "Chase",
+    "annualFeeUSD": 95,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "2x on United, dining, and hotel stays",
+    "signupBonus": "Earn 50,000 bonus miles after you spend $3,000 on purchases in the first 3 months",
+    "loungeAccess": true,
+    "travelInsurance": true,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "Marriott Bonvoy Boundless® Credit Card",
+    "issuer": "Chase",
+    "annualFeeUSD": 95,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "Up to 17X total points at Marriott Bonvoy® hotels",
+    "signupBonus": "Earn 3 Free Night Awards after you spend $3,000 on purchases in your first 3 months",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "World of Hyatt Credit Card",
+    "issuer": "Chase",
+    "annualFeeUSD": 95,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "Up to 9x points on Hyatt stays",
+    "signupBonus": "Earn up to 60,000 Bonus Points",
+    "loungeAccess": false,
+    "travelInsurance": true,
+    "category": "mid-tier"
+  },
+  {
+    "cardName": "Apple Card",
+    "issuer": "Goldman Sachs",
+    "annualFeeUSD": 0,
+    "foreignTxFeePct": 0,
+    "rewardsRate": "2% cash back when using Apple Pay",
+    "signupBonus": null,
+    "loungeAccess": false,
+    "travelInsurance": false,
+    "category": "no-annual-fee"
   }
 ]
   </script>
-</head>
-<body>
-  <header>
-    <h1>Travel Credit Card Foreign Transaction Fee Comparison 2026</h1>
-    <div class="subtitle">Detailed breakdown of fees and travel perks for international travelers.</div>
-  </header>
-  <main>
-    <div class="methodology">
-      <h2>Methodology</h2>
-      <p>Data collected from major financial sites including NerdWallet, Bankrate, TPG, and CNBC Select. All fees and rewards current for 2026.</p>
-      <p>Last Updated: 3/8/2026</p>
-    </div>
 
-    <div class="card-grid">
-
-      <div class="card">
-        <div class="issuer">Chase</div>
-        <div class="category-tag">mid tier</div>
-        <h3>Chase Sapphire Preferred® Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$95</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 5x on travel via Chase, 3x on dining/streaming/online groceries
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 75,000 bonus points after $5,000 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Wells Fargo</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Wells Fargo Autograph® Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 3x on restaurants, travel, gas, transit, streaming, phone plans
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 20,000 bonus points after $1,000 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Capital One</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Capital One Savor Cash Rewards Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 3% on dining, entertainment, popular streaming services and grocery stores
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn $200 cash bonus after $500 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Capital One</div>
-        <div class="category-tag">mid tier</div>
-        <h3>Capital One Venture Rewards Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$95</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 2x miles on every purchase, 5x on hotels/rentals via Capital One Travel
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> 75,000 bonus miles after $4,000 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Bank of America</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Bank of America® Travel Rewards credit card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 1.5 points per $1 on all purchases
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> 25,000 bonus points after $1,000 spend in 90 days</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Chase</div>
-        <div class="category-tag">premium</div>
-        <h3>Chase Sapphire Reserve®</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$550</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 5x on flights, 10x on hotels/car rentals via Chase, 3x on other travel/dining
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 60,000 bonus points after $4,000 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">American Express</div>
-        <div class="category-tag">premium</div>
-        <h3>The Platinum Card® from American Express</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$695</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 5x points on flights and prepaid hotels via Amex Travel
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 125,000 Membership Rewards® points after $8,000 spend in 6 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">American Express</div>
-        <div class="category-tag">premium</div>
-        <h3>American Express® Gold Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$325</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 4x at restaurants and U.S. supermarkets, 3x on flights via Amex Travel
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 60,000 Membership Rewards® points after $6,000 spend in 6 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Capital One</div>
-        <div class="category-tag">premium</div>
-        <h3>Capital One Venture X Rewards Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$395</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 2x on all purchases, 10x on hotels/cars and 5x on flights via Capital One Travel
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> 75,000 bonus miles after $4,000 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Citi</div>
-        <div class="category-tag">mid tier</div>
-        <h3>Citi Strata Premier℠ Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$95</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 3x on air travel, hotels, gas, restaurants, supermarkets
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 75,000 ThankYou® Points after $4,000 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Wells Fargo</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Bilt World Elite Mastercard®</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 1x on rent (no fee), 3x on dining, 2x on travel
-            </div>
-
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Discover</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Discover it® Miles</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 1.5x miles on every purchase
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Discover will match all miles earned at the end of the first year</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">U.S. Bank</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>U.S. Bank Altitude® Connect Visa Signature® Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 4x on gas/EV stations and travel, 2x on grocery stores, dining, streaming
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 20,000 bonus points after $1,000 spend in 90 days</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Bank of America</div>
-        <div class="category-tag">mid tier</div>
-        <h3>Bank of America® Premium Rewards® credit card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$95</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 2 points per $1 on travel/dining, 1.5 points on all other purchases
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 60,000 bonus points after $4,000 spend in 90 days</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Chase</div>
-        <div class="category-tag">mid tier</div>
-        <h3>Ink Business Preferred® Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$95</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 3x on travel and select business categories
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn 100,000 bonus points after $8,000 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Capital One</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Capital One Quicksilver Cash Rewards Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 1.5% cash back on every purchase
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn $200 cash bonus after $500 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">American Express</div>
-        <div class="category-tag">mid tier</div>
-        <h3>Blue Cash Preferred® Card from American Express</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$95</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--warning)">2.7%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 6% U.S. supermarkets, 6% streaming, 3% transit/gas
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn $250 statement credit after $3,000 spend in 6 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Chase</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Chase Freedom Unlimited®</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--warning)">3%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✓</span>
-                <span class="">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 1.5% to 5% cash back
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn an extra 1.5% on all purchases up to $20,000 in first year</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Discover</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Discover it® Cash Back</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 5% cash back on rotating categories, 1% elsewhere
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Discover will match all cash back earned at the end of the first year</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Capital One</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Capital One Platinum Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> No rewards
-            </div>
-
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Capital One</div>
-        <div class="category-tag">no annual-fee</div>
-        <h3>Capital One Quicksilver Student Cash Rewards Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> 1.5% cash back on every purchase
-            </div>
-            <div class="bonus"><strong>Bonus:</strong> Earn $50 bonus after $100 spend in 3 months</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="issuer">Capital One</div>
-        <div class="category-tag">secured</div>
-        <h3>Capital One Platinum Secured Credit Card</h3>
-
-        <div class="fee-row">
-            <div class="fee-box">
-                <span class="fee-label">Annual Fee</span>
-                <span class="fee-value">$0</span>
-            </div>
-            <div class="fee-box">
-                <span class="fee-label">Foreign TX Fee</span>
-                <span class="fee-value" style="color: var(--success)">0%</span>
-            </div>
-        </div>
-
-        <div class="perks">
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Lounge Access</span>
-            </div>
-            <div class="perk-item">
-                <span class="perk-icon">✗</span>
-                <span class="no-perk">Travel Insurance</span>
-            </div>
-            <div class="rewards">
-                <strong>Rewards:</strong> No rewards
-            </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <section class="faq">
-      <h2>Frequently Asked Questions</h2>
-
-      <div class="faq-item">
-        <h4>Which credit cards have no foreign transaction fee?</h4>
-        <p>Many travel-focused credit cards from issuers like Chase, Capital One, and American Express offer no foreign transaction fees. All Capital One and Discover cards have no foreign transaction fees, while other issuers typically reserve this perk for their mid-tier and premium travel cards.</p>
-      </div>
-
-      <div class="faq-item">
-        <h4>Is the Chase Sapphire worth the annual fee for travel?</h4>
-        <p>For frequent travelers, the Chase Sapphire Preferred ($95) or Reserve ($550) are often worth it due to their high rewards rates on travel, valuable point transfer partners, and comprehensive travel insurance. The Reserve also adds lounge access and a $300 annual travel credit.</p>
-      </div>
-
-      <div class="faq-item">
-        <h4>Do Capital One cards charge foreign transaction fees?</h4>
-        <p>No, Capital One is one of the few major issuers that charges $0 in foreign transaction fees across its entire credit card lineup, including their no-annual-fee and secured cards.</p>
-      </div>
-
-      <div class="faq-item">
-        <h4>What is a foreign transaction fee?</h4>
-        <p>A foreign transaction fee is a surcharge (typically 3%) that credit card issuers add to purchases made outside the United States or with a non-U.S. merchant. It covers the cost of processing the international transaction.</p>
-      </div>
-
-      <div class="faq-item">
-        <h4>Which is the best credit card for international travel?</h4>
-        <p>The 'best' card depends on your spending, but top contenders for 2026 include the Chase Sapphire Preferred for its balance of fee and rewards, the Capital One Venture X for premium perks at a lower effective cost, and the Wells Fargo Autograph for no annual fee.</p>
-      </div>
-
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2026 <a href="https://migratingmammals.com">migratingmammals.com</a> &middot; A GAB Ventures property</p>
-  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const rawData = document.getElementById('card-data').textContent;
+      let cards = [];
+      try { cards = JSON.parse(rawData); } catch (e) { console.error('Data parse error', e); }
+
+      let currentData = [...cards];
+      let sortCol = 'cardName';
+      let sortDir = 1;
+
+      const tbody = document.getElementById('table-body');
+      const searchInput = document.getElementById('search-input');
+      const feeFilter = document.getElementById('fee-filter');
+      const fxFilter = document.getElementById('fx-filter');
+      const categoryFilter = document.getElementById('category-filter');
+      const resultCount = document.getElementById('result-count');
+      const headers = document.querySelectorAll('th[data-sort]');
+
+      function renderTable() {
+        resultCount.textContent = currentData.length;
+
+        if (currentData.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px; color: var(--text-sec);">No cards found matching criteria.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = currentData.map(card => {
+          const fxClass = card.foreignTxFeePct === 0 ? 'fx-zero' : 'fx-high';
+          const fxText = card.foreignTxFeePct === 0 ? '0%' : card.foreignTxFeePct + '%';
+
+          let perks = '';
+          if (card.loungeAccess) perks += '<span class="perk-tag">Lounge Access</span>';
+          if (card.travelInsurance) perks += '<span class="perk-tag">Travel Insurance</span>';
+          if (!perks) perks = '<span style="color: var(--text-sec); font-size: 0.8rem;">Standard perks</span>';
+
+          return `
+          <tr>
+            <td>
+              <div class="card-name">${card.cardName}</div>
+              <div class="card-issuer">${card.issuer}</div>
+            </td>
+            <td class="money-val">$${card.annualFeeUSD}</td>
+            <td><span class="fx-fee ${fxClass}">${fxText}</span></td>
+            <td class="hide-mobile details-cell">
+              <div style="color: #e0d5c8; margin-bottom: 4px; font-weight: 500;">${card.rewardsRate}</div>
+              <div style="font-size: 0.75rem;">${card.signupBonus || 'No signup bonus'}</div>
+            </td>
+            <td>
+              ${perks}
+            </td>
+          </tr>
+          `;
+        }).join('');
+      }
+
+      function sortData(column) {
+        if (sortCol === column) {
+          sortDir *= -1;
+        } else {
+          sortCol = column;
+          sortDir = 1;
+        }
+
+        headers.forEach(th => {
+          th.classList.remove('sort-asc', 'sort-desc');
+          if (th.dataset.sort === sortCol) {
+            th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+          }
+        });
+
+        currentData.sort((a, b) => {
+          let valA = a[sortCol];
+          let valB = b[sortCol];
+
+          // Boolean sorting
+          if (typeof valA === 'boolean') valA = valA ? 1 : 0;
+          if (typeof valB === 'boolean') valB = valB ? 1 : 0;
+
+          if (typeof valA === 'string' && typeof valB === 'string') {
+            return valA.localeCompare(valB) * sortDir;
+          }
+          return (valA - valB) * sortDir;
+        });
+
+        renderTable();
+      }
+
+      function applyFilters() {
+        const query = searchInput.value.toLowerCase();
+        const fee = feeFilter.value;
+        const fx = fxFilter.value;
+        const cat = categoryFilter.value;
+
+        currentData = cards.filter(card => {
+          // Search
+          const matchesSearch = card.cardName.toLowerCase().includes(query) ||
+                                card.issuer.toLowerCase().includes(query) ||
+                                card.rewardsRate.toLowerCase().includes(query);
+          if (!matchesSearch) return false;
+
+          // Fee filter
+          if (fee === '0' && card.annualFeeUSD !== 0) return false;
+          if (fee === '1-99' && (card.annualFeeUSD < 1 || card.annualFeeUSD > 99)) return false;
+          if (fee === '100+' && card.annualFeeUSD < 100) return false;
+
+          // FX filter
+          if (fx === '0' && card.foreignTxFeePct !== 0) return false;
+
+          // Category filter
+          if (cat !== 'all' && card.category !== cat) return false;
+
+          return true;
+        });
+
+        // Re-apply sort
+        const tmpCol = sortCol;
+        const tmpDir = sortDir;
+        sortCol = null;
+        sortData(tmpCol);
+        if (sortDir !== tmpDir) {
+           sortDir = tmpDir;
+           sortData(tmpCol);
+        }
+      }
+
+      // Events
+      headers.forEach(th => {
+        th.addEventListener('click', () => sortData(th.dataset.sort));
+      });
+
+      searchInput.addEventListener('input', applyFilters);
+      feeFilter.addEventListener('change', applyFilters);
+      fxFilter.addEventListener('change', applyFilters);
+      categoryFilter.addEventListener('change', applyFilters);
+
+      // Init
+      sortData('cardName');
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Travel Credit Card Foreign Transaction Fee Comparison",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Travel Credit Card Foreign Transaction Fee Comparison 2026",
+      "description": "Compare foreign transaction fees, annual fees, and travel perks across major US credit cards. Find the best travel card with no foreign transaction fee.",
+      "author": {
+        "@type": "Organization",
+        "name": "migratingmammals.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "GAB Ventures",
+        "url": "https://gab.ae"
+      },
+      "datePublished": "2026-01-01"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which credit cards have no foreign transaction fee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Many travel credit cards offer no foreign transaction fees. Popular options include the Chase Sapphire Preferred, Capital One Venture X, Capital One Savor, and the Bank of America Travel Rewards card. Generally, cards branded for travel or premium rewards waive this fee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Chase Sapphire worth the annual fee for travel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for most frequent travelers. The Chase Sapphire Preferred has a $95 annual fee but offers 2x points on travel, primary rental car insurance, and valuable points that transfer to airlines and hotels. The Chase Sapphire Reserve ($550 fee) includes lounge access and a $300 travel credit, making it worthwhile for heavy travelers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do Capital One cards charge foreign transaction fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, none of Capital One's U.S.-issued credit cards charge a foreign transaction fee. This applies to all their cards, including the Quicksilver, Savor, and Venture lines, making them excellent choices for international travel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a foreign transaction fee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A foreign transaction fee (or FX fee) is a surcharge added by your credit card issuer on purchases made outside your home country or in a foreign currency. It is typically around 3% of the transaction amount, which can add up quickly during a trip."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which is the best credit card for international travel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 'best' card depends on your travel style. The Capital One Venture X is highly rated for premium perks (lounge access) at a lower effective cost than competitors. The Chase Sapphire Preferred is the best mid-tier option, while the Wells Fargo Autograph is an excellent no-annual-fee choice."
+          }
+        }
+      ]
+    }
+  </script>
 </body>
 </html>
