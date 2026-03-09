@@ -1,178 +1,408 @@
 ---
 import BaseHead from '../layouts/BaseHead.astro';
 
-const studies = [
-  {
-    title: "Digital Nomad Visa Index 2026",
-    subtitle: "60 Countries Compared",
-    slug: "/nomad-visa-index",
-    stat: "60",
-    statLabel: "countries with nomad visas",
-    desc: "Every digital nomad visa program worldwide — cost, duration, tax implications, and income requirements. From Albania to Uruguay.",
-    tag: "ORIGINAL RESEARCH",
-  },
-  {
-    title: "Nomad Cost of Living Index 2026",
-    subtitle: "42 Cities Ranked",
-    slug: "/cost-of-living-index",
-    stat: "$705",
-    statLabel: "Chiang Mai monthly budget",
-    desc: "Monthly costs for 42 popular nomad cities: rent, meals, coffee, coworking. Bangkok $1,013. Bali $1,400. New York $4,200+.",
-    tag: "ORIGINAL RESEARCH",
-  },
-  {
-    title: "Travel Credit Card Fee Comparison 2026",
-    subtitle: "22 Cards Compared",
-    slug: "/travel-card-fees",
-    stat: "0%",
-    statLabel: "foreign transaction fee (best cards)",
-    desc: "22 travel credit cards compared — annual fees, foreign transaction fees, rewards rates, and perks. Chase Sapphire, Capital One Venture, and more.",
-    tag: "ORIGINAL RESEARCH",
-  },
+// Tools 
+const tools = [
+  { emoji: "🛂", name: "Schengen 90/180 Calculator", slug: "/schengen-calculator", desc: "Track your days in the Schengen zone. Visual timeline of your allowance" },
+  { emoji: "🌐", name: "Timezone Overlap Finder", slug: "/timezone-overlap", desc: "Find the best meeting hours between any two cities instantly" },
+  { emoji: "💱", name: "Offline Currency Converter", slug: "/currency-converter", desc: "Convert 50+ currencies and crypto. Works fully offline" },
+  { emoji: "✈️", name: "Travel Budget Planner", slug: "/travel-budget", desc: "Plan budgets by destination with daily and total estimates" },
+  { emoji: "✈️", name: "Flight Time Calculator", slug: "/flight-time", desc: "Calculate flight time between airports with wind adjustments" },
+  { emoji: "🧳", name: "Smart Packing List", slug: "/packing-list", desc: "Customized packing list based on climate and activities" },
+  { emoji: "📞", name: "International Dialing Codes", slug: "/dialing-codes", desc: "Search country dialing codes and emergency numbers" },
+  { emoji: "📏", name: "Distance Calculator", slug: "/distance-calculator", desc: "Calculate distance between locations with driving time" },
+  { emoji: "💰", name: "Cost of Living Comparator", slug: "/cost-of-living", desc: "Compare living costs between two cities" },
+  { emoji: "🧾", name: "Trip Expense Splitter", slug: "/expense-splitter", desc: "Split group expenses fairly across multiple currencies" },
+  { emoji: "🧮", name: "Digital Nomad Tax Estimator", slug: "/nomad-tax", desc: "Estimate tax obligations by residency and income sources" },
+  { emoji: "⏳", name: "Trip Countdown Timer", slug: "/trip-countdown", desc: "Track countdowns for multiple upcoming trips" },
+  { emoji: "🛂", name: "Visa Requirement Checker", slug: "/visa-checker", desc: "Check visa requirements based on passport and destination" },
+  { emoji: "🕐", name: "World Clock Dashboard", slug: "/world-clock", desc: "View current time in multiple cities with business hours" },
+  { emoji: "😴", name: "Jet Lag Calculator", slug: "/jet-lag", desc: "Personalized recovery schedule to adjust to new timezone" },
+  { emoji: "🔌", name: "Travel Power Adapter Guide", slug: "/power-adapter", desc: "Check plug types, voltage, and frequency by country" },
+  { emoji: "🕐", name: "Timezone Converter", slug: "/timezone-converter", desc: "Convert times between timezones with DST support" },
+  { emoji: "✈️", name: "Airport Code Lookup", slug: "/airport-codes", desc: "Search 5,000+ IATA/ICAO airport codes worldwide" },
+  { emoji: "🗣️", name: "Travel Language Phrases", slug: "/language-phrases", desc: "Essential phrases in 20+ languages with pronunciation" },
+  { emoji: "✅", name: "Travel Checklist Generator", slug: "/travel-checklist", desc: "Customized pre-trip checklist for any destination" }
 ];
 
-const tools = [
-  { emoji: "🛂", name: "Schengen 90/180 Calculator", desc: "Track your days in the Schengen zone. Never overstay again — visual timeline of your 90/180-day allowance.", slug: "/schengen-calculator" },
-  { emoji: "🌐", name: "Timezone Overlap Finder", desc: "Working across time zones? Find the best meeting hours between any two cities instantly.", soon: false, slug: "/timezone-overlap" },
-  { emoji: "💱", name: "Offline Currency Converter", desc: "Convert 50+ fiat currencies and major crypto instantly. Works fully offline in your browser.", slug: "/currency-converter" },
-  { emoji: "🏨", name: "RevPAR Calculator", desc: "Revenue per available room — the metric that matters. Benchmark your boutique property against the market.", soon: true },
-  { emoji: "📋", name: "OTA Commission Comparison", desc: "Booking.com vs Airbnb vs direct — compare commission rates and net revenue per booking.", soon: true },
-  { emoji: "🧹", name: "Cleaning Fee Margin Tool", desc: "Are your cleaning fees covering costs? Calculate your true margin per turnover.", soon: true },
-  { emoji: "✈️", name: "Travel Budget Planner", desc: "Plan budgets by destination. Trip length, accommodation, food. Daily and total estimates.", slug: "/travel-budget" },
-  { emoji: "✈️", name: "Flight Time Calculator", desc: "Calculate flight time between airports. Great Circle Distance, wind adjustments, and layovers.", slug: "/flight-time" },
-  { emoji: "🧳", name: "Smart Packing List", desc: "Generate a customized packing list based on climate, duration, and activities. Works offline.", slug: "/packing-list" },
-  { emoji: "📞", name: "International Dialing Codes", desc: "Search and copy international country dialing codes. Emergency numbers and mobile prefix guides.", slug: "/dialing-codes" },
-  { emoji: "📏", name: "Distance Calculator", desc: "Calculate the distance between two locations in km and miles. Driving time estimates included.", slug: "/distance-calculator" },
-  { emoji: "💰", name: "Cost of Living Comparator", desc: "Compare the cost of living between two cities. Rent, food, transport, and utilities with percentage differences.", slug: "/cost-of-living" },
-  { emoji: "🧾", name: "Trip Expense Splitter", desc: "Split group expenses fairly. Calculate minimum transactions and handle multi-currency trips easily.", slug: "/expense-splitter" },
-  { emoji: "🇪🇺", name: "Schengen 90/180 Guide", desc: "Complete guide to the Schengen 90/180 day rule. How to calculate, common mistakes, country-by-country entry.", slug: "/guide-schengen" },
-  { emoji: "🧮", name: "Digital Nomad Tax Estimator", desc: "Estimate your tax obligations based on residency, income sources, and countries visited. Works offline.", slug: "/nomad-tax" },
-  { emoji: "⏳", name: "Trip Countdown Timer", desc: "Track countdowns for multiple upcoming trips. Remaining days, hours, and minutes for all your travel plans.", slug: "/trip-countdown" },
-  { emoji: "🛂", name: "Visa Requirement Checker", desc: "Check visa requirements, visa-free days, and e-visa options based on your passport and destination.", slug: "/visa-checker" },
-  { emoji: "🕐", name: "World Clock Dashboard", desc: "View current time in multiple cities. Identify business hour overlaps and day/night cycles across timezones.", slug: "/world-clock" },
-  { emoji: "😴", name: "Jet Lag Calculator", desc: "Calculate jet lag severity and get a personalized recovery schedule to adjust to your new timezone before you travel.", slug: "/jet-lag" },
-  { emoji: "🔌", name: "Travel Power Adapter Guide", desc: "Check plug types, voltage, and frequency by country. Know if you need an adapter or voltage converter.", slug: "/power-adapter" },
-  { emoji: "🕐", name: "Timezone Converter", desc: "Convert times accurately between global timezones. Accounts for Daylight Saving Time automatically.", slug: "/timezone-converter" },
-  { emoji: "✈️", name: "Airport Code Lookup", desc: "Search 5,000+ airport codes worldwide. IATA, ICAO, city, country, and timezone. Works offline.", slug: "/airport-codes" },
-  { emoji: "🛡️", name: "Travel Insurance Guide", desc: "Compare SafetyWing, World Nomads, and Genki — the top travel insurance options for digital nomads.", slug: "/guide-travel-insurance" },
-  { emoji: "💻", name: "Coworking Spaces Guide", desc: "How to choose the right coworking space. Day passes, memberships, amenities, and top cities.", slug: "/guide-coworking" },
-  { emoji: "🛂", name: "Remote Work Visas by Country", desc: "Digital nomad visa requirements, costs, and durations by country. Application tips included.", slug: "/guide-remote-work-visa" },
-  { emoji: "🐢", name: "Slow Travel Guide", desc: "Why slow travel wins — month-long stays vs city hopping. Cost savings, deeper experiences, less burnout.", slug: "/guide-slow-travel" },
-  { emoji: "🏙️", name: "Best Digital Nomad Cities", desc: "Top nomad cities ranked by cost, internet speed, community, safety, and visa friendliness.", slug: "/list-nomad-cities" },
-  { emoji: "💳", name: "Best Travel Credit Cards", desc: "No-FX-fee travel cards compared. Lounges, insurance, point multipliers, and annual fees.", slug: "/list-travel-credit-cards" },
-  { emoji: "📱", name: "Essential Travel Apps", desc: "Must-have apps for nomads and travelers. Maps, translation, flights, safety, and expense tracking.", slug: "/list-travel-apps" },
-  { emoji: "🗣️", name: "Travel Language Phrases", desc: "Essential phrases in 20+ languages. Greetings, directions, food, emergencies — with pronunciation guides.", slug: "/language-phrases" },
-  { emoji: "✅", name: "Travel Checklist Generator", desc: "Generate a pre-trip checklist customized to your destination, duration, and travel style. Never forget essentials.", slug: "/travel-checklist" },
+// Studies 
+const studies = [
+  { emoji: "🌍", name: "Digital Nomad Visa Index 2026", slug: "/nomad-visa-index", desc: "60 countries with nomad visa programs — cost, duration, tax implications", stat: "60", statLabel: "countries with nomad visas" },
+  { emoji: "🏙️", name: "Nomad Cost of Living Index 2026", slug: "/cost-of-living-index", desc: "42 popular nomad cities ranked by monthly costs", stat: "$705", statLabel: "Chiang Mai monthly budget" },
+  { emoji: "💳", name: "Travel Credit Card Fee Comparison", slug: "/travel-card-fees", desc: "22 travel cards compared — fees, rewards, and perks", stat: "0%", statLabel: "foreign transaction fee (best cards)" }
+];
+
+// Guides
+const guides = [
+  { emoji: "🇪🇺", name: "Schengen 90/180 Guide", slug: "/guide-schengen", desc: "Complete guide to the Schengen rule with calculation tips" },
+  { emoji: "🛡️", name: "Travel Insurance Guide", slug: "/guide-travel-insurance", desc: "Compare SafetyWing, World Nomads, Genki for nomads" },
+  { emoji: "💻", name: "Coworking Spaces Guide", slug: "/guide-coworking", desc: "How to choose coworking spaces with day pass tips" },
+  { emoji: "🛂", name: "Remote Work Visas by Country", slug: "/guide-remote-work-visa", desc: "Visa requirements, costs, and application tips" },
+  { emoji: "🐢", name: "Slow Travel Guide", slug: "/guide-slow-travel", desc: "Why month-long stays beat city hopping" }
+];
+
+// Lists
+const lists = [
+  { emoji: "🏙️", name: "Best Digital Nomad Cities", slug: "/list-nomad-cities", desc: "Top cities ranked by cost, internet, community, safety" },
+  { emoji: "💳", name: "Best Travel Credit Cards", slug: "/list-travel-credit-cards", desc: "No-FX-fee cards with lounges and insurance" },
+  { emoji: "📱", name: "Essential Travel Apps", slug: "/list-travel-apps", desc: "Maps, translation, flights, safety, expense tracking" },
+  { emoji: "📡", name: "Best eSIM Providers", slug: "/list-esim", desc: "Global data plans compared for travelers" },
+  { emoji: "🔒", name: "Best VPN Services", slug: "/list-vpn", desc: "VPN comparison for travelers and nomads" }
 ];
 ---
 <html lang="en">
 <head>
-  <BaseHead
-    title="Migrating Mammals — Digital Nomad Tools & Boutique Hospitality Calculators"
-    description="Free tools for digital nomads and boutique hospitality operators. Schengen day tracker, timezone overlap finder, RevPAR calculator, OTA commission comparison, and more."
-    ogTitle="Migrating Mammals — Tools for Nomads & Hosts"
-    ogDescription="Schengen tracker, timezone overlap finder, RevPAR calculator, and hospitality tools. Free, no signup."
-  />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <BaseHead />
+  <title>migratingmammals.com — Digital Nomad Tools & Research</title>
+  <meta name="description" content="Free tools for digital nomads and travelers. Schengen tracker, timezone overlap finder, cost of living comparison, visa guides, and travel research." />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #0a0806; color: #e0d5c8; }
-    .hero { text-align: center; padding: 100px 24px 80px; background: linear-gradient(180deg, #1a1008 0%, #0a0806 100%); position: relative; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(139,94,60,0.08) 0%, transparent 60%); }
+    body { 
+      font-family: 'Inter', -apple-system, sans-serif; 
+      background: #060a12; 
+      color: #c8d0de; 
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero { 
+      text-align: center; 
+      padding: 100px 24px 70px; 
+      background: linear-gradient(180deg, #1a0f08 0%, #060a12 100%); 
+      position: relative; 
+    }
+    .hero::before { 
+      content: ''; 
+      position: absolute; 
+      inset: 0; 
+      background: radial-gradient(circle at 50% 40%, rgba(196,149,106,0.08) 0%, transparent 60%); 
+    }
     .hero-content { position: relative; z-index: 1; }
-    .hero h1 { font-size: 3rem; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; background: linear-gradient(135deg, #fff 0%, #C4956A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero p { color: #666; font-size: 1.05rem; max-width: 500px; margin: 0 auto; }
-    .grid { max-width: 900px; margin: 0 auto; padding: 0 24px 100px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-    .card { background: #12100c; border: 2px solid #2a2418; border-radius: 16px; padding: 28px 24px; position: relative; }
-    .card .emoji { font-size: 2rem; margin-bottom: 12px; display: block; }
-    .card h2 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .card p { font-size: 0.85rem; color: #888; line-height: 1.6; }
-    .badge { position: absolute; top: 14px; right: 14px; background: #2a2418; color: #C4956A; font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
-    .live-badge { background: #C4956A; color: #0c0a00; font-weight: 800; }
-    a.card.live { text-decoration: none; color: inherit; cursor: pointer; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
-    a.card.live:hover { border-color: #C4956A; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(196,149,106,0.1); }
-    .arrow { color: #C4956A; font-size: 0.85rem; margin-top: 14px; display: inline-block; font-weight: 600; }
-    .footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #1a1510; }
-    .footer a { color: #C4956A; text-decoration: none; }
-    .section-container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-    .section-header { text-align: center; margin-bottom: 28px; padding-top: 10px; }
-    .section-tag { display: inline-block; background: #2a2418; color: #C4956A; font-size: 0.7rem; font-weight: 800; padding: 4px 14px; border-radius: 20px; letter-spacing: 1px; margin-bottom: 10px; }
-    .section-title { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
-    .section-sub { color: #555; font-size: 0.9rem; }
-    .studies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; margin-bottom: 50px; }
-    .study-card { background: linear-gradient(135deg, #110e0a 0%, #1a150e 100%); border: 2px solid #2a2418; border-radius: 20px; padding: 32px 28px; text-decoration: none; color: inherit; display: block; transition: border-color 0.3s, transform 0.2s; position: relative; overflow: hidden; }
-    .study-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #C4956A, #D4A57A); opacity: 0; transition: opacity 0.3s; }
-    .study-card:hover { border-color: #C4956A; transform: translateY(-3px); }
+    .hero .tagline { 
+      color: #C4956A; 
+      font-size: 0.85rem; 
+      font-weight: 700; 
+      letter-spacing: 3px; 
+      text-transform: uppercase; 
+      margin-bottom: 16px; 
+    }
+    .hero h1 { 
+      font-size: 3rem; 
+      font-weight: 900; 
+      letter-spacing: -1.5px; 
+      margin-bottom: 20px; 
+      color: #fff;
+    }
+    .hero p { 
+      color: #5a6a80; 
+      font-size: 1.05rem; 
+      max-width: 520px; 
+      margin: 0 auto; 
+    }
+
+    /* Sections */
+    .section-container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 60px 24px; 
+    }
+    .section-header { 
+      text-align: center; 
+      margin-bottom: 40px; 
+    }
+    .section-tag { 
+      display: inline-block; 
+      background: rgba(196,149,106,0.1); 
+      color: #C4956A; 
+      font-size: 0.7rem; 
+      font-weight: 800; 
+      padding: 6px 16px; 
+      border-radius: 20px; 
+      letter-spacing: 1px; 
+      margin-bottom: 12px; 
+    }
+    .section-title { 
+      font-size: 2.2rem; 
+      font-weight: 900; 
+      color: #fff; 
+      margin-bottom: 8px; 
+      letter-spacing: -0.8px; 
+    }
+    .section-sub { 
+      color: #5a6a80; 
+      font-size: 1rem; 
+    }
+
+    /* Tools Grid */
+    .tools-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+      gap: 16px; 
+    }
+    .tool-card { 
+      background: #0f1115; 
+      border: 1px solid #2a2418; 
+      border-radius: 12px; 
+      padding: 20px; 
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+      transition: all 0.2s ease; 
+    }
+    .tool-card:hover { 
+      border-color: #C4956A; 
+      transform: translateY(-2px); 
+    }
+    .tool-emoji { 
+      font-size: 1.4rem; 
+      margin-bottom: 8px; 
+      display: block; 
+    }
+    .tool-name { 
+      font-size: 0.95rem; 
+      font-weight: 700; 
+      color: #e0e8f0; 
+      margin-bottom: 6px; 
+    }
+    .tool-desc { 
+      font-size: 0.8rem; 
+      color: #6a7a90; 
+      line-height: 1.4; 
+    }
+
+    /* Studies Grid */
+    .studies-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+      gap: 24px; 
+    }
+    .study-card { 
+      background: linear-gradient(135deg, #110e0a 0%, #1a150e 100%); 
+      border: 1px solid #2a2418; 
+      border-radius: 16px; 
+      padding: 28px 24px; 
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+      transition: all 0.3s ease; 
+      position: relative; 
+      overflow: hidden; 
+    }
+    .study-card::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      height: 2px; 
+      background: linear-gradient(90deg, #C4956A, #D4A57A); 
+      opacity: 0; 
+      transition: opacity 0.3s; 
+    }
+    .study-card:hover { 
+      border-color: #C4956A; 
+      transform: translateY(-3px); 
+      box-shadow: 0 12px 40px rgba(196,149,106,0.15); 
+    }
     .study-card:hover::before { opacity: 1; }
-    .study-tag-label { display: inline-block; background: rgba(196,149,106,0.12); color: #C4956A; font-size: 0.6rem; font-weight: 800; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.8px; margin-bottom: 14px; }
-    .study-stat { margin-bottom: 14px; }
-    .stat-number { display: block; font-size: 2.4rem; font-weight: 900; color: #C4956A; line-height: 1; letter-spacing: -1px; }
-    .stat-label { display: block; font-size: 0.82rem; color: #666; margin-top: 4px; }
-    .study-title { font-size: 1.12rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .study-subtitle { font-size: 0.8rem; color: #C4956A; margin-bottom: 10px; font-weight: 600; }
-    .study-desc { font-size: 0.85rem; color: #777; line-height: 1.6; margin-bottom: 14px; }
-    .study-cta { color: #C4956A; font-size: 0.85rem; font-weight: 700; }
-    .grid { margin-bottom: 50px; }
-    @media (max-width: 600px) { .hero h1 { font-size: 2.2rem; } .hero { padding: 70px 20px 50px; } .grid { grid-template-columns: 1fr; } .studies-grid { grid-template-columns: 1fr; } .stat-number { font-size: 2rem; } }
+    
+    .study-emoji { 
+      font-size: 1.6rem; 
+      margin-bottom: 12px; 
+      display: block; 
+    }
+    .study-stat { 
+      margin-bottom: 16px; 
+    }
+    .stat-number { 
+      display: block; 
+      font-size: 2rem; 
+      font-weight: 900; 
+      color: #C4956A; 
+      line-height: 1; 
+      letter-spacing: -1px; 
+    }
+    .stat-label { 
+      display: block; 
+      font-size: 0.75rem; 
+      color: #5a6a80; 
+      margin-top: 4px; 
+    }
+    .study-name { 
+      font-size: 1rem; 
+      font-weight: 800; 
+      color: #e0e8f0; 
+      margin-bottom: 8px; 
+      line-height: 1.3; 
+    }
+    .study-desc { 
+      font-size: 0.85rem; 
+      color: #6a7a90; 
+      line-height: 1.4; 
+    }
+
+    /* Guides & Lists Grid */
+    .guides-grid, .lists-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+      gap: 20px; 
+    }
+    .guide-card, .list-card { 
+      background: #0f1115; 
+      border: 1px solid #2a2418; 
+      border-radius: 14px; 
+      padding: 24px 20px; 
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+      transition: all 0.2s ease; 
+    }
+    .guide-card:hover, .list-card:hover { 
+      border-color: #C4956A; 
+      transform: translateY(-2px); 
+    }
+    .guide-emoji, .list-emoji { 
+      font-size: 1.5rem; 
+      margin-bottom: 10px; 
+      display: block; 
+    }
+    .guide-name, .list-name { 
+      font-size: 1rem; 
+      font-weight: 700; 
+      color: #e0e8f0; 
+      margin-bottom: 6px; 
+    }
+    .guide-desc, .list-desc { 
+      font-size: 0.85rem; 
+      color: #6a7a90; 
+      line-height: 1.4; 
+    }
+
+    /* Footer */
+    .footer { 
+      text-align: center; 
+      padding: 50px 24px; 
+      font-size: 0.85rem; 
+      color: #3a4a5a; 
+      border-top: 1px solid #151f2e; 
+      background: #040810; 
+    }
+    .footer a { 
+      color: #C4956A; 
+      text-decoration: none; 
+    }
+    .footer a:hover { 
+      text-decoration: underline; 
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero { padding: 70px 20px 50px; }
+      .section-container { padding: 40px 20px; }
+      .tools-grid, .studies-grid, .guides-grid, .lists-grid { 
+        grid-template-columns: 1fr; 
+      }
+    }
   </style>
 </head>
 <body>
-<div class="hero">
-  <div class="hero-content">
-    <h1>Migrating Mammals 🌍</h1>
-    <p>Research & tools for people who move — and the places that host them.</p>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="tagline">Digital Nomad Tools & Research</div>
+      <h1>migratingmammals.com</h1>
+      <p>Research & tools for people who move — and the places that host them.</p>
+    </div>
   </div>
-</div>
 
-<div class="section-container">
-  <div class="section-header">
-    <span class="section-tag">🔬 ORIGINAL RESEARCH</span>
-    <h2 class="section-title">Featured Studies</h2>
-    <p class="section-sub">Real data for real nomads. Scraped, compared, ranked.</p>
-  </div>
-  <div class="studies-grid">
-    {studies.map(s => (
-      <a class="study-card" href={s.slug}>
-        <span class="study-tag-label">{s.tag}</span>
-        <div class="study-stat">
-          <span class="stat-number">{s.stat}</span>
-          <span class="stat-label">{s.statLabel}</span>
-        </div>
-        <h3 class="study-title">{s.title}</h3>
-        <p class="study-subtitle">{s.subtitle}</p>
-        <p class="study-desc">{s.desc}</p>
-        <span class="study-cta">Read the study →</span>
-      </a>
-    ))}
-  </div>
-</div>
-
-<div class="section-container">
-  <div class="section-header">
-    <span class="section-tag">🛠️ TOOLS</span>
-    <h2 class="section-title">Nomad Tools</h2>
-    <p class="section-sub">Free, runs in your browser, no signup.</p>
-  </div>
-  <div class="grid">
-    {tools.map(t => t.slug ? (
-      <a class="card live" href={t.slug}>
-        <span class="badge live-badge">LIVE</span>
-        <span class="emoji">{t.emoji}</span>
-        <h2>{t.name}</h2>
-        <p>{t.desc}</p>
-        <span class="arrow">Try it →</span>
-      </a>
-    ) : (
-      <div class="card">
-        {t.soon && <span class="badge">COMING SOON</span>}
-        <span class="emoji">{t.emoji}</span>
-        <h2>{t.name}</h2>
-        <p>{t.desc}</p>
+  <!-- Tools Section -->
+  {tools.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🛠️ TOOLS</span>
+        <h2 class="section-title">Nomad Tools</h2>
+        <p class="section-sub">Free, runs in your browser, no signup.</p>
       </div>
-    ))}
-  </div>
-</div>
+      <div class="tools-grid">
+        {tools.map(tool => (
+          <a class="tool-card" href={tool.slug}>
+            <span class="tool-emoji">{tool.emoji}</span>
+            <h3 class="tool-name">{tool.name}</h3>
+            <p class="tool-desc">{tool.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 
-<div class="footer">© 2026 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property</div>
+  <!-- Studies Section -->
+  {studies.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🔬 RESEARCH</span>
+        <h2 class="section-title">Featured Studies</h2>
+        <p class="section-sub">Real data for real nomads. Scraped, compared, ranked.</p>
+      </div>
+      <div class="studies-grid">
+        {studies.map(study => (
+          <a class="study-card" href={study.slug}>
+            <span class="study-emoji">{study.emoji}</span>
+            <div class="study-stat">
+              <span class="stat-number">{study.stat}</span>
+              <span class="stat-label">{study.statLabel}</span>
+            </div>
+            <h3 class="study-name">{study.name}</h3>
+            <p class="study-desc">{study.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Guides Section -->
+  {guides.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">📚 GUIDES</span>
+        <h2 class="section-title">Travel Guides</h2>
+        <p class="section-sub">Comprehensive guides for nomads and travelers.</p>
+      </div>
+      <div class="guides-grid">
+        {guides.map(guide => (
+          <a class="guide-card" href={guide.slug}>
+            <span class="guide-emoji">{guide.emoji}</span>
+            <h3 class="guide-name">{guide.name}</h3>
+            <p class="guide-desc">{guide.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Lists Section -->
+  {lists.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">📋 LISTS</span>
+        <h2 class="section-title">Curated Lists</h2>
+        <p class="section-sub">Best apps, services, and destinations for nomads.</p>
+      </div>
+      <div class="lists-grid">
+        {lists.map(list => (
+          <a class="list-card" href={list.slug}>
+            <span class="list-emoji">{list.emoji}</span>
+            <h3 class="list-name">{list.name}</h3>
+            <p class="list-desc">{list.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2026 <a href="/">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+  </div>
 </body>
 </html>
