@@ -1,0 +1,281 @@
+[
+  {
+    "role": "Frontend Developer",
+    "category": "Engineering",
+    "medianSalaryUSD": 135000,
+    "p25": 82500,
+    "p75": 180000,
+    "remoteListings": 2,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Backend Developer",
+    "category": "Engineering",
+    "medianSalaryUSD": 80000,
+    "p25": 75000,
+    "p75": 85000,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Full Stack Developer",
+    "category": "Engineering",
+    "medianSalaryUSD": 80000,
+    "p25": 75000,
+    "p75": 85000,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Mobile Developer",
+    "category": "Engineering",
+    "medianSalaryUSD": 80000,
+    "p25": 75000,
+    "p75": 85000,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "DevOps Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 130000,
+    "p25": 72500,
+    "p75": 180000,
+    "remoteListings": 4,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Data Scientist",
+    "category": "Engineering",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Data Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 130000,
+    "p25": 72500,
+    "p75": 180000,
+    "remoteListings": 4,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "UX Designer",
+    "category": "Design",
+    "medianSalaryUSD": 130000,
+    "p25": 105000,
+    "p75": 147500,
+    "remoteListings": 2,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "UI Designer",
+    "category": "Design",
+    "medianSalaryUSD": 130000,
+    "p25": 105000,
+    "p75": 147500,
+    "remoteListings": 2,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Product Designer",
+    "category": "Design",
+    "medianSalaryUSD": 100000,
+    "p25": 80000,
+    "p75": 140000,
+    "remoteListings": 3,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Graphic Designer",
+    "category": "Design",
+    "medianSalaryUSD": 130000,
+    "p25": 105000,
+    "p75": 147500,
+    "remoteListings": 2,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Product Manager",
+    "category": "Product",
+    "medianSalaryUSD": 80000,
+    "p25": 75000,
+    "p75": 94000,
+    "remoteListings": 3,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Project Manager",
+    "category": "Product",
+    "medianSalaryUSD": 84500,
+    "p25": 79750,
+    "p75": 89250,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Scrum Master",
+    "category": "Product",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Marketing Manager",
+    "category": "Marketing",
+    "medianSalaryUSD": 84500,
+    "p25": 79750,
+    "p75": 89250,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "SEO Specialist",
+    "category": "Marketing",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Content Writer",
+    "category": "Marketing",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Social Media Manager",
+    "category": "Marketing",
+    "medianSalaryUSD": 84500,
+    "p25": 79750,
+    "p75": 89250,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Sales Representative",
+    "category": "Sales",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Account Executive",
+    "category": "Sales",
+    "medianSalaryUSD": 84500,
+    "p25": 79750,
+    "p75": 89250,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Customer Success Manager",
+    "category": "Customer Support",
+    "medianSalaryUSD": 84500,
+    "p25": 79750,
+    "p75": 89250,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Customer Support Rep",
+    "category": "Customer Support",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Technical Writer",
+    "category": "Writing",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Copywriter",
+    "category": "Writing",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "HR Manager",
+    "category": "HR",
+    "medianSalaryUSD": 84500,
+    "p25": 79750,
+    "p75": 89250,
+    "remoteListings": 1,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Technical Recruiter",
+    "category": "HR",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Financial Analyst",
+    "category": "Finance",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Accountant",
+    "category": "Finance",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Business Analyst",
+    "category": "Business",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Operations Manager",
+    "category": "Operations",
+    "medianSalaryUSD": 72500,
+    "p25": 62500,
+    "p75": 82125,
+    "remoteListings": 2,
+    "typicalExperience": "3-5 years"
+  },
+  {
+    "role": "Virtual Assistant",
+    "category": "Administration",
+    "medianSalaryUSD": null,
+    "p25": null,
+    "p75": null,
+    "remoteListings": null,
+    "typicalExperience": "3-5 years"
+  }
+]

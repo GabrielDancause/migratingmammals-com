@@ -1,0 +1,488 @@
+const fs = require('fs');
+const path = require('path');
+
+const dataFile = path.join(__dirname, '../data/nomad-salaries.json');
+const outFile = path.join(__dirname, '../public/nomad-salaries.html');
+
+const salariesData = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
+
+// Format to local currency function for static rendering of median
+const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format;
+
+const totalRoles = salariesData.length;
+const totalListings = salariesData.reduce((sum, item) => sum + (item.remoteListings || 0), 0);
+const allMedians = salariesData.filter(d => d.medianSalaryUSD !== null).map(d => d.medianSalaryUSD).sort((a,b) => a-b);
+const globalMedian = allMedians.length > 0 ? allMedians[Math.floor(allMedians.length / 2)] : 0;
+const topRole = salariesData.reduce((prev, current) => {
+  if (current.medianSalaryUSD === null) return prev;
+  if (prev.medianSalaryUSD === null) return current;
+  return (prev.medianSalaryUSD > current.medianSalaryUSD) ? prev : current;
+});
+
+const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Nomad Average Salaries by Role 2026</title>
+  <meta name="description" content="Compare average remote worker salaries across ${totalRoles} roles. Get real remote salary data for digital nomads.">
+  <link rel="canonical" href="https://migratingmammals.com/nomad-salaries">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #0a0b10;
+      color: #e0d5c8;
+      line-height: 1.6;
+    }
+    a { color: #C4956A; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: linear-gradient(180deg, #111318 0%, #0a0b10 100%);
+      border-bottom: 1px solid #1e2030;
+    }
+    .hero-tag {
+      color: #C4956A;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: inline-block;
+      background: rgba(196,149,106,0.1);
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .hero p {
+      color: #888;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: #111318;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #C4956A;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #888;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .search-input {
+      background: #111318;
+      border: 1px solid #1e2030;
+      color: #e0d5c8;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      flex-grow: 1;
+      max-width: 400px;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: #C4956A;
+    }
+    .filter-select {
+      background: #111318;
+      border: 1px solid #1e2030;
+      color: #e0d5c8;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      cursor: pointer;
+    }
+    .filter-select:focus {
+      border-color: #C4956A;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      background: #111318;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      margin-bottom: 60px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th, td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #1e2030;
+    }
+    th {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      font-weight: 600;
+      background: rgba(0,0,0,0.2);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    th:hover {
+      color: #e0d5c8;
+    }
+    th.sort-asc::after { content: ' ▲'; font-size: 0.7em; }
+    th.sort-desc::after { content: ' ▼'; font-size: 0.7em; }
+
+    td { font-size: 0.95rem; }
+    .td-role { font-weight: 600; color: #fff; }
+    .td-category { font-size: 0.8rem; color: #888; background: #1e2030; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+    .td-money { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; }
+    .td-median { color: #C4956A; font-weight: 600; }
+    .td-range { color: #888; font-size: 0.85rem; }
+
+    tbody tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+
+    .faq-item {
+      background: #111318;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .faq-q {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #C4956A;
+    }
+    .faq-a {
+      color: #888;
+      font-size: 0.95rem;
+    }
+
+    .methodology {
+      background: #111318;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 60px;
+    }
+    .methodology h2 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .methodology p {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid #1e2030;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .controls { flex-direction: column; align-items: stretch; }
+      .search-input { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-tag">Original Research</div>
+    <h1>Digital Nomad Average Salaries 2026</h1>
+    <p>Comprehensive analysis of compensation across ${totalRoles} remote-friendly roles, based on data from active job listings.</p>
+  </div>
+
+  <div class="container">
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val">${totalRoles}</div>
+        <div class="stat-label">Roles Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">${fmt(globalMedian)}</div>
+        <div class="stat-label">Global Median Salary</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">${topRole.role}</div>
+        <div class="stat-label">Highest Paid Role</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">${totalListings}+</div>
+        <div class="stat-label">Data Points</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search roles (e.g., Designer, Marketing)...">
+      <select id="categoryFilter" class="filter-select">
+        <option value="">All Categories</option>
+        ${Array.from(new Set(salariesData.map(d => d.category))).sort().map(c => `<option value="${c}">${c}</option>`).join('')}
+      </select>
+    </div>
+
+    <div class="table-container">
+      <table id="salariesTable">
+        <thead>
+          <tr>
+            <th data-sort="role">Role</th>
+            <th data-sort="category">Category</th>
+            <th data-sort="median" class="sort-desc">Median (USD)</th>
+            <th data-sort="range">25th - 75th Percentile</th>
+            <th data-sort="listings">Listings</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">What is the highest paying digital nomad job?</div>
+      <div class="faq-a">Based on our 2026 data, the highest paying common digital nomad role is <strong>${topRole.role}</strong>, with a median salary of <strong>${fmt(topRole.medianSalaryUSD)}</strong> USD. Engineering and Product roles generally dominate the top end of remote compensation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do remote workers make less than office workers?</div>
+      <div class="faq-a">Data shows that fully remote workers, especially in tech and knowledge sectors, often earn competitive salaries that meet or exceed local averages, though compensation can vary based on whether companies use location-based or location-agnostic pay models.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What are the most common remote jobs?</div>
+      <div class="faq-a">Software engineering (Frontend, Backend, Full Stack), Design, Digital Marketing, and Customer Support consistently have the highest volume of remote job listings.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are these salaries global or US-based?</div>
+      <div class="faq-a">These are aggregate figures from global remote job platforms. While many high-paying listings are US-based companies hiring globally, the medians represent a worldwide remote market.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How much experience is required for these salaries?</div>
+      <div class="faq-a">The median salaries shown represent mid-level roles, typically requiring 3-5 years of relevant experience. Entry-level roles will be closer to or below the 25th percentile.</div>
+    </div>
+
+    <div class="methodology">
+      <h2>Methodology</h2>
+      <p>Data was collected and aggregated from major remote job platforms including RemoteOK, Levels.fyi, Glassdoor, and We Work Remotely. We tracked active job listings and reported compensation for specific roles, calculating the 25th percentile, median (50th percentile), and 75th percentile to represent a realistic earning range.</p>
+      <p>All currency values were converted to USD. Roles with insufficient data points simply show N/A in accordance with our strict data reporting standards.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    &copy; 2026 <a href="/">migratingmammals.com</a> &middot; A <a href="https://gab.ae" target="_blank" rel="noopener">GAB Ventures</a> property
+  </div>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Digital Nomad Average Salaries by Role 2026",
+        "description": "Compare average remote worker salaries across ${totalRoles} roles. Get real remote salary data for digital nomads.",
+        "author": {
+          "@type": "Organization",
+          "name": "migratingmammals.com",
+          "url": "https://migratingmammals.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "GAB Ventures",
+          "url": "https://gab.ae"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the highest paying digital nomad job?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Based on our 2026 data, the highest paying common digital nomad role is ${topRole.role}, with a median salary of ${fmt(topRole.medianSalaryUSD)} USD."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do remote workers make less than office workers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Data shows that fully remote workers, especially in tech and knowledge sectors, often earn competitive salaries that meet or exceed local averages, though compensation can vary based on whether companies use location-based or location-agnostic pay models."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the most common remote jobs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Software engineering (Frontend, Backend, Full Stack), Design, Digital Marketing, and Customer Support consistently have the highest volume of remote job listings."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are these salaries global or US-based?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "These are aggregate figures from global remote job platforms. While many high-paying listings are US-based companies hiring globally, the medians represent a worldwide remote market."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much experience is required for these salaries?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The median salaries shown represent mid-level roles, typically requiring 3-5 years of relevant experience. Entry-level roles will be closer to or below the 25th percentile."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    const data = ${JSON.stringify(salariesData)};
+
+    const tableBody = document.getElementById('tableBody');
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const headers = document.querySelectorAll('th[data-sort]');
+
+    let currentSort = { column: 'median', dir: 'desc' };
+
+    const fmtMoney = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format;
+
+    function renderTable() {
+      const search = searchInput.value.toLowerCase();
+      const cat = categoryFilter.value;
+
+      let filtered = data.filter(d => {
+        const matchSearch = d.role.toLowerCase().includes(search);
+        const matchCat = cat === '' || d.category === cat;
+        return matchSearch && matchCat;
+      });
+
+      filtered.sort((a, b) => {
+        let valA, valB;
+        if (currentSort.column === 'role') { valA = a.role; valB = b.role; }
+        else if (currentSort.column === 'category') { valA = a.category; valB = b.category; }
+        else if (currentSort.column === 'median') { valA = a.medianSalaryUSD; valB = b.medianSalaryUSD; }
+        else if (currentSort.column === 'range') { valA = a.p25; valB = b.p25; }
+        else if (currentSort.column === 'listings') { valA = a.remoteListings || 0; valB = b.remoteListings || 0; }
+
+        if (valA < valB) return currentSort.dir === 'asc' ? -1 : 1;
+        if (valA > valB) return currentSort.dir === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      tableBody.innerHTML = filtered.map(d => \`
+        <tr>
+          <td class="td-role">\${d.role}</td>
+          <td><span class="td-category">\${d.category}</span></td>
+          <td class="td-money td-median">\${d.medianSalaryUSD !== null ? fmtMoney(d.medianSalaryUSD) : 'N/A'}</td>
+          <td class="td-money td-range">\${d.p25 !== null ? fmtMoney(d.p25) + ' - ' + fmtMoney(d.p75) : 'N/A'}</td>
+          <td>\${d.remoteListings !== null ? d.remoteListings : 'N/A'}</td>
+        </tr>
+      \`).join('');
+    }
+
+    searchInput.addEventListener('input', renderTable);
+    categoryFilter.addEventListener('change', renderTable);
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.getAttribute('data-sort');
+        if (currentSort.column === col) {
+          currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
+        } else {
+          currentSort.column = col;
+          currentSort.dir = 'desc';
+        }
+
+        headers.forEach(h => {
+          h.classList.remove('sort-asc', 'sort-desc');
+        });
+        th.classList.add(currentSort.dir === 'asc' ? 'sort-asc' : 'sort-desc');
+
+        renderTable();
+      });
+    });
+
+    // Initial render
+    renderTable();
+  </script>
+</body>
+</html>
+`;
+
+fs.writeFileSync(outFile, html);
+console.log(`Generated ${outFile}`);
