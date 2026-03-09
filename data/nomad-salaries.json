@@ -1,0 +1,110 @@
+[
+  {
+    "role": "Frontend Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 180000,
+    "p25": 180000,
+    "p75": 180000,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "Data Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 170000,
+    "p25": 170000,
+    "p75": 170000,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "UX/UI Designer",
+    "category": "Design",
+    "medianSalaryUSD": 150000,
+    "p25": 150000,
+    "p75": 150000,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "DevOps / SRE",
+    "category": "Engineering",
+    "medianSalaryUSD": 140000,
+    "p25": 140000,
+    "p75": 140000,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "Backend Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 125000,
+    "p25": 125000,
+    "p75": 125000,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "Product Designer",
+    "category": "Design",
+    "medianSalaryUSD": 100000,
+    "p25": 100000,
+    "p75": 100000,
+    "remoteListings": 2,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "Mobile Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 95000,
+    "p25": 95000,
+    "p75": 95000,
+    "remoteListings": 1,
+    "typicalExperience": "Mid-Level"
+  },
+  {
+    "role": "Account Manager",
+    "category": "Sales",
+    "medianSalaryUSD": 84500,
+    "p25": 84500,
+    "p75": 84500,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "Full Stack Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 80000,
+    "p25": 80000,
+    "p75": 80000,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "Software Engineer",
+    "category": "Engineering",
+    "medianSalaryUSD": 70000,
+    "p25": 57500,
+    "p75": 127500,
+    "remoteListings": 3,
+    "typicalExperience": "Mid-Level"
+  },
+  {
+    "role": "Operations Manager",
+    "category": "Operations",
+    "medianSalaryUSD": 55000,
+    "p25": 55000,
+    "p75": 55000,
+    "remoteListings": 1,
+    "typicalExperience": "Senior"
+  },
+  {
+    "role": "Content Writer",
+    "category": "Marketing",
+    "medianSalaryUSD": 27500,
+    "p25": 27500,
+    "p75": 27500,
+    "remoteListings": 1,
+    "typicalExperience": "Mid-Level"
+  }
+]

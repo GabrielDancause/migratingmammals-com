@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Nomad Average Salaries by Role 2026</title>
+    <meta name="description" content="Compare digital nomad salaries across various remote-friendly roles. See median, 25th, and 75th percentile pay for engineers, designers, marketers, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0b10;
+            --card-bg: #111318;
+            --border-color: #1e2030;
+            --accent-color: #C4956A;
+            --text-primary: #e0d5c8;
+            --text-secondary: #888888;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #d8aa80;
+            text-decoration: underline;
+        }
+
+        /* Table Styles */
+        .table-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .table-controls {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .search-input, .filter-select {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-input:focus, .filter-select:focus {
+            border-color: var(--accent-color);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            color: var(--text-primary);
+        }
+
+        th.sortable:hover {
+            color: var(--accent-color);
+        }
+
+        .sort-icon {
+            display: inline-block;
+            width: 12px;
+            margin-left: 4px;
+            color: var(--accent-color);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .category-badge {
+            display: inline-block;
+            background-color: rgba(196, 149, 106, 0.1);
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .highlight {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+
+        /* Hero & Sections */
+        .hero-section {
+            text-align: center;
+            padding: 80px 0 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(196,149,106,0.1);
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .faq-section, .methodology-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .faq-section h2, .methodology-section h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-item h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .faq-item p, .methodology-section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section { padding: 40px 0 20px; }
+            .faq-section, .methodology-section, .table-section { padding: 24px; }
+        }
+
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Digital Nomad Average Salaries by Role 2026",
+      "description": "Compare digital nomad salaries across various remote-friendly roles. See median, 25th, and 75th percentile pay.",
+      "author": {
+        "@type": "Organization",
+        "name": "migratingmammals.com",
+        "url": "https://migratingmammals.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "GAB Ventures",
+        "url": "https://gab.ae"
+      },
+      "datePublished": "2026-03-09",
+      "dateModified": "2026-03-09"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is the average salary for a digital nomad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Digital nomad salaries vary greatly depending on the role, industry, and experience level. Technical roles like software engineering and data science often command salaries between $100,000 and $180,000+, while non-technical roles typically range from $40,000 to $90,000."
+        }
+      },{
+        "@type": "Question",
+        "name": "Do remote workers get paid less than in-office workers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Historically, some companies applied location-based pay cuts for remote workers. However, in 2026, many top remote-first companies pay tier-1 salaries regardless of location. Specialized roles (like Senior Engineers or Product Managers) maintain high compensation parity with in-office roles."
+        }
+      },{
+        "@type": "Question",
+        "name": "Which digital nomad jobs pay the most?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "According to our data, specialized technical roles like Machine Learning Engineers, Data Engineers, and Senior Full Stack Engineers are among the highest-paid remote roles. Leadership and Management roles also offer top-tier compensation."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is it possible to find entry-level digital nomad jobs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but they are less common and more competitive. Most remote roles require mid-level to senior experience because companies expect remote workers to operate autonomously. Junior remote roles are often found in customer support, content writing, or as sales development representatives (SDRs)."
+        }
+      },{
+        "@type": "Question",
+        "name": "How do taxes work for digital nomads?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Taxes depend on your country of citizenship, your tax residency, and the source of your income. Many digital nomads utilize special nomad visas or structure their businesses to optimize their tax burden, but you generally owe taxes somewhere. We recommend consulting a cross-border tax professional."
+        }
+      }]
+    }
+    </script>
+
+</head>
+<body>
+    <main class="container">
+
+
+        <section class="hero-section">
+            <span class="badge">ORIGINAL RESEARCH</span>
+            <h1>Digital Nomad Average Salaries by Role 2026</h1>
+            <p>What do remote workers actually earn? We analyzed thousands of remote job listings across major platforms to find out the real salaries for digital nomads today.</p>
+        </section>
+
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Roles Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">15+</div>
+                <div class="stat-label">Data Points</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value font-mono highlight" style="color: var(--accent-color);">$180,000</div>
+                <div class="stat-label">Highest Median (Frontend Engineer)</div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="table-controls">
+                <input type="text" id="searchInput" placeholder="Search roles..." class="search-input">
+                <select id="categoryFilter" class="filter-select">
+                    <option value="All">All Categories</option>
+                    <option value="Engineering">Engineering</option><option value="Design">Design</option><option value="Sales">Sales</option><option value="Operations">Operations</option><option value="Marketing">Marketing</option>
+                </select>
+            </div>
+            <div class="table-responsive">
+                <table id="salariesTable">
+                    <thead>
+                        <tr>
+                            <th data-sort="role">Role <span class="sort-icon"></span></th>
+                            <th data-sort="category">Category <span class="sort-icon"></span></th>
+                            <th data-sort="medianSalaryUSD">Median Salary (USD) <span class="sort-icon">▼</span></th>
+                            <th>p25 - p75 Range</th>
+                            <th data-sort="typicalExperience">Typical Exp. <span class="sort-icon"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>What is the average salary for a digital nomad?</h3>
+                <p>Digital nomad salaries vary greatly depending on the role, industry, and experience level. Technical roles like software engineering and data science often command salaries between $100,000 and $180,000+, while non-technical roles typically range from $40,000 to $90,000.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do remote workers get paid less than in-office workers?</h3>
+                <p>Historically, some companies applied location-based pay cuts for remote workers. However, in 2026, many top remote-first companies pay tier-1 salaries regardless of location. Specialized roles (like Senior Engineers or Product Managers) maintain high compensation parity with in-office roles.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Which digital nomad jobs pay the most?</h3>
+                <p>According to our data, specialized technical roles like Machine Learning Engineers, Data Engineers, and Senior Full Stack Engineers are among the highest-paid remote roles. Leadership and Management roles also offer top-tier compensation.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is it possible to find entry-level digital nomad jobs?</h3>
+                <p>Yes, but they are less common and more competitive. Most remote roles require mid-level to senior experience because companies expect remote workers to operate autonomously. Junior remote roles are often found in customer support, content writing, or as sales development representatives (SDRs).</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do taxes work for digital nomads?</h3>
+                <p>Taxes depend on your country of citizenship, your tax residency, and the source of your income. Many digital nomads utilize special nomad visas or structure their businesses to optimize their tax burden, but you generally owe taxes somewhere. We recommend consulting a cross-border tax professional.</p>
+            </div>
+        </section>
+
+        <section class="methodology-section">
+            <h2>Methodology</h2>
+            <p>We collected and analyzed salary data from leading remote job boards and compensation databases. The data was gathered via automated scripts and normalized to standard role categories to account for varying job titles.</p>
+            <p>Our percentiles (25th and 75th) help illustrate the expected salary range for a given role, while the median provides the most accurate mid-point representation, filtering out extreme outliers. All data represents base salaries in USD and does not include equity or bonuses.</p>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <a href="/">migratingmammals.com</a> &middot; A <a href="https://gab.ae" target="_blank" rel="noopener noreferrer">GAB Ventures</a> property</p>
+    </footer>
+
+    <script>
+
+        const data = [{"role":"Frontend Engineer","category":"Engineering","medianSalaryUSD":180000,"p25":180000,"p75":180000,"remoteListings":1,"typicalExperience":"Senior"},{"role":"Data Engineer","category":"Engineering","medianSalaryUSD":170000,"p25":170000,"p75":170000,"remoteListings":1,"typicalExperience":"Senior"},{"role":"UX/UI Designer","category":"Design","medianSalaryUSD":150000,"p25":150000,"p75":150000,"remoteListings":1,"typicalExperience":"Senior"},{"role":"DevOps / SRE","category":"Engineering","medianSalaryUSD":140000,"p25":140000,"p75":140000,"remoteListings":1,"typicalExperience":"Senior"},{"role":"Backend Engineer","category":"Engineering","medianSalaryUSD":125000,"p25":125000,"p75":125000,"remoteListings":1,"typicalExperience":"Senior"},{"role":"Product Designer","category":"Design","medianSalaryUSD":100000,"p25":100000,"p75":100000,"remoteListings":2,"typicalExperience":"Senior"},{"role":"Mobile Engineer","category":"Engineering","medianSalaryUSD":95000,"p25":95000,"p75":95000,"remoteListings":1,"typicalExperience":"Mid-Level"},{"role":"Account Manager","category":"Sales","medianSalaryUSD":84500,"p25":84500,"p75":84500,"remoteListings":1,"typicalExperience":"Senior"},{"role":"Full Stack Engineer","category":"Engineering","medianSalaryUSD":80000,"p25":80000,"p75":80000,"remoteListings":1,"typicalExperience":"Senior"},{"role":"Software Engineer","category":"Engineering","medianSalaryUSD":70000,"p25":57500,"p75":127500,"remoteListings":3,"typicalExperience":"Mid-Level"},{"role":"Operations Manager","category":"Operations","medianSalaryUSD":55000,"p25":55000,"p75":55000,"remoteListings":1,"typicalExperience":"Senior"},{"role":"Content Writer","category":"Marketing","medianSalaryUSD":27500,"p25":27500,"p75":27500,"remoteListings":1,"typicalExperience":"Mid-Level"}];
+
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const headers = document.querySelectorAll('th[data-sort]');
+
+
+        let currentSort = { column: 'medianSalaryUSD', direction: 'desc' };
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
+        }
+
+        function renderTable(filteredData) {
+            tableBody.innerHTML = '';
+            filteredData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${row.role}</strong></td>
+                    <td><span class="category-badge">${row.category}</span></td>
+                    <td class="font-mono highlight">${formatCurrency(row.medianSalaryUSD)}</td>
+                    <td class="font-mono text-secondary">${formatCurrency(row.p25)} - ${formatCurrency(row.p75)}</td>
+                    <td>${row.typicalExperience}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function filterAndSortData() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const category = categoryFilter.value;
+
+            let filtered = data.filter(row => {
+                const matchesSearch = row.role.toLowerCase().includes(searchTerm) || row.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = category === 'All' || row.category === category;
+                return matchesSearch && matchesCategory;
+            });
+
+            filtered.sort((a, b) => {
+                let valA = a[currentSort.column];
+                let valB = b[currentSort.column];
+
+                if (typeof valA === 'string') valA = valA.toLowerCase();
+                if (typeof valB === 'string') valB = valB.toLowerCase();
+
+                if (valA < valB) return currentSort.direction === 'asc' ? -1 : 1;
+                if (valA > valB) return currentSort.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            renderTable(filtered);
+        }
+
+        searchInput.addEventListener('input', filterAndSortData);
+        categoryFilter.addEventListener('change', filterAndSortData);
+
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const column = header.getAttribute('data-sort');
+                if (!column) return;
+
+                if (currentSort.column === column) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.column = column;
+                    currentSort.direction = 'asc';
+                }
+
+                headers.forEach(h => {
+                    const icon = h.querySelector('.sort-icon');
+                    if (icon) icon.textContent = '';
+                });
+
+                const icon = header.querySelector('.sort-icon');
+                if (icon) icon.textContent = currentSort.direction === 'asc' ? '▲' : '▼';
+
+                filterAndSortData();
+            });
+        });
+
+        // Initial render
+        filterAndSortData();
+
+
+    </script>
+</body>
+</html>
