@@ -1,0 +1,605 @@
+[
+  {
+    "city": "Bangkok",
+    "country": "Thailand",
+    "dayPassUSD": 21,
+    "monthlyUSD": 212,
+    "avgInternetMbps": 24,
+    "spacesCount": 38,
+    "popularSpaces": [
+      "The Hive",
+      "The Great Room"
+    ]
+  },
+  {
+    "city": "Chiang Mai",
+    "country": "Thailand",
+    "dayPassUSD": 19,
+    "monthlyUSD": 194,
+    "avgInternetMbps": 20,
+    "spacesCount": 49,
+    "popularSpaces": [
+      "Punspace",
+      "The Brick"
+    ]
+  },
+  {
+    "city": "Canggu",
+    "country": "Indonesia",
+    "dayPassUSD": 20,
+    "monthlyUSD": 202,
+    "avgInternetMbps": 24,
+    "spacesCount": 25,
+    "popularSpaces": [
+      "Bwork",
+      "Tropical Nomad"
+    ]
+  },
+  {
+    "city": "Medellin",
+    "country": "Colombia",
+    "dayPassUSD": 20,
+    "monthlyUSD": 195,
+    "avgInternetMbps": 9,
+    "spacesCount": 44,
+    "popularSpaces": [
+      "Espacio",
+      "Epicentro"
+    ]
+  },
+  {
+    "city": "Lisbon",
+    "country": "Portugal",
+    "dayPassUSD": 28,
+    "monthlyUSD": 275,
+    "avgInternetMbps": 38,
+    "spacesCount": 38,
+    "popularSpaces": [
+      "The Secret Garden"
+    ]
+  },
+  {
+    "city": "Buenos Aires",
+    "country": "Argentina",
+    "dayPassUSD": 7,
+    "monthlyUSD": 66,
+    "avgInternetMbps": 13,
+    "spacesCount": 47,
+    "popularSpaces": [
+      "Cespedes",
+      "Urban Station"
+    ]
+  },
+  {
+    "city": "Kuala Lumpur",
+    "country": "Malaysia",
+    "dayPassUSD": 19,
+    "monthlyUSD": 187,
+    "avgInternetMbps": 19,
+    "spacesCount": 48,
+    "popularSpaces": [
+      "PAPER + TOAST",
+      "Nook"
+    ]
+  },
+  {
+    "city": "Tbilisi",
+    "country": "Georgia",
+    "dayPassUSD": 11,
+    "monthlyUSD": 109,
+    "avgInternetMbps": 15,
+    "spacesCount": 35,
+    "popularSpaces": [
+      "Cospot"
+    ]
+  },
+  {
+    "city": "Cape Town",
+    "country": "South Africa",
+    "dayPassUSD": 22,
+    "monthlyUSD": 217,
+    "avgInternetMbps": 9,
+    "spacesCount": 49,
+    "popularSpaces": [
+      "88mph",
+      "Daddyo"
+    ]
+  },
+  {
+    "city": "Ho Chi Minh City",
+    "country": "Vietnam",
+    "dayPassUSD": 14,
+    "monthlyUSD": 144,
+    "avgInternetMbps": 12,
+    "spacesCount": 12,
+    "popularSpaces": [
+      "Start Saigon",
+      "The Hive"
+    ]
+  },
+  {
+    "city": "Da Nang",
+    "country": "Vietnam",
+    "dayPassUSD": 14,
+    "monthlyUSD": 140,
+    "avgInternetMbps": 9,
+    "spacesCount": 26,
+    "popularSpaces": [
+      "Local Cafes & Hubs"
+    ]
+  },
+  {
+    "city": "Playa del Carmen",
+    "country": "Mexico",
+    "dayPassUSD": 50,
+    "monthlyUSD": 501,
+    "avgInternetMbps": 12,
+    "spacesCount": 9,
+    "popularSpaces": [
+      "NEST",
+      "COFFICE"
+    ]
+  },
+  {
+    "city": "Mexico City",
+    "country": "Mexico",
+    "dayPassUSD": 29,
+    "monthlyUSD": 286,
+    "avgInternetMbps": 12,
+    "spacesCount": 44,
+    "popularSpaces": [
+      "Urban Station",
+      "Centraal"
+    ]
+  },
+  {
+    "city": "Ubud",
+    "country": "Indonesia",
+    "dayPassUSD": 21,
+    "monthlyUSD": 213,
+    "avgInternetMbps": 13,
+    "spacesCount": 30,
+    "popularSpaces": [
+      "Outpost"
+    ]
+  },
+  {
+    "city": "Taipei",
+    "country": "Taiwan",
+    "dayPassUSD": 45,
+    "monthlyUSD": 446,
+    "avgInternetMbps": 23,
+    "spacesCount": 29,
+    "popularSpaces": [
+      "CLBC",
+      "Citron"
+    ]
+  },
+  {
+    "city": "Budapest",
+    "country": "Hungary",
+    "dayPassUSD": 21,
+    "monthlyUSD": 210,
+    "avgInternetMbps": 33,
+    "spacesCount": 39,
+    "popularSpaces": [
+      "LOFFICE",
+      "Kubik"
+    ]
+  },
+  {
+    "city": "Porto",
+    "country": "Portugal",
+    "dayPassUSD": 34,
+    "monthlyUSD": 340,
+    "avgInternetMbps": 35,
+    "spacesCount": 20,
+    "popularSpaces": [
+      "Porto i/o"
+    ]
+  },
+  {
+    "city": "Prague",
+    "country": "Czechia",
+    "dayPassUSD": 32,
+    "monthlyUSD": 320,
+    "avgInternetMbps": 23,
+    "spacesCount": 23,
+    "popularSpaces": [
+      "Impact Hub",
+      "Locus"
+    ]
+  },
+  {
+    "city": "Sofia",
+    "country": "Bulgaria",
+    "dayPassUSD": 29,
+    "monthlyUSD": 292,
+    "avgInternetMbps": 23,
+    "spacesCount": 32,
+    "popularSpaces": [
+      "Betahaus",
+      "Soho"
+    ]
+  },
+  {
+    "city": "Istanbul",
+    "country": "Turkey",
+    "dayPassUSD": 7,
+    "monthlyUSD": 72,
+    "avgInternetMbps": 11,
+    "spacesCount": 41,
+    "popularSpaces": [
+      "Local Cafes & Hubs"
+    ]
+  },
+  {
+    "city": "Warsaw",
+    "country": "Poland",
+    "dayPassUSD": 29,
+    "monthlyUSD": 288,
+    "avgInternetMbps": 21,
+    "spacesCount": 31,
+    "popularSpaces": [
+      "Clock Work Warsaw"
+    ]
+  },
+  {
+    "city": "Krakow",
+    "country": "Poland",
+    "dayPassUSD": 19,
+    "monthlyUSD": 185,
+    "avgInternetMbps": 36,
+    "spacesCount": 28,
+    "popularSpaces": [
+      "CoLabs",
+      "HubRaum"
+    ]
+  },
+  {
+    "city": "Belgrade",
+    "country": "Serbia",
+    "dayPassUSD": 26,
+    "monthlyUSD": 260,
+    "avgInternetMbps": 31,
+    "spacesCount": 29,
+    "popularSpaces": [
+      "Smart Office",
+      "Impact Hub"
+    ]
+  },
+  {
+    "city": "Tenerife",
+    "country": "Spain",
+    "dayPassUSD": 43,
+    "monthlyUSD": 425,
+    "avgInternetMbps": 35,
+    "spacesCount": 34,
+    "popularSpaces": [
+      "Wolfhouse"
+    ]
+  },
+  {
+    "city": "Barcelona",
+    "country": "Spain",
+    "dayPassUSD": 39,
+    "monthlyUSD": 393,
+    "avgInternetMbps": 35,
+    "spacesCount": 45,
+    "popularSpaces": [
+      "Betahaus"
+    ]
+  },
+  {
+    "city": "Madrid",
+    "country": "Spain",
+    "dayPassUSD": 47,
+    "monthlyUSD": 467,
+    "avgInternetMbps": 35,
+    "spacesCount": 30,
+    "popularSpaces": [
+      "Utopic_US",
+      "GarAJE Madrid"
+    ]
+  },
+  {
+    "city": "Valencia",
+    "country": "Spain",
+    "dayPassUSD": 26,
+    "monthlyUSD": 257,
+    "avgInternetMbps": 35,
+    "spacesCount": 46,
+    "popularSpaces": [
+      "Wayco",
+      "Botanico Creativo"
+    ]
+  },
+  {
+    "city": "Las Palmas",
+    "country": "Spain",
+    "dayPassUSD": 10,
+    "monthlyUSD": 104,
+    "avgInternetMbps": 32,
+    "spacesCount": 39,
+    "popularSpaces": [
+      "CoworkingC",
+      "CoworkingC"
+    ]
+  },
+  {
+    "city": "Bansko",
+    "country": "Bulgaria",
+    "dayPassUSD": 41,
+    "monthlyUSD": 412,
+    "avgInternetMbps": 23,
+    "spacesCount": 35,
+    "popularSpaces": [
+      "Coworking Bansko"
+    ]
+  },
+  {
+    "city": "Bogota",
+    "country": "Colombia",
+    "dayPassUSD": 22,
+    "monthlyUSD": 215,
+    "avgInternetMbps": 9,
+    "spacesCount": 38,
+    "popularSpaces": [
+      "Atom House",
+      "HubBOG"
+    ]
+  },
+  {
+    "city": "Lima",
+    "country": "Peru",
+    "dayPassUSD": 17,
+    "monthlyUSD": 174,
+    "avgInternetMbps": 9,
+    "spacesCount": 31,
+    "popularSpaces": [
+      "Comunal",
+      "Starscamp"
+    ]
+  },
+  {
+    "city": "Santiago",
+    "country": "Chile",
+    "dayPassUSD": 20,
+    "monthlyUSD": 203,
+    "avgInternetMbps": 15,
+    "spacesCount": 32,
+    "popularSpaces": [
+      "Connectas",
+      "CoworkingLatam"
+    ]
+  },
+  {
+    "city": "Rio de Janeiro",
+    "country": "Brazil",
+    "dayPassUSD": 45,
+    "monthlyUSD": 452,
+    "avgInternetMbps": 14,
+    "spacesCount": 59,
+    "popularSpaces": [
+      "Tribo",
+      "StartupRio"
+    ]
+  },
+  {
+    "city": "Sao Paulo",
+    "country": "Brazil",
+    "dayPassUSD": 25,
+    "monthlyUSD": 249,
+    "avgInternetMbps": 16,
+    "spacesCount": 41,
+    "popularSpaces": [
+      "Link2u",
+      "Ponto de Contato"
+    ]
+  },
+  {
+    "city": "Florianopolis",
+    "country": "Brazil",
+    "dayPassUSD": 16,
+    "monthlyUSD": 164,
+    "avgInternetMbps": 13,
+    "spacesCount": 48,
+    "popularSpaces": [
+      "UPspace!",
+      "SmartMob"
+    ]
+  },
+  {
+    "city": "Antigua",
+    "country": "Guatemala",
+    "dayPassUSD": 17,
+    "monthlyUSD": 173,
+    "avgInternetMbps": 7,
+    "spacesCount": 39,
+    "popularSpaces": [
+      "Impact Hub"
+    ]
+  },
+  {
+    "city": "Oaxaca",
+    "country": "Mexico",
+    "dayPassUSD": 24,
+    "monthlyUSD": 236,
+    "avgInternetMbps": 12,
+    "spacesCount": 39,
+    "popularSpaces": [
+      "Hub Oaxaca"
+    ]
+  },
+  {
+    "city": "Puerto Escondido",
+    "country": "Mexico",
+    "dayPassUSD": 10,
+    "monthlyUSD": 104,
+    "avgInternetMbps": 25,
+    "spacesCount": 12,
+    "popularSpaces": [
+      "Local Cafes & Hubs"
+    ]
+  },
+  {
+    "city": "Koh Phangan",
+    "country": "Thailand",
+    "dayPassUSD": 34,
+    "monthlyUSD": 340,
+    "avgInternetMbps": 20,
+    "spacesCount": 38,
+    "popularSpaces": [
+      "Koh Space"
+    ]
+  },
+  {
+    "city": "Phuket",
+    "country": "Thailand",
+    "dayPassUSD": 17,
+    "monthlyUSD": 165,
+    "avgInternetMbps": 21,
+    "spacesCount": 28,
+    "popularSpaces": [
+      "Phuket Coworking",
+      "Phuket Stash"
+    ]
+  },
+  {
+    "city": "Penang",
+    "country": "Malaysia",
+    "dayPassUSD": 8,
+    "monthlyUSD": 81,
+    "avgInternetMbps": 19,
+    "spacesCount": 24,
+    "popularSpaces": [
+      "Settlements"
+    ]
+  },
+  {
+    "city": "Siargao",
+    "country": "Philippines",
+    "dayPassUSD": 23,
+    "monthlyUSD": 234,
+    "avgInternetMbps": 9,
+    "spacesCount": 40,
+    "popularSpaces": [
+      "Local Cafes & Hubs"
+    ]
+  },
+  {
+    "city": "Manila",
+    "country": "Philippines",
+    "dayPassUSD": 12,
+    "monthlyUSD": 119,
+    "avgInternetMbps": 8,
+    "spacesCount": 42,
+    "popularSpaces": [
+      "Co.lab",
+      "ASpace"
+    ]
+  },
+  {
+    "city": "Seoul",
+    "country": "South Korea",
+    "dayPassUSD": 19,
+    "monthlyUSD": 186,
+    "avgInternetMbps": 33,
+    "spacesCount": 26,
+    "popularSpaces": [
+      "Campus Seoul",
+      "Hive Arena"
+    ]
+  },
+  {
+    "city": "Tokyo",
+    "country": "Japan",
+    "dayPassUSD": 35,
+    "monthlyUSD": 347,
+    "avgInternetMbps": 27,
+    "spacesCount": 27,
+    "popularSpaces": [
+      "Agora",
+      "Jelly Jelly Cafe"
+    ]
+  },
+  {
+    "city": "Osaka",
+    "country": "Japan",
+    "dayPassUSD": 39,
+    "monthlyUSD": 385,
+    "avgInternetMbps": 25,
+    "spacesCount": 25,
+    "popularSpaces": [
+      "Osakan Space",
+      "Juso Coworking"
+    ]
+  },
+  {
+    "city": "Fukuoka",
+    "country": "Japan",
+    "dayPassUSD": 39,
+    "monthlyUSD": 385,
+    "avgInternetMbps": 28,
+    "spacesCount": 31,
+    "popularSpaces": [
+      "Regus"
+    ]
+  },
+  {
+    "city": "Kyoto",
+    "country": "Japan",
+    "dayPassUSD": 39,
+    "monthlyUSD": 385,
+    "avgInternetMbps": 28,
+    "spacesCount": 25,
+    "popularSpaces": [
+      "Local Cafes & Hubs"
+    ]
+  },
+  {
+    "city": "Dubai",
+    "country": "UAE",
+    "dayPassUSD": 34,
+    "monthlyUSD": 341,
+    "avgInternetMbps": 11,
+    "spacesCount": 21,
+    "popularSpaces": [
+      "Make Hub"
+    ]
+  },
+  {
+    "city": "Doha",
+    "country": "Qatar",
+    "dayPassUSD": 49,
+    "monthlyUSD": 494,
+    "avgInternetMbps": 11,
+    "spacesCount": 31,
+    "popularSpaces": [
+      "7ayak Hub"
+    ]
+  },
+  {
+    "city": "Manama",
+    "country": "Bahrain",
+    "dayPassUSD": 32,
+    "monthlyUSD": 321,
+    "avgInternetMbps": 9,
+    "spacesCount": 24,
+    "popularSpaces": [
+      "RUKN",
+      "Batelco"
+    ]
+  },
+  {
+    "city": "Riyadh",
+    "country": "Saudi Arabia",
+    "dayPassUSD": 25,
+    "monthlyUSD": 245,
+    "avgInternetMbps": 8,
+    "spacesCount": 28,
+    "popularSpaces": [
+      "The Work Hub"
+    ]
+  }
+]

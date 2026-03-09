@@ -1,0 +1,618 @@
+const fs = require('fs');
+const data = fs.readFileSync('data/coworking-prices.json', 'utf8');
+
+const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coworking Space Prices Around the World 2026 | migratingmammals.com</title>
+  <meta name="description" content="Compare coworking day pass and monthly prices across 50+ cities popular with digital nomads.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0b10;
+      --card-bg: #111318;
+      --border: #1e2030;
+      --accent: #C4956A;
+      --text: #e0d5c8;
+      --text-muted: #888888;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 60px;
+      background: linear-gradient(180deg, #15111b 0%, var(--bg) 100%);
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(196,149,106,0.08) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+
+    .tagline {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: inline-block;
+      background: rgba(196,149,106,0.1);
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: -30px auto 60px;
+      max-width: 1000px;
+      position: relative;
+      z-index: 10;
+      padding: 0 24px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #151820;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 16px 12px 40px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    /* Table */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+      margin-bottom: 60px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(0,0,0,0.2);
+      padding: 16px 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    th:hover {
+      background: rgba(0,0,0,0.4);
+    }
+
+    th.sort-asc::after { content: ' \u2191'; color: var(--accent); }
+    th.sort-desc::after { content: ' \u2193'; color: var(--accent); }
+
+    td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .col-city { font-weight: 600; color: #fff; }
+    .col-country { color: var(--text-muted); font-size: 0.85rem; }
+    .col-price { font-family: var(--font-mono); color: var(--accent); font-weight: 600; }
+    .col-speed { font-family: var(--font-mono); }
+    .col-spaces { font-size: 0.85rem; color: var(--text-muted); }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #1a1d26;
+      border: 1px solid var(--border);
+    }
+    .badge.fast { color: #4ade80; border-color: rgba(74, 222, 128, 0.2); background: rgba(74, 222, 128, 0.05); }
+    .badge.med { color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); background: rgba(251, 191, 36, 0.05); }
+    .badge.slow { color: #f87171; border-color: rgba(248, 113, 113, 0.2); background: rgba(248, 113, 113, 0.05); }
+
+    /* Content Section */
+    .content-section {
+      max-width: 800px;
+      margin: 0 auto 80px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 40px 0 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #fff;
+      margin: 30px 0 15px;
+    }
+
+    .content-section p {
+      margin-bottom: 16px;
+      color: #c8d0de;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      padding: 24px;
+    }
+    .faq-q {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .faq-a {
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 50px 24px;
+      font-size: 0.85rem;
+      color: #5a6a80;
+      border-top: 1px solid var(--border);
+      background: #040810;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      .hero { padding: 80px 20px 40px; }
+      .controls { flex-direction: column; align-items: stretch; }
+      .search-box { max-width: 100%; }
+      th, td { padding: 12px 10px; }
+      .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="tagline">Original Research</div>
+      <h1>Coworking Space Prices Around the World 2026</h1>
+      <p>We analyzed coworking day pass and monthly hot desk costs across top digital nomad cities to help you budget your remote work travels.</p>
+    </div>
+  </div>
+
+  <div class="stats-grid" id="stats-container">
+    <!-- Stats will be inserted here by JS -->
+  </div>
+
+  <div class="container">
+    <div class="controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Search cities or countries...">
+      </div>
+      <div style="font-size: 0.85rem; color: var(--text-muted);">
+        Showing <span id="result-count">0</span> locations
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th data-sort="city" class="sort-asc">Location</th>
+            <th data-sort="monthlyUSD">Monthly Hot Desk</th>
+            <th data-sort="dayPassUSD">Day Pass (Est.)</th>
+            <th data-sort="avgInternetMbps" class="hide-mobile">Internet Speed</th>
+            <th data-sort="spacesCount" class="hide-mobile">Coworking Spaces</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Data will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-section">
+      <h2>Methodology</h2>
+      <p>This study collected data across over 50 cities popular with digital nomads. Pricing data was aggregated from multiple sources, primarily leveraging Nomadlist statistics for coworking hot desk costs. Day pass rates are estimated based on a standard calculation (approximately 10% of monthly cost with a $5 minimum) where direct day pass data was unavailable. Internet speeds represent the average reported speeds for the city, and the count of spaces is an indicator of coworking availability.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Which digital nomad city has the cheapest coworking spaces?</div>
+        <div class="faq-a">Based on our 2026 data, Buenos Aires offers some of the lowest coworking prices at roughly $66 per month for a hot desk. Other very affordable locations include cities in Southeast Asia and South America.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How much does a coworking day pass usually cost?</div>
+        <div class="faq-a">A coworking day pass typically ranges from $10 to $30 USD depending on the city. In expensive hubs like London, New York, or Lisbon, you might pay $25-$35 per day. In more affordable hubs like Chiang Mai or Medellin, a day pass is closer to $10-$20.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is it cheaper to get a monthly hot desk or pay for day passes?</div>
+        <div class="faq-a">If you plan to work from a coworking space more than 8-10 times a month, a monthly hot desk membership is almost always cheaper. Monthly memberships often come with added perks like 24/7 access, lockers, and free coffee.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do all coworking spaces have fast internet?</div>
+        <div class="faq-a">Not always. While coworking spaces generally invest in better internet infrastructure than local cafes, the speeds are still limited by the city's overall infrastructure. Our data shows cities like Lisbon have excellent speeds (38+ Mbps avg), while places like Medellin might be slower (9 Mbps avg).</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I negotiate coworking space prices?</div>
+        <div class="faq-a">Yes, especially in locations with a high density of coworking spaces or during off-peak seasons. You can often negotiate discounts if you commit to multiple months or sign up as a group. However, large corporate spaces like WeWork rarely negotiate on individual hot desk prices.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 <a href="/">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+  </div>
+
+  <!-- JSON Data Embedded Directly -->
+  <script id="coworking-data" type="application/json">
+${data}
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load data from embedded JSON
+      const rawData = document.getElementById('coworking-data').textContent;
+      let citiesData = [];
+      try {
+        citiesData = JSON.parse(rawData);
+      } catch (e) {
+        console.error('Failed to parse coworking data', e);
+      }
+
+      // State
+      let currentData = [...citiesData];
+      let sortCol = 'city';
+      let sortDir = 1; // 1 for asc, -1 for desc
+
+      // DOM Elements
+      const tbody = document.getElementById('table-body');
+      const searchInput = document.getElementById('search-input');
+      const resultCount = document.getElementById('result-count');
+      const headers = document.querySelectorAll('th[data-sort]');
+      const statsContainer = document.getElementById('stats-container');
+
+      // Initialize Stats
+      function initStats() {
+        if (!citiesData.length) return;
+
+        const count = citiesData.length;
+
+        let avgMonthly = 0;
+        let validMonthly = 0;
+        citiesData.forEach(c => {
+          if (c.monthlyUSD) {
+            avgMonthly += c.monthlyUSD;
+            validMonthly++;
+          }
+        });
+        avgMonthly = Math.round(avgMonthly / validMonthly);
+
+        const sortedByPrice = [...citiesData].filter(c => c.monthlyUSD).sort((a, b) => a.monthlyUSD - b.monthlyUSD);
+        const cheapest = sortedByPrice[0] || { city: 'Unknown', monthlyUSD: 0 };
+        const mostExp = sortedByPrice[sortedByPrice.length - 1];
+
+        statsContainer.innerHTML = \`
+          <div class="stat-card">
+            <div class="stat-value">\${count}</div>
+            <div class="stat-label">Cities Analyzed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">$\${avgMonthly}</div>
+            <div class="stat-label">Global Avg Monthly</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">$\${cheapest.monthlyUSD}</div>
+            <div class="stat-label">Most Affordable (\${cheapest.city})</div>
+          </div>
+        \`;
+      }
+
+      // Format Speed Badge
+      function getSpeedBadge(speed) {
+        if (!speed) return '<span class="badge">N/A</span>';
+        if (speed >= 30) return \`<span class="badge fast">\${speed} Mbps</span>\`;
+        if (speed >= 15) return \`<span class="badge med">\${speed} Mbps</span>\`;
+        return \`<span class="badge slow">\${speed} Mbps</span>\`;
+      }
+
+      // Render Table
+      function renderTable() {
+        resultCount.textContent = currentData.length;
+
+        if (currentData.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px;">No cities found matching your search.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = currentData.map(item => {
+          const popularText = (item.popularSpaces && item.popularSpaces.length) ? item.popularSpaces.join(', ') : 'Various';
+          const firstSpace = (item.popularSpaces && item.popularSpaces.length) ? item.popularSpaces[0] : '';
+
+          return \`
+          <tr>
+            <td>
+              <div class="col-city">\${item.city}</div>
+              <div class="col-country">\${item.country}</div>
+            </td>
+            <td class="col-price">\${item.monthlyUSD ? '$' + item.monthlyUSD : 'N/A'}</td>
+            <td class="col-price">\${item.dayPassUSD ? '$' + item.dayPassUSD : 'N/A'}</td>
+            <td class="col-speed hide-mobile">\${getSpeedBadge(item.avgInternetMbps)}</td>
+            <td class="col-spaces hide-mobile">
+              \${item.spacesCount ? item.spacesCount + '+' : 'N/A'}
+              <div style="font-size: 0.75rem; color: #5a6a80; margin-top: 4px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Top: \${popularText}">
+                \${firstSpace}
+              </div>
+            </td>
+          </tr>
+          \`;
+        }).join('');
+      }
+
+      // Sort Data
+      function sortData(column) {
+        if (sortCol === column) {
+          sortDir *= -1; // Toggle direction
+        } else {
+          sortCol = column;
+          sortDir = 1; // Default to asc
+        }
+
+        // Update headers visual state
+        headers.forEach(th => {
+          th.classList.remove('sort-asc', 'sort-desc');
+          if (th.dataset.sort === sortCol) {
+            th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+          }
+        });
+
+        currentData.sort((a, b) => {
+          let valA = a[sortCol];
+          let valB = b[sortCol];
+
+          if (valA === null || valA === undefined) valA = '';
+          if (valB === null || valB === undefined) valB = '';
+
+          if (typeof valA === 'string' && typeof valB === 'string') {
+            return valA.localeCompare(valB) * sortDir;
+          }
+          return (valA - valB) * sortDir;
+        });
+
+        renderTable();
+      }
+
+      // Filter Data
+      function filterData() {
+        const query = searchInput.value.toLowerCase();
+        if (!query) {
+          currentData = [...citiesData];
+        } else {
+          currentData = citiesData.filter(item =>
+            item.city.toLowerCase().includes(query) ||
+            item.country.toLowerCase().includes(query)
+          );
+        }
+
+        // Re-apply current sort
+        const tmpCol = sortCol;
+        const tmpDir = sortDir;
+        sortCol = null; // force re-sort
+        sortData(tmpCol);
+        // sortData toggles direction, so we fix it
+        if (sortDir !== tmpDir) {
+           sortDir = tmpDir;
+           sortData(tmpCol); // re-apply correct direction visually
+        }
+      }
+
+      // Event Listeners
+      headers.forEach(th => {
+        th.addEventListener('click', () => {
+          sortData(th.dataset.sort);
+        });
+      });
+
+      searchInput.addEventListener('input', filterData);
+
+      // Initial Render
+      initStats();
+      sortData('city'); // Initial sort
+    });
+  </script>
+
+  <!-- JSON-LD Schemas -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Coworking Space Prices Around the World 2026",
+      "description": "Compare coworking day pass and monthly prices across 50+ cities popular with digital nomads.",
+      "author": {
+        "@type": "Organization",
+        "name": "migratingmammals.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "GAB Ventures",
+        "url": "https://gab.ae"
+      },
+      "datePublished": "2026-03-09"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Which digital nomad city has the cheapest coworking spaces?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Based on our 2026 data, Buenos Aires offers some of the lowest coworking prices at roughly $66 per month for a hot desk. Other very affordable locations include cities in Southeast Asia and South America."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How much does a coworking day pass usually cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A coworking day pass typically ranges from $10 to $30 USD depending on the city. In expensive hubs like London, New York, or Lisbon, you might pay $25-$35 per day. In more affordable hubs like Chiang Mai or Medellin, a day pass is closer to $10-$20."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is it cheaper to get a monthly hot desk or pay for day passes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you plan to work from a coworking space more than 8-10 times a month, a monthly hot desk membership is almost always cheaper. Monthly memberships often come with added perks like 24/7 access, lockers, and free coffee."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Do all coworking spaces have fast internet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always. While coworking spaces generally invest in better internet infrastructure than local cafes, the speeds are still limited by the city's overall infrastructure. Our data shows cities like Lisbon have excellent speeds (38+ Mbps avg), while places like Medellin might be slower (9 Mbps avg)."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Can I negotiate coworking space prices?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, especially in locations with a high density of coworking spaces or during off-peak seasons. You can often negotiate discounts if you commit to multiple months or sign up as a group. However, large corporate spaces like WeWork rarely negotiate on individual hot desk prices."
+        }
+      }]
+    }
+  </script>
+</body>
+</html>`;
+
+fs.writeFileSync('public/coworking-prices.html', htmlContent);
+console.log('Successfully wrote public/coworking-prices.html');
