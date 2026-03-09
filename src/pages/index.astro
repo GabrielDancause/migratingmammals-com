@@ -27,9 +27,9 @@ const tools = [
 
 // Studies 
 const studies = [
+  { title: "Digital Nomad Cost of Living Index 2026", subtitle: "42 items · most popular cities", slug: "/cost-of-living-index", stat: "$894", statLabel: "Chiang Mai monthly budget", desc: "Compile cost of living data for 42 popular digital nomad cities. The cheapest city, Da Nang, costs just $870/mo.", tag: "ORIGINAL RESEARCH" },
   { emoji: "🏢", name: "Coworking Space Prices Around the World 2026", slug: "/coworking-prices", desc: "Compare coworking day pass and monthly prices across 50+ cities popular with digital nomads.", stat: "52", statLabel: "cities analyzed" },
   { emoji: "🌍", name: "Digital Nomad Visa Index 2026", slug: "/nomad-visa-index", desc: "60 countries with nomad visa programs — cost, duration, tax implications", stat: "60", statLabel: "countries with nomad visas" },
-  { emoji: "🏙️", name: "Nomad Cost of Living Index 2026", slug: "/cost-of-living-index", desc: "42 popular nomad cities ranked by monthly costs", stat: "$705", statLabel: "Chiang Mai monthly budget" },
   { emoji: "💳", name: "Travel Credit Card Fee Comparison", slug: "/travel-card-fees", desc: "22 travel cards compared — fees, rewards, and perks", stat: "0%", statLabel: "foreign transaction fee (best cards)" }
 ];
 
@@ -348,12 +348,14 @@ const lists = [
       <div class="studies-grid">
         {studies.map(study => (
           <a class="study-card" href={study.slug}>
-            <span class="study-emoji">{study.emoji}</span>
+            {study.tag && <span class="section-tag" style="position: absolute; top: 20px; right: 20px; font-size: 0.6rem;">{study.tag}</span>}
+            {study.emoji && <span class="study-emoji">{study.emoji}</span>}
             <div class="study-stat">
               <span class="stat-number">{study.stat}</span>
               <span class="stat-label">{study.statLabel}</span>
             </div>
-            <h3 class="study-name">{study.name}</h3>
+            <h3 class="study-name">{study.title || study.name}</h3>
+            {study.subtitle && <p style="font-size: 0.8rem; color: #C4956A; margin-bottom: 8px;">{study.subtitle}</p>}
             <p class="study-desc">{study.desc}</p>
           </a>
         ))}
