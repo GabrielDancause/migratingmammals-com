@@ -2,26 +2,14 @@
 > migratingmammals-com@0.0.1 dev
 > astro dev
 
-06:55:36 [types] Generated 1ms
-06:55:37 [content] Syncing content
-06:55:37 [content] Synced content
-06:55:37 [vite] Re-optimizing dependencies because vite config has changed
+04:25:23 [types] Generated 1ms
+04:25:24 [content] Syncing content
+04:25:24 [content] Synced content
+04:25:24 [vite] Re-optimizing dependencies because vite config has changed
 
- astro  v5.18.0 ready in 905 ms
+ astro  v5.18.0 ready in 713 ms
 
 ┃ Local    http://localhost:4321/
 ┃ Network  use --host to expose
 
-06:55:37 watching for file changes...
-06:56:19 [200] / 29ms
-06:56:21 [WARN] [router] getStaticPaths() returned an invalid path param: "slug". `undefined` expected for an optional param, but got empty string.
-06:56:21 [WARN] [router] A `getStaticPaths()` route pattern was matched, but no matching static path was found for requested path `/coworking-prices`.
-
-Possible dynamic routes being matched: src/pages/[...slug].astro.
-06:56:21 [404] /coworking-prices 3ms
-06:57:25 [WARN] [router] getStaticPaths() returned an invalid path param: "slug". `undefined` expected for an optional param, but got empty string.
-06:57:25 [WARN] [router] A `getStaticPaths()` route pattern was matched, but no matching static path was found for requested path `/coworking-prices`.
-
-Possible dynamic routes being matched: src/pages/[...slug].astro.
-06:57:25 [404] /coworking-prices 1ms
-06:57:46 [200] / 8ms
+04:25:24 watching for file changes...
