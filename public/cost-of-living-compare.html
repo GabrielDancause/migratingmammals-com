@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G86C7NJG3F');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://migratingmammals.com/cost-of-living-compare" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost of Living City Comparator | Migrating Mammals</title>
+  <meta name="description" content="Compare the cost of living between popular digital nomad cities side by side. See differences in rent, food, transport, internet, and coworking spaces.">
+  <meta property="og:title" content="Cost of Living City Comparator">
+  <meta property="og:description" content="Compare the cost of living between popular digital nomad cities side by side. See differences in rent, food, transport, internet, and coworking spaces.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Cost of Living City Comparator",
+    "url": "https://migratingmammals.com/cost-of-living-compare.html",
+    "description": "Compare the cost of living between popular digital nomad cities side by side.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0b10;
+      --card-bg: #111318;
+      --border: #1e2030;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Layout */
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .selectors-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 0;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1em;
+      font-size: 1rem;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    .vs-badge {
+      background: var(--border);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Comparison Table */
+    .comparison-container {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-header {
+      background: rgba(255, 255, 255, 0.02);
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .comparison-cell {
+      padding: 16px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .comparison-cell:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      border-right: 1px solid var(--border);
+    }
+
+    .comparison-cell:nth-child(2) {
+      border-right: 1px solid var(--border);
+    }
+
+    .city-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .cost-value {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .cost-diff {
+      font-size: 0.85rem;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .diff-positive { color: var(--danger); }
+    .diff-negative { color: var(--success); }
+    .diff-neutral { color: var(--text-secondary); }
+
+    .total-row {
+      background: rgba(196, 149, 106, 0.05);
+    }
+
+    .total-row .comparison-cell {
+      padding: 24px 20px;
+    }
+
+    .total-row .cost-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    /* Summary */
+    .summary-box {
+      margin-top: 32px;
+      text-align: center;
+      padding: 24px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 1.1rem;
+    }
+
+    .summary-box strong {
+      color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* FAQ Content */
+    .faq-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+
+    .faq-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+
+    .faq-item {
+      margin-bottom: 24px;
+    }
+
+    .faq-item h3 {
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .selectors-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .vs-badge {
+        align-self: center;
+        width: fit-content;
+        margin: 0 auto;
+      }
+      .comparison-row {
+        grid-template-columns: 100px 1fr 1fr;
+      }
+      .comparison-cell {
+        padding: 12px 8px;
+      }
+      .comparison-cell:first-child {
+        font-size: 0.85rem;
+      }
+      .cost-value {
+        font-size: 1rem;
+      }
+      .total-row .cost-value {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<script src="/nav.js"></script>
+
+  <header>
+    <div class="container">
+      <h1>Cost of Living City Comparator</h1>
+      <p class="subtitle">Compare estimated monthly expenses between popular digital nomad destinations side-by-side.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="selectors-grid">
+        <div class="form-group">
+          <label for="city1-select">City 1</label>
+          <select id="city1-select"></select>
+        </div>
+
+        <div class="vs-badge">VS</div>
+
+        <div class="form-group">
+          <label for="city2-select">City 2</label>
+          <select id="city2-select"></select>
+        </div>
+      </div>
+
+      <div class="comparison-container">
+        <div class="comparison-row comparison-header">
+          <div class="comparison-cell">Category</div>
+          <div class="comparison-cell city-name" id="header-city1">City 1</div>
+          <div class="comparison-cell city-name" id="header-city2">City 2</div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-cell">Rent (1BR)</div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c1-rent">$0</div>
+          </div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c2-rent">$0</div>
+            <div class="cost-diff" id="diff-rent"></div>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-cell">Food</div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c1-food">$0</div>
+          </div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c2-food">$0</div>
+            <div class="cost-diff" id="diff-food"></div>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-cell">Transport</div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c1-transport">$0</div>
+          </div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c2-transport">$0</div>
+            <div class="cost-diff" id="diff-transport"></div>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-cell">Internet</div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c1-internet">$0</div>
+          </div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c2-internet">$0</div>
+            <div class="cost-diff" id="diff-internet"></div>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-cell">Coworking</div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c1-coworking">$0</div>
+          </div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c2-coworking">$0</div>
+            <div class="cost-diff" id="diff-coworking"></div>
+          </div>
+        </div>
+
+        <div class="comparison-row total-row">
+          <div class="comparison-cell">Total/Month</div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c1-total">$0</div>
+          </div>
+          <div class="comparison-cell">
+            <div class="cost-value" id="c2-total">$0</div>
+            <div class="cost-diff" id="diff-total" style="font-size: 1rem; font-weight: 700; margin-top: 8px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box" id="summary-box">
+        Select two cities to compare.
+      </div>
+
+      <div class="actions">
+        <button class="secondary" id="copy-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Copy Comparison
+        </button>
+      </div>
+    </div>
+
+    <div class="faq-content">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3>Where does this data come from?</h3>
+        <p>This tool uses a curated dataset of estimated monthly costs for popular digital nomad destinations. The figures are averages designed to represent a typical remote worker's lifestyle, including renting a 1-bedroom apartment in a central/popular area, eating out occasionally while also cooking at home, using public transit or renting a scooter, getting reliable home internet, and paying for a monthly hot-desk at a coworking space.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Are these costs for a local or a foreigner?</h3>
+        <p>These estimates are tailored for foreigners, digital nomads, and expats. Locals often have significantly lower living costs as they may live outside popular expat hubs, share accommodation, or know the cheapest local spots. Nomads typically pay a premium for short-term rentals and international-standard amenities.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why is coworking included separately from internet?</h3>
+        <p>Many digital nomads require a reliable workspace outside their apartment. While home internet is essential for basics and backup, a coworking space provides a community, ergonomic seating, and guaranteed high-speed connections, which is a standard line item in many remote workers' budgets.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does this include flights and visas?</h3>
+        <p>No. This tool only compares the day-to-day cost of living once you are settled in the city. Flights, visas, travel insurance, and international health insurance are highly variable based on your nationality and origin, and should be budgeted separately.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    const citiesData = [
+      { name: "Chiang Mai, Thailand", rent: 400, food: 250, transport: 50, internet: 20, coworking: 100 },
+      { name: "Bali, Indonesia", rent: 600, food: 300, transport: 60, internet: 25, coworking: 150 },
+      { name: "Lisbon, Portugal", rent: 1200, food: 400, transport: 50, internet: 35, coworking: 180 },
+      { name: "Medellin, Colombia", rent: 600, food: 250, transport: 40, internet: 20, coworking: 120 },
+      { name: "Buenos Aires, Argentina", rent: 500, food: 200, transport: 20, internet: 15, coworking: 80 },
+      { name: "Mexico City, Mexico", rent: 800, food: 350, transport: 40, internet: 30, coworking: 150 },
+      { name: "Budapest, Hungary", rent: 700, food: 300, transport: 30, internet: 20, coworking: 130 },
+      { name: "Prague, Czech Republic", rent: 900, food: 350, transport: 25, internet: 25, coworking: 160 },
+      { name: "Tbilisi, Georgia", rent: 500, food: 250, transport: 20, internet: 15, coworking: 100 },
+      { name: "Da Nang, Vietnam", rent: 350, food: 200, transport: 30, internet: 15, coworking: 80 },
+      { name: "Cape Town, South Africa", rent: 800, food: 350, transport: 60, internet: 40, coworking: 150 },
+      { name: "Barcelona, Spain", rent: 1300, food: 450, transport: 50, internet: 40, coworking: 200 },
+      { name: "Berlin, Germany", rent: 1200, food: 400, transport: 90, internet: 45, coworking: 180 },
+      { name: "Istanbul, Turkey", rent: 600, food: 300, transport: 30, internet: 15, coworking: 120 },
+      { name: "Playa del Carmen, Mexico", rent: 700, food: 300, transport: 40, internet: 35, coworking: 140 },
+      { name: "Tenerife, Spain", rent: 900, food: 350, transport: 45, internet: 40, coworking: 160 },
+      { name: "Bansko, Bulgaria", rent: 300, food: 250, transport: 20, internet: 15, coworking: 100 },
+      { name: "Kuala Lumpur, Malaysia", rent: 600, food: 300, transport: 30, internet: 25, coworking: 120 },
+      { name: "Bangkok, Thailand", rent: 600, food: 350, transport: 60, internet: 25, coworking: 150 },
+      { name: "Ho Chi Minh City, Vietnam", rent: 450, food: 250, transport: 30, internet: 15, coworking: 90 },
+      { name: "Oaxaca, Mexico", rent: 500, food: 250, transport: 30, internet: 25, coworking: 100 },
+      { name: "Antigua, Guatemala", rent: 550, food: 300, transport: 25, internet: 30, coworking: 120 },
+      { name: "Canggu, Bali", rent: 700, food: 400, transport: 60, internet: 30, coworking: 180 },
+      { name: "Porto, Portugal", rent: 1000, food: 350, transport: 45, internet: 35, coworking: 150 },
+      { name: "Split, Croatia", rent: 800, food: 350, transport: 40, internet: 30, coworking: 140 },
+      { name: "Belgrade, Serbia", rent: 600, food: 250, transport: 30, internet: 20, coworking: 130 },
+      { name: "Florianopolis, Brazil", rent: 550, food: 250, transport: 40, internet: 25, coworking: 120 },
+      { name: "Phuket, Thailand", rent: 550, food: 300, transport: 50, internet: 25, coworking: 130 },
+      { name: "Taipei, Taiwan", rent: 800, food: 400, transport: 45, internet: 30, coworking: 160 },
+      { name: "Warsaw, Poland", rent: 850, food: 300, transport: 35, internet: 20, coworking: 150 }
+    ].sort((a, b) => a.name.localeCompare(b.name));
+
+    const s1 = document.getElementById('city1-select');
+    const s2 = document.getElementById('city2-select');
+
+    function initSelects() {
+      citiesData.forEach((city, index) => {
+        const o1 = document.createElement('option');
+        o1.value = index;
+        o1.textContent = city.name;
+        s1.appendChild(o1);
+
+        const o2 = document.createElement('option');
+        o2.value = index;
+        o2.textContent = city.name;
+        s2.appendChild(o2);
+      });
+
+      // Set defaults (Chiang Mai vs Lisbon)
+      const idxCM = citiesData.findIndex(c => c.name.includes('Chiang Mai'));
+      const idxLisbon = citiesData.findIndex(c => c.name.includes('Lisbon'));
+
+      s1.value = idxCM >= 0 ? idxCM : 0;
+      s2.value = idxLisbon >= 0 ? idxLisbon : 1;
+
+      s1.addEventListener('change', updateComparison);
+      s2.addEventListener('change', updateComparison);
+
+      updateComparison();
+    }
+
+    function formatCur(val) {
+      return '$' + val.toLocaleString();
+    }
+
+    function formatDiff(v1, v2, el) {
+      const diff = v2 - v1;
+      if (diff === 0) {
+        el.textContent = "Same";
+        el.className = "cost-diff diff-neutral";
+        return;
+      }
+
+      const pct = Math.abs((diff / v1) * 100).toFixed(0);
+      const sign = diff > 0 ? "+" : "";
+
+      el.textContent = `${sign}${formatCur(diff)} (${sign}${pct}%)`;
+      el.className = `cost-diff ${diff > 0 ? 'diff-positive' : 'diff-negative'}`;
+    }
+
+    function updateComparison() {
+      const c1 = citiesData[s1.value];
+      const c2 = citiesData[s2.value];
+
+      document.getElementById('header-city1').textContent = c1.name.split(',')[0];
+      document.getElementById('header-city2').textContent = c2.name.split(',')[0];
+
+      // Values
+      document.getElementById('c1-rent').textContent = formatCur(c1.rent);
+      document.getElementById('c2-rent').textContent = formatCur(c2.rent);
+      formatDiff(c1.rent, c2.rent, document.getElementById('diff-rent'));
+
+      document.getElementById('c1-food').textContent = formatCur(c1.food);
+      document.getElementById('c2-food').textContent = formatCur(c2.food);
+      formatDiff(c1.food, c2.food, document.getElementById('diff-food'));
+
+      document.getElementById('c1-transport').textContent = formatCur(c1.transport);
+      document.getElementById('c2-transport').textContent = formatCur(c2.transport);
+      formatDiff(c1.transport, c2.transport, document.getElementById('diff-transport'));
+
+      document.getElementById('c1-internet').textContent = formatCur(c1.internet);
+      document.getElementById('c2-internet').textContent = formatCur(c2.internet);
+      formatDiff(c1.internet, c2.internet, document.getElementById('diff-internet'));
+
+      document.getElementById('c1-coworking').textContent = formatCur(c1.coworking);
+      document.getElementById('c2-coworking').textContent = formatCur(c2.coworking);
+      formatDiff(c1.coworking, c2.coworking, document.getElementById('diff-coworking'));
+
+      // Totals
+      const t1 = c1.rent + c1.food + c1.transport + c1.internet + c1.coworking;
+      const t2 = c2.rent + c2.food + c2.transport + c2.internet + c2.coworking;
+
+      document.getElementById('c1-total').textContent = formatCur(t1);
+      document.getElementById('c2-total').textContent = formatCur(t2);
+      formatDiff(t1, t2, document.getElementById('diff-total'));
+
+      // Summary text
+      const sumBox = document.getElementById('summary-box');
+      if (t1 === t2) {
+        sumBox.innerHTML = `Living in <strong>${c2.name}</strong> costs about the same as in <strong>${c1.name}</strong>.`;
+      } else {
+        const diff = t2 - t1;
+        const pct = Math.abs((diff / t1) * 100).toFixed(0);
+        const direction = diff > 0 ? "more" : "less";
+        sumBox.innerHTML = `Overall, <strong>${c2.name}</strong> is about <strong>${pct}% ${direction} expensive</strong> than <strong>${c1.name}</strong>.`;
+      }
+    }
+
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      const c1 = citiesData[s1.value];
+      const c2 = citiesData[s2.value];
+      const t1 = c1.rent + c1.food + c1.transport + c1.internet + c1.coworking;
+      const t2 = c2.rent + c2.food + c2.transport + c2.internet + c2.coworking;
+
+      const diff = t2 - t1;
+      const pct = Math.abs((diff / t1) * 100).toFixed(0);
+      const diffStr = diff > 0 ? `(+${pct}%)` : diff < 0 ? `(-${pct}%)` : `(Same)`;
+
+      const text = `Cost of Living: ${c1.name} vs ${c2.name}
+${c1.name} Total: ${formatCur(t1)}/mo
+${c2.name} Total: ${formatCur(t2)}/mo ${diffStr}
+
+Breakdown (${c1.name.split(',')[0]} vs ${c2.name.split(',')[0]}):
+Rent: ${formatCur(c1.rent)} vs ${formatCur(c2.rent)}
+Food: ${formatCur(c1.food)} vs ${formatCur(c2.food)}
+Transport: ${formatCur(c1.transport)} vs ${formatCur(c2.transport)}
+Internet: ${formatCur(c1.internet)} vs ${formatCur(c2.internet)}
+Coworking: ${formatCur(c1.coworking)} vs ${formatCur(c2.coworking)}
+
+via migratingmammals.com`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span style="color: var(--success)">Copied!</span>`;
+        setTimeout(() => btn.innerHTML = orig, 2000);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', initSelects);
+  </script>
+</body>
+</html>
