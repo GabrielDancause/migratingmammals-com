@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Nomad Tools — migratingmammals.com</title>
+  <meta name="description" content="Free, browser-based tools for digital nomads and travelers. Track your Schengen days, calculate timezone overlaps, and plan budgets." />
+  <link rel="canonical" href="https://migratingmammals.com/tools/" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-G86C7NJG3F');
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #060a12;
+      color: #e0d5c8;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 60px;
+      background: linear-gradient(180deg, #1a0f08 0%, #060a12 100%);
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(196,149,106,0.08) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero .tagline {
+      color: #C4956A;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    /* Search */
+    .search-container {
+      max-width: 500px;
+      margin: 30px auto 0;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      background: #111318;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      color: #e0d5c8;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: #C4956A;
+      box-shadow: 0 0 0 3px rgba(196,149,106,0.1);
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 1.2rem;
+    }
+    .counter {
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 12px;
+      font-weight: 500;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px 80px;
+      width: 100%;
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: #111318;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.2s ease;
+    }
+    .tool-card:hover {
+      border-color: #C4956A;
+      transform: translateY(-2px);
+    }
+    .tool-emoji {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .tool-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .tool-desc {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.5;
+    }
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #888;
+      grid-column: 1 / -1;
+      background: #111318;
+      border-radius: 12px;
+      border: 1px dashed #1e2030;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 50px 24px;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #1e2030;
+      background: #0a0b10;
+    }
+    .footer a {
+      color: #C4956A;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero { padding: 80px 20px 40px; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="tagline">Interactive Tools</div>
+      <h1>Digital Nomad Tools</h1>
+
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search tools by name or description..." aria-label="Search tools">
+        <div id="counter" class="counter"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div id="toolsGrid" class="tools-grid">
+      <!-- Cards will be injected here by JS -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span id="copyright-year"></span>
+  </footer>
+
+  <script>
+    // Set dynamic year
+    const yearElement = document.getElementById('copyright-year');
+    const currentYear = new Date().getFullYear();
+    yearElement.innerHTML = `© ${currentYear} <a href="/">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property`;
+
+    // Tools Data
+    const tools = [
+      {
+        "emoji": "🛂",
+        "name": "Schengen 90/180 Calculator",
+        "slug": "/schengen-calculator",
+        "desc": "Track your days in the Schengen zone. Visual timeline of your allowance"
+      },
+      {
+        "emoji": "🌐",
+        "name": "Timezone Overlap Finder",
+        "slug": "/timezone-overlap",
+        "desc": "Find the best meeting hours between any two cities instantly"
+      },
+      {
+        "emoji": "💱",
+        "name": "Offline Currency Converter",
+        "slug": "/currency-converter",
+        "desc": "Convert 50+ currencies and crypto. Works fully offline"
+      },
+      {
+        "emoji": "✈️",
+        "name": "Travel Budget Planner",
+        "slug": "/travel-budget",
+        "desc": "Plan budgets by destination with daily and total estimates"
+      },
+      {
+        "emoji": "✈️",
+        "name": "Flight Time Calculator",
+        "slug": "/flight-time",
+        "desc": "Calculate flight time between airports with wind adjustments"
+      },
+      {
+        "emoji": "🧳",
+        "name": "Smart Packing List",
+        "slug": "/packing-list",
+        "desc": "Customized packing list based on climate and activities"
+      },
+      {
+        "emoji": "📞",
+        "name": "International Dialing Codes",
+        "slug": "/dialing-codes",
+        "desc": "Search country dialing codes and emergency numbers"
+      },
+      {
+        "emoji": "📏",
+        "name": "Distance Calculator",
+        "slug": "/distance-calculator",
+        "desc": "Calculate distance between locations with driving time"
+      },
+      {
+        "emoji": "💰",
+        "name": "Cost of Living Comparator",
+        "slug": "/cost-of-living",
+        "desc": "Compare living costs between two cities"
+      },
+      {
+        "emoji": "🧾",
+        "name": "Trip Expense Splitter",
+        "slug": "/expense-splitter",
+        "desc": "Split group expenses fairly across multiple currencies"
+      },
+      {
+        "emoji": "🧮",
+        "name": "Digital Nomad Tax Estimator",
+        "slug": "/nomad-tax",
+        "desc": "Estimate tax obligations by residency and income sources"
+      },
+      {
+        "emoji": "⏳",
+        "name": "Trip Countdown Timer",
+        "slug": "/trip-countdown",
+        "desc": "Track countdowns for multiple upcoming trips"
+      },
+      {
+        "emoji": "🛂",
+        "name": "Visa Requirement Checker",
+        "slug": "/visa-checker",
+        "desc": "Check visa requirements based on passport and destination"
+      },
+      {
+        "emoji": "🕐",
+        "name": "World Clock Dashboard",
+        "slug": "/world-clock",
+        "desc": "View current time in multiple cities with business hours"
+      },
+      {
+        "emoji": "😴",
+        "name": "Jet Lag Calculator",
+        "slug": "/jet-lag",
+        "desc": "Personalized recovery schedule to adjust to new timezone"
+      },
+      {
+        "emoji": "🔌",
+        "name": "Travel Power Adapter Guide",
+        "slug": "/power-adapter",
+        "desc": "Check plug types, voltage, and frequency by country"
+      },
+      {
+        "emoji": "🕐",
+        "name": "Timezone Converter",
+        "slug": "/timezone-converter",
+        "desc": "Convert times between timezones with DST support"
+      },
+      {
+        "emoji": "✈️",
+        "name": "Airport Code Lookup",
+        "slug": "/airport-codes",
+        "desc": "Search 5,000+ IATA/ICAO airport codes worldwide"
+      },
+      {
+        "emoji": "🗣️",
+        "name": "Travel Language Phrases",
+        "slug": "/language-phrases",
+        "desc": "Essential phrases in 20+ languages with pronunciation"
+      },
+      {
+        "emoji": "✅",
+        "name": "Travel Checklist Generator",
+        "slug": "/travel-checklist",
+        "desc": "Customized pre-trip checklist for any destination"
+      },
+      {
+        "emoji": "🇪🇺",
+        "name": "Schengen 90/180 Guide",
+        "slug": "/guide-schengen",
+        "desc": "Complete guide to the Schengen rule with calculation tips"
+      },
+      {
+        "emoji": "🛡️",
+        "name": "Travel Insurance Guide",
+        "slug": "/guide-travel-insurance",
+        "desc": "Compare SafetyWing, World Nomads, Genki for nomads"
+      },
+      {
+        "emoji": "💻",
+        "name": "Coworking Spaces Guide",
+        "slug": "/guide-coworking",
+        "desc": "How to choose coworking spaces with day pass tips"
+      },
+      {
+        "emoji": "🛂",
+        "name": "Remote Work Visas by Country",
+        "slug": "/guide-remote-work-visa",
+        "desc": "Visa requirements, costs, and application tips"
+      },
+      {
+        "emoji": "🐢",
+        "name": "Slow Travel Guide",
+        "slug": "/guide-slow-travel",
+        "desc": "Why month-long stays beat city hopping"
+      },
+      {
+        "emoji": "🏙️",
+        "name": "Best Digital Nomad Cities",
+        "slug": "/list-nomad-cities",
+        "desc": "Top cities ranked by cost, internet, community, safety"
+      },
+      {
+        "emoji": "💳",
+        "name": "Best Travel Credit Cards",
+        "slug": "/list-travel-credit-cards",
+        "desc": "No-FX-fee cards with lounges and insurance"
+      },
+      {
+        "emoji": "📱",
+        "name": "Essential Travel Apps",
+        "slug": "/list-travel-apps",
+        "desc": "Maps, translation, flights, safety, expense tracking"
+      },
+      {
+        "emoji": "📡",
+        "name": "Best eSIM Providers",
+        "slug": "/list-esim",
+        "desc": "Global data plans compared for travelers"
+      },
+      {
+        "emoji": "🔒",
+        "name": "Best VPN Services",
+        "slug": "/list-vpn",
+        "desc": "VPN comparison for travelers and nomads"
+      }
+    ];
+
+    const grid = document.getElementById('toolsGrid');
+    const searchInput = document.getElementById('searchInput');
+    const counter = document.getElementById('counter');
+
+    function renderTools(toolsToRender) {
+      grid.innerHTML = '';
+
+      if (toolsToRender.length === 0) {
+        grid.innerHTML = `<div class="no-results">No tools found matching your search.</div>`;
+        counter.textContent = '0 tools';
+        return;
+      }
+
+      toolsToRender.forEach(tool => {
+        const card = document.createElement('a');
+        card.href = tool.slug;
+        card.className = 'tool-card';
+        card.innerHTML = `
+          <span class="tool-emoji">${tool.emoji}</span>
+          <h2 class="tool-name">${tool.name}</h2>
+          <p class="tool-desc">${tool.desc}</p>
+        `;
+        grid.appendChild(card);
+      });
+
+      counter.textContent = `${toolsToRender.length} tool${toolsToRender.length !== 1 ? 's' : ''}`;
+    }
+
+    function filterTools() {
+      const query = searchInput.value.toLowerCase();
+      const filtered = tools.filter(tool =>
+        tool.name.toLowerCase().includes(query) ||
+        tool.desc.toLowerCase().includes(query)
+      );
+      renderTools(filtered);
+    }
+
+    searchInput.addEventListener('input', filterTools);
+
+    // Initial render
+    renderTools(tools);
+  </script>
+</body>
+</html>
