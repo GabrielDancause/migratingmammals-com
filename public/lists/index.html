@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curated Lists — migratingmammals.com</title>
+  <meta name="description" content="Curated lists of best apps, services, and destinations for digital nomads and travelers.">
+  <link rel="canonical" href="https://migratingmammals.com/lists/">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-G86C7NJG3F');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #060a12;
+      --card-bg: #111318;
+      --border-color: #1e2030;
+      --accent: #C4956A;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888888;
+      --text-muted: #5a6a80;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 60px;
+      background: linear-gradient(180deg, #1a0f08 0%, var(--bg-color) 100%);
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(196,149,106,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero .tagline {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+
+    /* Search Bar */
+    .search-container {
+      max-width: 500px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(196,149,106,0.2);
+    }
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 20px;
+      height: 20px;
+    }
+
+    .counter {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+    .counter span {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* Card Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    .card-emoji {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    .card-title {
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .card-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Empty State */
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border-color);
+      background: #040810;
+      margin-top: auto;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+      color: #d8b08d;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 80px 20px 40px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <header class="hero">
+    <div class="hero-content">
+      <div class="tagline">migratingmammals.com</div>
+      <h1>Curated Lists</h1>
+
+      <div class="search-container">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search lists...">
+      </div>
+
+      <div class="counter" id="resultCounter">Showing <span id="count">5</span> lists</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid" id="listsGrid">
+      <a href="/list-nomad-cities" class="card">
+        <span class="card-emoji">🏙️</span>
+        <h2 class="card-title">Best Digital Nomad Cities</h2>
+        <p class="card-desc">Top cities ranked by cost, internet, community, safety</p>
+      </a>
+
+      <a href="/list-travel-credit-cards" class="card">
+        <span class="card-emoji">💳</span>
+        <h2 class="card-title">Best Travel Credit Cards</h2>
+        <p class="card-desc">No-FX-fee cards with lounges and insurance</p>
+      </a>
+
+      <a href="/list-travel-apps" class="card">
+        <span class="card-emoji">📱</span>
+        <h2 class="card-title">Essential Travel Apps</h2>
+        <p class="card-desc">Maps, translation, flights, safety, expense tracking</p>
+      </a>
+
+      <a href="/list-esim" class="card">
+        <span class="card-emoji">📡</span>
+        <h2 class="card-title">Best eSIM Providers</h2>
+        <p class="card-desc">Global data plans compared for travelers</p>
+      </a>
+
+      <a href="/list-vpn" class="card">
+        <span class="card-emoji">🔒</span>
+        <h2 class="card-title">Best VPN Services</h2>
+        <p class="card-desc">VPN comparison for travelers and nomads</p>
+      </a>
+
+      <div class="empty-state" id="emptyState">
+        No lists found matching your search.
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('searchInput');
+      const cards = document.querySelectorAll('.card');
+      const countEl = document.getElementById('count');
+      const emptyState = document.getElementById('emptyState');
+
+      function filterLists() {
+        const query = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const title = card.querySelector('.card-title').textContent.toLowerCase();
+          const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+
+          if (title.includes(query) || desc.includes(query)) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        countEl.textContent = visibleCount;
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      searchInput.addEventListener('input', filterLists);
+    });
+  </script>
+</body>
+</html>
