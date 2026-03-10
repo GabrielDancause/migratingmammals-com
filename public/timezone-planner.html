@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timezone Meeting Planner | Migrating Mammals</title>
+  <meta name="description" content="Plan meetings across multiple timezones. Find overlapping business hours for up to 5 cities globally.">
+  <link rel="canonical" href="https://migratingmammals.com/timezone-planner" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G86C7NJG3F');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Timezone Meeting Planner",
+    "url": "https://migratingmammals.com/timezone-planner",
+    "description": "Plan meetings across 2-5 cities with visual overlapping business hours.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0b10;
+      --card-bg: #111318;
+      --border: #1e2030;
+      --accent: #C4956A;
+      --accent-hover: #a37952;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    select, input[type="date"], input[type="time"], input[type="number"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    .remove-btn {
+      background: transparent;
+      color: var(--danger);
+      width: auto;
+      padding: 8px 12px;
+      border: 1px solid var(--danger);
+    }
+    .remove-btn:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    .row > button {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    .city-list {
+      list-style: none;
+      margin-top: 24px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .city-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .city-name {
+      font-weight: 600;
+    }
+
+    .city-time {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      margin-left: 12px;
+    }
+
+    /* Timeline Section */
+    .timeline-container {
+      margin-top: 32px;
+      overflow-x: auto;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 140px repeat(24, minmax(30px, 1fr));
+      gap: 2px;
+      margin-bottom: 16px;
+      min-width: 800px;
+    }
+
+    .tick {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      padding-bottom: 8px;
+    }
+
+    .city-row-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      align-self: center;
+      padding-right: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-primary);
+    }
+
+    .hour-block {
+      height: 40px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      position: relative;
+    }
+
+    .hour-block.work-hour {
+      background: rgba(196, 149, 106, 0.1);
+      color: var(--text-primary);
+      border-color: rgba(196, 149, 106, 0.3);
+    }
+
+    .hour-block.overlap {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: var(--success);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .date-picker-row {
+      margin-bottom: 24px;
+    }
+
+    .seo-content {
+      margin: 60px 0;
+      color: var(--text-secondary);
+    }
+    .seo-content h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 700;
+    }
+    .seo-content p {
+      margin-bottom: 16px;
+    }
+    .seo-content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+    .seo-content li {
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .city-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <header>
+    <div class="container">
+      <h1>Timezone Meeting Planner</h1>
+      <p class="subtitle">Find overlapping business hours across 2 to 5 cities for global meetings.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="row date-picker-row">
+        <div>
+          <label for="meeting-date">Meeting Date</label>
+          <input type="date" id="meeting-date">
+        </div>
+        <div>
+          <label for="work-start">Business Day Start (Local Time)</label>
+          <input type="number" id="work-start" min="0" max="23" value="9">
+        </div>
+        <div>
+          <label for="work-end">Business Day End (Local Time)</label>
+          <input type="number" id="work-end" min="0" max="23" value="17">
+        </div>
+      </div>
+
+      <div style="height: 1px; background: var(--border); margin: 32px 0;"></div>
+
+      <label>Add a City (2 to 5 max)</label>
+      <div class="row">
+        <div>
+          <select id="city-select">
+            <option value="">Select a timezone...</option>
+            <option value="America/Los_Angeles">San Francisco / Los Angeles (PT)</option>
+            <option value="America/Denver">Denver (MT)</option>
+            <option value="America/Chicago">Chicago (CT)</option>
+            <option value="America/New_York">New York (ET)</option>
+            <option value="America/Toronto">Toronto (ET)</option>
+            <option value="America/Sao_Paulo">São Paulo (BRT)</option>
+            <option value="Europe/London">London (GMT/BST)</option>
+            <option value="Europe/Paris">Paris / Berlin (CET/CEST)</option>
+            <option value="Africa/Johannesburg">Johannesburg (SAST)</option>
+            <option value="Asia/Dubai">Dubai (GST)</option>
+            <option value="Asia/Kolkata">Mumbai / New Delhi (IST)</option>
+            <option value="Asia/Bangkok">Bangkok (ICT)</option>
+            <option value="Asia/Singapore">Singapore (SGT)</option>
+            <option value="Asia/Tokyo">Tokyo (JST)</option>
+            <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+            <option value="Pacific/Auckland">Auckland (NZST/NZDT)</option>
+          </select>
+        </div>
+        <button id="add-city-btn">Add City</button>
+      </div>
+
+      <ul class="city-list" id="city-list">
+        <!-- Cities will be added here -->
+      </ul>
+
+      <div class="timeline-container">
+        <div class="timeline-grid" id="timeline-grid">
+          <!-- Timeline will be generated here -->
+        </div>
+      </div>
+
+      <div id="overlap-message" style="margin-top: 24px; padding: 16px; border-radius: 8px; font-weight: 500; text-align: center; display: none;">
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <h2>How to Plan Global Meetings</h2>
+      <p>When working with distributed teams, finding a time where everyone is awake and at their desk can be challenging. This timezone meeting planner helps you visualize standard business hours (e.g., 9 AM to 5 PM) across 2 to 5 global cities. Green blocks indicate overlapping business hours.</p>
+
+      <h2>Handling Daylight Saving Time (DST)</h2>
+      <p>By selecting a specific meeting date, the planner uses accurate time offsets powered by your browser's <code>Intl.DateTimeFormat</code> API. This means it automatically accounts for different regions starting and ending DST on different days.</p>
+
+      <h2>Tips for Managing Multiple Timezones</h2>
+      <ul>
+        <li><strong>Rotate Meeting Times:</strong> If there are no perfectly overlapping hours, don't always penalize the same team members. Rotate who takes an early or late call.</li>
+        <li><strong>Use UTC for Clarity:</strong> Always propose times clearly in a widely understood timezone or use UTC to avoid scheduling mishaps.</li>
+        <li><strong>Consider Asynchronous Work:</strong> If you are planning a meeting across more than 3 distinct timezones, standard business hours rarely overlap. Consider recording a video or using written communication instead.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 <a href="https://migratingmammals.com">migratingmammals.com</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+    </div>
+  </footer>
+
+  <script>
+    let cities = [];
+    const MAX_CITIES = 5;
+    const MIN_CITIES = 2;
+    let workStart = 9;
+    let workEnd = 17;
+
+    const citySelect = document.getElementById('city-select');
+    const addCityBtn = document.getElementById('add-city-btn');
+    const cityList = document.getElementById('city-list');
+    const timelineGrid = document.getElementById('timeline-grid');
+    const workStartInput = document.getElementById('work-start');
+    const workEndInput = document.getElementById('work-end');
+    const meetingDateInput = document.getElementById('meeting-date');
+    const overlapMessage = document.getElementById('overlap-message');
+
+    function init() {
+      const today = new Date();
+      meetingDateInput.value = today.toISOString().split('T')[0];
+
+      try {
+        const saved = localStorage.getItem('planner-cities');
+        if (saved) {
+          cities = JSON.parse(saved);
+        } else {
+          cities = [
+            { id: 'America/New_York', name: 'New York (ET)' },
+            { id: 'Europe/London', name: 'London (GMT/BST)' },
+            { id: 'Asia/Tokyo', name: 'Tokyo (JST)' }
+          ];
+        }
+
+        const savedStart = localStorage.getItem('planner-work-start');
+        const savedEnd = localStorage.getItem('planner-work-end');
+        if (savedStart) workStartInput.value = savedStart;
+        if (savedEnd) workEndInput.value = savedEnd;
+      } catch (e) {
+        console.error("Could not load saved settings");
+      }
+
+      updateWorkHours();
+      renderCities();
+      renderTimeline();
+    }
+
+    function saveState() {
+      localStorage.setItem('planner-cities', JSON.stringify(cities));
+      localStorage.setItem('planner-work-start', workStart);
+      localStorage.setItem('planner-work-end', workEnd);
+    }
+
+    function updateWorkHours() {
+      workStart = parseInt(workStartInput.value, 10);
+      workEnd = parseInt(workEndInput.value, 10);
+
+      if (workStart >= workEnd) {
+        workStart = 9;
+        workEnd = 17;
+        workStartInput.value = workStart;
+        workEndInput.value = workEnd;
+        alert("Business end hour must be after start hour. Resetting to 9-17.");
+      }
+      saveState();
+      renderTimeline();
+    }
+
+    workStartInput.addEventListener('change', updateWorkHours);
+    workEndInput.addEventListener('change', updateWorkHours);
+    meetingDateInput.addEventListener('change', renderTimeline);
+
+    addCityBtn.addEventListener('click', () => {
+      const selectedOption = citySelect.options[citySelect.selectedIndex];
+      const cityId = selectedOption.value;
+      const cityName = selectedOption.text;
+
+      if (!cityId) {
+        alert("Please select a city.");
+        return;
+      }
+
+      if (cities.length >= MAX_CITIES) {
+        alert(`You can only add up to ${MAX_CITIES} cities.`);
+        return;
+      }
+
+      if (cities.some(c => c.id === cityId)) {
+        alert("City already added.");
+        return;
+      }
+
+      cities.push({ id: cityId, name: cityName });
+      citySelect.selectedIndex = 0;
+
+      saveState();
+      renderCities();
+      renderTimeline();
+    });
+
+    window.removeCity = function(id) {
+      cities = cities.filter(c => c.id !== id);
+      saveState();
+      renderCities();
+      renderTimeline();
+    };
+
+    function getCityTime(timeZone, date = new Date()) {
+      return new Intl.DateTimeFormat('en-US', {
+        timeZone,
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(date);
+    }
+
+    function getHourInTimezone(utcDate, timeZone) {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone,
+        hour: 'numeric',
+        hour12: false
+      }).formatToParts(utcDate);
+
+      const hourPart = parts.find(p => p.type === 'hour').value;
+      return parseInt(hourPart, 10) % 24;
+    }
+
+    function getBaseDateUTC() {
+      const dateVal = meetingDateInput.value;
+      if (!dateVal) return new Date();
+      const [year, month, day] = dateVal.split('-').map(Number);
+
+      const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      // Construct a date near midday to minimize weird offset issues, we just need the day right.
+      const d = new Date();
+      d.setFullYear(year, month - 1, day);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    }
+
+    function renderCities() {
+      cityList.innerHTML = '';
+      cities.forEach(city => {
+        const li = document.createElement('li');
+        li.className = 'city-item';
+        li.innerHTML = `
+          <div>
+            <span class="city-name">${city.name}</span>
+            <span class="city-time">${getCityTime(city.id)}</span>
+          </div>
+          <button class="remove-btn" onclick="removeCity('${city.id}')">Remove</button>
+        `;
+        cityList.appendChild(li);
+      });
+    }
+
+    function renderTimeline() {
+      if (cities.length < MIN_CITIES) {
+        timelineGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--text-secondary);">Add at least ${MIN_CITIES} cities to see the timeline</div>`;
+        overlapMessage.style.display = 'none';
+        return;
+      }
+
+      timelineGrid.innerHTML = '';
+      const baseDate = getBaseDateUTC();
+
+      const overlapIndices = [];
+
+      for (let i = 0; i < 24; i++) {
+        const testDate = new Date(baseDate.getTime() + (i * 60 * 60 * 1000));
+        let allWorking = true;
+
+        for (const city of cities) {
+          const hourInTz = getHourInTimezone(testDate, city.id);
+          if (hourInTz < workStart || hourInTz >= workEnd) {
+            allWorking = false;
+            break;
+          }
+        }
+
+        if (allWorking) {
+          overlapIndices.push(i);
+        }
+      }
+
+      // Add Header Row
+      const headerLabel = document.createElement('div');
+      headerLabel.className = 'city-row-label';
+      headerLabel.textContent = 'Local Time';
+      timelineGrid.appendChild(headerLabel);
+
+      for (let i = 0; i < 24; i++) {
+        const testDate = new Date(baseDate.getTime() + (i * 60 * 60 * 1000));
+        const hour = testDate.getHours();
+        const displayHour = hour === 0 ? '12a' : hour === 12 ? '12p' : hour > 12 ? `${hour-12}p` : `${hour}a`;
+
+        const tick = document.createElement('div');
+        tick.className = 'tick';
+        tick.textContent = displayHour;
+        timelineGrid.appendChild(tick);
+      }
+
+      // Add City Rows
+      cities.forEach(city => {
+        const label = document.createElement('div');
+        label.className = 'city-row-label';
+        label.textContent = city.name.split(' (')[0];
+        label.title = city.name;
+        timelineGrid.appendChild(label);
+
+        for (let i = 0; i < 24; i++) {
+          const testDate = new Date(baseDate.getTime() + (i * 60 * 60 * 1000));
+          const hourInTz = getHourInTimezone(testDate, city.id);
+
+          const block = document.createElement('div');
+          block.className = 'hour-block';
+          block.textContent = hourInTz;
+
+          if (hourInTz >= workStart && hourInTz < workEnd) {
+            block.classList.add('work-hour');
+          }
+
+          if (overlapIndices.includes(i)) {
+            block.classList.add('overlap');
+          }
+
+          timelineGrid.appendChild(block);
+        }
+      });
+
+      if (overlapIndices.length > 0) {
+        overlapMessage.style.display = 'block';
+        overlapMessage.style.background = 'rgba(34, 197, 94, 0.1)';
+        overlapMessage.style.border = '1px solid rgba(34, 197, 94, 0.3)';
+        overlapMessage.style.color = '#fff';
+        overlapMessage.innerHTML = 'Found overlapping business hours! Highlighted in green.';
+      } else {
+        overlapMessage.style.display = 'block';
+        overlapMessage.style.background = 'rgba(239, 68, 68, 0.1)';
+        overlapMessage.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+        overlapMessage.style.color = '#fca5a5';
+        overlapMessage.innerHTML = 'No overlapping business hours found for the selected cities.';
+      }
+    }
+
+    init();
+
+    // Auto-update times every minute
+    setInterval(() => {
+        renderCities();
+    }, 60000);
+  </script>
+</body>
+</html>
