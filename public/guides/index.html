@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Guides — migratingmammals.com</title>
+  <meta name="description" content="Comprehensive guides for digital nomads and travelers. Visas, coworking spaces, slow travel, and more.">
+  <link rel="canonical" href="https://migratingmammals.com/guides/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-G86C7NJG3F');
+  </script>
+
+  <style>
+    :root {
+      --bg: #060a12;
+      --card-bg: #111318;
+      --border: #1e2030;
+      --accent: #C4956A;
+      --text-primary: #e0d5c8;
+      --text-secondary: #888;
+      --text-dark: #3a4a5a;
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 60px;
+      background: linear-gradient(180deg, #1a0f08 0%, var(--bg) 100%);
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(196,149,106,0.08) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 30px auto;
+    }
+
+    /* Search */
+    .search-container {
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: rgba(17, 19, 24, 0.7);
+      color: #fff;
+      font-family: var(--font-family);
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(196, 149, 106, 0.2);
+    }
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    /* Content Area */
+    .main-content {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      width: 100%;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .results-count {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* Guides Grid */
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .guide-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.2s ease;
+    }
+
+    .guide-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .guide-emoji {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .guide-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .guide-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 50px 24px;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      border-top: 1px solid #151f2e;
+      background: #040810;
+      margin-top: auto;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero { padding: 80px 20px 40px; }
+      .main-content { padding: 0 20px 60px; }
+      .guides-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Travel Guides</h1>
+      <p>Comprehensive guides for digital nomads, remote workers, and frequent travelers.</p>
+
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search guides by name or topic..." aria-label="Search guides">
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="results-header">
+      <div class="results-count" id="resultsCount">Loading guides...</div>
+    </div>
+
+    <div class="guides-grid" id="guidesGrid">
+      <!-- Cards will be injected here by JS -->
+    </div>
+
+    <div class="no-results" id="noResults">
+      <div style="font-size: 2rem; margin-bottom: 10px;">🤷</div>
+      <h3>No guides found</h3>
+      <p>Try adjusting your search terms.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © <span id="year">2026</span> <a href="/">migratingmammals.com</a> · A <a href="https://gab.ae" target="_blank" rel="noopener">GAB Ventures</a> property
+  </div>
+
+  <script>
+    // Data extracted from src/pages/index.astro
+    const guides = [
+      { emoji: "🇪🇺", name: "Schengen 90/180 Guide", slug: "/guide-schengen", desc: "Complete guide to the Schengen rule with calculation tips" },
+      { emoji: "🛡️", name: "Travel Insurance Guide", slug: "/guide-travel-insurance", desc: "Compare SafetyWing, World Nomads, Genki for nomads" },
+      { emoji: "💻", name: "Coworking Spaces Guide", slug: "/guide-coworking", desc: "How to choose coworking spaces with day pass tips" },
+      { emoji: "🛂", name: "Remote Work Visas by Country", slug: "/guide-remote-work-visa", desc: "Visa requirements, costs, and application tips" },
+      { emoji: "🐢", name: "Slow Travel Guide", slug: "/guide-slow-travel", desc: "Why month-long stays beat city hopping" }
+    ];
+
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // DOM Elements
+    const guidesGrid = document.getElementById('guidesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const resultsCount = document.getElementById('resultsCount');
+    const noResults = document.getElementById('noResults');
+
+    // Render cards function
+    function renderCards(data) {
+      guidesGrid.innerHTML = '';
+
+      if (data.length === 0) {
+        noResults.style.display = 'block';
+        resultsCount.textContent = '0 guides';
+        return;
+      }
+
+      noResults.style.display = 'none';
+      resultsCount.textContent = `${data.length} guide${data.length !== 1 ? 's' : ''}`;
+
+      data.forEach(guide => {
+        const card = document.createElement('a');
+        card.className = 'guide-card';
+        // Check if slug has a leading slash, if so remove it or just use it.
+        // We're at /guides/, so we should probably link to the root for these standalone pages
+        // The slugs in index.astro start with /, so we use them directly.
+        card.href = guide.slug;
+
+        card.innerHTML = `
+          <span class="guide-emoji">${guide.emoji}</span>
+          <h3 class="guide-name">${guide.name}</h3>
+          <p class="guide-desc">${guide.desc}</p>
+        `;
+
+        guidesGrid.appendChild(card);
+      });
+    }
+
+    // Initial render
+    renderCards(guides);
+
+    // Search functionality
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase().trim();
+
+      if (!searchTerm) {
+        renderCards(guides);
+        return;
+      }
+
+      const filteredGuides = guides.filter(guide =>
+        guide.name.toLowerCase().includes(searchTerm) ||
+        guide.desc.toLowerCase().includes(searchTerm)
+      );
+
+      renderCards(filteredGuides);
+    });
+  </script>
+</body>
+</html>
